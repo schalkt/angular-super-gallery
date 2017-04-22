@@ -1,0 +1,29 @@
+{
+  "name": "angular-super-gallery",
+  "homepage": "https://github.com/schalkt/angular-super-gallery",
+  "description": "Super Angular modal image gallery",
+  "license": "MIT",
+  "authors": [
+    "Tamas Schalk <github@schalk.hu>"
+  ],
+  "keywords": [
+    "component",
+    "gallery",
+    "image",
+    "modal"
+  ],
+  "main": [
+    "dist/angular-super-gallery.js",
+    "dist/angular-super-gallery.css"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "angular": "1.6.*",
+    "angular-animate": "1.6.*"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}

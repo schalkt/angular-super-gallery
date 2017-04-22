@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="demo">
+<head>
+    <meta charset="utf-8"/>
+    <title>Angular Super Gallery Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"
+            integrity="sha256-jFCqhWdzGFjoG8/SAncY2afI/Xv1TPSWSZrb9dpXQbk="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"
+            integrity="sha256-lE2XZC7eMrdH+KRaKXPWg1YqsAcDdhmqFAPbPG5f/U8="
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <script src="angular-fullscreen.js"></script>
+
+    <link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
+    <script src="../dist/angular-super-gallery.js"></script>
+    <script src="../dist/angular-super-gallery-views.js"></script>
+
+</head>
+<body>
+
+<script>
+    angular.module('demo', ['angularSuperGallery', 'FBAngular']);
+</script>
+
+<div class="container">
+    <h1>Angular Super Gallery Demo</h1>
+
+    <button class="btn btn-warning" data-ng-click="galleryVisible = !galleryVisible">Show gallery</button>
+
+    <gallery-view
+            data-visible="galleryVisible"
+            data-selected=""
+            data-title="TwentyVersary"
+            data-badge="2016"
+            data-base-url="https://dilemma.ws/files/gallery/12/image/"
+            data-files='[{"name":"saturnus-reborn-by-rascy.jpg","size":1215267,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/saturnus-reborn-by-rascy.jpg","small":"small\/saturnus-reborn-by-rascy.jpg","medium":"medium\/saturnus-reborn-by-rascy.jpg"}},{"name":"dilemma-logo-by-rascy.jpg","size":155184,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/dilemma-logo-by-rascy.jpg","small":"small\/dilemma-logo-by-rascy.jpg","medium":"medium\/dilemma-logo-by-rascy.jpg"}},{"name":"daark-overshine-by-rascy.jpg","size":607611,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/daark-overshine-by-rascy.jpg","small":"small\/daark-overshine-by-rascy.jpg","medium":"medium\/daark-overshine-by-rascy.jpg"}},{"name":"wolden.jpg","size":661362,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/wolden.jpg","small":"small\/wolden.jpg","medium":"medium\/wolden.jpg"}},{"name":"t-one.jpg","size":132076,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/t-one.jpg","small":"small\/t-one.jpg","medium":"medium\/t-one.jpg"}},{"name":"nowhere-on-earth-landscape.png","size":1036280,"mime":"image\/png","thumbnails":{"tiny":"tiny\/nowhere-on-earth-landscape.jpg","small":"small\/nowhere-on-earth-landscape.jpg","medium":"medium\/nowhere-on-earth-landscape.jpg"}},{"name":"orange-dream.png","size":570994,"mime":"image\/png","thumbnails":{"tiny":"tiny\/orange-dream.jpg","small":"small\/orange-dream.jpg","medium":"medium\/orange-dream.jpg"}},{"name":"scene-hu-header-variations-by-rascy.jpg","size":495700,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/scene-hu-header-variations-by-rascy.jpg","small":"small\/scene-hu-header-variations-by-rascy.jpg","medium":"medium\/scene-hu-header-variations-by-rascy.jpg"}},{"name":"scenedemoscene.jpg","size":274692,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/scenedemoscene.jpg","small":"small\/scenedemoscene.jpg","medium":"medium\/scenedemoscene.jpg"}},{"name":"dma-splash.jpg","size":64734,"mime":"image\/jpeg","thumbnails":{"tiny":"tiny\/dma-splash.jpg","small":"small\/dma-splash.jpg","medium":"medium\/dma-splash.jpg"}}]'>
+    </gallery-view>
+
+</div>
+
+</body>
+</html>

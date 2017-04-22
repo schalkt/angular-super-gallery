@@ -1,0 +1,10 @@
+{
+  "name": "angular-super-gallery",
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20170310222111",
+    "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#5256422ee72d2b1ab41bbb72eb47754e202b6bb8"
+  },
+  "dependencies": {
+    "angular-animate": "registry:dt/angular-animate#1.5.0+20161206185711"
+  }
+}
