@@ -57,10 +57,16 @@ module ASG {
                 this.files = [];
             }
 
+            if (this.selected == undefined) {
+                this.selected = 0;
+            }
+
+            var self = this;
+
             this.timeout(() => {
 
                 // submenu click events
-                var element = '.gallery-view.' + this.id + ' li.dropdown-submenu';
+                var element = '.gallery-view.' + self.id + ' li.dropdown-submenu';
                 angular.element(element).off().on('click', function (event) {
                     event.stopPropagation();
                     if (angular.element(this).hasClass('open')) {
@@ -72,7 +78,7 @@ module ASG {
                 });
 
                 // set focus
-                this.setFocus();
+                self.setFocus();
 
             }, 100);
 
