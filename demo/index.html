@@ -36,15 +36,20 @@
 
     <h1>Angular Super Gallery Demo</h1>
 
-    <button class="btn btn-warning" data-ng-click="galleryVisible = !galleryVisible">Show gallery</button>
+    <button class="btn btn-warning" data-ng-click="gallery1Visible = !gallery1Visible">Show gallery 1</button>
+    <button class="btn btn-warning" data-ng-click="gallery2Visible = !gallery2Visible">Show gallery 2</button>
 
     <gallery-view
-            data-visible="galleryVisible"
-            data-selected=""
-            data-title="TwentyVersary"
-            data-badge="2016"
-            data-base-url="https://dilemma.ws/files/gallery/12/image/"
-            data-files="ctrl.files">
+            data-visible="gallery1Visible"
+            data-title="Angular Super Gallery Demo"
+            data-subtitle="1"
+            data-options="ctrl.options1"
+            data-files="ctrl.files1">
+    </gallery-view>
+
+    <gallery-view
+            data-visible="gallery2Visible"
+            data-files="ctrl.files2">
     </gallery-view>
 
 </div>

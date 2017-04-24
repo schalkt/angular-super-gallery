@@ -113,34 +113,10 @@ gulp.task("watch", function () {
     watch(SRC + "/*.scss", batch(function (events, done) {
         gulp.start("css", done);
     }));
-});
 
-// figyeli a fejlesztés közben változó fájlokat Virtualbox esetén is
-gulp.task("watch-network", function () {
-
-    var chokidar = require('chokidar');
-
-    chokidar.watch([
-        SRC + "/*.ts"
-    ], {
-        ignoreInitial: true,
-        usePolling: true,
-        interval: 100,
-        binaryInterval: 500,
-    }).on('all', function (event, path) {
-        gulp.start("js");
-    });
-
-    chokidar.watch([
-        SRC + "/*.scss",
-    ], {
-        ignoreInitial: true,
-        usePolling: true,
-        interval: 100,
-        binaryInterval: 500,
-    }).on('all', function (event, path) {
-        gulp.start("css");
-    });
+    watch(SRC + "/*.html", batch(function (events, done) {
+        gulp.start("views", done);
+    }));
 
 });
 

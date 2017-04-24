@@ -2,20 +2,32 @@
 
 module ASG {
 
+    interface IOptions {
+
+        baseUrl : string;
+        fields : {
+            url : string;
+            title : string;
+            description : string;
+        }
+
+    }
+
     export class GalleryViewController {
 
         public title : string;
-        public badge : string;
+        public subtitle : string;
         public files : any;
         public selected : number;
-        public baseUrl : string;
+
+        public options : IOptions;
         public direction : string;
         public help : boolean = false;
         public gui : boolean = true;
         public id : string;
 
-        private _visible : boolean;
-        private _fullscreen : boolean;
+        private _visible : boolean = false;
+        private _fullscreen : boolean = false;
 
         private functionsVisible : boolean = false;
         private transition : string = 'rotateLR';
@@ -39,18 +51,26 @@ module ASG {
                     private galleryId) {
 
             if (this.id == undefined) {
-                this.id = 'id' + this.galleryId.getNext();
+                this.id = 'asgid' + this.galleryId.getNext();
             }
-
-            this.init();
 
         }
 
-        // initialize the gallery
-        private init() {
+        private defaults() {
 
-            if (this.visible == undefined) {
-                this.visible = false;
+            var defaultOptions = {
+                baseUrl: "",
+                fields: {
+                    url: "url",
+                    title: "title",
+                    description: "description"
+                }
+            };
+
+            if (this.options == undefined) {
+                this.options = defaultOptions;
+            } else {
+                this.options = angular.merge(defaultOptions, this.options);
             }
 
             if (this.files == undefined) {
@@ -61,7 +81,16 @@ module ASG {
                 this.selected = 0;
             }
 
+            console.log(this.options);
+
+        }
+
+
+        // initialize the gallery
+        private init() {
+
             var self = this;
+            this.defaults();
 
             this.timeout(() => {
 
@@ -84,6 +113,62 @@ module ASG {
 
         }
 
+        // image preload
+        private preload(wait? : number) {
+
+            this.timeout(() => {
+
+                this.loadImage(this.selected);
+                this.loadImage(0);
+                this.loadImage(this.selected + 1);
+                this.loadImage(this.selected - 1);
+                this.loadImage(this.selected + 2);
+                this.loadImage(this.files.length - 1);
+
+            }, (wait != undefined) ? wait : 750);
+
+        }
+
+        public normalize(index : number) {
+
+            var last = this.files.length - 1;
+
+            if (index > last) {
+                return (index - last) - 1;
+            }
+
+            if (index < 0) {
+                return last - Math.abs(index) + 1;
+            }
+
+            return index;
+
+        }
+
+
+        private loadImage(index : number) {
+
+            index = this.normalize(index);
+
+            if (!this.files[index]) {
+                console.warn('Invalid file index: ' + index);
+                return;
+            }
+
+            if (this.files[index].loaded) {
+                return;
+            }
+
+            var source = this.options.baseUrl + this.files[index][this.options.fields.url];
+            var img = new Image();
+            img.src = source;
+            this.files[index].source = source;
+            this.files[index].loaded = true;
+
+            console.log(this.files[index]);
+
+        }
+
         // get visible
         public get visible() {
 
@@ -97,8 +182,11 @@ module ASG {
             this._visible = value;
 
             if (this._visible) {
+
                 this.init();
+                this.preload(1);
                 angular.element('body').addClass('yhidden');
+
             } else {
                 angular.element('body').removeClass('yhidden');
             }
@@ -145,7 +233,7 @@ module ASG {
         public downloadLink() {
 
             if (this.selected != undefined) {
-                return this.baseUrl + this.files[this.selected].name;
+                return this.options.baseUrl + this.files[this.selected][this.options.fields.url];
             }
 
         }
@@ -161,7 +249,8 @@ module ASG {
         public toBackward() {
 
             this.direction = 'backward';
-            this.selected = this.selected == 0 ? this.files.length - 1 : this.selected - 1;
+            this.selected = this.normalize(this.selected - 1);
+            this.preload();
 
         }
 
@@ -169,7 +258,8 @@ module ASG {
         public toForward() {
 
             this.direction = 'forward';
-            this.selected = this.selected == this.files.length - 1 ? 0 : this.selected + 1;
+            this.selected = this.normalize(this.selected + 1);
+            this.preload();
 
         }
 
@@ -178,6 +268,7 @@ module ASG {
 
             this.direction = 'backward';
             this.selected = 0;
+            this.preload();
 
         }
 
@@ -186,6 +277,7 @@ module ASG {
 
             this.direction = 'forward';
             this.selected = this.files.length - 1;
+            this.preload();
 
         }
 
@@ -312,9 +404,9 @@ module ASG {
             visible: '=',
             selected: '<',
             title: '@',
-            badge: '@',
+            subtitle: '@',
             files: '=',
-            baseUrl: '@'
+            options: '=?'
         }
     });
 
