@@ -12,6 +12,16 @@ body.yhidden {
   overflow-y: hidden;
 }
 
+
+.gallery-panel {
+  
+  .thumbnail {
+    height: 90px;
+    overflow: hidden;
+  }
+  
+}
+
 .gallery-view {
 
   z-index: 99999;
@@ -100,6 +110,9 @@ body.yhidden {
     }
 
   }
+
+  
+
 
   .images {
 

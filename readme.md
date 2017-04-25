@@ -12,4 +12,7 @@ Angular SuperGallery
 
 
 ### Todo
-- fix rotateLR transition in Firefox
+- rotate image LEFT / RIGHT
+- zoom image IN / OUT
+- show original size
+- fix rotateLR transition in Firefox (or fix Firefox CSS3D)

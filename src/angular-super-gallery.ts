@@ -2,454 +2,484 @@
 
 module ASG {
 
-    interface IOptions {
-
-        baseUrl : string;
-        fields : {
-            url : string;
-            title : string;
-            description : string;
-        }
-
-    }
-
-    export class GalleryViewController {
-
-        public title : string;
-        public subtitle : string;
-        public files : any;
-        public selected : number;
-
-        public options : IOptions;
-        public direction : string;
-        public help : boolean = false;
-        public gui : boolean = true;
-        public id : string;
-
-        private _visible : boolean = false;
-        private _fullscreen : boolean = false;
-
-        private functionsVisible : boolean = false;
-        private transition : string = 'rotateLR';
-        private transitions : Array<string> = [
-            'no',
-            'fadeInOut',
-            'zoomInOut',
-            'rotateLR',
-            'rotateTB',
-            'rotateZY',
-            'slideLR',
-            'slideTB',
-            'flipX',
-            'flipY'
-        ];
+	interface IOptions {
 
-        //protected infoVisible : boolean = false;
+		title : string;
+		subtitle : string;
+		baseUrl : string;
+		fields : {
+			url : string;
+			title : string;
+			description : string;
+		},
+		thumbnail : {
+			class : string;
+		}
 
-        constructor(private fullscreen,
-                    private timeout,
-                    private galleryId) {
+	}
 
-            if (this.id == undefined) {
-                this.id = 'asgid' + this.galleryId.getNext();
-            }
+	export class GalleryViewController {
 
-        }
 
-        private defaults() {
+		public files : any;
+		public selected : number;
 
-            var defaultOptions = {
-                baseUrl: "",
-                fields: {
-                    url: "url",
-                    title: "title",
-                    description: "description"
-                }
-            };
+		public options : IOptions;
+		private defaults = {
+			title: "",
+			subtitle: "",
+			baseUrl: "",
+			fields: {
+				url: "url",
+				title: "title",
+				description: "description"
+			},
+			thumbnail: {
+				class: 'col-md-3'
+			}
+		};
 
-            if (this.options == undefined) {
-                this.options = defaultOptions;
-            } else {
-                this.options = angular.merge(defaultOptions, this.options);
-            }
 
-            if (this.files == undefined) {
-                this.files = [];
-            }
+		public direction : string;
+		public help : boolean = false;
+		public gui : boolean = true;
+		public id : string;
 
-            if (this.selected == undefined) {
-                this.selected = 0;
-            }
+		private _visible : boolean = false;
+		private _fullscreen : boolean = false;
 
-            console.log(this.options);
 
-        }
+		private functionsVisible : boolean = false;
+		private transition : string = 'rotateLR';
+		private transitions : Array<string> = [
+			'no',
+			'fadeInOut',
+			'zoomInOut',
+			'rotateLR',
+			'rotateTB',
+			'rotateZY',
+			'slideLR',
+			'slideTB',
+			'flipX',
+			'flipY'
+		];
 
+		//protected infoVisible : boolean = false;
 
-        // initialize the gallery
-        private init() {
+		constructor(private fullscreen,
+					private timeout,
+					private galleryId) {
 
-            var self = this;
-            this.defaults();
+			if (this.id == undefined) {
+				this.id = 'asgid' + this.galleryId.getNext();
+			}
 
-            this.timeout(() => {
+		}
 
-                // submenu click events
-                var element = '.gallery-view.' + self.id + ' li.dropdown-submenu';
-                angular.element(element).off().on('click', function (event) {
-                    event.stopPropagation();
-                    if (angular.element(this).hasClass('open')) {
-                        angular.element(this).removeClass('open');
-                    } else {
-                        angular.element(element).removeClass('open');
-                        angular.element(this).addClass('open');
-                    }
-                });
 
-                // set focus
-                self.setFocus();
+		public $onInit() {
 
-            }, 100);
+			this.setDefaults();
 
-        }
+		}
 
-        // image preload
-        private preload(wait? : number) {
+		private setDefaults() {
 
-            this.timeout(() => {
+			if (this.files == undefined) {
+				this.files = [];
+			}
 
-                this.loadImage(this.selected);
-                this.loadImage(0);
-                this.loadImage(this.selected + 1);
-                this.loadImage(this.selected - 1);
-                this.loadImage(this.selected + 2);
-                this.loadImage(this.files.length - 1);
+			if (this.selected == undefined) {
+				this.selected = 0;
+			}
 
-            }, (wait != undefined) ? wait : 750);
+			if (this.options == undefined) {
+				this.options = this.defaults;
+			}
 
-        }
+			this.options = angular.merge(this.defaults, this.options);
 
-        public normalize(index : number) {
+			var self = this;
 
-            var last = this.files.length - 1;
+			angular.forEach(this.files, function (value, key) {
 
-            if (index > last) {
-                return (index - last) - 1;
-            }
+				var source = self.options.baseUrl + value[self.options.fields.url];
 
-            if (index < 0) {
-                return last - Math.abs(index) + 1;
-            }
+				self.files[key].source = source;
+				self.files[key].title = value[self.options.fields.title] ? value[self.options.fields.title] : null;
+				self.files[key].description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
 
-            return index;
+			});
 
-        }
 
+		}
 
-        private loadImage(index : number) {
 
-            index = this.normalize(index);
+		// initialize the gallery
+		private init() {
 
-            if (!this.files[index]) {
-                console.warn('Invalid file index: ' + index);
-                return;
-            }
+			var self = this;
 
-            if (this.files[index].loaded) {
-                return;
-            }
+			this.timeout(() => {
 
-            var source = this.options.baseUrl + this.files[index][this.options.fields.url];
-            var img = new Image();
-            img.src = source;
-            this.files[index].source = source;
-            this.files[index].loaded = true;
+				// submenu click events
+				var element = '.gallery-view.' + self.id + ' li.dropdown-submenu';
+				angular.element(element).off().on('click', function (event) {
+					event.stopPropagation();
+					if (angular.element(this).hasClass('open')) {
+						angular.element(this).removeClass('open');
+					} else {
+						angular.element(element).removeClass('open');
+						angular.element(this).addClass('open');
+					}
+				});
 
-            console.log(this.files[index]);
+				// set focus
+				self.setFocus();
 
-        }
+			}, 100);
 
-        // get visible
-        public get visible() {
+		}
 
-            return this._visible;
+		// image preload
+		private preload(wait? : number) {
 
-        }
+			this.timeout(() => {
 
-        // set visible
-        public set visible(value : boolean) {
+				this.loadImage(this.selected);
+				this.loadImage(0);
+				this.loadImage(this.selected + 1);
+				this.loadImage(this.selected - 1);
+				this.loadImage(this.selected + 2);
+				this.loadImage(this.files.length - 1);
 
-            this._visible = value;
+			}, (wait != undefined) ? wait : 750);
 
-            if (this._visible) {
+		}
 
-                this.init();
-                this.preload(1);
-                angular.element('body').addClass('yhidden');
+		public normalize(index : number) {
 
-            } else {
-                angular.element('body').removeClass('yhidden');
-            }
+			var last = this.files.length - 1;
 
-        }
+			if (index > last) {
+				return (index - last) - 1;
+			}
 
-        // is single?
-        public get isSingle() {
+			if (index < 0) {
+				return last - Math.abs(index) + 1;
+			}
 
-            return this.files.length > 1 ? false : true;
+			return index;
 
-        }
+		}
 
-        // set the focus
-        public setFocus() {
 
-            angular.element('.gallery-view.' + this.id + ' .keyInput').trigger('focus').focus();
+		private loadImage(index : number) {
 
-        }
+			index = this.normalize(index);
 
-        // set transition effect
-        public setTransition(transition) {
+			if (!this.files[index]) {
+				console.warn('Invalid file index: ' + index);
+				return;
+			}
 
-            this.transition = transition;
-            this.setFocus();
+			if (this.files[index].loaded) {
+				return;
+			}
 
-        }
+			var img = new Image();
+			img.src = this.files[index].source;
+			this.files[index].loaded = true;
 
-        // overlay arrows hide
-        public functionsHide() {
+		}
 
-            this.functionsVisible = false;
+		// get visible
+		public get visible() {
 
-        }
+			return this._visible;
 
-        // overlay arrows show
-        public functionsShow() {
+		}
 
-            this.functionsVisible = true;
+		// set visible
+		public set visible(value : boolean) {
 
-        }
+			this._visible = value;
 
-        // get the download link
-        public downloadLink() {
+			if (this._visible) {
 
-            if (this.selected != undefined) {
-                return this.options.baseUrl + this.files[this.selected][this.options.fields.url];
-            }
+				this.init();
+				this.preload(1);
+				angular.element('body').addClass('yhidden');
 
-        }
+			} else {
+				angular.element('body').removeClass('yhidden');
+			}
 
-        // get the file
-        public get file() {
+		}
 
-            return this.files[this.selected];
+		// is single?
+		public get isSingle() {
 
-        }
+			return this.files.length > 1 ? false : true;
 
-        // go to backward
-        public toBackward() {
+		}
 
-            this.direction = 'backward';
-            this.selected = this.normalize(this.selected - 1);
-            this.preload();
+		// set the focus
+		public setFocus() {
 
-        }
+			angular.element('.gallery-view.' + this.id + ' .keyInput').trigger('focus').focus();
 
-        // go to forward
-        public toForward() {
+		}
 
-            this.direction = 'forward';
-            this.selected = this.normalize(this.selected + 1);
-            this.preload();
+		// set transition effect
+		public setTransition(transition) {
 
-        }
+			this.transition = transition;
+			this.setFocus();
 
-        // go to first
-        public toFirst() {
+		}
 
-            this.direction = 'backward';
-            this.selected = 0;
-            this.preload();
+		// overlay arrows hide
+		public functionsHide() {
 
-        }
+			this.functionsVisible = false;
 
-        // go to last
-        public toLast() {
+		}
 
-            this.direction = 'forward';
-            this.selected = this.files.length - 1;
-            this.preload();
+		// overlay arrows show
+		public functionsShow() {
 
-        }
+			this.functionsVisible = true;
 
-        // exit
-        public exit() {
+		}
 
-            this.visible = false;
+		// get the download link
+		public downloadLink() {
 
-        }
+			if (this.selected != undefined) {
+				return this.options.baseUrl + this.files[this.selected][this.options.fields.url];
+			}
 
-        // keymap
-        public keyUp(e) {
+		}
 
-            // esc
-            if (e.keyCode == 27) {
-                this.exit();
-            }
+		// get the file
+		public get file() {
 
-            // space
-            if (e.keyCode == 32) {
-                this.toForward();
-            }
+			return this.files[this.selected];
 
-            // left
-            if (e.keyCode == 37) {
-                this.toBackward();
-            }
+		}
 
-            // right
-            if (e.keyCode == 39) {
-                this.toForward();
-            }
+		// go to backward
+		public toBackward() {
 
-            // up
-            if (e.keyCode == 38 || e.keyCode == 36) {
-                this.toFirst();
-            }
+			this.direction = 'backward';
+			this.selected = this.normalize(this.selected - 1);
+			this.preload();
 
-            // down
-            if (e.keyCode == 40 || e.keyCode == 35) {
-                this.toLast();
-            }
+		}
 
-            // f - fullscreen
-            if (e.keyCode == 70 || e.keyCode == 13) {
-                this.toggleFullScreen();
-            }
+		// go to forward
+		public toForward() {
 
-            // g - gui
-            if (e.keyCode == 71) {
-                this.toggleGUI();
-            }
+			this.direction = 'forward';
+			this.selected = this.normalize(this.selected + 1);
+			this.preload();
 
-            // h - help
-            if (e.keyCode == 72) {
-                this.toggleHelp();
-            }
+		}
 
-            // t - transition next
-            if (e.keyCode == 84) {
-                this.nextTransition();
-            }
+		// go to first
+		public toFirst() {
 
-        }
+			this.direction = 'backward';
+			this.selected = 0;
+			this.preload();
 
-        // switch to next transition effect
-        private nextTransition() {
+		}
 
-            var idx = this.transitions.indexOf(this.transition) + 1;
-            var next = idx >= this.transitions.length ? 0 : idx;
-            this.transition = this.transitions[next];
+		// go to last
+		public toLast() {
 
-        }
+			this.direction = 'forward';
+			this.selected = this.files.length - 1;
+			this.preload();
 
-        // toggle fullscreen
-        private toggleFullScreen() {
+		}
 
-            if (this.fullscreen.isEnabled()) {
-                this.fullscreen.cancel();
-            } else {
-                this.fullscreen.all();
-            }
-            this.setFocus();
 
-        }
+		public open(index : number) {
 
-        // toggle help
-        private toggleHelp() {
+			this.selected = index;
+			this.visible = true;
 
-            this.help = !this.help;
-            this.setFocus();
+		}
 
-        }
+		// exit
+		public exit() {
 
-        // toggle GUI
-        private toggleGUI() {
+			this.visible = false;
 
-            this.gui = !this.gui;
+		}
 
-        }
+		// keymap
+		public keyUp(e) {
 
-    }
+			// esc
+			if (e.keyCode == 27) {
+				this.exit();
+			}
 
-    // gallery unique id service
-    export class GalleryIdService {
+			// space
+			if (e.keyCode == 32) {
+				this.toForward();
+			}
 
-        private id = 1;
+			// left
+			if (e.keyCode == 37) {
+				this.toBackward();
+			}
 
-        public getNext() {
-            return this.id++;
-        }
+			// right
+			if (e.keyCode == 39) {
+				this.toForward();
+			}
 
-    }
+			// up
+			if (e.keyCode == 38 || e.keyCode == 36) {
+				this.toFirst();
+			}
 
+			// down
+			if (e.keyCode == 40 || e.keyCode == 35) {
+				this.toLast();
+			}
 
-    var app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate']);
+			// f - fullscreen
+			if (e.keyCode == 70 || e.keyCode == 13) {
+				this.toggleFullScreen();
+			}
 
-    app.service('galleryId', GalleryIdService);
+			// g - gui
+			if (e.keyCode == 71) {
+				this.toggleGUI();
+			}
 
-    app.component("galleryView", {
-        controller: ["Fullscreen", "$timeout", "galleryId", ASG.GalleryViewController],
-        templateUrl: 'views/angular-super-gallery.html',
-        bindings: {
-            visible: '=',
-            selected: '<',
-            title: '@',
-            subtitle: '@',
-            files: '=',
-            options: '=?'
-        }
-    });
+			// h - help
+			if (e.keyCode == 72) {
+				this.toggleHelp();
+			}
 
-    app.provider('angularSuperGalleryOptions', function () {
+			// t - transition next
+			if (e.keyCode == 84) {
+				this.nextTransition();
+			}
 
-        var defaults = {};
+		}
 
-        return {
-            setOpts: function (options) {
-                angular.extend(defaults, options);
-            },
-            $get: function () {
-                return defaults;
-            }
-        }
+		// switch to next transition effect
+		private nextTransition() {
 
-    });
+			var idx = this.transitions.indexOf(this.transition) + 1;
+			var next = idx >= this.transitions.length ? 0 : idx;
+			this.transition = this.transitions[next];
 
-    app.directive('imageOnload', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs : any) {
-                element.bind('load', function () {
-                    scope.$apply(attrs.imageOnload);
-                });
-            }
-        };
-    });
+		}
 
-    app.filter('bytes', () => {
-        return function (bytes : any, precision : number) : string {
+		// toggle fullscreen
+		private toggleFullScreen() {
 
-            if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return ''
-            if (bytes === 0) return '0';
-            if (typeof precision === 'undefined') precision = 1;
+			if (this.fullscreen.isEnabled()) {
+				this.fullscreen.cancel();
+			} else {
+				this.fullscreen.all();
+			}
+			this.setFocus();
 
-            var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
-                number = Math.floor(Math.log(bytes) / Math.log(1024));
+		}
 
-            return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+		// toggle help
+		private toggleHelp() {
 
-        }
-    });
+			this.help = !this.help;
+			this.setFocus();
+
+		}
+
+		// toggle GUI
+		private toggleGUI() {
+
+			this.gui = !this.gui;
+
+		}
+
+	}
+
+	// gallery unique id service
+	export class GalleryIdService {
+
+		private id = 1;
+
+		public getNext() {
+			return this.id++;
+		}
+
+	}
+
+
+	var app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate']);
+
+	app.service('galleryId', GalleryIdService);
+
+	app.component("galleryView", {
+		controller: ["Fullscreen", "$timeout", "galleryId", ASG.GalleryViewController],
+		templateUrl: 'views/angular-super-gallery.html',
+		bindings: {
+			visible: '=',
+			selected: '<',
+			files: '=',
+			options: '=?'
+		}
+	});
+
+	app.provider('angularSuperGalleryOptions', function () {
+
+		var defaults = {};
+
+		return {
+			setOpts: function (options) {
+				angular.extend(defaults, options);
+			},
+			$get: function () {
+				return defaults;
+			}
+		}
+
+	});
+
+	app.directive('imageOnload', function () {
+		return {
+			restrict: 'A',
+			link: function (scope, element, attrs : any) {
+				element.bind('load', function () {
+					scope.$apply(attrs.imageOnload);
+				});
+			}
+		};
+	});
+
+	app.filter('bytes', () => {
+		return function (bytes : any, precision : number) : string {
+
+			if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return ''
+			if (bytes === 0) return '0';
+			if (typeof precision === 'undefined') precision = 1;
+
+			var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+				number = Math.floor(Math.log(bytes) / Math.log(1024));
+
+			return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+
+		}
+	});
 
 
 }
