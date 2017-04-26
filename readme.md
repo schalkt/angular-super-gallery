@@ -16,3 +16,7 @@ Angular SuperGallery
 - zoom image IN / OUT
 - show original size
 - fix rotateLR transition in Firefox (or fix Firefox CSS3D)
+
+### Legal
+
+Photos taken from https://wallpaperscraft.com

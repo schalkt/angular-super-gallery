@@ -1,15 +1,12 @@
 <div class="gallery-panel">
 
-	<pre>
-		{{ $ctrl.options|json}}
-	</pre>
-
-	<div class="{{ $ctrl.options.thumbnail.class }} thumbnail"
-		 data-ng-repeat="(key,file) in $ctrl.files">
-		<a href="#{{key}}" data-ng-click="$ctrl.open(key)">
-			<img data-ng-src="{{ file.source }}" alt="{{ file.title }}"/>
-		</a>
-
+	<div class="row">
+		<div class="{{ $ctrl.options.thumbnail.class }}"
+			 data-ng-repeat="(key,file) in $ctrl.files">
+			<a class="thumbnail" href="#{{key}}" data-ng-click="$ctrl.open(key)">
+				<img data-ng-src="{{ file.thumbnail }}" alt="{{ file.title }}"/>
+			</a>
+		</div>
 	</div>
 
 </div>
@@ -128,15 +125,15 @@
                 </span>
 
 		<h2 class="visible-md visible-lg">
-			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default">{{ $ctrl.options.subtitle }}</span>
+			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default badge">{{ $ctrl.options.subtitle }}</span>
 		</h2>
 
 		<h3 class="visible-sm">
-			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default">{{ $ctrl.options.subtitle }}</span>
+			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default badge">{{ $ctrl.options.subtitle }}</span>
 		</h3>
 
 		<h4 class="visible-xs">
-			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default">{{ $ctrl.options.subtitle }}</span>
+			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default badge">{{ $ctrl.options.subtitle }}</span>
 		</h4>
 
 	</div>
@@ -163,8 +160,9 @@
 		<div class="img"
 			 data-ng-repeat="(key,file) in $ctrl.files"
 			 data-ng-show="$ctrl.selected == key"
-			 data-ng-class="{'loading' : !file.loaded}"
-			 data-ng-style="{'background-image': 'url({{ file.source }})'}">
+			 data-ng-class="{'loading' : !file.loaded}">
+
+			<div class="source" data-ng-if="file.loaded" data-ng-style="{'background-image': 'url({{ file.source }})'}"></div>
 
 			<div class="description" data-ng-show="$ctrl.functionsVisible">
 				<a href="{{ $ctrl.downloadLink() }}" target="_blank" class="btn btn-default btn-xs">

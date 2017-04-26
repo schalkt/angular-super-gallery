@@ -4,25 +4,68 @@ demo.controller('DemoController', function ($http) {
 
 	this.options1 = {
 		title: "Angular Super Gallery Demo",
-		subtitle: "1",
-		baseUrl: "",
+		subtitle: "Nature Wallpapers Full HD",
+		baseUrl: "https://",
 		fields: {
-			url : "link"
-		}
+			url: "link"
+		},
+		thumbnail: {
+			class: "col-md-3"
+		},
+		preload: [0]
 	};
 
 	this.files1 = [{
-		"link": "http://img07.deviantart.net/2144/i/2014/349/b/7/micropolis_wallpaper_by_lacza-d89y46i.jpg",
+		"link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x168.jpg",
 	}, {
-		"link": "http://img14.deviantart.net/467e/i/2012/062/4/0/suborganic_space_by_joelbelessa-d4e7z8x.jpg",
+		"link": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x168.jpg",
 	}, {
-		"link": "http://orig08.deviantart.net/6a12/f/2010/037/0/4/the_hornet_by_ev_one.jpg"
+		"link": "wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_300x168.jpg",
 	}, {
-		"link": "http://orig06.deviantart.net/1a01/f/2014/073/5/c/abstract_wallpaper_by_bezo97-d7a58jc.png"
+		"link": "wallpaperscraft.com/image/sea_sand_palm_trees_surf_84649_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/sea_sand_palm_trees_surf_84649_300x168.jpg",
 	}, {
-		"link": "http://img01.deviantart.net/e9a5/i/2013/329/9/3/chemical_factory_by_lacza-d66a6sg.jpg"
+		"link": "wallpaperscraft.com/image/stones_tropical_ocean_sky_summer_92472_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/stones_tropical_ocean_sky_summer_92472_300x168.jpg",
+	}, {
+		"link": "wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_300x168.jpg",
+	}, {
+		"link": "wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_300x168.jpg",
+	}, {
+		"link": "wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_300x168.jpg",
 	}];
 
-	this.files2 = [];
+
+	this.options2 = {
+		thumbnail: {
+			class: "col-md-4"
+		},
+	};
+
+	this.files2 = [{
+		"url": "https://wallpaperscraft.com/image/miranda_kerr_smile_celebrity_brunette_24761_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/miranda_kerr_smile_celebrity_brunette_24761_300x168.jpg"
+	}, {
+		"url": "https://wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_300x168.jpg",
+	}, {
+		"url": "https://wallpaperscraft.com/image/girl_red-haired_eyes_hair_makeup_63833_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/girl_red-haired_eyes_hair_makeup_63833_300x168.jpg",
+	}, {
+		"url": "https://wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_300x168.jpg",
+	}, {
+		"url": "https://wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_300x168.jpg",
+	}, {
+		"url": "https://wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_300x168.jpg",
+	}];
 
 });

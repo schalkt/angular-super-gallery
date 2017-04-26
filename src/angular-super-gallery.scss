@@ -12,14 +12,12 @@ body.yhidden {
   overflow-y: hidden;
 }
 
-
 .gallery-panel {
-  
+
   .thumbnail {
-    height: 90px;
     overflow: hidden;
   }
-  
+
 }
 
 .gallery-view {
@@ -111,9 +109,6 @@ body.yhidden {
 
   }
 
-  
-
-
   .images {
 
     position: absolute;
@@ -168,9 +163,18 @@ body.yhidden {
       left: 0px;
       text-align: center;
       opacity: 1;
-      background-size: contain;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
+
+      .source {
+        position: absolute;
+        z-index: auto;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-size: contain;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+      }
 
       .description {
         position: absolute;

@@ -1,54 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="demo" data-ng-controller="DemoController as ctrl">
 <head>
-    <meta charset="utf-8"/>
-    <title>Angular Super Gallery Demo</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<meta charset="utf-8"/>
+	<title>Angular Super Gallery Demo</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"
-            integrity="sha256-jFCqhWdzGFjoG8/SAncY2afI/Xv1TPSWSZrb9dpXQbk="
-            crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"
+			integrity="sha256-jFCqhWdzGFjoG8/SAncY2afI/Xv1TPSWSZrb9dpXQbk="
+			crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"
-            integrity="sha256-lE2XZC7eMrdH+KRaKXPWg1YqsAcDdhmqFAPbPG5f/U8="
-            crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-animate.min.js"
+			integrity="sha256-lE2XZC7eMrdH+KRaKXPWg1YqsAcDdhmqFAPbPG5f/U8="
+			crossorigin="anonymous"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+			crossorigin="anonymous"></script>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  rel="stylesheet"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		  crossorigin="anonymous">
 
-    <script src="angular-fullscreen.js"></script>
+	<script src="angular-fullscreen.js"></script>
 
-    <link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
-    <script src="../dist/angular-super-gallery.js"></script>
-    <script src="../dist/angular-super-gallery-views.js"></script>
-    <script src="demo.js"></script>
+	<link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
+	<script src="../dist/angular-super-gallery.js"></script>
+	<script src="demo.js"></script>
 
 </head>
 <body>
 
 <div class="container">
 
-    <h1>Angular Super Gallery Demo</h1>
 
-    <button class="btn btn-warning" data-ng-click="gallery1Visible = !gallery1Visible">Show gallery 1</button>
-    <button class="btn btn-warning" data-ng-click="gallery2Visible = !gallery2Visible">Show gallery 2</button>
+	<h1>Angular Super Gallery Demo</h1>
 
-    <gallery-view
-            data-visible="gallery1Visible"
-            data-options="ctrl.options1"
-            data-files="ctrl.files1">
-    </gallery-view>
+	<div class="row">
 
-    <gallery-view
-            data-visible="gallery2Visible"
-            data-files="ctrl.files2">
-    </gallery-view>
+		<div class="col-md-6">
+			<pre>
+			{{ ctrl.options1|json}}
+		</pre>
+
+		</div>
+
+		<div class="col-md-6">
+			<button class="btn btn-warning" data-ng-click="gallery1Visible = !gallery1Visible">Open gallery 1 modal
+			</button>
+			<br/><br/>
+			<gallery-view
+					data-visible="gallery1Visible"
+					data-options="ctrl.options1"
+					data-files="ctrl.files1">
+			</gallery-view>
+		</div>
+
+	</div>
+
+
+	<div class="row">
+
+		<div class="col-md-6">
+			<pre>
+			{{ ctrl.options2|json}}
+		</pre>
+
+		</div>
+
+		<div class="col-md-6">
+			<button class="btn btn-warning" data-ng-click="gallery2Visible = !gallery2Visible">Open gallery 2 modal
+			</button>
+			<br/><br/>
+			<gallery-view
+					data-visible="gallery2Visible"
+					data-options="ctrl.options2"
+					data-files="ctrl.files2">
+			</gallery-view>
+		</div>
+
+	</div>
 
 </div>
 

@@ -10,12 +10,13 @@ var gulp         = require('gulp'),
 	uglify       = require('gulp-uglify'),
 	sourcemaps   = require('gulp-sourcemaps'),
 	runSequence  = require('run-sequence'),
+	merge2       = require('merge2'),
 	gzip         = require('gulp-gzip');
 
 
 var DIST = "dist";
 var SRC = "src";
-var TYPINGS = "typings";
+var TEMP = "temp";
 var PROD = false;
 
 var nanoOptions = {
@@ -25,20 +26,17 @@ var nanoOptions = {
 	}
 };
 
-
-gulp.task("js", function () {
+gulp.task("ts", function () {
 
 	var tsc = require("gulp-typescript");
 	var filename = "angular-super-gallery.js";
 
 	return gulp.src([
-		//TYPINGS + "/**/*.ts",
 		SRC + "/**/*.ts",
 	])
 		.pipe(gulpif(!PROD, sourcemaps.init()))
 		.pipe(order([
-			"angular-super-gallery.ts",
-			"angular-super-gallery-controller.ts",
+			"angular-super-gallery.ts"
 		], {
 			base: SRC
 		}))
@@ -49,8 +47,38 @@ gulp.task("js", function () {
 		}))
 		.pipe(concat(filename))
 		.pipe(gulpif(!PROD, sourcemaps.write()))
+		.pipe(gulp.dest(TEMP))
+		.pipe(debug());
+
+});
+
+gulp.task("js", function () {
+
+	var filename = "angular-super-gallery.js";
+
+	return gulp.src([
+		TEMP + "/*.js"
+	])
+		.pipe(order([
+			"angular-super-gallery.js"
+		], {
+			base: TEMP
+		}))
+		.pipe(concat(filename))
 		.pipe(gulp.dest(DIST))
-		.pipe(debug())
+		.pipe(debug());
+
+});
+
+
+gulp.task("js-min", function () {
+
+	var filename = "angular-super-gallery.js";
+
+	return gulp.src([
+		DIST + "/" + filename,
+	])
+		.pipe(concat(filename))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(uglify())
 		.pipe(gulp.dest(DIST))
@@ -59,23 +87,40 @@ gulp.task("js", function () {
 		.pipe(gulp.dest(DIST))
 		.pipe(debug());
 
-
 });
 
 
 gulp.task("css", function () {
 
 	return gulp.src([
-		SRC + '/gallery-view.scss'
+		SRC + '/*.scss'
 	])
+		.pipe(concat("angular-super-gallery.css"))
 		.pipe(gulpif(!PROD, sourcemaps.init()))
 		.pipe(sass())
-		.pipe(gulpif(PROD, nano(nanoOptions)))
-		.pipe(concat("angular-super-gallery.css"))
 		.pipe(autoprefixer())
 		.pipe(gulpif(!PROD, sourcemaps.write()))
+		.pipe(gulp.dest(DIST));
+
+});
+
+gulp.task("css-min", function () {
+
+	var filename = "angular-super-gallery.css";
+
+	return gulp.src([
+		DIST + '/*.css'
+	])
+		.pipe(concat(filename))
+		.pipe(nano(nanoOptions))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(DIST))
+		.pipe(debug())
+		.pipe(gzip({append: true}))
 		.pipe(gulp.dest(DIST))
 		.pipe(debug());
+
+
 });
 
 
@@ -95,7 +140,7 @@ gulp.task("views", function () {
 			root: 'views/'
 		}))
 		.pipe(concat("angular-super-gallery-views.js"))
-		.pipe(gulp.dest(DIST))
+		.pipe(gulp.dest(TEMP))
 		.pipe(debug());
 
 });
@@ -150,8 +195,8 @@ gulp.task('dev', function (callback) {
 	prod = false;
 
 	runSequence(
+		["views", "css", "ts"],
 		["js"],
-		["css", "views"],
 		["version"],
 		callback
 	)
@@ -163,8 +208,9 @@ gulp.task('prod', function (callback) {
 
 	runSequence(
 		["bump"],
+		["views", "css", "ts"],
 		["js"],
-		["css", "views"],
+		["css-min", "js-min"],
 		["version"],
 		callback
 	)

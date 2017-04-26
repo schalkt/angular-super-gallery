@@ -11,10 +11,12 @@ module ASG {
 			url : string;
 			title : string;
 			description : string;
+			thumbnail : string;
 		},
 		thumbnail : {
 			class : string;
-		}
+		},
+		preload : Array<number>;
 
 	}
 
@@ -32,11 +34,13 @@ module ASG {
 			fields: {
 				url: "url",
 				title: "title",
-				description: "description"
+				description: "description",
+				thumbnail: "thumbnail"
 			},
 			thumbnail: {
 				class: 'col-md-3'
-			}
+			},
+			preload: [0]
 		};
 
 
@@ -79,7 +83,14 @@ module ASG {
 
 		public $onInit() {
 
+			var self = this;
 			this.setDefaults();
+
+			if (this.options.preload) {
+				this.options.preload.forEach((index : number) => {
+					self.loadImage(index);
+				})
+			}
 
 		}
 
@@ -104,13 +115,14 @@ module ASG {
 			angular.forEach(this.files, function (value, key) {
 
 				var source = self.options.baseUrl + value[self.options.fields.url];
+				var thumbnail = self.options.baseUrl + (value[self.options.fields.thumbnail] ? value[self.options.fields.thumbnail] : value[self.options.fields.url]);
 
 				self.files[key].source = source;
+				self.files[key].thumbnail = thumbnail;
 				self.files[key].title = value[self.options.fields.title] ? value[self.options.fields.title] : null;
 				self.files[key].description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
 
 			});
-
 
 		}
 
