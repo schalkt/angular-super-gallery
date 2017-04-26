@@ -12,7 +12,7 @@
 </div>
 
 <div class="gallery-view {{ $ctrl.id }}"
-	 data-ng-class="{'nogui' : !$ctrl.gui}"
+	 data-ng-class="$ctrl.getClass()"
 	 data-ng-click="$ctrl.setFocus()"
 	 data-ng-show="$ctrl.visible"
 	 data-ng-cloak>
@@ -46,8 +46,18 @@
                             <ul class="dropdown-menu">
                                 <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTransition(transition)"
 									   data-ng-repeat="transition in $ctrl.transitions">
-                                    <span data-ng-class="{'color-highlight' : transition == $ctrl.transition}">
+                                    <span data-ng-class="{'highlight' : transition == $ctrl.transition}">
                                         {{ transition }}</span></a>
+                                </li>
+                            </ul>
+                        </li>
+						<li class="dropdown-submenu">
+                            <a class="themes" tabindex="-1" href="#">Themes <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTheme(theme)"
+									   data-ng-repeat="theme in $ctrl.themes">
+                                    <span data-ng-class="{'highlight' : theme == $ctrl.theme}">
+                                        {{ theme }}</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -56,9 +66,9 @@
                 </span>
 
 
-                <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleGUI()">
-                    <span data-ng-if="$ctrl.gui" class="glyphicon glyphicon-chevron-up"></span>
-                    <span data-ng-if="!$ctrl.gui" class="glyphicon glyphicon-chevron-down"></span>
+                <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleHeader()">
+                    <span data-ng-if="$ctrl.options.header" class="glyphicon glyphicon-chevron-up"></span>
+                    <span data-ng-if="!$ctrl.options.header" class="glyphicon glyphicon-chevron-down"></span>
                 </button>
 
                 <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleFullScreen()">
@@ -100,18 +110,28 @@
                                 <ul class="dropdown-menu">
                                     <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTransition(transition)"
 										   data-ng-repeat="transition in $ctrl.transitions">
-                                        <span data-ng-class="{'color-highlight' : transition == $ctrl.transition}">
+                                        <span data-ng-class="{'highlight' : transition == $ctrl.transition}">
                                             {{ transition }}</span></a>
                                     </li>
                                 </ul>
                             </li>
+							<li class="dropdown-submenu">
+                            <a class="themes" tabindex="-1" href="#">Themes <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTheme(theme)"
+									   data-ng-repeat="theme in $ctrl.themes">
+                                    <span data-ng-class="{'highlight' : theme == $ctrl.theme}">
+                                        {{ theme }}</span></a>
+                                </li>
+                            </ul>
+                        </li>
                             <li><a href="#" tabindex="-1" data-ng-click="$ctrl.toggleHelp()">Help</a></li>
                         </ul>
                     </span>
 
-                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleGUI()">
-                        <span data-ng-if="$ctrl.gui" class="glyphicon glyphicon-chevron-up"></span>
-                        <span data-ng-if="!$ctrl.gui" class="glyphicon glyphicon-chevron-down"></span>
+                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleHeader()">
+                        <span data-ng-if="$ctrl.options.header" class="glyphicon glyphicon-chevron-up"></span>
+                        <span data-ng-if="!$ctrl.options.header" class="glyphicon glyphicon-chevron-down"></span>
                     </button>
 
                     <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleFullScreen()">
@@ -125,20 +145,20 @@
                 </span>
 
 		<h2 class="visible-md visible-lg">
-			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default badge">{{ $ctrl.options.subtitle }}</span>
+			{{ $ctrl.options.title }} <sup data-ng-if="$ctrl.options.subtitle">{{ $ctrl.options.subtitle }}</sup>
 		</h2>
 
 		<h3 class="visible-sm">
-			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default badge">{{ $ctrl.options.subtitle }}</span>
+			{{ $ctrl.options.title }} <sup data-ng-if="$ctrl.options.subtitle">{{ $ctrl.options.subtitle }}</sup>
 		</h3>
 
 		<h4 class="visible-xs">
-			{{ $ctrl.options.title }} <span data-ng-if="$ctrl.options.subtitle" class="color-default badge">{{ $ctrl.options.subtitle }}</span>
+			{{ $ctrl.options.title }} <sup data-ng-if="$ctrl.options.subtitle">{{ $ctrl.options.subtitle }}</sup>
 		</h4>
 
 	</div>
 
-	<div class="help text-right" data-ng-click="$ctrl.toggleHelp()" data-ng-show="$ctrl.help">
+	<div class="help text-right" data-ng-click="$ctrl.toggleHelp()" data-ng-show="$ctrl.options.help">
 		SPACE : forward</br>
 		RIGHT : forward</br>
 		LEFT : backward</br>
@@ -147,13 +167,14 @@
 		ESC : exit</br>
 		T : change transition</br>
 		F : toggle fullscreen</br>
-		G : toggle gui</br>
+		G : toggle header</br>
 		H : toggle help
 	</div>
 
-	<div class="images {{$ctrl.direction}} {{$ctrl.transition }}"
-		 data-ng-mouseover="$ctrl.functionsShow()"
-		 data-ng-mouseleave="$ctrl.functionsHide()"
+
+	<div class="images {{ $ctrl.direction }} {{ $ctrl.options.transition }}"
+		 data-ng-mouseover="$ctrl.arrowsShow()"
+		 data-ng-mouseleave="$ctrl.arrowsHide()"
 		 data-ng-swipe-left="$ctrl.toForward()"
 		 data-ng-swipe-right="$ctrl.toBackward()">
 
@@ -162,18 +183,17 @@
 			 data-ng-show="$ctrl.selected == key"
 			 data-ng-class="{'loading' : !file.loaded}">
 
-			<div class="source" data-ng-if="file.loaded" data-ng-style="{'background-image': 'url({{ file.source }})'}"></div>
+			<img class="source" data-ng-src="{{ file.url }}" data-ng-if="file.loaded"/>
 
-			<div class="description" data-ng-show="$ctrl.functionsVisible">
-				<a href="{{ $ctrl.downloadLink() }}" target="_blank" class="btn btn-default btn-xs">
-					<span class="glyphicon glyphicon-picture"></span> {{ $ctrl.file.description ?
-					$ctrl.file.description : $ctrl.file.url }}
-					| {{ $ctrl.file.size|bytes }}
+			<div class="details">
+				<a href="{{ $ctrl.downloadLink() }}" target="_blank">
+					<span class="title">{{ $ctrl.file.title }}</span>
+					<span class="description">{{ $ctrl.file.description }}</span>
 				</a>
 			</div>
 		</div>
 
-		<div data-ng-if="!$ctrl.isSingle" data-ng-show="$ctrl.functionsVisible" class="toBackward">
+		<div data-ng-if="!$ctrl.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toBackward">
 
 			<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
 					data-ng-click="$ctrl.toBackward()">
@@ -191,7 +211,7 @@
 
 		</div>
 
-		<div data-ng-if="!$ctrl.isSingle" data-ng-show="$ctrl.functionsVisible" class="toForward">
+		<div data-ng-if="!$ctrl.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toForward">
 
 			<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
 					data-ng-click="$ctrl.toForward()">
@@ -209,7 +229,7 @@
 
 		</div>
 
-		<div data-ng-show="$ctrl.functionsVisible" class="functions">
+		<div data-ng-show="$ctrl.arrowsVisible" class="functions">
 		</div>
 
 	</div>

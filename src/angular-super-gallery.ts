@@ -13,19 +13,36 @@ module ASG {
 			description : string;
 			thumbnail : string;
 		},
+		transition : string;
 		thumbnail : {
 			class : string;
 		},
 		preload : Array<number>;
+		header : boolean;
+		help : boolean;
+
+	}
+
+
+	interface IFile {
+
+		url : string;
+		title? : string;
+		description? : string;
+		thumbnail? : string;
+		loaded? : boolean;
+		size? : number;
+		width? : number;
+		height? : number;
 
 	}
 
 	export class GalleryViewController {
 
+		public items : any;
 
-		public files : any;
+		public files : Array<IFile>;
 		public selected : number;
-
 		public options : IOptions;
 		private defaults = {
 			title: "",
@@ -37,24 +54,29 @@ module ASG {
 				description: "description",
 				thumbnail: "thumbnail"
 			},
+			transition: 'rotateLR',
 			thumbnail: {
 				class: 'col-md-3'
 			},
-			preload: [0]
+			preload: [0],
+			header: true,
+			help: false
 		};
 
 
 		public direction : string;
-		public help : boolean = false;
-		public gui : boolean = true;
 		public id : string;
 
 		private _visible : boolean = false;
 		private _fullscreen : boolean = false;
+		private arrowsVisible : boolean = false;
 
+		private theme : string = 'darkblue';
+		private themes : Array<string> = [
+			'darkblue',
+			'whiteblue'
+		];
 
-		private functionsVisible : boolean = false;
-		private transition : string = 'rotateLR';
 		private transitions : Array<string> = [
 			'no',
 			'fadeInOut',
@@ -96,6 +118,10 @@ module ASG {
 
 		private setDefaults() {
 
+			if (this.items == undefined) {
+				this.items = [];
+			}
+
 			if (this.files == undefined) {
 				this.files = [];
 			}
@@ -112,15 +138,23 @@ module ASG {
 
 			var self = this;
 
-			angular.forEach(this.files, function (value, key) {
+			angular.forEach(this.items, function (value, key) {
 
-				var source = self.options.baseUrl + value[self.options.fields.url];
+				var url = self.options.baseUrl + value[self.options.fields.url];
 				var thumbnail = self.options.baseUrl + (value[self.options.fields.thumbnail] ? value[self.options.fields.thumbnail] : value[self.options.fields.url]);
+				var filename = url.toString().match(/.*\/(.+?)\./);
+				var title = value[self.options.fields.title] ? value[self.options.fields.title] : null;
 
-				self.files[key].source = source;
-				self.files[key].thumbnail = thumbnail;
-				self.files[key].title = value[self.options.fields.title] ? value[self.options.fields.title] : null;
-				self.files[key].description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
+				var file = {
+					url: url,
+					thumbnail: thumbnail,
+					title: title,
+					description: value[self.options.fields.description] ? value[self.options.fields.description] : null,
+					loaded: false
+				};
+
+				self.files.push(file);
+
 
 			});
 
@@ -150,6 +184,21 @@ module ASG {
 				self.setFocus();
 
 			}, 100);
+
+		}
+
+
+		private getClass() {
+
+			var ngClass = [];
+
+			if (!this.options.header) {
+				ngClass.push('noheader');
+			}
+
+			ngClass.push(this.theme);
+
+			return ngClass.join(' ');
 
 		}
 
@@ -200,7 +249,7 @@ module ASG {
 			}
 
 			var img = new Image();
-			img.src = this.files[index].source;
+			img.src = this.files[index].url;
 			this.files[index].loaded = true;
 
 		}
@@ -246,22 +295,30 @@ module ASG {
 		// set transition effect
 		public setTransition(transition) {
 
-			this.transition = transition;
+			this.options.transition = transition;
+			this.setFocus();
+
+		}
+
+		// set theme
+		public setTheme(theme) {
+
+			this.theme = theme;
 			this.setFocus();
 
 		}
 
 		// overlay arrows hide
-		public functionsHide() {
+		public arrowsHide() {
 
-			this.functionsVisible = false;
+			this.arrowsVisible = false;
 
 		}
 
 		// overlay arrows show
-		public functionsShow() {
+		public arrowsShow() {
 
-			this.functionsVisible = true;
+			this.arrowsVisible = true;
 
 		}
 
@@ -370,9 +427,9 @@ module ASG {
 				this.toggleFullScreen();
 			}
 
-			// g - gui
+			// g - header
 			if (e.keyCode == 71) {
-				this.toggleGUI();
+				this.toggleHeader();
 			}
 
 			// h - help
@@ -390,9 +447,9 @@ module ASG {
 		// switch to next transition effect
 		private nextTransition() {
 
-			var idx = this.transitions.indexOf(this.transition) + 1;
+			var idx = this.transitions.indexOf(this.options.transition) + 1;
 			var next = idx >= this.transitions.length ? 0 : idx;
-			this.transition = this.transitions[next];
+			this.options.transition = this.transitions[next];
 
 		}
 
@@ -411,15 +468,15 @@ module ASG {
 		// toggle help
 		private toggleHelp() {
 
-			this.help = !this.help;
+			this.options.help = !this.options.help;
 			this.setFocus();
 
 		}
 
-		// toggle GUI
-		private toggleGUI() {
+		// toggle header
+		private toggleHeader() {
 
-			this.gui = !this.gui;
+			this.options.header = !this.options.header;
 
 		}
 
@@ -447,7 +504,7 @@ module ASG {
 		bindings: {
 			visible: '=',
 			selected: '<',
-			files: '=',
+			items: '=',
 			options: '=?'
 		}
 	});

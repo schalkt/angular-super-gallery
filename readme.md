@@ -12,11 +12,12 @@ Angular SuperGallery
 
 
 ### Todo
-- rotate image LEFT / RIGHT
-- zoom image IN / OUT
+- rotate image (left, right)
+- zoom image and drag
 - show original size
 - fix rotateLR transition in Firefox (or fix Firefox CSS3D)
 
-### Legal
+### Photos
 
-Photos taken from https://wallpaperscraft.com
+Taken from https://wallpaperscraft.com
+Thanks

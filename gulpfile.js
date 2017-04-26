@@ -52,7 +52,7 @@ gulp.task("ts", function () {
 
 });
 
-gulp.task("js", function () {
+gulp.task("js", ['ts', 'views'], function () {
 
 	var filename = "angular-super-gallery.js";
 
@@ -151,17 +151,18 @@ gulp.task("watch", function () {
 	var watch = require("gulp-watch");
 	var batch = require("gulp-batch");
 
+	watch(SRC + "/*.html", batch(function (events, done) {
+		gulp.start("js", done);
+	}));
+
 	watch(SRC + "/*.ts", batch(function (events, done) {
 		gulp.start("js", done);
 	}));
 
-	watch(SRC + "/*.scss", batch(function (events, done) {
+	watch(SRC + "/**/*.scss", batch(function (events, done) {
 		gulp.start("css", done);
 	}));
 
-	watch(SRC + "/*.html", batch(function (events, done) {
-		gulp.start("views", done);
-	}));
 
 });
 
@@ -195,8 +196,7 @@ gulp.task('dev', function (callback) {
 	prod = false;
 
 	runSequence(
-		["views", "css", "ts"],
-		["js"],
+		["css", "js"],
 		["version"],
 		callback
 	)
@@ -208,8 +208,7 @@ gulp.task('prod', function (callback) {
 
 	runSequence(
 		["bump"],
-		["views", "css", "ts"],
-		["js"],
+		["css", "js"],
 		["css-min", "js-min"],
 		["version"],
 		callback
