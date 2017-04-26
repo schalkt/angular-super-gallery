@@ -1,11 +1,3 @@
-$primary: #42c7d5;
-$default: #f1f1f1;
-$background: #202020;
-$black: #101010;
-$highlight: #d5b045;
-
-$primary_hover: darken($primary, 20%);
-$imgpath: "/sources/grayscale/img";
 $perspective: 1280px;
 
 body.yhidden {
@@ -22,14 +14,15 @@ body.yhidden {
 
 .gallery-view {
 
+  @import "themes/darkblue";
+  @import "themes/whiteblue";
+
   z-index: 99999;
   position: fixed;
   top: 0px;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: $black;
-  color: $primary;
   padding: 0;
   outline: none;
   opacity: 1;
@@ -51,13 +44,17 @@ body.yhidden {
 
   .header {
     position: relative;
-    background-color: $background;
     height: auto;
     padding: 7px;
     z-index: 7700;
 
     h2, h3, h4 {
       margin: 0;
+      text-transform: uppercase;
+      sup {
+        font-size: 50%;
+      }
+
     }
 
     .buttons {
@@ -73,9 +70,7 @@ body.yhidden {
     right: 0;
     padding: 10px;
     z-index: 7500;
-    background-color: $black;
-    color: $default;
-    opacity: 0.75;
+    font-size: 12px;
     transition: all ease 0.42s;
     transform: translateY(0) rotateX(0deg);
 
@@ -87,7 +82,7 @@ body.yhidden {
 
   }
 
-  &.nogui {
+  &.noheader {
 
     .header {
       position: absolute;
@@ -155,33 +150,38 @@ body.yhidden {
     }
 
     .img {
+      max-width: 100%;
+      max-height: 100%;
+      margin: auto;
       position: absolute;
-      z-index: auto;
-      top: 0px;
+      top: 0;
       right: 0px;
+      left: 0;
+      z-index: 0;
+      width: auto;
+      height: auto;
       bottom: 0px;
-      left: 0px;
-      text-align: center;
       opacity: 1;
 
       .source {
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+        display: block;
         position: absolute;
-        z-index: auto;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        background-size: contain;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-      }
-
-      .description {
-        position: absolute;
-        z-index: 100;
-        bottom: 5px;
+        top: 0;
+        bottom: 0;
         left: 0;
         right: 0;
+      }
+
+      .details {
+        position: absolute;
+        z-index: 100;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 5px 10px;
         text-align: center;
       }
 
@@ -193,531 +193,15 @@ body.yhidden {
     $scaleIn: 1.15;
     $scaleOut: 0.85;
 
-    &.rotateLR {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateY(-$rotate) translateX(-$animsize);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateY(0deg) translateX(0);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateY(0deg) translateX(0);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateY($rotate) translateX($animsize);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateY($rotate) translateX($animsize);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateY(0deg) translateX(0);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateY(0deg) translateX(0);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateY(-$rotate) translateX(-$animsize);
-        }
-
-      }
-    }
-
-    &.rotateTB {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: translateY($animsize) rotateX(-$rotate);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: translateY(0) rotateX(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: translateY(0) rotateX(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: translateY(-$animsize) rotateX($rotate);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: translateY(-$animsize) rotateX($rotate);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: translateY(0) rotateX(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: translateY(0) rotateX(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: translateY($animsize) rotateX(-$rotate);
-        }
-
-      }
-
-    }
-
-    &.slideLR {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: translateX(-$animsize);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: translateX($animsize);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: translateX($animsize);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: translateX(-$animsize);
-        }
-
-      }
-    }
-
-    &.slideTB {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: translateY($animsize);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: translateY(-$animsize);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: translateY(-$animsize);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: translateY($animsize);
-        }
-
-      }
-
-    }
-
-    &.fadeInOut {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-        }
-
-      }
-    }
-
-    &.zoomInOut {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: scale($scaleIn);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: scale($scaleOut);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: scale($scaleOut);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: scale($scaleIn);
-        }
-
-      }
-    }
-
-    &.rotateZY {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateZ(-$rotate) rotateY($rotate);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateZ(0) rotateY(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateZ(0) rotateY(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateZ($rotate) rotateY(-$rotate);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateZ($rotate) rotateY(-$rotate);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateZ(0) rotateY(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateZ(0) rotateY(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateZ(-$rotate) rotateY($rotate);
-        }
-
-      }
-
-    }
-
-    &.flipY {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateY(-180deg);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateY(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateY(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateY(180deg);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateY(180deg);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateY(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateY(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateY(-180deg);
-        }
-
-      }
-    }
-
-    &.flipX {
-
-      &.forward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateX(-180deg);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateX(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateX(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateX(180deg);
-        }
-
-      }
-
-      &.backward .img {
-
-        &.ng-hide-remove, &.ng-hide-add {
-          transition: all ease $animspeed;
-        }
-
-        &.ng-hide-add.ng-hide-add-active {
-          opacity: 0;
-          transform: rotateX(180deg);
-        }
-
-        &.ng-hide-add {
-          opacity: 1;
-          transform: rotateX(0deg);
-        }
-
-        &.ng-hide-remove.ng-hide-remove-active {
-          opacity: 1;
-          transform: rotateX(0deg);
-        }
-
-        &.ng-hide-remove {
-          opacity: 0;
-          transform: rotateX(-180deg);
-        }
-
-      }
-    }
+    @import 'transitions/rotateLR';
+    @import 'transitions/rotateTB';
+    @import 'transitions/rotateZY';
+    @import 'transitions/slideLR';
+    @import 'transitions/slideTB';
+    @import 'transitions/fadeInOut';
+    @import 'transitions/zoomInOut';
+    @import 'transitions/flipX';
+    @import 'transitions/flipY';
 
   }
 
@@ -734,3 +218,4 @@ body.yhidden {
   }
 
 }
+

@@ -1,0 +1,58 @@
+&.flipX {
+
+  &.forward .img {
+
+    &.ng-hide-remove, &.ng-hide-add {
+      transition: all ease $animspeed;
+    }
+
+    &.ng-hide-add.ng-hide-add-active {
+      opacity: 0;
+      transform: rotateX(-180deg);
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+      transform: rotateX(0deg);
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+      transform: rotateX(0deg);
+    }
+
+    &.ng-hide-remove {
+      opacity: 0;
+      transform: rotateX(180deg);
+    }
+
+  }
+
+  &.backward .img {
+
+    &.ng-hide-remove, &.ng-hide-add {
+      transition: all ease $animspeed;
+    }
+
+    &.ng-hide-add.ng-hide-add-active {
+      opacity: 0;
+      transform: rotateX(180deg);
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+      transform: rotateX(0deg);
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+      transform: rotateX(0deg);
+    }
+
+    &.ng-hide-remove {
+      opacity: 0;
+      transform: rotateX(-180deg);
+    }
+
+  }
+}

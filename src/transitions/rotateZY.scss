@@ -1,0 +1,59 @@
+&.rotateZY {
+
+  &.forward .img {
+
+    &.ng-hide-remove, &.ng-hide-add {
+      transition: all ease $animspeed;
+    }
+
+    &.ng-hide-add.ng-hide-add-active {
+      opacity: 0;
+      transform: rotateZ(-$rotate) rotateY($rotate);
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+      transform: rotateZ(0) rotateY(0deg);
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+      transform: rotateZ(0) rotateY(0deg);
+    }
+
+    &.ng-hide-remove {
+      opacity: 0;
+      transform: rotateZ($rotate) rotateY(-$rotate);
+    }
+
+  }
+
+  &.backward .img {
+
+    &.ng-hide-remove, &.ng-hide-add {
+      transition: all ease $animspeed;
+    }
+
+    &.ng-hide-add.ng-hide-add-active {
+      opacity: 0;
+      transform: rotateZ($rotate) rotateY(-$rotate);
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+      transform: rotateZ(0) rotateY(0deg);
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+      transform: rotateZ(0) rotateY(0deg);
+    }
+
+    &.ng-hide-remove {
+      opacity: 0;
+      transform: rotateZ(-$rotate) rotateY($rotate);
+    }
+
+  }
+
+}

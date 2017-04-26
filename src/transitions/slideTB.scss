@@ -1,0 +1,59 @@
+&.slideTB {
+
+  &.forward .img {
+
+    &.ng-hide-remove, &.ng-hide-add {
+      transition: all ease $animspeed;
+    }
+
+    &.ng-hide-add.ng-hide-add-active {
+      opacity: 0;
+      transform: translateY($animsize);
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.ng-hide-remove {
+      opacity: 0;
+      transform: translateY(-$animsize);
+    }
+
+  }
+
+  &.backward .img {
+
+    &.ng-hide-remove, &.ng-hide-add {
+      transition: all ease $animspeed;
+    }
+
+    &.ng-hide-add.ng-hide-add-active {
+      opacity: 0;
+      transform: translateY(-$animsize);
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.ng-hide-remove {
+      opacity: 0;
+      transform: translateY($animsize);
+    }
+
+  }
+
+}
