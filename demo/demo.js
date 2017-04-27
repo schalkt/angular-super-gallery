@@ -45,6 +45,7 @@ demo.controller('DemoController', function ($http) {
 	this.options2 = {
 		header: false,
 		transition: 'zoomInOut',
+		theme: 'whiteblue',
 		thumbnail: {
 			class: "col-md-4"
 		},

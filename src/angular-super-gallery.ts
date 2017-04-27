@@ -14,6 +14,7 @@ module ASG {
 			thumbnail : string;
 		},
 		transition : string;
+		theme : string;
 		thumbnail : {
 			class : string;
 		},
@@ -39,11 +40,13 @@ module ASG {
 
 	export class GalleryViewController {
 
+		public id : string;
+		public direction : string;
 		public items : any;
-
 		public files : Array<IFile>;
 		public selected : number;
 		public options : IOptions;
+
 		private defaults = {
 			title: "",
 			subtitle: "",
@@ -55,6 +58,7 @@ module ASG {
 				thumbnail: "thumbnail"
 			},
 			transition: 'rotateLR',
+			theme: 'darkblue',
 			thumbnail: {
 				class: 'col-md-3'
 			},
@@ -63,15 +67,10 @@ module ASG {
 			help: false
 		};
 
-
-		public direction : string;
-		public id : string;
-
 		private _visible : boolean = false;
 		private _fullscreen : boolean = false;
 		private arrowsVisible : boolean = false;
 
-		private theme : string = 'darkblue';
 		private themes : Array<string> = [
 			'darkblue',
 			'whiteblue'
@@ -196,7 +195,7 @@ module ASG {
 				ngClass.push('noheader');
 			}
 
-			ngClass.push(this.theme);
+			ngClass.push(this.options.theme);
 
 			return ngClass.join(' ');
 
@@ -303,7 +302,7 @@ module ASG {
 		// set theme
 		public setTheme(theme) {
 
-			this.theme = theme;
+			this.options.theme = theme;
 			this.setFocus();
 
 		}
