@@ -1,0 +1,23 @@
+<div class="asg-image" data-ng-style="{'height' : $ctrl.asg.options.image.height}">
+
+	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
+		 data-ng-swipe-left="$ctrl.asg.toForward()"
+		 data-ng-swipe-right="$ctrl.asg.toBackward()">
+
+		<div class="img"
+			 data-ng-repeat="(key,file) in $ctrl.asg.files"
+			 data-ng-show="$ctrl.asg.selected == key"
+			 data-ng-class="{'loading' : !file.loaded}">
+
+			<img class="img-responsive source"
+				 data-ng-if="file.loaded"
+				 data-ng-src="{{ file.url }}"
+				 data-ng-click="$ctrl.asg.modalOpen()"/>
+		</div>
+	</div>
+
+</div>
+
+
+
+

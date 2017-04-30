@@ -1,0 +1,22 @@
+.asg-panel {
+
+  .thumbnail {
+    overflow: hidden;
+    position: relative;
+
+    img {
+      cursor: pointer;
+    }
+
+    .index {
+      position: absolute;
+      bottom: 5px;
+      z-index: 9999;
+      right: 6px;
+      padding: 1px 3px;
+      font-size: 9px;
+    }
+
+  }
+
+}

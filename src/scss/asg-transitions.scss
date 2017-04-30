@@ -1,0 +1,53 @@
+.img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  left: 0;
+  z-index: 0;
+  width: auto;
+  height: auto;
+  bottom: 0px;
+  opacity: 1;
+
+  .source {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .details {
+    position: absolute;
+    margin: auto;
+    z-index: 100;
+    bottom: 0;
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+}
+
+$animspeed: 0.75s;
+$animsize: 150px;
+$rotate: 40deg;
+$scaleIn: 1.15;
+$scaleOut: 0.85;
+
+@import 'transitions/rotateLR';
+@import 'transitions/rotateTB';
+@import 'transitions/rotateZY';
+@import 'transitions/slideLR';
+@import 'transitions/slideTB';
+@import 'transitions/fadeInOut';
+@import 'transitions/zoomInOut';
+@import 'transitions/flipX';
+@import 'transitions/flipY';
+

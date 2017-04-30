@@ -1,0 +1,21 @@
+<div class="asg-panel">
+
+	<div class="row">
+		<div class="{{ $ctrl.asg.options.panel.thumbnail.class }}"
+			 data-ng-repeat="(key,file) in $ctrl.asg.files">
+			<div class="thumbnail" href="#{{key}}"
+				 data-ng-class="{'selected' : $ctrl.asg.selected == key}"
+				 data-ng-mouseover="indexShow = true"
+				 data-ng-mouseleave="indexShow = false">
+
+				<img data-ng-src="{{ file.thumbnail }}" data-ng-click="$ctrl.asg.setSelected(key)" alt="{{ file.title }}"/>
+				<span class="index" data-ng-if="$ctrl.options.thumbnail.index && indexShow">{{ key + 1 }}</span>
+
+				<div class="caption" data-ng-if="$ctrl.options.thumbnail.caption">
+					<span>{{ file.title }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

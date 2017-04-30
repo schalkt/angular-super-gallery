@@ -1,0 +1,25 @@
+.asg-image {
+
+  position: relative;
+  min-height: 300px;
+
+  .images {
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: auto;
+    overflow: hidden;
+    perspective: $perspective;
+
+    @import "asg-transitions";
+
+  }
+
+  img {
+    cursor: pointer;
+  }
+
+}

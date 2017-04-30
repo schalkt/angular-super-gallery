@@ -1,24 +1,24 @@
 $white: #f1f1f1;
-$black: #101010;
+$black: #050505;
 $primary: #42c7d5;
-$background: #e2e2e2;
-$highlight: #d5b045;
+$primary_lighter: lighten($primary, 30%);
+$background: #101010;
 
-&.whiteblue {
+.asg-modal.darkblue {
 
   background-color: $background;
   color: $primary;
 
   .highlight {
-    color: $highlight;
+    color: $primary_lighter;
   }
 
   .header {
     background-color: $background;
 
-    h2, h3, h4 {
+    h3, h4, h5 {
       sup {
-        color: $highlight;
+        color: $primary_lighter;
         text-transform: initial;
       }
     }
@@ -39,4 +39,16 @@ $highlight: #d5b045;
     }
   }
 
+}
+
+.asg-panel {
+  .thumbnail {
+    &.selected {
+      border-color: $black;
+    }
+    .index {
+      background-color: rgba($black, 0.5);
+      color: $white;
+    }
+  }
 }

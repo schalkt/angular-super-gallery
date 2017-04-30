@@ -1,0 +1,48 @@
+$black: #050505;
+$white: #fefefe;
+$white_darken: darken($white, 10%);
+
+.asg-modal.default {
+
+  background-color: $black;
+
+  .highlight {
+
+  }
+
+  .header {
+    background-color: $white;
+    h3, h4, h5 {
+      span {
+
+      }
+    }
+
+  }
+
+  .help {
+    background-color: rgba($black, 0.42);
+    color: $white_darken;
+  }
+
+  .images {
+    .img {
+      .details {
+
+      }
+    }
+  }
+
+}
+
+.asg-panel {
+  .thumbnail {
+    &.selected {
+      border-color: $black;
+    }
+    .index {
+      background-color: rgba($black, 0.5);
+      color: $white;
+    }
+  }
+}

@@ -1,15 +1,20 @@
-Angular SuperGallery
+Angular Super Gallery
 ===
 
-Under construction
+*Angular 2 and Angular 4 versions are under development*
 
 ###Requirements
-- AngularJS 1.6.4
-- Bootstrap 3.3.7
-- FBAngular (angular-fullscreen.js)
+- [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.4
+- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.4
+- [angular-fullscreen](https://github.com/fabiobiondi/angular-fullscreen) 1.0.1 
+- [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.7
 
 ### Usage
 
+##### quick
+
+
+##### advanced
 
 
 ### Build
@@ -17,12 +22,18 @@ Under construction
 - `typings install`
 - `gulp dev` or `gulp prod` for minified javascript and css file
 
-### Todo
+
+### Todos
+- transition delay from options
 - rotate image (left, right)
 - zoom image and drag
 - show original size
-- fix rotateLR transition in Firefox (or fix Firefox CSS3D)
+- angular component for controls (play/stop/next/prev)
+- fix rotateLR transition in Firefox (or somebody fix the Firefox ;)
+
 
 ### Photos
-
 Taken from [wallpaperscraft.com](https://wallpaperscraft.com). Thank you!
+
+### License
+MIT
