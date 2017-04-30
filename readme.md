@@ -11,26 +11,20 @@ Angular Super Gallery
 
 ### Usage
 
-##### quick
-
-
-##### advanced
-
+See demo/index.html
 
 ### Build
 - `npm install`
 - `typings install`
-- `gulp dev` or `gulp prod` for minified javascript and css file
-
+- `gulp dev`
+- `gulp prod` (minified javascript and css file)
 
 ### Todos
-- transition delay from options
 - rotate image (left, right)
 - zoom image and drag
 - show original size
 - angular component for controls (play/stop/next/prev)
 - fix rotateLR transition in Firefox (or somebody fix the Firefox ;)
-
 
 ### Photos
 Taken from [wallpaperscraft.com](https://wallpaperscraft.com). Thank you!
