@@ -12,6 +12,12 @@ Angular Super Gallery
 ### Usage
 
 See demo/index.html or [here](http://schalk.hu/projects/angular-super-gallery/demo/)
+```
+<asg-setup data-id="galleryUniqueId" data-options="ctrl.options2" data-items="ctrl.files2"></asg-setup>
+<asg-panel data-id="galleryUniqueId"></asg-panel>
+<asg-image data-id="galleryUniqueId"></asg-image>
+<asg-modal data-id="galleryUniqueId" data-visible="showModal2"></asg-modal>
+```
 
 ### Build
 - `npm install`
