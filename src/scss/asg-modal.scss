@@ -1,21 +1,4 @@
-$perspective: 1280px;
-
-body.yhidden {
-  overflow-y: hidden;
-}
-
-.gallery-panel {
-
-  .thumbnail {
-    overflow: hidden;
-  }
-
-}
-
-.gallery-view {
-
-  @import "themes/darkblue";
-  @import "themes/whiteblue";
+.asg-modal {
 
   z-index: 99999;
   position: fixed;
@@ -43,22 +26,40 @@ body.yhidden {
   }
 
   .header {
+
     position: relative;
+    display: inline-block;
+    width: 100%;
     height: auto;
-    padding: 7px;
     z-index: 7700;
 
-    h2, h3, h4 {
-      margin: 0;
+    .title {
+      display: inline-block;
+      margin: 7px 10px 2px 12px;
       text-transform: uppercase;
-      sup {
-        font-size: 50%;
-      }
+      float: left;
+      font-size: 1.2em;
+    }
 
+    .subtitle {
+      display: inline-block;
+      margin: 4px 10px 2px 2px;
+      text-transform: uppercase;
+      float: left;
+      font-size: 0.8em;
+      background: #b5b5b5;
+      color: #fefefe;
+      padding: 8px 16px 6px 16px;
+    }
+
+    .file {
+      font-size: 0.9em;
+      padding: 10px 12px;
+      display: inline-block;
     }
 
     .buttons {
-      margin-left: 10px;
+      margin: 4px 4px 4px 14px;
     }
 
   }
@@ -107,9 +108,9 @@ body.yhidden {
   .images {
 
     position: absolute;
-    top: 50px;
+    top: 42px;
     right: 0px;
-    bottom: 5px;
+    bottom: 4px;
     left: 0px;
     z-index: auto;
     overflow: hidden;
@@ -149,59 +150,7 @@ body.yhidden {
       z-index: auto;
     }
 
-    .img {
-      max-width: 100%;
-      max-height: 100%;
-      margin: auto;
-      position: absolute;
-      top: 0;
-      right: 0px;
-      left: 0;
-      z-index: 0;
-      width: auto;
-      height: auto;
-      bottom: 0px;
-      opacity: 1;
-
-      .source {
-        max-width: 100%;
-        max-height: 100%;
-        margin: auto;
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-
-      .details {
-        position: absolute;
-        z-index: 100;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 5px 10px;
-        text-align: center;
-      }
-
-    }
-
-    $animspeed: 0.75s;
-    $animsize: 150px;
-    $rotate: 40deg;
-    $scaleIn: 1.15;
-    $scaleOut: 0.85;
-
-    @import 'transitions/rotateLR';
-    @import 'transitions/rotateTB';
-    @import 'transitions/rotateZY';
-    @import 'transitions/slideLR';
-    @import 'transitions/slideTB';
-    @import 'transitions/fadeInOut';
-    @import 'transitions/zoomInOut';
-    @import 'transitions/flipX';
-    @import 'transitions/flipY';
+    @import "asg-transitions";
 
   }
 
@@ -218,4 +167,3 @@ body.yhidden {
   }
 
 }
-

@@ -1,0 +1,55 @@
+$white: #ffffff;
+$white_darken: darken($white, 5%);
+$black: #050505;
+$primary: #dea41d;
+$second: darken($primary, 20%);
+$background: #101010;
+
+.asg-modal.whitegold {
+
+  background-color: $white;
+  color: $primary;
+
+  .highlight {
+    color: $second;
+  }
+
+  .header {
+    background-color: $white_darken;
+    box-shadow: 0px 0px 2px #404040;
+
+    h3, h4, h5 {
+      span {
+        color: $second;
+      }
+    }
+
+  }
+
+  .help {
+    background-color: $background;
+    color: $white;
+    opacity: 0.75;
+  }
+
+  .images {
+    .img {
+      .details {
+        background-color: rgba($black, 0.5);
+      }
+    }
+  }
+
+}
+
+.asg-panel {
+  .thumbnail {
+    &.selected {
+      border-color: $black;
+    }
+    .index {
+      background-color: rgba($black, 0.5);
+      color: $white;
+    }
+  }
+}

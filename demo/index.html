@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Angular Super Gallery Demo</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"
 			integrity="sha256-jFCqhWdzGFjoG8/SAncY2afI/Xv1TPSWSZrb9dpXQbk="
@@ -31,6 +31,8 @@
 </head>
 <body>
 
+<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
+
 <div class="container">
 
 
@@ -39,44 +41,63 @@
 	<div class="row">
 
 		<div class="col-md-6">
-			<pre>
-			{{ ctrl.options1|json}}
-		</pre>
+
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<button class="btn btn-warning" data-ng-click="showModal1 = !showModal1">
+						Open demo gallery 1 window
+					</button>
+					<button class="btn btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show options
+					</button>
+					<button class="btn btn-default pull-right" data-ng-click="showFiles1 = !showFiles1">show files
+					</button>
+				</div>
+				<div class="panel-body">
+
+					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
+					<pre data-ng-if="showFiles1">{{ ctrl.files1|json}}</pre>
+					<pre data-ng-bind="ctrl.html1"></pre>
+
+					<asg-setup data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1"></asg-setup>
+					<asg-image data-id="nature"></asg-image>
+					<asg-panel data-id="nature"></asg-panel>
+
+				</div>
+
+			</div>
 
 		</div>
 
 		<div class="col-md-6">
-			<button class="btn btn-warning" data-ng-click="gallery1Visible = !gallery1Visible">Open gallery 1 modal
-			</button>
-			<br/><br/>
-			<gallery-view
-					data-visible="gallery1Visible"
-					data-options="ctrl.options1"
-					data-items="ctrl.files1">
-			</gallery-view>
-		</div>
 
-	</div>
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<button class="btn btn-warning" data-ng-click="showModal2 = !showModal2">
+						Open demo gallery 2 window
+					</button>
+					<button class="btn btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">show options
+					</button>
+					<button class="btn btn-default pull-right" data-ng-click="showFiles2 = !showFiles2">show files
+					</button>
+				</div>
+				<div class="panel-body">
+
+					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
+					<pre data-ng-if="showFiles2">{{ ctrl.files2|json}}</pre>
+					<pre data-ng-bind="ctrl.html2"></pre>
+
+					<asg-setup data-id="girls" data-options="ctrl.options2" data-items="ctrl.files2"></asg-setup>
+					<asg-panel data-id="girls"></asg-panel>
+					<asg-image data-id="girls"></asg-image>
+					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
+
+				</div>
+
+			</div>
 
 
-	<div class="row">
-
-		<div class="col-md-6">
-			<pre>
-			{{ ctrl.options2|json}}
-		</pre>
-
-		</div>
-
-		<div class="col-md-6">
-			<button class="btn btn-warning" data-ng-click="gallery2Visible = !gallery2Visible">Open gallery 2 modal
-			</button>
-			<br/><br/>
-			<gallery-view
-					data-visible="gallery2Visible"
-					data-options="ctrl.options2"
-					data-items="ctrl.files2">
-			</gallery-view>
 		</div>
 
 	</div>

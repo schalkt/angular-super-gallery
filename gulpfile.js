@@ -36,7 +36,8 @@ gulp.task("ts", function () {
 	])
 		.pipe(gulpif(!PROD, sourcemaps.init()))
 		.pipe(order([
-			"angular-super-gallery.ts"
+			"asg.ts",
+			"asg-factory.ts"
 		], {
 			base: SRC
 		}))
@@ -129,7 +130,7 @@ gulp.task("views", function () {
 	var templateCache = require('gulp-angular-templatecache');
 	var htmlmin = require('gulp-htmlmin');
 
-	return gulp.src([SRC + '/*.html'])
+	return gulp.src([SRC + '/**/*.html'])
 		.pipe(htmlmin({
 			removeComments: false,
 			collapseWhitespace: false,
@@ -137,7 +138,7 @@ gulp.task("views", function () {
 		}))
 		.pipe(templateCache({
 			module: 'angularSuperGallery',
-			root: 'views/'
+			root: ''
 		}))
 		.pipe(concat("angular-super-gallery-views.js"))
 		.pipe(gulp.dest(TEMP))
