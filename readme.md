@@ -3,7 +3,7 @@ Angular Super Gallery
 
 *Angular 2 and Angular 4 versions are under development*
 
-###Requirements
+### Requirements
 - [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.4
 - [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.4
 - [angular-fullscreen](https://github.com/fabiobiondi/angular-fullscreen) 1.0.1 
@@ -11,7 +11,7 @@ Angular Super Gallery
 
 ### Usage
 
-See demo/index.html
+See demo/index.html or [here](http://schalk.hu/projects/angular-super-gallery/demo/)
 
 ### Build
 - `npm install`
