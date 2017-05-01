@@ -1,4 +1,4 @@
-<div class="asg-image" data-ng-style="{'height' : $ctrl.asg.options.image.height}">
+<div class="asg-image {{ $ctrl.asg.theme }}" data-ng-style="{'height' : $ctrl.asg.options.image.height}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
 		 data-ng-swipe-left="$ctrl.asg.toForward()"
@@ -11,6 +11,7 @@
 
 			<img class="img-responsive source"
 				 data-ng-if="file.loaded"
+				 data-ng-class="{ wide : $ctrl.options.wide }"
 				 data-ng-src="{{ file.url }}"
 				 data-ng-click="$ctrl.asg.modalOpen()"/>
 		</div>

@@ -1,6 +1,6 @@
 $black: #050505;
 $white: #fefefe;
-$white_darken: darken($white, 10%);
+$white_darken: darken($white, 14%);
 
 .asg-modal.default {
 
@@ -12,16 +12,17 @@ $white_darken: darken($white, 10%);
 
   .header {
     background-color: $white;
-    h3, h4, h5 {
-      span {
+    .title {
 
-      }
     }
-
+    .subtitle {
+      background: $white_darken;
+      color: $white;
+    }
   }
 
   .help {
-    background-color: rgba($black, 0.42);
+    background-color: rgba($black, 0.56);
     color: $white_darken;
   }
 
@@ -33,15 +34,22 @@ $white_darken: darken($white, 10%);
     }
   }
 
+  .caption {
+    .content {
+      background-color: rgba($black, 0.56);
+      color: $white_darken;
+    }
+  }
+
 }
 
-.asg-panel {
-  .thumbnail {
+.asg-panel.default {
+  .item {
     &.selected {
       border-color: $black;
     }
     .index {
-      background-color: rgba($black, 0.5);
+      background-color: rgba($black, 0.56);
       color: $white;
     }
   }

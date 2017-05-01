@@ -22,24 +22,20 @@
     bottom: 0;
     left: 0;
     right: 0;
-  }
 
-  .details {
-    position: absolute;
-    margin: auto;
-    z-index: 100;
-    bottom: 0;
-    padding: 5px 10px;
-    text-align: center;
+    &.wide {
+      max-height: none;
+    }
+
   }
 
 }
 
-$animspeed: 0.75s;
-$animsize: 150px;
-$rotate: 40deg;
-$scaleIn: 1.15;
-$scaleOut: 0.85;
+$animspeed: 0.77s;
+$animsize: 14%;
+$rotate: 32deg;
+$scaleIn: 1.14;
+$scaleOut: 0.86;
 
 @import 'transitions/rotateLR';
 @import 'transitions/rotateTB';

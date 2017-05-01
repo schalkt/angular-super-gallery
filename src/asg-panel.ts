@@ -16,9 +16,15 @@ module ASG {
 
 		}
 
-		public get options() {
+		public get options() : IOptionsPanel {
 
 			return this.asg.options.panel;
+
+		}
+
+		public set options(value : IOptionsPanel) {
+
+			this.asg.options.panel = value;
 
 		}
 

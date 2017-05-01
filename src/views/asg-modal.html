@@ -5,8 +5,11 @@
 	UP : first</br>
 	DOWN : last</br>
 	ESC : exit</br>
+	P : play/pause</br>
 	F : toggle fullscreen</br>
-	G : toggle header</br>
+	M : toggle menu</br>
+	W : toggle wide screen</br>
+	C : toggle caption</br>
 	H : toggle help
 </script>
 
@@ -22,13 +25,9 @@
 
         <span class="buttons pull-right visible-sm visible-md visible-lg">
 
-
-			   <button data-ng-if="!$ctrl.asg.isSingle && $ctrl.asg.options.autoplay.enabled" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayStop()">
-                    <span class="glyphicon glyphicon-stop"></span>
-                </button>
-
-			   <button data-ng-if="!$ctrl.asg.isSingle && !$ctrl.asg.options.autoplay.enabled" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayStart()">
-                    <span class="glyphicon glyphicon-play"></span>
+			   <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()">
+                    <span data-ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
+				   <span data-ng-if="$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-stop"></span>
                 </button>
 
                 <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm " data-ng-click="$ctrl.asg.toFirst(true)">
@@ -74,9 +73,13 @@
                 </span>
 
 
-                <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleHeader()">
+                <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleMenu()">
                     <span data-ng-if="$ctrl.asg.options.modal.header" class="glyphicon glyphicon-chevron-up"></span>
                     <span data-ng-if="!$ctrl.asg.options.modal.header" class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+
+			 	<button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleWide()">
+                    <span class="glyphicon glyphicon-resize-horizontal"></span>
                 </button>
 
                 <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleFullScreen()">
@@ -150,10 +153,15 @@
                         </ul>
                     </span>
 
-                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleHeader()">
+                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleMenu()">
                         <span data-ng-if="$ctrl.asg.options.modal.header" class="glyphicon glyphicon-chevron-up"></span>
                         <span data-ng-if="!$ctrl.asg.options.modal.header" class="glyphicon glyphicon-chevron-down"></span>
                     </button>
+
+
+					<button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleWide()">
+						<span class="glyphicon glyphicon-resize-horizontal"></span>
+					</button>
 
                     <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleFullScreen()">
                         <span class="glyphicon glyphicon-fullscreen"></span>
@@ -174,8 +182,6 @@
 			<span class="subtitle" data-ng-if="$ctrl.asg.options.modal.subtitle">{{ $ctrl.asg.options.modal.subtitle }}</span>
 		</span>
 
-		<span class="file">{{ $ctrl.asg.file.title }}</span>
-
 	</div>
 
 	<div class="help text-right" data-ng-click="$ctrl.toggleHelp()" data-ng-show="$ctrl.asg.options.modal.help" data-ng-include src="'help.html'"></div>
@@ -192,12 +198,10 @@
 			 data-ng-show="$ctrl.asg.selected == key"
 			 data-ng-class="{'loading' : !file.loaded}">
 
-			<img class="source" data-ng-src="{{ file.url }}" data-ng-if="file.loaded"/>
+			<img class="source"
+				 data-ng-class="{ wide : $ctrl.options.wide }"
+				 data-ng-src="{{ file.url }}" data-ng-if="file.loaded"/>
 
-			<div class="details">
-				<a href="{{ $ctrl.downloadLink() }}" target="_blank">Download</a>
-				<span class="description">{{ $ctrl.asg.file.description }}</span>
-			</div>
 		</div>
 
 		<div data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toBackward">
@@ -241,5 +245,13 @@
 
 	</div>
 
+
+	<div class="caption" data-ng-if="$ctrl.options.caption">
+		<div class="content">
+			<span class="title">{{ $ctrl.asg.file.title }}</span>
+			<span data-ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
+			<span class="description">{{ $ctrl.asg.file.description }}</span>
+		</div>
+	</div>
 
 </div>

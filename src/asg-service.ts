@@ -2,6 +2,34 @@
 
 module ASG {
 
+	export interface IOptionsModal {
+
+		menu? : boolean;
+		help? : boolean;
+		caption? : boolean;
+		transition? : string;
+		title? : string;
+		subtitle? : string;
+		wide? : boolean;
+
+	}
+
+	export interface IOptionsPanel {
+
+		item? : {
+			class? : string;
+		},
+
+	}
+
+	export interface IOptionsImage {
+
+		transition? : string;
+		height? : number;
+		wide? : boolean;
+
+	}
+
 	export interface IOptions {
 
 		baseUrl? : string;
@@ -17,22 +45,9 @@ module ASG {
 		},
 		theme? : string;
 		preload? : Array<number>;
-		modal? : {
-			header? : boolean;
-			help? : boolean;
-			transition? : string;
-			title? : string;
-			subtitle? : string;
-		},
-		panel? : {
-			thumbnail? : {
-				class? : string;
-			},
-		},
-		image? : {
-			transition? : string;
-			height? : number
-		}
+		modal? : IOptionsModal;
+		panel? : IOptionsPanel;
+		image? : IOptionsImage;
 
 	}
 
@@ -64,6 +79,7 @@ module ASG {
 		toForward(stop? : boolean) : void;
 		toFirst(stop? : boolean) : void;
 		toLast(stop? : boolean) : void;
+		autoPlayToggle() : void;
 		modalVisible : boolean;
 		transitions : Array<string>;
 		themes : Array<string>;
@@ -81,34 +97,37 @@ module ASG {
 		public selected : number = 0;
 		public options : IOptions = {};
 		public defaults : IOptions = {
-			baseUrl: "",
+			baseUrl: "", // url prefix, not required
 			fields: {
-				url: "url",
-				title: "title",
-				description: "description",
-				thumbnail: "thumbnail"
+				url: "url", // url input field name, not required
+				title: "title", // title input field name, not required
+				description: "description", // description input field name, not required
+				thumbnail: "thumbnail" // thumbnail input field name, not required
 			},
 			autoplay: {
-				enabled: false,
-				delay: 2500
+				enabled: false, // slideshow autoplay enabled/disabled, not required
+				delay: 4100 // autoplay delay in millisecond
 			},
-			theme: 'default',
-			preload: [0],
+			theme: 'default', // css style [default, darkblue, whitegold]
+			preload: [0], // preload images by index number
 			modal: {
-				title: "",
-				subtitle: "",
-				header: true,
-				help: false,
-				transition: 'rotateLR',
+				title: "", // modal window title, not required
+				subtitle: "", // modal window subtitle, not required
+				caption: true, // show/hide image caption, not required
+				menu: true, // show/hide modal menu, not required
+				help: false, // show/hide help
+				transition: 'rotateLR', // transition effect
+				wide: false // enable/disable wide image display mode
 			},
 			panel: {
-				thumbnail: {
-					class: 'col-md-3'
+				item: {
+					class: 'col-md-3' // item class
 				},
 			},
 			image: {
-				transition: 'rotateLR',
-				height: 300
+				transition: 'rotateLR', // transition effect
+				wide: false, // enable/disable wide image display mode
+				height: 300 // height
 			}
 		};
 
@@ -162,7 +181,7 @@ module ASG {
 
 		}
 
-		public setup(options, items) {
+		public setup(options : IOptions, items : Array<IFile>) {
 
 			this.options = angular.merge(this.defaults, options);
 			this.items = items;
@@ -224,6 +243,17 @@ module ASG {
 			this.direction = 'forward';
 			this.selected = this.items.length - 1;
 			this.preload();
+
+		}
+
+
+		public autoPlayToggle() {
+
+			if (this.options.autoplay.enabled) {
+				this.autoPlayStop();
+			} else {
+				this.autoPlayStart();
+			}
 
 		}
 
@@ -371,6 +401,15 @@ module ASG {
 			return this._visible;
 
 		}
+
+
+		// get theme
+		public get theme() {
+
+			return this.options.theme;
+
+		}
+
 
 		// set visible
 		public set modalVisible(value : boolean) {

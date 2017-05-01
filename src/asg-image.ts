@@ -17,6 +17,18 @@ module ASG {
 
 		}
 
+		public get options() : IOptionsImage {
+
+			return this.asg.options.image;
+
+		}
+
+		public set options(value : IOptionsImage) {
+
+			this.asg.options.image = value;
+
+		}
+
 	}
 
 	var app : ng.IModule = angular.module('angularSuperGallery');
