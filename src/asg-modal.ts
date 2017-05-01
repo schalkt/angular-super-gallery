@@ -27,8 +27,8 @@ module ASG {
 
 			var ngClass = [];
 
-			if (!this.asg.options.modal.header) {
-				ngClass.push('noheader');
+			if (!this.options.menu) {
+				ngClass.push('nomenu');
 			}
 
 			ngClass.push(this.asg.options.theme);
@@ -39,11 +39,16 @@ module ASG {
 
 
 		// keymap
-		public keyUp(e) {
+		public keyUp(e : KeyboardEvent) {
 
 			// esc
 			if (e.keyCode == 27) {
 				this.asg.modalClose();
+			}
+
+			// play/pause
+			if (e.keyCode == 80) {
+				this.asg.autoPlayToggle();
 			}
 
 			// space
@@ -76,14 +81,24 @@ module ASG {
 				this.toggleFullScreen();
 			}
 
-			// g - header
-			if (e.keyCode == 71) {
-				this.toggleHeader();
+			// m - menu
+			if (e.keyCode == 77) {
+				this.toggleMenu();
+			}
+
+			// c - caption
+			if (e.keyCode == 67) {
+				this.toggleCaption();
 			}
 
 			// h - help
 			if (e.keyCode == 72) {
 				this.toggleHelp();
+			}
+
+			// w - wide sceeen (image fit to images container)
+			if (e.keyCode == 87) {
+				this.toggleWide();
 			}
 
 			// t - transition next
@@ -97,9 +112,9 @@ module ASG {
 		// switch to next transition effect
 		private nextTransition() {
 
-			var idx = this.asg.transitions.indexOf(this.asg.options.modal.transition) + 1;
+			var idx = this.asg.transitions.indexOf(this.options.transition) + 1;
 			var next = idx >= this.asg.transitions.length ? 0 : idx;
-			this.asg.options.modal.transition = this.asg.transitions[next];
+			this.options.transition = this.asg.transitions[next];
 
 		}
 
@@ -119,13 +134,13 @@ module ASG {
 		// set transition effect
 		public setTransition(transition) {
 
-			this.asg.options.modal.transition = transition;
+			this.options.transition = transition;
 			this.asg.setFocus();
 
 		}
 
 		// set theme
-		public setTheme(theme) {
+		public setTheme(theme : string) {
 
 			this.asg.options.theme = theme;
 			this.asg.setFocus();
@@ -149,19 +164,33 @@ module ASG {
 		// toggle help
 		private toggleHelp() {
 
-			this.asg.options.modal.help = !this.asg.options.modal.help;
+			this.options.help = !this.options.help;
 			this.asg.setFocus();
 
 		}
 
 
-		// toggle header
-		private toggleHeader() {
+		// toggle wide
+		private toggleWide() {
 
-			this.asg.options.modal.header = !this.asg.options.modal.header;
+			this.options.wide = !this.options.wide;
 
 		}
 
+
+		// toggle menu
+		private toggleMenu() {
+
+			this.options.menu = !this.options.menu;
+
+		}
+
+		// toggle caption
+		private toggleCaption() {
+
+			this.options.caption = !this.options.caption;
+
+		}
 
 		// get modal visible
 		public get visible() {
@@ -185,6 +214,17 @@ module ASG {
 
 		}
 
+		public get options() : IOptionsModal {
+
+			return this.asg.options.modal;
+
+		}
+
+		public set options(value : IOptionsModal) {
+
+			this.asg.options.modal = value;
+
+		}
 
 	}
 

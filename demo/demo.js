@@ -2,30 +2,29 @@ var demo = angular.module('demo', ['angularSuperGallery', 'FBAngular']);
 
 demo.controller('DemoController', function ($http) {
 
-	this.html1 = '<gallery-view' + '\n'
-		+ ' data-visible="gallery1Visible"' + '\n'
-		+ ' data-options="ctrl.options1"' + '\n'
-		+ ' data-items="ctrl.files1">' + '\n'
-		+ '</gallery-view>';
-
 	this.options1 = {
 		baseUrl: "https://",
 		fields: {
 			url: "link"
 		},
+		theme: 'darkblue',
 		modal: {
+			wide: true,
+			caption: false,
 			title: "Angular Super Gallery Demo",
 			subtitle: "Nature Wallpapers Full HD",
 			preload: [0]
 		},
 		panel: {
-			thumbnail: {
-				class: "col-md-3",
+			item: {
+				class: "thumbnail-custom",
 				title: false,
 				index: true
 			},
 		},
 		image: {
+			height: 210,
+			wide: true,
 			transition: 'rotateLR'
 		},
 	};
@@ -57,25 +56,20 @@ demo.controller('DemoController', function ($http) {
 	}];
 
 
-	this.html2 = '<gallery-view' + '\n'
-		+ ' data-visible="gallery2Visible"' + '\n'
-		+ ' data-options="ctrl.options2"' + '\n'
-		+ ' data-items="ctrl.files2">' + '\n'
-		+ '</gallery-view>';
-
 	this.options2 = {
 		autoplay: {
 			enabled: true,
 			delay: 3500
 		},
+		theme: 'whitegold',
 		modal: {
-			header: false,
+			menu: false,
 			transition: 'zoomInOut',
-			theme: 'whitegold',
+			wide: true,
 		},
 		panel: {
-			thumbnail: {
-				class: "col-md-4",
+			item: {
+				class: "col-md-4 thumbnail",
 				caption: true
 			},
 		},
@@ -94,9 +88,9 @@ demo.controller('DemoController', function ($http) {
 		"thumbnail": "https://i2.wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_300x168.jpg",
 		"title": "Emma Stone"
 	}, {
-		"url": "https://wallpaperscraft.com/image/girl_red-haired_eyes_hair_makeup_63833_1920x1080.jpg",
-		"thumbnail": "https://i2.wallpaperscraft.com/image/girl_red-haired_eyes_hair_makeup_63833_300x168.jpg",
-		"title": "Girl red hair"
+		"url": "https://wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_1920x1080.jpg",
+		"thumbnail": "https://i2.wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_300x168.jpg",
+		"title": "Amanda Seyfried"
 	}, {
 		"url": "https://wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_1920x1080.jpg",
 		"thumbnail": "https://i2.wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_300x168.jpg",
@@ -104,7 +98,7 @@ demo.controller('DemoController', function ($http) {
 	}, {
 		"url": "https://wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_1920x1080.jpg",
 		"thumbnail": "https://i2.wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_300x168.jpg",
-		"title": "Selena Gomer"
+		"title": "Selena Gomez"
 	}, {
 		"url": "https://wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_1920x1080.jpg",
 		"thumbnail": "https://i2.wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_300x168.jpg",

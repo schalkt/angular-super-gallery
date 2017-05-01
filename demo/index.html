@@ -13,6 +13,10 @@
 			integrity="sha256-lE2XZC7eMrdH+KRaKXPWg1YqsAcDdhmqFAPbPG5f/U8="
 			crossorigin="anonymous"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.6.4/angular-touch.js"
+			integrity="sha256-cTsmFaFeMR70ihoa6L20+fCf2TSfIrjkfL3KSa2DP7M="
+			crossorigin="anonymous"></script>
+
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 			crossorigin="anonymous"></script>
@@ -31,10 +35,17 @@
 </head>
 <body>
 
-<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
+<style>
+
+	.thumbnail-custom {
+		width: 25%;
+		float: left;
+		padding: 1px 1px 0px 0px;
+	}
+
+</style>
 
 <div class="container">
-
 
 	<h1>Angular Super Gallery Demo</h1>
 
@@ -50,19 +61,20 @@
 					</button>
 					<button class="btn btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show options
 					</button>
-					<button class="btn btn-default pull-right" data-ng-click="showFiles1 = !showFiles1">show files
-					</button>
 				</div>
 				<div class="panel-body">
 
 					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
-					<pre data-ng-if="showFiles1">{{ ctrl.files1|json}}</pre>
-					<pre data-ng-bind="ctrl.html1"></pre>
 
 					<asg-setup data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1"></asg-setup>
 					<asg-image data-id="nature"></asg-image>
 					<asg-panel data-id="nature"></asg-panel>
+					<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
 
+				</div>
+
+				<div class="panel-footer text-center">
+					photos : <a target="_blank" href="https://wallpaperscraft.com"/>wallpaperscraft.com</a>
 				</div>
 
 			</div>
@@ -79,20 +91,25 @@
 					</button>
 					<button class="btn btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">show options
 					</button>
-					<button class="btn btn-default pull-right" data-ng-click="showFiles2 = !showFiles2">show files
+					<button class="btn btn-default pull-right" data-ng-click="showThumbnails2 = !showThumbnails2">show
+						thumbnails
 					</button>
 				</div>
 				<div class="panel-body">
 
 					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
-					<pre data-ng-if="showFiles2">{{ ctrl.files2|json}}</pre>
-					<pre data-ng-bind="ctrl.html2"></pre>
 
 					<asg-setup data-id="girls" data-options="ctrl.options2" data-items="ctrl.files2"></asg-setup>
-					<asg-panel data-id="girls"></asg-panel>
+					<div class="row">
+						<asg-panel data-ng-if="showThumbnails2" data-id="girls"></asg-panel>
+					</div>
 					<asg-image data-id="girls"></asg-image>
 					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
 
+				</div>
+
+				<div class="panel-footer text-center">
+					photos : <a target="_blank" href="https://wallpaperscraft.com"/>wallpaperscraft.com</a>
 				</div>
 
 			</div>

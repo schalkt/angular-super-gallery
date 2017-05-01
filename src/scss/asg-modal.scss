@@ -47,8 +47,6 @@
       text-transform: uppercase;
       float: left;
       font-size: 0.8em;
-      background: #b5b5b5;
-      color: #fefefe;
       padding: 8px 16px 6px 16px;
     }
 
@@ -83,34 +81,12 @@
 
   }
 
-  &.noheader {
-
-    .header {
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      left: 0;
-      right: 0;
-
-      &:hover {
-        opacity: 0.75;
-      }
-
-    }
-
-    .images {
-      top: 0px;
-      bottom: 0px;
-    }
-
-  }
-
   .images {
 
     position: absolute;
     top: 42px;
     right: 0px;
-    bottom: 4px;
+    bottom: 0px;
     left: 0px;
     z-index: auto;
     overflow: hidden;
@@ -151,6 +127,32 @@
     }
 
     @import "asg-transitions";
+
+  }
+
+  .caption {
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+
+    .content {
+
+      padding: 5px 10px;
+      text-align: center;
+      margin: auto;
+
+      .title {
+
+      }
+
+      .description {
+
+      }
+
+    }
 
   }
 

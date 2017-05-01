@@ -6,18 +6,105 @@ Angular Super Gallery
 ### Requirements
 - [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.4
 - [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.4
+- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.4
 - [angular-fullscreen](https://github.com/fabiobiondi/angular-fullscreen) 1.0.1 
 - [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.7
 
+### Demo
+
+See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gallery/demo/)
+
 ### Usage
 
-See demo/index.html or [here](http://schalk.hu/projects/angular-super-gallery/demo/)
+in Controller
 ```
-<asg-setup data-id="galleryUniqueId" data-options="ctrl.options2" data-items="ctrl.files2"></asg-setup>
-<asg-panel data-id="galleryUniqueId"></asg-panel>
-<asg-image data-id="galleryUniqueId"></asg-image>
-<asg-modal data-id="galleryUniqueId" data-visible="showModal2"></asg-modal>
+this.nature1Options = {
+    baseUrl: "https://",
+    modal: {
+        wide: true,
+        transition: 'zoomInOut'
+    },
+    panel: {
+        thumbnail: {
+            class: "col-md-4"
+        },
+    },
+    image: {
+        transition: 'fadeInOut'
+    }
+};
+
+
+this.nature1 = [
+    {
+		"url": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x168.jpg",
+	}, {
+		"url": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x168.jpg",
+	}
+];
 ```
+
+
+in HTML
+```
+<asg-setup data-id="nature1" data-options="ctrl.nature1Options" data-items="ctrl.nature1"></asg-setup>
+<asg-panel data-id="nature1"></asg-panel>
+<asg-image data-id="nature1"></asg-image>
+<asg-modal data-id="nature1"></asg-modal>
+```
+
+### Available options
+```
+{
+    baseUrl: "", // url prefix, not required
+    fields: {
+        url: "url", // url input field name, not required
+        title: "title", // title input field name, not required
+        description: "description", // description input field name, not required
+        thumbnail: "thumbnail" // thumbnail input field name, not required
+    },
+    autoplay: {
+        enabled: false, // slideshow autoplay enabled/disabled, not required
+        delay: 4100 // autoplay delay in millisecond
+    },
+    theme: 'default', // css style [default, darkblue, whitegold]
+    preload: [0], // preload images by index number
+    modal: {
+        title: "", // modal window title, not required
+        subtitle: "", // modal window subtitle, not required
+        caption: true, // show/hide image caption, not required
+        menu: true, // show/hide modal menu, not required
+        help: false, // show/hide help
+        transition: 'rotateLR', // transition effect
+        wide: false // enable/disable wide image display mode
+    },
+    panel: {
+        item: {
+            class: 'col-md-3' // item class
+        },
+    },
+    image: {
+        transition: 'rotateLR', // transition effect
+        wide: false, // enable/disable wide image display mode
+        height: 300 // height
+    }
+```
+
+### Keyboard shortcuts in modal window
+- SPACE : forward
+- RIGHT : forward
+- LEFT : backward
+- UP : first
+- DOWN : last
+- ESC : exit
+- P : play/pause
+- F : toggle fullscreen
+- M : toggle menu
+- W : toggle wide screen
+- C : toggle caption
+- H : toggle help
 
 ### Build
 - `npm install`
@@ -26,14 +113,15 @@ See demo/index.html or [here](http://schalk.hu/projects/angular-super-gallery/de
 - `gulp prod` (minified javascript and css file)
 
 ### Todos
-- rotate image (left, right)
-- zoom image and drag
-- show original size
+- image preload fix
+- image zoom / drag / rotate
+- image info (original width and height / bytes)
 - angular component for controls (play/stop/next/prev)
-- fix rotateLR transition in Firefox (or somebody fix the Firefox ;)
+- fix transitions in Microsoft Edge
+- fix rotateLR transition in Firefox on MAC (or somebody fix the Firefox ;)
 
 ### Photos
-Taken from [wallpaperscraft.com](https://wallpaperscraft.com). Thank you!
+[wallpaperscraft.com](https://wallpaperscraft.com)
 
 ### License
 MIT

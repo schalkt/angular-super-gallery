@@ -1,18 +1,23 @@
 .asg-panel {
 
-  .thumbnail {
+  .item {
     overflow: hidden;
     position: relative;
 
     img {
       cursor: pointer;
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin-right: auto;
+      margin-left: auto;
     }
 
     .index {
       position: absolute;
-      bottom: 5px;
+      top: 5px;
       z-index: 9999;
-      right: 6px;
+      right: 5px;
       padding: 1px 3px;
       font-size: 9px;
     }
