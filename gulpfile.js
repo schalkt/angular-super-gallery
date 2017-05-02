@@ -56,6 +56,18 @@ gulp.task("ts", function () {
 gulp.task("js", ['ts', 'views'], function () {
 
 	var filename = "angular-super-gallery.js";
+	var header = require('gulp-header');
+
+
+	var package = require('./package.json');
+	var banner = ['/**',
+		' * <%= pkg.name %> - <%= pkg.description %>',
+		' * ',
+		' * @version v<%= pkg.version %>',
+		' * @link <%= pkg.homepage %>',
+		' * @license <%= pkg.license %>',
+		' */',
+		''].join('\n');
 
 	return gulp.src([
 		TEMP + "/*.js"
@@ -66,6 +78,7 @@ gulp.task("js", ['ts', 'views'], function () {
 			base: TEMP
 		}))
 		.pipe(concat(filename))
+		.pipe(header(banner, {pkg: package}))
 		.pipe(gulp.dest(DIST))
 		.pipe(debug());
 
@@ -81,7 +94,7 @@ gulp.task("js-min", function () {
 	])
 		.pipe(concat(filename))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(uglify())
+		.pipe(uglify({preserveComments: 'license'}))
 		.pipe(gulp.dest(DIST))
 		.pipe(debug())
 		.pipe(gzip({append: true}))
@@ -110,7 +123,7 @@ gulp.task("css-min", function () {
 	var filename = "angular-super-gallery.css";
 
 	return gulp.src([
-		DIST + '/*.css'
+		DIST + "/" + filename
 	])
 		.pipe(concat(filename))
 		.pipe(nano(nanoOptions))
