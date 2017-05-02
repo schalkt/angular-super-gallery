@@ -47,7 +47,15 @@
 
 <div class="container">
 
-	<h1>Angular Super Gallery Demo</h1>
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Angular Super Gallery Demo
+				<a class="btn btn-default" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
+					<img src="github.ico" width="16" height="16"/> Github repository
+				</a>
+			</h1>
+		</div>
+	</div>
 
 	<div class="row">
 
@@ -59,7 +67,8 @@
 					<button class="btn btn-warning" data-ng-click="showModal1 = !showModal1">
 						Open demo gallery 1 window
 					</button>
-					<button class="btn btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show options
+					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions1 = !showOptions1">show
+						options
 					</button>
 				</div>
 				<div class="panel-body">
@@ -89,9 +98,11 @@
 					<button class="btn btn-warning" data-ng-click="showModal2 = !showModal2">
 						Open demo gallery 2 window
 					</button>
-					<button class="btn btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">show options
+					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions2 = !showOptions2">show
+						options
 					</button>
-					<button class="btn btn-default pull-right" data-ng-click="showThumbnails2 = !showThumbnails2">show
+					<button class="btn btn-default btn-xs pull-right" data-ng-click="showThumbnails2 = !showThumbnails2">
+						show
 						thumbnails
 					</button>
 				</div>
@@ -100,9 +111,8 @@
 					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
 
 					<asg-setup data-id="girls" data-options="ctrl.options2" data-items="ctrl.files2"></asg-setup>
-					<div class="row">
-						<asg-panel data-ng-if="showThumbnails2" data-id="girls"></asg-panel>
-					</div>
+					<asg-panel class="clearfix" data-ng-if="showThumbnails2" data-id="girls"></asg-panel>
+
 					<asg-image data-id="girls"></asg-image>
 					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
 

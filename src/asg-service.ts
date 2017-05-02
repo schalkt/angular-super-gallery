@@ -97,24 +97,24 @@ module ASG {
 		public selected : number = 0;
 		public options : IOptions = {};
 		public defaults : IOptions = {
-			baseUrl: "", // url prefix, not required
+			baseUrl: "", // url prefix
 			fields: {
-				url: "url", // url input field name, not required
-				title: "title", // title input field name, not required
-				description: "description", // description input field name, not required
-				thumbnail: "thumbnail" // thumbnail input field name, not required
+				url: "url", // url input field name
+				title: "title", // title input field name
+				description: "description", // description input field name
+				thumbnail: "thumbnail" // thumbnail input field name
 			},
 			autoplay: {
-				enabled: false, // slideshow autoplay enabled/disabled, not required
+				enabled: false, // slideshow autoplay enabled/disabled
 				delay: 4100 // autoplay delay in millisecond
 			},
 			theme: 'default', // css style [default, darkblue, whitegold]
 			preload: [0], // preload images by index number
 			modal: {
-				title: "", // modal window title, not required
-				subtitle: "", // modal window subtitle, not required
-				caption: true, // show/hide image caption, not required
-				menu: true, // show/hide modal menu, not required
+				title: "", // modal window title
+				subtitle: "", // modal window subtitle
+				caption: true, // show/hide image caption
+				menu: true, // show/hide modal menu
 				help: false, // show/hide help
 				transition: 'rotateLR', // transition effect
 				wide: false // enable/disable wide image display mode
