@@ -8,12 +8,12 @@ demo.controller('DemoController', function ($http) {
 			url: "link"
 		},
 		theme: 'darkblue',
+		preload: [0, 1],
 		modal: {
 			wide: true,
 			caption: false,
 			title: "Angular Super Gallery Demo",
 			subtitle: "Nature Wallpapers Full HD",
-			preload: [0]
 		},
 		panel: {
 			item: {

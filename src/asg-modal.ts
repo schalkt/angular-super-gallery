@@ -3,6 +3,10 @@ module ASG {
 	export class ModalController {
 
 		public id : string;
+		public options : IOptions;
+		public items : Array<IFile>;
+		public selected : number;
+
 		private asg : IServiceController;
 
 		private _fullscreen : boolean = false;
@@ -17,17 +21,21 @@ module ASG {
 
 		public $onInit() {
 
-			// get service instance by id
-			this.asg = this.service.getInstance(this.id);
+			// get service instance
+			this.asg = this.service.getInstance(this);
 
 		}
 
 
 		private getClass() {
 
+			if (!this.config) {
+				return;
+			}
+
 			var ngClass = [];
 
-			if (!this.options.menu) {
+			if (!this.config.menu) {
 				ngClass.push('nomenu');
 			}
 
@@ -112,9 +120,9 @@ module ASG {
 		// switch to next transition effect
 		private nextTransition() {
 
-			var idx = this.asg.transitions.indexOf(this.options.transition) + 1;
+			var idx = this.asg.transitions.indexOf(this.config.transition) + 1;
 			var next = idx >= this.asg.transitions.length ? 0 : idx;
-			this.options.transition = this.asg.transitions[next];
+			this.config.transition = this.asg.transitions[next];
 
 		}
 
@@ -134,7 +142,7 @@ module ASG {
 		// set transition effect
 		public setTransition(transition) {
 
-			this.options.transition = transition;
+			this.config.transition = transition;
 			this.asg.setFocus();
 
 		}
@@ -164,7 +172,7 @@ module ASG {
 		// toggle help
 		private toggleHelp() {
 
-			this.options.help = !this.options.help;
+			this.config.help = !this.config.help;
 			this.asg.setFocus();
 
 		}
@@ -173,7 +181,7 @@ module ASG {
 		// toggle wide
 		private toggleWide() {
 
-			this.options.wide = !this.options.wide;
+			this.config.wide = !this.config.wide;
 
 		}
 
@@ -181,14 +189,14 @@ module ASG {
 		// toggle menu
 		private toggleMenu() {
 
-			this.options.menu = !this.options.menu;
+			this.config.menu = !this.config.menu;
 
 		}
 
 		// toggle caption
 		private toggleCaption() {
 
-			this.options.caption = !this.options.caption;
+			this.config.caption = !this.config.caption;
 
 		}
 
@@ -214,13 +222,15 @@ module ASG {
 
 		}
 
-		public get options() : IOptionsModal {
+		// get modal config
+		public get config() : IOptionsModal {
 
 			return this.asg.options.modal;
 
 		}
 
-		public set options(value : IOptionsModal) {
+		// set modal config
+		public set config(value : IOptionsModal) {
 
 			this.asg.options.modal = value;
 
@@ -236,7 +246,10 @@ module ASG {
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
 			id: "@",
-			visible: "="
+			items: '=?',
+			options: '=?',
+			selected: '=?',
+			visible: "=?"
 		}
 	});
 

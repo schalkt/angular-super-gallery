@@ -93,7 +93,7 @@ in HTML
         title: "", // modal window title
         subtitle: "", // modal window subtitle
         caption: true, // show/hide image caption
-        menu: true, // show/hide modal menu
+        menu: true, // show/hide menu
         help: false, // show/hide help
         transition: 'rotateLR', // transition effect
         wide: false // enable/disable wide image display mode
@@ -109,6 +109,20 @@ in HTML
         height: 300 // height
     }
 ```
+
+
+### Transitions
+- no
+- fadeInOut
+- zoomInOut
+- rotateLR
+- rotateTB
+- rotateZY
+- slideLR
+- slideTB
+- flipX
+- flipY
+
 
 ### Keyboard shortcuts in modal window
 - SPACE : forward
@@ -133,7 +147,11 @@ in HTML
 
 
 ### Todo
-- image preload fix
+- keyboard shortcuts setup / YouTube play/pause (K), skip forward (L), jump back (J)
+- image preload fix (and/or http://jariz.github.io/vibrant.js/)
+- multiple image sizes (thumbnail, medium, original)
+- publish package to npm (webpack support)
+- exit button must be visible on modal when menubar hidden
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
 - angular component for controls (play/stop/next/prev)

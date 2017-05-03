@@ -69,7 +69,8 @@ module ASG {
 
 		getInstance(id : any) : IServiceController,
 		setDefaults() : void;
-		setup(options, items) : IOptions;
+		setOptions(options : IOptions) : IOptions;
+		setItems(items : Array<IFile>) : void;
 		preload(wait? : number) : void;
 		normalize(index : number) : number;
 		setFocus() : void;
@@ -79,6 +80,7 @@ module ASG {
 		toForward(stop? : boolean) : void;
 		toFirst(stop? : boolean) : void;
 		toLast(stop? : boolean) : void;
+		loadImages(indexes : Array<number>) : void;
 		autoPlayToggle() : void;
 		modalVisible : boolean;
 		transitions : Array<string>;
@@ -165,32 +167,62 @@ module ASG {
 
 		public $onInit() {
 
-			console.log(this);
 
 		}
 
 
-		public getInstance(id : any) {
+		public getInstance(asg : any) {
 
-			if (this.instances[id] == undefined) {
-				this.instances[id] = new ServiceController(this.timeout, this.interval);
-				this.instances[id].id = id;
+			var id = asg.id;
+			var instance = this.instances[id];
+
+			// new instance and set options and items
+			if (instance == undefined) {
+				instance = new ServiceController(this.timeout, this.interval);
+				instance.id = id;
 			}
 
-			return this.instances[id];
+			instance.setOptions(asg.options);
+			instance.setItems(asg.items);
+			instance.loadImages(instance.options.preload);
+			instance.selected = asg.selected ? asg.selected : 0;
+
+			this.instances[id] = instance;
+			return instance;
 
 		}
 
-		public setup(options : IOptions, items : Array<IFile>) {
 
-			this.options = angular.merge(this.defaults, options);
+		public setItems(items : Array<IFile>) {
+
+			if (!items) {
+				return;
+			}
+
+			// if already
+			if (this.items) {
+				return;
+			}
+
 			this.items = items;
 			this.prepareItems();
+
+		}
+
+
+		public setOptions(options : IOptions) {
+
+			if (!options) {
+				return;
+			}
+
+			this.options = angular.merge(this.defaults, options);
 
 			if (this.options.autoplay.enabled) {
 				this.autoPlayStart();
 			}
 
+			options = this.options;
 			return this.options;
 
 		}
@@ -278,18 +310,6 @@ module ASG {
 		}
 
 
-		private initPreload() {
-
-			var self = this;
-
-			if (this.options.preload) {
-				this.options.preload.forEach((index : number) => {
-					self.loadImage(index);
-				})
-			}
-
-		}
-
 		private prepareItems() {
 
 			var self = this;
@@ -329,7 +349,7 @@ module ASG {
 				this.loadImage(this.selected + 2);
 				this.loadImage(this.files.length - 1);
 
-			}, (wait != undefined) ? wait : 750);
+			}, (wait != undefined) ? wait : 770);
 
 		}
 
@@ -346,6 +366,20 @@ module ASG {
 			}
 
 			return index;
+
+		}
+
+
+		public loadImages(indexes : Array<number>) {
+
+			if (!indexes) {
+				return;
+			}
+
+			var self = this;
+			indexes.forEach((index : number) => {
+				self.loadImage(index);
+			});
 
 		}
 

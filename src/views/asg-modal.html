@@ -53,7 +53,7 @@
                             <ul class="dropdown-menu">
                                 <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTransition(transition)"
 									   data-ng-repeat="transition in $ctrl.asg.transitions">
-                                    <span data-ng-class="{'highlight' : transition == $ctrl.asg.options.modal.transition}">
+                                    <span data-ng-class="{'highlight' : transition == $ctrl.config.transition}">
                                         {{ transition }}</span></a>
                                 </li>
                             </ul>
@@ -74,8 +74,8 @@
 
 
                 <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleMenu()">
-                    <span data-ng-if="$ctrl.asg.options.modal.menu" class="glyphicon glyphicon-chevron-up"></span>
-                    <span data-ng-if="!$ctrl.asg.options.modal.menu" class="glyphicon glyphicon-chevron-down"></span>
+                    <span data-ng-if="$ctrl.config.menu" class="glyphicon glyphicon-chevron-up"></span>
+                    <span data-ng-if="!$ctrl.config.menu" class="glyphicon glyphicon-chevron-down"></span>
                 </button>
 
 			 	<button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleWide()">
@@ -154,8 +154,8 @@
                     </span>
 
                     <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleMenu()">
-                        <span data-ng-if="$ctrl.asg.options.modal.header" class="glyphicon glyphicon-chevron-up"></span>
-                        <span data-ng-if="!$ctrl.asg.options.modal.header" class="glyphicon glyphicon-chevron-down"></span>
+                        <span data-ng-if="$ctrl.config.header" class="glyphicon glyphicon-chevron-up"></span>
+                        <span data-ng-if="!$ctrl.config.header" class="glyphicon glyphicon-chevron-down"></span>
                     </button>
 
 
@@ -177,17 +177,17 @@
 
                 </span>
 
-		<span data-ng-if="$ctrl.asg.options.modal.title">
-			<span class="title">{{ $ctrl.asg.options.modal.title }}</span>
-			<span class="subtitle" data-ng-if="$ctrl.asg.options.modal.subtitle">{{ $ctrl.asg.options.modal.subtitle }}</span>
+		<span data-ng-if="$ctrl.config.title">
+			<span class="title">{{ $ctrl.config.title }}</span>
+			<span class="subtitle" data-ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
 		</span>
 
 	</div>
 
-	<div class="help text-right" data-ng-click="$ctrl.toggleHelp()" data-ng-show="$ctrl.asg.options.modal.help" data-ng-include src="'help.html'"></div>
+	<div class="help text-right" data-ng-click="$ctrl.toggleHelp()" data-ng-show="$ctrl.config.help" data-ng-include src="'help.html'"></div>
 
 
-	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.modal.transition }}"
+	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}"
 		 data-ng-mouseover="$ctrl.arrowsShow()"
 		 data-ng-mouseleave="$ctrl.arrowsHide()"
 		 data-ng-swipe-left="$ctrl.asg.toForward(true)"
@@ -199,7 +199,7 @@
 			 data-ng-class="{'loading' : !file.loaded}">
 
 			<img class="source"
-				 data-ng-class="{ wide : $ctrl.options.wide }"
+				 data-ng-class="{ wide : $ctrl.config.wide }"
 				 data-ng-src="{{ file.url }}" data-ng-if="file.loaded"/>
 
 		</div>
@@ -246,7 +246,7 @@
 	</div>
 
 
-	<div class="caption" data-ng-if="$ctrl.options.caption">
+	<div class="caption" data-ng-if="$ctrl.config.caption">
 		<div class="content">
 			<span class="title">{{ $ctrl.asg.file.title }}</span>
 			<span data-ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>

@@ -3,6 +3,10 @@ module ASG {
 	export class PanelController {
 
 		public id : string;
+		public options : IOptions;
+		public items : Array<IFile>;
+		public selected : number;
+
 		private asg : IServiceController;
 
 		constructor(private service : IServiceController) {
@@ -11,18 +15,20 @@ module ASG {
 
 		public $onInit() {
 
-			// get service instance by id
-			this.asg = this.service.getInstance(this.id);
+			// get service instance
+			this.asg = this.service.getInstance(this);
 
 		}
 
-		public get options() : IOptionsPanel {
+		// get panel config
+		public get config() : IOptionsPanel {
 
 			return this.asg.options.panel;
 
 		}
 
-		public set options(value : IOptionsPanel) {
+		// set panel config
+		public set config(value : IOptionsPanel) {
 
 			this.asg.options.panel = value;
 
@@ -36,7 +42,10 @@ module ASG {
 		controller: ["asgService", ASG.PanelController],
 		templateUrl: 'views/asg-panel.html',
 		bindings: {
-			id: "@"
+			id: "@",
+			items: '=?',
+			options: '=?',
+			selected: '=?'
 		}
 	});
 
