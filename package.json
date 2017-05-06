@@ -3,6 +3,16 @@
 	"version": "0.1.5",
 	"description": "Super Angular image gallery",
 	"homepage": "https://github.com/schalkt/angular-super-gallery",
+	"keywords": [
+		"angular",
+		"image",
+		"gallery",
+		"thumbnails",
+		"component",
+		"modal",
+		"bootstrap"
+	],
+	"author": "Tamas Schalk <github@schalk.hu> (https://github.com/schalkt)",
 	"license": "MIT",
 	"devDependencies": {
 		"gulp": "^3.9.1",
