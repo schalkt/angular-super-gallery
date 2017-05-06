@@ -2,6 +2,7 @@
 
 module ASG {
 
+	// modal component options
 	export interface IOptionsModal {
 
 		menu? : boolean;
@@ -11,9 +12,23 @@ module ASG {
 		title? : string;
 		subtitle? : string;
 		wide? : boolean;
-
+		keycodes? : {
+			exit? : Array<number>;
+			playpause? : Array<number>;
+			forward? : Array<number>;
+			backward? : Array<number>;
+			first? : Array<number>;
+			last? : Array<number>;
+			fullscreen? : Array<number>;
+			menu? : Array<number>;
+			caption? : Array<number>;
+			help? : Array<number>;
+			wide? : Array<number>;
+			transition? : Array<number>;
+		}
 	}
 
+	// panel component options
 	export interface IOptionsPanel {
 
 		item? : {
@@ -22,6 +37,7 @@ module ASG {
 
 	}
 
+	// image component options
 	export interface IOptionsImage {
 
 		transition? : string;
@@ -30,11 +46,17 @@ module ASG {
 
 	}
 
+	// gallery options
 	export interface IOptions {
 
+		debug? : boolean,
 		baseUrl? : string;
 		fields? : {
-			url? : string;
+			source? : {
+				modal? : string;
+				panel? : string;
+				image? : string;
+			}
 			title? : string;
 			description? : string;
 			thumbnail? : string;
@@ -44,6 +66,7 @@ module ASG {
 			delay? : number;
 		},
 		theme? : string;
+		preloadDelay? : number;
 		preload? : Array<number>;
 		modal? : IOptionsModal;
 		panel? : IOptionsPanel;
@@ -51,23 +74,37 @@ module ASG {
 
 	}
 
+	// image source
+	export interface ISource {
 
+		modal : string; // original, required
+		panel? : string;
+		image? : string;
+
+	}
+
+	// image file
 	export interface IFile {
 
-		url : string;
+		source : ISource;
 		title? : string;
 		description? : string;
 		thumbnail? : string;
-		loaded? : boolean;
+		loaded? : {
+			modal? : boolean;
+			panel? : boolean;
+			image? : boolean;
+		};
 		size? : number;
 		width? : number;
 		height? : number;
 
 	}
 
+	// service controller interface
 	export interface IServiceController {
 
-		getInstance(id : any) : IServiceController,
+		getInstance(component : any) : IServiceController,
 		setDefaults() : void;
 		setOptions(options : IOptions) : IOptions;
 		setItems(items : Array<IFile>) : void;
@@ -80,6 +117,7 @@ module ASG {
 		toForward(stop? : boolean) : void;
 		toFirst(stop? : boolean) : void;
 		toLast(stop? : boolean) : void;
+		loadImage(index? : number) : void;
 		loadImages(indexes : Array<number>) : void;
 		autoPlayToggle() : void;
 		modalVisible : boolean;
@@ -91,27 +129,40 @@ module ASG {
 
 	}
 
+	// service controller
 	export class ServiceController {
 
 		public id : string;
 		public items : any;
 		public files : Array<IFile> = [];
-		public selected : number = 0;
+		public direction : string;
+
+		private instances : {} = {}
+		private _selected : number;
+		private _visible : boolean = false;
+		private autoplay : angular.IPromise<any>;
+
 		public options : IOptions = {};
 		public defaults : IOptions = {
+			debug: false, // image load and autoplay info in console.log
 			baseUrl: "", // url prefix
 			fields: {
-				url: "url", // url input field name
+				source: {
+					modal: "url", // required, image url for modal component (large size)
+					panel: "url", // image url for panel component (thumbnail size)
+					image: "url" // image url for image (medium size)
+				},
 				title: "title", // title input field name
 				description: "description", // description input field name
 				thumbnail: "thumbnail" // thumbnail input field name
 			},
 			autoplay: {
-				enabled: false, // slideshow autoplay enabled/disabled
+				enabled: false, // slideshow play enabled/disabled
 				delay: 4100 // autoplay delay in millisecond
 			},
 			theme: 'default', // css style [default, darkblue, whitegold]
-			preload: [0], // preload images by index number
+			preloadDelay: 770,
+			preload: [], // preload images by index number
 			modal: {
 				title: "", // modal window title
 				subtitle: "", // modal window subtitle
@@ -119,7 +170,21 @@ module ASG {
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
 				transition: 'rotateLR', // transition effect
-				wide: false // enable/disable wide image display mode
+				wide: false, // enable/disable wide image display mode
+				keycodes: {
+					exit: [27], // ESC
+					playpause: [80], // p
+					forward: [32, 39], // SPACE, RIGHT ARROW
+					backward: [37], // LEFT ARROW
+					first: [38, 36], // UP ARROW, HOME
+					last: [40, 35], // DOWN ARROW, END
+					fullscreen: [70, 13], // f, ENTER
+					menu: [77], // m
+					caption: [67], // c
+					help: [72], // h
+					wide: [87], // w
+					transition: [84] // t
+				}
 			},
 			panel: {
 				item: {
@@ -129,21 +194,18 @@ module ASG {
 			image: {
 				transition: 'rotateLR', // transition effect
 				wide: false, // enable/disable wide image display mode
-				height: 300 // height
+				height: 300, // height
 			}
 		};
 
-		private instances : {} = {}
-		private _visible : boolean = false;
-		private autoplay : angular.IPromise<any>;
-		public direction : string;
-
+		// available themes
 		public themes : Array<string> = [
 			'default',
 			'darkblue',
 			'whitegold'
 		];
 
+		// available transitions
 		public transitions : Array<string> = [
 			'no',
 			'fadeInOut',
@@ -157,8 +219,6 @@ module ASG {
 			'flipY'
 		];
 
-		//protected infoVisible : boolean = false;
-
 		constructor(private timeout : ng.ITimeoutService,
 					private interval : ng.IIntervalService) {
 
@@ -170,11 +230,11 @@ module ASG {
 
 		}
 
+		// get service instance for current gallery by component id
+		public getInstance(component : any) {
 
-		public getInstance(asg : any) {
-
-			var id = asg.id;
-			var instance = this.instances[id];
+			const id = component.id;
+			let instance = this.instances[id];
 
 			// new instance and set options and items
 			if (instance == undefined) {
@@ -182,17 +242,26 @@ module ASG {
 				instance.id = id;
 			}
 
-			instance.setOptions(asg.options);
-			instance.setItems(asg.items);
-			instance.loadImages(instance.options.preload);
-			instance.selected = asg.selected ? asg.selected : 0;
+			instance.setOptions(component.options);
+			instance.setItems(component.items);
+			instance.selected = component.selected ? component.selected : 0;
+
+			if (instance.options) {
+
+				instance.loadImages(instance.options.preload);
+
+				if (instance.options.autoplay && instance.options.autoplay.enabled && !instance.autoplay) {
+					instance.autoPlayStart();
+				}
+
+			}
 
 			this.instances[id] = instance;
 			return instance;
 
 		}
 
-
+		// prepare images array
 		public setItems(items : Array<IFile>) {
 
 			if (!items) {
@@ -209,7 +278,7 @@ module ASG {
 
 		}
 
-
+		// options setup
 		public setOptions(options : IOptions) {
 
 			if (!options) {
@@ -217,13 +286,25 @@ module ASG {
 			}
 
 			this.options = angular.merge(this.defaults, options);
-
-			if (this.options.autoplay.enabled) {
-				this.autoPlayStart();
-			}
+			this.log('config', this.options);
 
 			options = this.options;
 			return this.options;
+
+		}
+
+		// set selected image
+		public set selected(v : number) {
+
+			this._selected = v;
+			this.preload();
+
+		}
+
+		// get selected image
+		public get selected() {
+
+			return this._selected;
 
 		}
 
@@ -233,7 +314,6 @@ module ASG {
 			this.autoPlayStop();
 			this.direction = index > this.selected ? 'forward' : 'backward';
 			this.selected = this.normalize(index);
-			this.preload();
 
 		}
 
@@ -244,7 +324,7 @@ module ASG {
 			stop && this.autoPlayStop();
 			this.direction = 'backward';
 			this.selected = this.normalize(--this.selected);
-			this.preload();
+			this.loadImage(this.selected - 1);
 
 		}
 
@@ -254,7 +334,7 @@ module ASG {
 			stop && this.autoPlayStop();
 			this.direction = 'forward';
 			this.selected = this.normalize(++this.selected);
-			this.preload();
+			this.loadImage(this.selected + 1);
 
 		}
 
@@ -264,7 +344,6 @@ module ASG {
 			stop && this.autoPlayStop();
 			this.direction = 'backward';
 			this.selected = 0;
-			this.preload();
 
 		}
 
@@ -274,7 +353,6 @@ module ASG {
 			stop && this.autoPlayStop();
 			this.direction = 'forward';
 			this.selected = this.items.length - 1;
-			this.preload();
 
 		}
 
@@ -305,6 +383,7 @@ module ASG {
 
 			this.autoplay = this.interval(() => {
 				this.toForward();
+				this.log('autoplay', {index: this.selected, file: this.file});
 			}, this.options.autoplay.delay);
 
 		}
@@ -312,27 +391,71 @@ module ASG {
 
 		private prepareItems() {
 
-			var self = this;
+			const self = this;
+
+			var getAvailableSource = function (type : string, source : ISource) {
+
+				if (source[type]) {
+					return self.options.baseUrl + source[type];
+				}
+
+				if (type == 'panel') {
+					return self.options.baseUrl + getAvailableSource('image', source);
+				}
+
+				if (type == 'image') {
+					return self.options.baseUrl + getAvailableSource('modal', source);
+				}
+
+			};
+
 
 			angular.forEach(this.items, function (value, key) {
 
-				var url = self.options.baseUrl + value[self.options.fields.url];
-				var thumbnail = self.options.baseUrl + (value[self.options.fields.thumbnail] ? value[self.options.fields.thumbnail] : value[self.options.fields.url]);
-				var parts = url.split('/');
-				var filename = parts[parts.length - 1];
-				var title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
+				if (!value.source) {
 
-				var file = {
-					url: url,
-					thumbnail: thumbnail,
+					value.source = {
+						modal: value[self.options.fields.source.modal],
+						panel: value[self.options.fields.source.panel],
+						image: value[self.options.fields.source.image],
+					};
+
+				}
+
+				let source = {
+					modal: getAvailableSource('modal', value.source),
+					panel: getAvailableSource('panel', value.source),
+					image: getAvailableSource('image', value.source),
+				};
+
+
+				let parts = source.modal.split('/');
+				let filename = parts[parts.length - 1];
+				let title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
+
+				let file = {
+					source: source,
 					title: title,
 					description: value[self.options.fields.description] ? value[self.options.fields.description] : null,
-					loaded: false
+					loaded: {
+						modal: false,
+						panel: false,
+						image: false
+					}
 				};
 
 				self.files.push(file);
 
 			});
+
+			this.log('images', this.files);
+
+		}
+
+
+		public hoverPreload(index : number) {
+
+			this.loadImage(index);
 
 		}
 
@@ -340,16 +463,11 @@ module ASG {
 		// image preload
 		private preload(wait? : number) {
 
+			this.loadImage(this.selected);
+
 			this.timeout(() => {
-
-				this.loadImage(this.selected);
-				this.loadImage(0);
 				this.loadImage(this.selected + 1);
-				this.loadImage(this.selected - 1);
-				this.loadImage(this.selected + 2);
-				this.loadImage(this.files.length - 1);
-
-			}, (wait != undefined) ? wait : 770);
+			}, (wait != undefined) ? wait : this.options.preloadDelay);
 
 		}
 
@@ -370,7 +488,7 @@ module ASG {
 		}
 
 
-		public loadImages(indexes : Array<number>) {
+		public loadImages(indexes : Array<number>, type : string) {
 
 			if (!indexes) {
 				return;
@@ -384,22 +502,29 @@ module ASG {
 		}
 
 
-		private loadImage(index : number) {
+		public loadImage(index? : number, callback? : {}) {
 
+			index = index ? index : this.selected;
 			index = this.normalize(index);
 
 			if (!this.files[index]) {
-				console.warn('Invalid file index: ' + index);
+				this.log('invalid file index', {index: index});
 				return;
 			}
 
-			if (this.files[index].loaded) {
+			if (this.files[index].loaded['modal']) {
 				return;
 			}
 
 			var img = new Image();
-			img.src = this.files[index].url;
-			this.files[index].loaded = true;
+			img.src = this.files[index].source['image'];
+			this.files[index].loaded['image'] = true;
+
+			var img = new Image();
+			img.src = this.files[index].source['modal'];
+			this.files[index].loaded['modal'] = true;
+
+			this.log('load image', {index: index, file: this.file});
 
 		}
 
@@ -416,7 +541,7 @@ module ASG {
 		public downloadLink() {
 
 			if (this.selected != undefined) {
-				return this.options.baseUrl + this.files[this.selected][this.options.fields.url];
+				return this.options.baseUrl + this.files[this.selected][this.options.fields.source.modal];
 			}
 
 		}
@@ -452,8 +577,8 @@ module ASG {
 
 			if (value) {
 
-				this.modalInit();
 				this.preload(1);
+				this.modalInit();
 				angular.element('body').addClass('yhidden');
 
 			} else {
@@ -506,6 +631,15 @@ module ASG {
 		public modalClose() {
 
 			this.modalVisible = false;
+
+		}
+
+
+		private log(event : string, data? : any) {
+
+			if (this.options.debug) {
+				console.log('ASG | ' + this.id + ' : ' + event, data ? data : null);
+			}
 
 		}
 

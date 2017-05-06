@@ -2,6 +2,8 @@ module ASG {
 
 	export class ImageController {
 
+		private type : string = 'image';
+
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
@@ -23,14 +25,14 @@ module ASG {
 		// get image config
 		public get config() : IOptionsImage {
 
-			return this.asg.options.image;
+			return this.asg.options[this.type];
 
 		}
 
 		// set image config
 		public set config(value : IOptionsImage) {
 
-			this.asg.options.image = value;
+			this.asg.options[this.type] = value;
 
 		}
 

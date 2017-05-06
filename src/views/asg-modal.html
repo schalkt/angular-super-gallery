@@ -2,11 +2,11 @@
 	SPACE : forward</br>
 	RIGHT : forward</br>
 	LEFT : backward</br>
-	UP : first</br>
-	DOWN : last</br>
+	UP / HOME : first</br>
+	DOWN / END : last</br>
 	ESC : exit</br>
 	P : play/pause</br>
-	F : toggle fullscreen</br>
+	F / ENTER : toggle fullscreen</br>
 	M : toggle menu</br>
 	W : toggle wide screen</br>
 	C : toggle caption</br>
@@ -196,11 +196,11 @@
 		<div class="img"
 			 data-ng-repeat="(key,file) in $ctrl.asg.files"
 			 data-ng-show="$ctrl.asg.selected == key"
-			 data-ng-class="{'loading' : !file.loaded}">
+			 data-ng-class="{'loading' : !file.loaded.modal}">
 
 			<img class="source"
 				 data-ng-class="{ wide : $ctrl.config.wide }"
-				 data-ng-src="{{ file.url }}" data-ng-if="file.loaded"/>
+				 data-ng-src="{{ file.source.modal }}" data-ng-if="file.loaded.modal"/>
 
 		</div>
 
@@ -211,7 +211,7 @@
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
-			<button class="btn btn-default btn-md pull-left visible-sm" data-ng-click="$ctrl.toBackward(true)">
+			<button class="btn btn-default btn-md pull-left visible-sm" data-ng-click="$ctrl.asg.toBackward(true)">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
@@ -229,7 +229,7 @@
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 
-			<button class="btn btn-default btn-md pull-right visible-sm" data-ng-click="$ctrl.toForward(true)">
+			<button class="btn btn-default btn-md pull-right visible-sm" data-ng-click="$ctrl.asg.toForward(true)">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 

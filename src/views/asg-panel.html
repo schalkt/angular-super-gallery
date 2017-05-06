@@ -6,7 +6,10 @@
 		 data-ng-mouseover="indexShow = true"
 		 data-ng-mouseleave="indexShow = false">
 
-		<img data-ng-src="{{ file.thumbnail }}" data-ng-click="$ctrl.asg.setSelected(key)" alt="{{ file.title }}"/>
+		<img data-ng-src="{{ file.source.panel }}"
+			 data-ng-click="$ctrl.asg.setSelected(key)"
+			 data-ng-mouseover="$ctrl.asg.hoverPreload(key)"
+			 alt="{{ file.title }}"/>
 		<span class="index" data-ng-if="$ctrl.config.item.index && indexShow">{{ key + 1 }}</span>
 
 		<div class="caption" data-ng-if="$ctrl.config.item.caption">

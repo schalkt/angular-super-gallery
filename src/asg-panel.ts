@@ -2,6 +2,8 @@ module ASG {
 
 	export class PanelController {
 
+		private type : string = 'panel';
+
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
@@ -23,14 +25,14 @@ module ASG {
 		// get panel config
 		public get config() : IOptionsPanel {
 
-			return this.asg.options.panel;
+			return this.asg.options[this.type];
 
 		}
 
 		// set panel config
 		public set config(value : IOptionsPanel) {
 
-			this.asg.options.panel = value;
+			this.asg.options[this.type] = value;
 
 		}
 

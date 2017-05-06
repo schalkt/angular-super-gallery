@@ -2,6 +2,8 @@ module ASG {
 
 	export class ModalController {
 
+		private type : string = 'modal';
+
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
@@ -45,73 +47,89 @@ module ASG {
 
 		}
 
+		// get action from keycodes
+		private getActionByKeyCode(keyCode : number) {
 
-		// keymap
+			var keys = Object.keys(this.config.keycodes);
+			var action;
+
+			for (var key in keys) {
+
+				var codes = this.config.keycodes[keys[key]];
+
+				if (!codes) {
+					continue;
+				}
+
+				var index = codes.indexOf(keyCode);
+
+				if (index > -1) {
+					action = keys[key];
+					break;
+				}
+
+			}
+
+			return action;
+
+		}
+
+
+		// do keyboard action
 		public keyUp(e : KeyboardEvent) {
 
-			// esc
-			if (e.keyCode == 27) {
-				this.asg.modalClose();
-			}
+			var action : string = this.getActionByKeyCode(e.keyCode);
 
-			// play/pause
-			if (e.keyCode == 80) {
-				this.asg.autoPlayToggle();
-			}
+			switch (action) {
 
-			// space
-			if (e.keyCode == 32) {
-				this.asg.toForward(true);
-			}
+				case 'exit':
+					this.asg.modalClose();
+					break;
 
-			// left
-			if (e.keyCode == 37) {
-				this.asg.toBackward(true);
-			}
+				case 'playpause':
+					this.asg.autoPlayToggle();
+					break;
 
-			// right
-			if (e.keyCode == 39) {
-				this.asg.toForward(true);
-			}
+				case 'forward':
+					this.asg.toForward(true);
+					break;
 
-			// up
-			if (e.keyCode == 38 || e.keyCode == 36) {
-				this.asg.toFirst(true);
-			}
+				case 'backward':
+					this.asg.toBackward(true);
+					break;
 
-			// down
-			if (e.keyCode == 40 || e.keyCode == 35) {
-				this.asg.toLast(true);
-			}
+				case 'first':
+					this.asg.toFirst(true);
+					break;
 
-			// f - fullscreen
-			if (e.keyCode == 70 || e.keyCode == 13) {
-				this.toggleFullScreen();
-			}
+				case 'last':
+					this.asg.toLast(true);
+					break;
 
-			// m - menu
-			if (e.keyCode == 77) {
-				this.toggleMenu();
-			}
+				case 'fullscreen':
+					this.toggleFullScreen();
+					break;
 
-			// c - caption
-			if (e.keyCode == 67) {
-				this.toggleCaption();
-			}
+				case 'menu':
+					this.toggleMenu();
+					break;
 
-			// h - help
-			if (e.keyCode == 72) {
-				this.toggleHelp();
-			}
+				case 'caption':
+					this.toggleCaption();
+					break;
 
-			// w - wide sceeen (image fit to images container)
-			if (e.keyCode == 87) {
-				this.toggleWide();
-			}
+				case 'help':
+					this.toggleHelp();
+					break;
 
-			// t - transition next
-			if (e.keyCode == 84) {
-				this.nextTransition();
+				case 'wide':
+					this.toggleWide();
+					break;
+
+				case 'transition':
+					this.nextTransition();
+					break;
+
 			}
 
 		}
@@ -225,14 +243,14 @@ module ASG {
 		// get modal config
 		public get config() : IOptionsModal {
 
-			return this.asg.options.modal;
+			return this.asg.options[this.type];
 
 		}
 
 		// set modal config
 		public set config(value : IOptionsModal) {
 
-			this.asg.options.modal = value;
+			this.asg.options[this.type] = value;
 
 		}
 
