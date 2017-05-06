@@ -26,6 +26,7 @@
 		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 		  crossorigin="anonymous">
 
+
 	<script src="angular-fullscreen.js"></script>
 
 	<link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
@@ -75,9 +76,8 @@
 
 					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
 
-					<asg-setup data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1"></asg-setup>
 					<asg-image data-id="nature"></asg-image>
-					<asg-panel data-id="nature"></asg-panel>
+					<asg-panel data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1"></asg-panel>
 					<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
 
 				</div>
@@ -110,9 +110,11 @@
 
 					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
 
-					<asg-setup data-id="girls" data-options="ctrl.options2" data-items="ctrl.files2"></asg-setup>
-					<asg-panel class="clearfix" data-ng-if="showThumbnails2" data-id="girls"></asg-panel>
-
+					<asg-panel class="clearfix"
+							   data-id="girls"
+							   data-options="ctrl.options2"
+							   data-items="ctrl.files2"
+							   data-ng-show="showThumbnails2"></asg-panel>
 					<asg-image data-id="girls"></asg-image>
 					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
 

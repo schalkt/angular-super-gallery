@@ -20,12 +20,13 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 ### Features
 - separated angular components (modal, panel and image)
-- keyboard shortcuts in modal window
-- highly configurable
-- full responsive
+- many configuration options
+- full responsive (under fixing)
+- wide and fit image display mode
+- multiple image sizes / thumbnail (for panel) , medium (for image), original (for modal)
 - 3 built-in themes
 - 9 image transitions (CSS3 3D)
-- wide and fit image display mode
+- configurable keyboard shortcuts in modal window ([keyCodes](https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes))
 - touch support
 
 ### Install
@@ -36,8 +37,16 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 in Controller
 ```
+this.showModal = false;
 this.nature1Options = {
     baseUrl: "https://",
+    fields: {
+        source: {
+            modal: "link",
+            image: "medium",
+            panel: "thumbnail"
+        }
+    },
     modal: {
         wide: true,
         transition: 'zoomInOut'
@@ -55,40 +64,52 @@ this.nature1Options = {
 
 this.nature1 = [
     {
-		"url": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
-		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x168.jpg",
-	}, {
-		"url": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
-		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x168.jpg",
-	}
+        "link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
+  		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x168.jpg",
+  		"medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
+  	}, {
+  		"link": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
+  		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x168.jpg",
+  		"medium": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_602x339.jpg",
+  	}
 ];
 ```
 
 
 in HTML
 ```
-<asg-setup data-id="nature1" data-options="ctrl.nature1Options" data-items="ctrl.nature1"></asg-setup>
-<asg-panel data-id="nature1"></asg-panel>
-<asg-image data-id="nature1"></asg-image>
-<asg-modal data-id="nature1"></asg-modal>
+<asg-image data-id="nature"></asg-image>
+<asg-panel data-id="nature" data-options="ctrl.nature1Options" data-items="ctrl.nature1"></asg-panel>
+<asg-modal data-id="nature" data-visible="ctrl.showModal"></asg-modal>
+```
+or (no thumbnails)
+```
+<asg-image data-id="nature" data-options="ctrl.nature1Options" data-items="ctrl.nature1"></asg-image>
+<asg-modal data-id="nature" data-visible="ctrl.showModal"></asg-modal>
 ```
 
 ### Available options
 ```
 {
+    debug: false, // image load and autoplay info in console.log
     baseUrl: "", // url prefix
     fields: {
-        url: "url", // url input field name
+        source: {
+            modal: "url", // required, image url for modal component (large size)
+            panel: "url", // image url for panel component (thumbnail size)
+            image: "url" // image url for image (medium size)
+        },
         title: "title", // title input field name
         description: "description", // description input field name
         thumbnail: "thumbnail" // thumbnail input field name
     },
     autoplay: {
-        enabled: false, // slideshow autoplay enabled/disabled
+        enabled: false, // slideshow play enabled/disabled
         delay: 4100 // autoplay delay in millisecond
     },
     theme: 'default', // css style [default, darkblue, whitegold]
-    preload: [0], // preload images by index number
+    preloadDelay: 770,
+    preload: [], // preload images by index number
     modal: {
         title: "", // modal window title
         subtitle: "", // modal window subtitle
@@ -96,7 +117,21 @@ in HTML
         menu: true, // show/hide modal menu
         help: false, // show/hide help
         transition: 'rotateLR', // transition effect
-        wide: false // enable/disable wide image display mode
+        wide: false, // enable/disable wide image display mode
+        keycodes: {
+            exit: [27], // ESC
+            playpause: [80], // p
+            forward: [32, 39], // SPACE, RIGHT ARROW
+            backward: [37], // LEFT ARROW
+            first: [38, 36], // UP ARROW, HOME
+            last: [40, 35], // DOWN ARROW, END
+            fullscreen: [70, 13], // f, ENTER
+            menu: [77], // m
+            caption: [67], // c
+            help: [72], // h
+            wide: [87], // w
+            transition: [84] // t
+        }
     },
     panel: {
         item: {
@@ -106,19 +141,33 @@ in HTML
     image: {
         transition: 'rotateLR', // transition effect
         wide: false, // enable/disable wide image display mode
-        height: 300 // height
+        height: 300, // height
     }
+}
 ```
 
-### Keyboard shortcuts in modal window
-- SPACE : forward
-- RIGHT : forward
+
+### Transitions
+- no
+- fadeInOut
+- zoomInOut
+- rotateLR
+- rotateTB
+- rotateZY
+- slideLR
+- slideTB
+- flipX
+- flipY
+
+
+### Default keyboard shortcuts in modal window
+- RIGHT / SPACE : forward
 - LEFT : backward
-- UP : first
-- DOWN : last
+- UP / HOME : first
+- DOWN / END : last
 - ESC : exit
 - P : play/pause
-- F : toggle fullscreen
+- F / ENTER : toggle fullscreen
 - M : toggle menu
 - W : toggle wide screen
 - C : toggle caption
@@ -133,10 +182,14 @@ in HTML
 
 
 ### Todo
+- fix responsive view
 - image preload fix
+- publish package to npm (webpack support)
+- exit button must be visible on modal when menubar hidden
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
 - angular component for controls (play/stop/next/prev)
+- angular component for img
 - transitions fix in Microsoft Edge
 - rotateLR transition fix in Firefox on MAC (or somebody fix the Firefox ;)
 

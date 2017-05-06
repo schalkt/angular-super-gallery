@@ -2,7 +2,13 @@ module ASG {
 
 	export class ModalController {
 
+		private type : string = 'modal';
+
 		public id : string;
+		public options : IOptions;
+		public items : Array<IFile>;
+		public selected : number;
+
 		private asg : IServiceController;
 
 		private _fullscreen : boolean = false;
@@ -17,17 +23,21 @@ module ASG {
 
 		public $onInit() {
 
-			// get service instance by id
-			this.asg = this.service.getInstance(this.id);
+			// get service instance
+			this.asg = this.service.getInstance(this);
 
 		}
 
 
 		private getClass() {
 
+			if (!this.config) {
+				return;
+			}
+
 			var ngClass = [];
 
-			if (!this.options.menu) {
+			if (!this.config.menu) {
 				ngClass.push('nomenu');
 			}
 
@@ -37,73 +47,89 @@ module ASG {
 
 		}
 
+		// get action from keycodes
+		private getActionByKeyCode(keyCode : number) {
 
-		// keymap
+			var keys = Object.keys(this.config.keycodes);
+			var action;
+
+			for (var key in keys) {
+
+				var codes = this.config.keycodes[keys[key]];
+
+				if (!codes) {
+					continue;
+				}
+
+				var index = codes.indexOf(keyCode);
+
+				if (index > -1) {
+					action = keys[key];
+					break;
+				}
+
+			}
+
+			return action;
+
+		}
+
+
+		// do keyboard action
 		public keyUp(e : KeyboardEvent) {
 
-			// esc
-			if (e.keyCode == 27) {
-				this.asg.modalClose();
-			}
+			var action : string = this.getActionByKeyCode(e.keyCode);
 
-			// play/pause
-			if (e.keyCode == 80) {
-				this.asg.autoPlayToggle();
-			}
+			switch (action) {
 
-			// space
-			if (e.keyCode == 32) {
-				this.asg.toForward(true);
-			}
+				case 'exit':
+					this.asg.modalClose();
+					break;
 
-			// left
-			if (e.keyCode == 37) {
-				this.asg.toBackward(true);
-			}
+				case 'playpause':
+					this.asg.autoPlayToggle();
+					break;
 
-			// right
-			if (e.keyCode == 39) {
-				this.asg.toForward(true);
-			}
+				case 'forward':
+					this.asg.toForward(true);
+					break;
 
-			// up
-			if (e.keyCode == 38 || e.keyCode == 36) {
-				this.asg.toFirst(true);
-			}
+				case 'backward':
+					this.asg.toBackward(true);
+					break;
 
-			// down
-			if (e.keyCode == 40 || e.keyCode == 35) {
-				this.asg.toLast(true);
-			}
+				case 'first':
+					this.asg.toFirst(true);
+					break;
 
-			// f - fullscreen
-			if (e.keyCode == 70 || e.keyCode == 13) {
-				this.toggleFullScreen();
-			}
+				case 'last':
+					this.asg.toLast(true);
+					break;
 
-			// m - menu
-			if (e.keyCode == 77) {
-				this.toggleMenu();
-			}
+				case 'fullscreen':
+					this.toggleFullScreen();
+					break;
 
-			// c - caption
-			if (e.keyCode == 67) {
-				this.toggleCaption();
-			}
+				case 'menu':
+					this.toggleMenu();
+					break;
 
-			// h - help
-			if (e.keyCode == 72) {
-				this.toggleHelp();
-			}
+				case 'caption':
+					this.toggleCaption();
+					break;
 
-			// w - wide sceeen (image fit to images container)
-			if (e.keyCode == 87) {
-				this.toggleWide();
-			}
+				case 'help':
+					this.toggleHelp();
+					break;
 
-			// t - transition next
-			if (e.keyCode == 84) {
-				this.nextTransition();
+				case 'wide':
+					this.toggleWide();
+					break;
+
+				case 'transition':
+					this.nextTransition();
+					break;
+
 			}
 
 		}
@@ -112,9 +138,9 @@ module ASG {
 		// switch to next transition effect
 		private nextTransition() {
 
-			var idx = this.asg.transitions.indexOf(this.options.transition) + 1;
+			var idx = this.asg.transitions.indexOf(this.config.transition) + 1;
 			var next = idx >= this.asg.transitions.length ? 0 : idx;
-			this.options.transition = this.asg.transitions[next];
+			this.config.transition = this.asg.transitions[next];
 
 		}
 
@@ -134,7 +160,7 @@ module ASG {
 		// set transition effect
 		public setTransition(transition) {
 
-			this.options.transition = transition;
+			this.config.transition = transition;
 			this.asg.setFocus();
 
 		}
@@ -164,7 +190,7 @@ module ASG {
 		// toggle help
 		private toggleHelp() {
 
-			this.options.help = !this.options.help;
+			this.config.help = !this.config.help;
 			this.asg.setFocus();
 
 		}
@@ -173,7 +199,7 @@ module ASG {
 		// toggle wide
 		private toggleWide() {
 
-			this.options.wide = !this.options.wide;
+			this.config.wide = !this.config.wide;
 
 		}
 
@@ -181,14 +207,14 @@ module ASG {
 		// toggle menu
 		private toggleMenu() {
 
-			this.options.menu = !this.options.menu;
+			this.config.menu = !this.config.menu;
 
 		}
 
 		// toggle caption
 		private toggleCaption() {
 
-			this.options.caption = !this.options.caption;
+			this.config.caption = !this.config.caption;
 
 		}
 
@@ -214,15 +240,17 @@ module ASG {
 
 		}
 
-		public get options() : IOptionsModal {
+		// get modal config
+		public get config() : IOptionsModal {
 
-			return this.asg.options.modal;
+			return this.asg.options[this.type];
 
 		}
 
-		public set options(value : IOptionsModal) {
+		// set modal config
+		public set config(value : IOptionsModal) {
 
-			this.asg.options.modal = value;
+			this.asg.options[this.type] = value;
 
 		}
 
@@ -236,7 +264,10 @@ module ASG {
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
 			id: "@",
-			visible: "="
+			items: '=?',
+			options: '=?',
+			selected: '=?',
+			visible: "=?"
 		}
 	});
 

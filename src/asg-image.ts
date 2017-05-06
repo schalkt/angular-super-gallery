@@ -2,7 +2,13 @@ module ASG {
 
 	export class ImageController {
 
+		private type : string = 'image';
+
 		public id : string;
+		public options : IOptions;
+		public items : Array<IFile>;
+		public selected : number;
+
 		private asg : IServiceController;
 
 		constructor(private service : IServiceController) {
@@ -11,21 +17,22 @@ module ASG {
 
 		public $onInit() {
 
-			// get service instance by id
-			this.asg = this.service.getInstance(this.id);
-			this.asg.preload(1);
+			// get service instance
+			this.asg = this.service.getInstance(this);
 
 		}
 
-		public get options() : IOptionsImage {
+		// get image config
+		public get config() : IOptionsImage {
 
-			return this.asg.options.image;
+			return this.asg.options[this.type];
 
 		}
 
-		public set options(value : IOptionsImage) {
+		// set image config
+		public set config(value : IOptionsImage) {
 
-			this.asg.options.image = value;
+			this.asg.options[this.type] = value;
 
 		}
 
@@ -37,7 +44,10 @@ module ASG {
 		controller: ["asgService", ASG.ImageController],
 		templateUrl: 'views/asg-image.html',
 		bindings: {
-			id: "@"
+			id: "@",
+			items: '=?',
+			options: '=?',
+			selected: '=?'
 		}
 	});
 

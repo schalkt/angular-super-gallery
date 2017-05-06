@@ -7,13 +7,15 @@
 		<div class="img"
 			 data-ng-repeat="(key,file) in $ctrl.asg.files"
 			 data-ng-show="$ctrl.asg.selected == key"
-			 data-ng-class="{'loading' : !file.loaded}">
+			 data-ng-class="{'loading' : !file.loaded.image}">
 
 			<img class="img-responsive source"
-				 data-ng-if="file.loaded"
-				 data-ng-class="{ wide : $ctrl.options.wide }"
-				 data-ng-src="{{ file.url }}"
+				 data-ng-if="file.loaded.image"
+				 data-ng-class="{ wide : $ctrl.config.wide }"
+				 data-ng-src="{{ file.source.image }}"
+				 data-ng-mouseover="$ctrl.asg.hoverPreload(key)"
 				 data-ng-click="$ctrl.asg.modalOpen()"/>
+
 		</div>
 	</div>
 
