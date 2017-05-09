@@ -31,8 +31,9 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 ### Install
 
-`npm install --save angular-super-gallery`
-`bower install --save angular-super-gallery`
+- `npm install --save angular-super-gallery`
+- `bower install --save angular-super-gallery`
+- webpack (CommonJS) supported
 
 ### Usage
 
