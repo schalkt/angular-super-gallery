@@ -42,7 +42,6 @@ gulp.task("ts", function () {
 			base: SRC
 		}))
 		.pipe(tsc({
-			out: filename,
 			target: 'ES5',
 			removeComments: true
 		}))

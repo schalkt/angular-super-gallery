@@ -20,9 +20,10 @@
 		"dist/angular-super-gallery.css"
 	],
 	"dependencies": {
-		"jquery": "2.2.*",
+		"jquery": "^2.2.4",
 		"angular": "1.6.*",
 		"angular-animate": "1.6.*",
+		"angular-fullscreen": "git+https://github.com/fabiobiondi/angular-fullscreen.git",
 		"angular-touch": "1.6.*",
 		"bootstrap": "3.3.*"
 	},

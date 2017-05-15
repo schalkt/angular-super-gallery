@@ -1,4 +1,5 @@
-var demo = angular.module('demo', ['angularSuperGallery', 'FBAngular']);
+
+var demo = angular.module('demo', ['angularSuperGallery']);
 
 demo.controller('DemoController', function ($http) {
 
