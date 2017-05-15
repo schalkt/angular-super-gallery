@@ -120,6 +120,7 @@ module ASG {
 		loadImage(index? : number) : void;
 		loadImages(indexes : Array<number>) : void;
 		autoPlayToggle() : void;
+		el(selector) : any;
 		modalVisible : boolean;
 		transitions : Array<string>;
 		themes : Array<string>;
@@ -579,10 +580,12 @@ module ASG {
 
 				this.preload(1);
 				this.modalInit();
-				angular.element('body').addClass('yhidden');
+				this.el('body').addClass('yhidden');
 
 			} else {
-				angular.element('body').removeClass('yhidden');
+
+				this.el('body').removeClass('yhidden');
+
 			}
 
 		}
@@ -590,7 +593,7 @@ module ASG {
 		// set the focus
 		public setFocus() {
 
-			angular.element('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
+			this.el('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
 
 		}
 
@@ -604,13 +607,13 @@ module ASG {
 
 				// submenu click events
 				var element = '.gallery-modal.' + self.id + ' li.dropdown-submenu';
-				angular.element(element).off().on('click', function (event) {
+				this.el(element).off().on('click', function (event) {
 					event.stopPropagation();
-					if (angular.element(this).hasClass('open')) {
-						angular.element(this).removeClass('open');
+					if (this.el(this).hasClass('open')) {
+						this.el(this).removeClass('open');
 					} else {
-						angular.element(element).removeClass('open');
-						angular.element(this).addClass('open');
+						this.el(element).removeClass('open');
+						this.el(this).addClass('open');
 					}
 				});
 
@@ -640,6 +643,12 @@ module ASG {
 			if (this.options.debug) {
 				console.log('ASG | ' + this.id + ' : ' + event, data ? data : null);
 			}
+
+		}
+
+		public el(selector) : any {
+
+			return angular.element(selector);
 
 		}
 

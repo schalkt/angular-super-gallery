@@ -11,6 +11,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 ![angular-super-gallery-screenshot-2](http://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
 
 ### Requirements
+- [jQuery](https://github.com/jquery/jquery/tree/2.2.4) ^2.2.4
 - [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.4
 - [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.4
 - [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.4
@@ -32,7 +33,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 ### Install
 
 - `npm install --save angular-super-gallery`
-- `bower install --save angular-super-gallery`
+- or `bower install --save angular-super-gallery`
 - webpack (CommonJS) supported
 
 ### Usage

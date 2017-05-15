@@ -2,7 +2,7 @@
 
 module ASG {
 
-	var app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate']);
+	var app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'FBAngular', 'ngTouch']);
 
 	app.filter('asgBytes', () => {
 		return function (bytes : any, precision : number) : string {

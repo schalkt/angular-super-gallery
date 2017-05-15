@@ -1,6 +1,6 @@
 {
 	"name": "angular-super-gallery",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "Super Angular image gallery",
 	"homepage": "https://github.com/schalkt/angular-super-gallery",
 	"keywords": [
@@ -44,6 +44,7 @@
 		"typings": "^2.1.1"
 	},
 	"dependencies": {
+		"jquery": "^2.2.4",
 		"angular": "1.6.*",
 		"angular-animate": "1.6.*",
 		"angular-fullscreen": "git+https://github.com/fabiobiondi/angular-fullscreen.git",

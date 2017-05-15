@@ -65,6 +65,13 @@
   perspective: $perspective;
 
   .help {
+
+    ul, li {
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+
     position: absolute;
     right: 0;
     padding: 10px;
@@ -166,6 +173,55 @@
 
   .dropdown-submenu.open > .dropdown-menu {
     display: block;
+  }
+
+  @media (orientation: portrait) {
+
+    .help {
+      left: 0;
+      right: 0;
+      bottom: 7%;
+      font-size: 2em;
+      text-align: center;
+
+      li {
+        margin: 0;
+        padding: 4px;
+        display: inline-block;
+      }
+
+    }
+
+    .header {
+
+      text-align: center;
+      font-size: 30px;
+
+      .title, .subtitle {
+        margin-top: 2%;
+        float: none;
+        clear: both;
+      }
+
+      .buttons {
+
+        float: none !important;
+        clear: both !important;
+
+        .btn {
+          font-size: 1.1em;
+          margin: 2% 0;
+        }
+
+      }
+    }
+
+    .caption {
+      .content {
+        font-size: 2em;
+      }
+    }
+
   }
 
 }
