@@ -1,16 +1,18 @@
 <script type="text/ng-template" id="help.html">
-	SPACE : forward</br>
-	RIGHT : forward</br>
-	LEFT : backward</br>
-	UP / HOME : first</br>
-	DOWN / END : last</br>
-	ESC : exit</br>
-	P : play/pause</br>
-	F / ENTER : toggle fullscreen</br>
-	M : toggle menu</br>
-	W : toggle wide screen</br>
-	C : toggle caption</br>
-	H : toggle help
+	<ul>
+		<li>SPACE : forward</li>
+		<li>RIGHT : forward</li>
+		<li>LEFT : backward</li>
+		<li>UP / HOME : first</li>
+		<li>DOWN / END : last</li>
+		<li>ESC : exit</li>
+		<li>P : play/pause</li>
+		<li>F / ENTER : toggle fullscreen</li>
+		<li>M : toggle menu</li>
+		<li>W : toggle wide screen</li>
+		<li>C : toggle caption</li>
+		<li>H : toggle help</li>
+	</ul>
 </script>
 
 <div class="asg-modal {{ $ctrl.id }}"
@@ -23,7 +25,7 @@
 
 	<div class="header">
 
-        <span class="buttons pull-right visible-sm visible-md visible-lg">
+        <span class="buttons pull-right">
 
 			   <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()">
                     <span data-ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
@@ -95,87 +97,6 @@
                 </button>
 
             </span>
-
-		<span class="buttons pull-right visible-xs">
-
-
-				 	<button data-ng-if="!$ctrl.asg.isSingle && $ctrl.asg.options.autoplay.enabled" class="btn btn-default btn-xs" data-ng-click="$ctrl.asg.autoPlayStop()">
-						<span class="glyphicon glyphicon-stop"></span>
-					</button>
-
-				   <button data-ng-if="!$ctrl.asg.isSingle && !$ctrl.asg.options.autoplay.enabled" class="btn btn-default btn-xs" data-ng-click="$ctrl.asg.autoPlayStart()">
-						<span class="glyphicon glyphicon-play"></span>
-				   </button>
-
-                    <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs "
-							data-ng-click="$ctrl.asg.toFirst(true)">
-                        {{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
-                    </button>
-
-                    <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs"
-							data-ng-click="$ctrl.asg.toBackward(true)">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </button>
-
-                    <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs"
-							data-ng-click="$ctrl.asg.toForward(true)">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </button>
-
-                    <span data-ng-if="!$ctrl.asg.isSingle && false" class="dropdown">
-                        <button class="btn btn-default btn-xs dropdown-toggle ng-binding" type="button"
-								data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li class="dropdown-submenu">
-                                <a class="transitions" tabindex="-1" href="#">Transitions <span
-										class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTransition(transition)"
-										   data-ng-repeat="transition in $ctrl.transitions">
-                                        <span data-ng-class="{'highlight' : transition == $ctrl.transition}">
-                                            {{ transition }}</span></a>
-                                    </li>
-                                </ul>
-                            </li>
-							<li class="dropdown-submenu">
-                            <a class="themes" tabindex="-1" href="#">Themes <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#" data-ng-click="$ctrl.setTheme(theme)"
-									   data-ng-repeat="theme in $ctrl.themes">
-                                    <span data-ng-class="{'highlight' : theme == $ctrl.asg.options.theme}">
-                                        {{ theme }}</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                            <li><a href="#" tabindex="-1" data-ng-click="$ctrl.toggleHelp()">Help</a></li>
-                        </ul>
-                    </span>
-
-                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleMenu()">
-                        <span data-ng-if="$ctrl.config.header" class="glyphicon glyphicon-chevron-up"></span>
-                        <span data-ng-if="!$ctrl.config.header" class="glyphicon glyphicon-chevron-down"></span>
-                    </button>
-
-
-					<button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleWide()">
-						<span class="glyphicon glyphicon-resize-horizontal"></span>
-					</button>
-
-                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleFullScreen()">
-                        <span class="glyphicon glyphicon-fullscreen"></span>
-                    </button>
-
-			  		<button class="btn btn-default btn-xs" data-ng-click="$ctrl.toggleHelp()">
-                        <span class="glyphicon glyphicon-question-sign"></span>
-                    </button>
-
-                    <button class="btn btn-default btn-xs" data-ng-click="$ctrl.asg.modalClose()">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-
-                </span>
 
 		<span data-ng-if="$ctrl.config.title">
 			<span class="title">{{ $ctrl.config.title }}</span>
