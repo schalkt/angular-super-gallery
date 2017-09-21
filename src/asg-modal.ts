@@ -237,6 +237,7 @@ module ASG {
 			}
 
 			this.asg.modalVisible = value;
+			this.asg.setHash();
 
 		}
 

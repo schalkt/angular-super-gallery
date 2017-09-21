@@ -22,7 +22,6 @@ demo.controller('DemoController', function () {
 				playpause: [80, 75],
 				forward: [32, 39, 76],
 				backward: [37, 74],
-				fullscreen: null
 			}
 		},
 		panel: {
@@ -35,7 +34,7 @@ demo.controller('DemoController', function () {
 		image: {
 			height: 210,
 			wide: true,
-			transition: 'rotateLR',
+			transition: 'slideLR',
 		},
 	};
 
