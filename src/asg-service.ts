@@ -105,22 +105,41 @@ module ASG {
 	export interface IServiceController {
 
 		getInstance(component : any) : IServiceController,
+
 		setDefaults() : void;
+
 		setOptions(options : IOptions) : IOptions;
+
 		setItems(items : Array<IFile>) : void;
+
 		preload(wait? : number) : void;
+
 		normalize(index : number) : number;
+
 		setFocus() : void;
+
 		modalOpen(index : number) : void;
+
 		modalClose() : void;
+
 		toBackward(stop? : boolean) : void;
+
 		toForward(stop? : boolean) : void;
+
 		toFirst(stop? : boolean) : void;
+
 		toLast(stop? : boolean) : void;
+
 		loadImage(index? : number) : void;
+
 		loadImages(indexes : Array<number>) : void;
+
 		autoPlayToggle() : void;
+
 		el(selector) : any;
+
+		setHash() : void;
+
 		modalVisible : boolean;
 		transitions : Array<string>;
 		themes : Array<string>;
@@ -133,6 +152,7 @@ module ASG {
 	// service controller
 	export class ServiceController {
 
+		public slug : string = 'asg';
 		public id : string;
 		public items : any;
 		public files : Array<IFile> = [];
@@ -170,7 +190,7 @@ module ASG {
 				caption: true, // show/hide image caption
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
-				transition: 'rotateLR', // transition effect
+				transition: 'slideLR', // transition effect
 				wide: false, // enable/disable wide image display mode
 				keycodes: {
 					exit: [27], // ESC
@@ -193,7 +213,7 @@ module ASG {
 				},
 			},
 			image: {
-				transition: 'rotateLR', // transition effect
+				transition: 'slideLR', // transition effect
 				wide: false, // enable/disable wide image display mode
 				height: 300, // height
 			}
@@ -221,13 +241,51 @@ module ASG {
 		];
 
 		constructor(private timeout : ng.ITimeoutService,
-					private interval : ng.IIntervalService) {
+					private interval : ng.IIntervalService,
+					private location : ng.ILocationService) {
+
+		}
+
+		public $onInit() {
+
 
 		}
 
 
-		public $onInit() {
+		private parseHash() {
 
+			if (!this.id) {
+				return;
+			}
+
+			var hash = this.location.hash();
+			var parts = hash ? hash.split('-') : null;
+
+			if (parts === null) {
+				return;
+			}
+
+			if (parts[0] !== this.slug) {
+				return;
+			}
+
+			if (parts.length !== 3) {
+				return;
+			}
+
+			if (parts[1] !== this.id) {
+				return;
+			}
+
+			var index = parseInt(parts[2], 10);
+
+			if (!angular.isNumber(index)) {
+				return;
+			}
+
+			console.log(parts);
+			this.selected = index;
+			this.modalOpen(index);
 
 		}
 
@@ -239,13 +297,14 @@ module ASG {
 
 			// new instance and set options and items
 			if (instance == undefined) {
-				instance = new ServiceController(this.timeout, this.interval);
+				instance = new ServiceController(this.timeout, this.interval, this.location);
 				instance.id = id;
 			}
 
 			instance.setOptions(component.options);
 			instance.setItems(component.items);
 			instance.selected = component.selected ? component.selected : 0;
+			instance.parseHash();
 
 			if (instance.options) {
 
@@ -326,6 +385,7 @@ module ASG {
 			this.direction = 'backward';
 			this.selected = this.normalize(--this.selected);
 			this.loadImage(this.selected - 1);
+			this.setHash();
 
 		}
 
@@ -336,6 +396,7 @@ module ASG {
 			this.direction = 'forward';
 			this.selected = this.normalize(++this.selected);
 			this.loadImage(this.selected + 1);
+			this.setHash();
 
 		}
 
@@ -345,6 +406,7 @@ module ASG {
 			stop && this.autoPlayStop();
 			this.direction = 'backward';
 			this.selected = 0;
+			this.setHash();
 
 		}
 
@@ -354,9 +416,17 @@ module ASG {
 			stop && this.autoPlayStop();
 			this.direction = 'forward';
 			this.selected = this.items.length - 1;
+			this.setHash();
 
 		}
 
+		public setHash() {
+
+			if (this.modalVisible) {
+				this.location.hash([this.slug, this.id, this.selected].join('-'));
+			}
+
+		}
 
 		public autoPlayToggle() {
 
@@ -628,11 +698,13 @@ module ASG {
 
 			this.selected = index ? index : this.selected;
 			this.modalVisible = true;
+			this.setHash();
 
 		}
 
 		public modalClose() {
 
+			this.location.hash('');
 			this.modalVisible = false;
 
 		}
@@ -657,7 +729,7 @@ module ASG {
 
 	var app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.service('asgService', ["$timeout", "$interval", ServiceController]);
+	app.service('asgService', ["$timeout", "$interval", "$location", ServiceController]);
 
 }
 

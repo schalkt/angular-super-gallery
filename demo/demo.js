@@ -22,7 +22,6 @@ demo.controller('DemoController', function () {
 				playpause: [80, 75],
 				forward: [32, 39, 76],
 				backward: [37, 74],
-				fullscreen: null
 			}
 		},
 		panel: {
@@ -35,14 +34,14 @@ demo.controller('DemoController', function () {
 		image: {
 			height: 210,
 			wide: true,
-			transition: 'rotateLR',
+			transition: 'slideLR',
 		},
 	};
 
 	this.files1 = [{
-		"link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
-		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x168.jpg",
-		"medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
+		"link": "wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_300x168.jpg",
+		"medium": "i1.wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_602x339.jpg",
 	}, {
 		"link": "wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_1920x1080.jpg",
 		"thumbnail": "i1.wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_300x168.jpg",
@@ -52,9 +51,9 @@ demo.controller('DemoController', function () {
 		"thumbnail": "i1.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_300x168.jpg",
 		"medium": "i1.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_602x339.jpg",
 	}, {
-		"link": "wallpaperscraft.com/image/sea_sand_palm_trees_surf_84649_1920x1080.jpg",
-		"thumbnail": "i1.wallpaperscraft.com/image/sea_sand_palm_trees_surf_84649_300x168.jpg",
-		"medium": "i1.wallpaperscraft.com/image/sea_sand_palm_trees_surf_84649_602x339.jpg",
+		"link": "wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_1920x1200.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_300x168.jpg",
+		"medium": "i1.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_602x339.jpg",
 	}, {
 		"link": "wallpaperscraft.com/image/stones_tropical_ocean_sky_summer_92472_1920x1080.jpg",
 		"thumbnail": "i1.wallpaperscraft.com/image/stones_tropical_ocean_sky_summer_92472_300x168.jpg",

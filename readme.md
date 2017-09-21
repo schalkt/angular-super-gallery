@@ -171,6 +171,7 @@ or (no thumbnails)
 - ESC : exit
 - P : play/pause
 - F / ENTER : toggle fullscreen
+- T : change transition effect
 - M : toggle menu
 - W : toggle wide screen
 - C : toggle caption
