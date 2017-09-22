@@ -283,7 +283,7 @@ module ASG {
 				return;
 			}
 
-			console.log(parts);
+			index--;
 			this.selected = index;
 			this.modalOpen(index);
 
@@ -423,7 +423,7 @@ module ASG {
 		public setHash() {
 
 			if (this.modalVisible) {
-				this.location.hash([this.slug, this.id, this.selected].join('-'));
+				this.location.hash([this.slug, this.id, this.selected + 1].join('-'));
 			}
 
 		}
