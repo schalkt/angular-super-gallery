@@ -167,12 +167,14 @@
 
 	</div>
 
-
-	<div class="caption" data-ng-if="$ctrl.config.caption">
+	<div class="caption" data-ng-class="{'visible' : $ctrl.config.caption}">
 		<div class="content">
 			<span class="title">{{ $ctrl.asg.file.title }}</span>
 			<span data-ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
 			<span class="description">{{ $ctrl.asg.file.description }}</span>
+			<a href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-xs">
+				<span class="glyphicon glyphicon-download"></span> Download
+			</a>
 		</div>
 	</div>
 

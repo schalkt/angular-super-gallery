@@ -144,6 +144,15 @@
     right: 0;
     bottom: 0;
     z-index: 100;
+    opacity: 0;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    &:not(.visible):hover {
+      opacity: 1;
+    }
 
     .content {
 

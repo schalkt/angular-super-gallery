@@ -348,7 +348,9 @@ module ASG {
 			this.options = angular.merge(this.defaults, options);
 			this.log('config', this.options);
 
+			// important!
 			options = this.options;
+
 			return this.options;
 
 		}
@@ -612,7 +614,7 @@ module ASG {
 		public downloadLink() {
 
 			if (this.selected != undefined) {
-				return this.options.baseUrl + this.files[this.selected][this.options.fields.source.modal];
+				return this.files[this.selected].source.modal;
 			}
 
 		}

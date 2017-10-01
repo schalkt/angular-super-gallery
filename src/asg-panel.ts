@@ -2,13 +2,11 @@ module ASG {
 
 	export class PanelController {
 
-		private type : string = 'panel';
-
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
-		public selected : number;
 
+		private type : string = 'panel';
 		private asg : IServiceController;
 
 		constructor(private service : IServiceController) {
@@ -35,6 +33,29 @@ module ASG {
 			this.asg.options[this.type] = value;
 
 		}
+
+		// set selected image
+		public set selected(v : number) {
+
+			if (!this.asg) {
+				return;
+			}
+
+			this.asg.selected = v;
+
+		}
+
+		// get selected image
+		public get selected() {
+
+			if (!this.asg) {
+				return;
+			}
+
+			return this.asg.selected;
+
+		}
+
 
 	}
 

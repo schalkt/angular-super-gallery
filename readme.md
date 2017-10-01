@@ -38,6 +38,10 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 ### Usage
 
+```
+angular.module("App", ['angularSuperGallery']);
+```
+
 in Controller
 ```
 this.showModal = false;
