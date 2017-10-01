@@ -381,24 +381,34 @@ module ASG {
 
 
 		// go to backward
-		public toBackward(stop? : boolean) {
+		public toBackward(stop? : boolean, $event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
 
 			stop && this.autoPlayStop();
 			this.direction = 'backward';
 			this.selected = this.normalize(--this.selected);
 			this.loadImage(this.selected - 1);
 			this.setHash();
+			this.setFocus();
 
 		}
 
 		// go to forward
-		public toForward(stop? : boolean) {
+		public toForward(stop? : boolean, $event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
 
 			stop && this.autoPlayStop();
 			this.direction = 'forward';
 			this.selected = this.normalize(++this.selected);
 			this.loadImage(this.selected + 1);
 			this.setHash();
+			this.setFocus();
 
 		}
 

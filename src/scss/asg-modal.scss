@@ -99,12 +99,23 @@
     overflow: hidden;
     perspective: $perspective;
 
+    @import "asg-transitions";
+
+  }
+
+  .arrows {
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: auto;
+
     .toBackward, .toForward {
 
       position: absolute;
       top: 45%;
-      bottom: 0;
-      z-index: auto;
 
       .btn {
         opacity: 0.4;
@@ -126,14 +137,6 @@
       right: 0;
       left: 50%;
     }
-
-    .functions {
-      position: absolute;
-      right: 0;
-      z-index: auto;
-    }
-
-    @import "asg-transitions";
 
   }
 
