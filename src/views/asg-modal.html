@@ -26,6 +26,12 @@
 
 	<div class="header">
 
+		<span class="buttons visible-xs pull-right">
+			 <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs">
+                    {{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
+			 </button>
+		</span>
+
 		<span class="buttons hidden-xs pull-right">
 
 			   <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()">
@@ -156,7 +162,7 @@
 			</button>
 
 		</div>
-		
+
 	</div>
 
 	<div class="caption" data-ng-class="{'visible' : $ctrl.config.caption}">
