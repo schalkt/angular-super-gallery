@@ -131,7 +131,7 @@
 		 data-ng-swipe-right="$ctrl.asg.toBackward(true)"
 		 data-ng-click="$ctrl.asg.modalClose()">
 
-		<div class="hidden-xs" data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toBackward">
+		<div data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toBackward">
 
 			<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
 					data-ng-click="$ctrl.asg.toBackward(true, $event)">
@@ -142,14 +142,9 @@
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
-			<button class="btn btn-default btn-sm pull-left visible-xs"
-					data-ng-click="$ctrl.asg.toBackward(true, $event)">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</button>
-
 		</div>
 
-		<div class="hidden-xs" data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toForward">
+		<div data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toForward">
 
 			<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
 					data-ng-click="$ctrl.asg.toForward(true, $event)">
@@ -160,12 +155,8 @@
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 
-			<button class="btn btn-default btn-sm pull-right visible-xs"
-					data-ng-click="$ctrl.asg.toForward(true, $event)">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-
 		</div>
+		
 	</div>
 
 	<div class="caption" data-ng-class="{'visible' : $ctrl.config.caption}">
