@@ -2,17 +2,12 @@ module ASG {
 
 	export class ModalController {
 
-		private type : string = 'modal';
-
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
-		public selected : number;
 
+		private type : string = 'modal';
 		private asg : IServiceController;
-
-		private _fullscreen : boolean = false;
-		private _visible : boolean = false;
 		private arrowsVisible : boolean = false;
 
 		constructor(private service : IServiceController,
@@ -237,7 +232,30 @@ module ASG {
 			}
 
 			this.asg.modalVisible = value;
+			console.log('modal set visible', this.asg, this);
 			this.asg.setHash();
+
+		}
+
+		// set selected image
+		public set selected(v : number) {
+
+			if (!this.asg) {
+				return;
+			}
+
+			this.asg.selected = v;
+
+		}
+
+		// get selected image
+		public get selected() {
+
+			if (!this.asg) {
+				return;
+			}
+
+			return this.asg.selected;
 
 		}
 
