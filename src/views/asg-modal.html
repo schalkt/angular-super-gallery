@@ -26,7 +26,7 @@
 
 	<div class="header">
 
-        <span class="buttons pull-right">
+		<span class="buttons hidden-xs pull-right">
 
 			   <button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()">
                     <span data-ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
@@ -99,9 +99,9 @@
 
             </span>
 
-		<span data-ng-if="$ctrl.config.title">
+		<span data-ng-click="$ctrl.asg.modalClose()" data-ng-if="$ctrl.config.title">
 			<span class="title">{{ $ctrl.config.title }}</span>
-			<span class="subtitle" data-ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
+			<span class="subtitle hidden-xs" data-ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
 		</span>
 
 	</div>
@@ -109,11 +109,7 @@
 	<div class="help text-right" data-ng-click="$ctrl.toggleHelp()" data-ng-show="$ctrl.config.help" data-ng-include src="'help.html'"></div>
 
 
-	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}"
-		 data-ng-mouseover="$ctrl.arrowsShow()"
-		 data-ng-mouseleave="$ctrl.arrowsHide()"
-		 data-ng-swipe-left="$ctrl.asg.toForward(true)"
-		 data-ng-swipe-right="$ctrl.asg.toBackward(true)">
+	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}">
 
 		<div class="img"
 			 data-ng-repeat="(key,file) in $ctrl.asg.files"
@@ -126,45 +122,50 @@
 
 		</div>
 
-		<div data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toBackward">
+	</div>
+
+	<div class="arrows"
+		 data-ng-mouseover="$ctrl.arrowsShow()"
+		 data-ng-mouseleave="$ctrl.arrowsHide()"
+		 data-ng-swipe-left="$ctrl.asg.toForward(true)"
+		 data-ng-swipe-right="$ctrl.asg.toBackward(true)"
+		 data-ng-click="$ctrl.asg.modalClose()">
+
+		<div class="hidden-xs" data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toBackward">
 
 			<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
-					data-ng-click="$ctrl.asg.toBackward(true)">
+					data-ng-click="$ctrl.asg.toBackward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
-			<button class="btn btn-default btn-md pull-left visible-sm" data-ng-click="$ctrl.asg.toBackward(true)">
+			<button class="btn btn-default btn-md pull-left visible-sm" data-ng-click="$ctrl.asg.toBackward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
 			<button class="btn btn-default btn-sm pull-left visible-xs"
-					data-ng-click="$ctrl.asg.toBackward(true)">
+					data-ng-click="$ctrl.asg.toBackward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
 		</div>
 
-		<div data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toForward">
+		<div class="hidden-xs" data-ng-if="!$ctrl.asg.isSingle" data-ng-show="$ctrl.arrowsVisible" class="toForward">
 
 			<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
-					data-ng-click="$ctrl.asg.toForward(true)">
+					data-ng-click="$ctrl.asg.toForward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 
-			<button class="btn btn-default btn-md pull-right visible-sm" data-ng-click="$ctrl.asg.toForward(true)">
+			<button class="btn btn-default btn-md pull-right visible-sm" data-ng-click="$ctrl.asg.toForward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 
 			<button class="btn btn-default btn-sm pull-right visible-xs"
-					data-ng-click="$ctrl.asg.toForward(true)">
+					data-ng-click="$ctrl.asg.toForward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 
 		</div>
-
-		<div data-ng-show="$ctrl.arrowsVisible" class="functions">
-		</div>
-
 	</div>
 
 	<div class="caption" data-ng-class="{'visible' : $ctrl.config.caption}">
