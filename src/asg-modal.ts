@@ -20,6 +20,7 @@ module ASG {
 
 			// get service instance
 			this.asg = this.service.getInstance(this);
+			this.asg.modalAvailable = true;
 
 		}
 
