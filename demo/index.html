@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Angular Super Gallery Demo</title>
+	<title>AngularJS Super Gallery Demo</title>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -37,30 +37,57 @@
 	<script src="../dist/angular-super-gallery.js"></script>
 	<script src="demo.js"></script>
 
+	<style>
+
+		.thumbnail-custom {
+			width: 25%;
+			float: left;
+			padding: 1px 1px 0px 0px;
+		}
+
+		.navbar-text {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.navbar-inverse .navbar-brand {
+			color: #30c6d4;
+		}
+
+	</style>
+
 </head>
 <body>
 
-<style>
+<nav class="navbar navbar-default navbar-inverse">
+	<div class="container">
 
-	.thumbnail-custom {
-		width: 25%;
-		float: left;
-		padding: 1px 1px 0px 0px;
-	}
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">AngularJS Super Gallery Demo</a>
+		</div>
 
-</style>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+			<span class="navbar-text">
+				<a class="btn btn-sm btn-default" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
+					<img src="github.ico" width="16" height="16"/> github
+				</a>
+				<a class="btn btn-sm btn-default" href="https://www.npmjs.com/package/angular-super-gallery" target="_blank">
+					<img src="npmjs.png" width="16" height="16"/> npm
+				</a>
+			</span>
+
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
 
 <div class="container">
-
-	<div class="row">
-		<div class="col-md-12">
-			<h1>Angular Super Gallery Demo
-				<a class="btn btn-default" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
-					<img src="github.ico" width="16" height="16"/> Github repository
-				</a>
-			</h1>
-		</div>
-	</div>
 
 	<div class="row">
 
@@ -70,24 +97,25 @@
 
 				<div class="panel-heading">
 					<button class="btn btn-warning" data-ng-click="showModal1 = !showModal1">
-						Open demo gallery 1 window
+						open gallery
 					</button>
 					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions1 = !showOptions1">show
-						options
+						config
 					</button>
 				</div>
 				<div class="panel-body">
 
 					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
 
+					<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
 					<asg-image data-id="nature"></asg-image>
 					<asg-panel data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1"></asg-panel>
-					<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
 
 				</div>
 
 				<div class="panel-footer text-center">
-					photos : <a target="_blank" href="https://wallpaperscraft.com"/>wallpaperscraft.com</a>
+					photos :
+					<a target="_blank" href="https://wallpaperscraft.com/catalog/nature"/>wallpaperscraft.com</a>
 				</div>
 
 			</div>
@@ -100,32 +128,61 @@
 
 				<div class="panel-heading">
 					<button class="btn btn-warning" data-ng-click="showModal2 = !showModal2">
-						Open demo gallery 2 window
+						open gallery
 					</button>
-					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions2 = !showOptions2">show
-						options
+					<button class="btn btn-primary" data-ng-click="showThumbnails2 = !showThumbnails2">
+						show thumbnails
 					</button>
-					<button class="btn btn-default btn-xs pull-right" data-ng-click="showThumbnails2 = !showThumbnails2">
-						show
-						thumbnails
+					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions2 = !showOptions2">
+						show config
 					</button>
 				</div>
 				<div class="panel-body">
 
 					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
 
+					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
 					<asg-panel class="clearfix"
 							   data-id="girls"
 							   data-options="ctrl.options2"
 							   data-items="ctrl.files2"
 							   data-ng-show="showThumbnails2"></asg-panel>
 					<asg-image data-id="girls"></asg-image>
-					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
 
 				</div>
 
 				<div class="panel-footer text-center">
-					photos : <a target="_blank" href="https://wallpaperscraft.com"/>wallpaperscraft.com</a>
+					photos :
+					<a target="_blank" href="https://wallpaperscraft.com/catalog/girls"/>wallpaperscraft.com</a>
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="col-md-6">
+
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					single image + modal (wide : true, menu : false)
+				</div>
+
+				<div class="panel-body">
+
+					<asg-modal data-id="cars" data-options="{ modal: { wide: true, menu: false}}"></asg-modal>
+					<asg-image class="clearfix" data-id="cars"
+							   data-items="[{
+							   source: {
+							   		modal : 'https://wallpaperscraft.com/image/nissan_gt_r_red_rear_view_sportscar_103693_1920x1080.jpg',
+							   		image : 'https://wallpaperscraft.com/image/nissan_gt_r_red_rear_view_sportscar_103693_602x339.jpg'
+							   }}]"></asg-image>
+
+				</div>
+
+				<div class="panel-footer text-center">
+					photo : <a target="_blank" href="https://wallpaperscraft.com/catalog/cars"/>wallpaperscraft.com</a>
 				</div>
 
 			</div>

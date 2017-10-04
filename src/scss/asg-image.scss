@@ -21,4 +21,8 @@
     cursor: pointer;
   }
 
+  &.nomodal img {
+    cursor: inherit;
+  }
+
 }
