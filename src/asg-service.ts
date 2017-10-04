@@ -141,6 +141,7 @@ module ASG {
 		setHash() : void;
 
 		modalVisible : boolean;
+		modalAvailable : boolean;
 		transitions : Array<string>;
 		themes : Array<string>;
 		options : IOptions;
@@ -157,6 +158,7 @@ module ASG {
 		public items : any;
 		public files : Array<IFile> = [];
 		public direction : string;
+		public modalAvailable : boolean = false;
 
 		private instances : {} = {}
 		private _selected : number;
@@ -283,9 +285,13 @@ module ASG {
 				return;
 			}
 
-			index--;
-			this.selected = index;
-			this.modalOpen(index);
+			this.timeout(() => {
+
+				index--;
+				this.selected = index;
+				this.modalOpen(index);
+
+			}, 20);
 
 		}
 
@@ -341,11 +347,12 @@ module ASG {
 		// options setup
 		public setOptions(options : IOptions) {
 
-			if (!options) {
-				return;
+			if (options) {
+				this.options = angular.merge(this.defaults, options);
+			} else {
+				this.options = this.defaults;
 			}
 
-			this.options = angular.merge(this.defaults, options);
 			this.log('config', this.options);
 
 			// important!
@@ -514,12 +521,23 @@ module ASG {
 
 				let parts = source.modal.split('/');
 				let filename = parts[parts.length - 1];
-				let title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
+
+				if (self.options.fields != undefined) {
+					var title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
+				} else {
+					var title = filename;
+				}
+
+				if (self.options.fields != undefined) {
+					var description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
+				} else {
+					var description = null;
+				}
 
 				let file = {
 					source: source,
 					title: title,
-					description: value[self.options.fields.description] ? value[self.options.fields.description] : null,
+					description: description,
 					loaded: {
 						modal: false,
 						panel: false,
@@ -623,7 +641,7 @@ module ASG {
 		// get the download link
 		public downloadLink() {
 
-			if (this.selected != undefined) {
+			if (this.selected != undefined && this.files.length > 0) {
 				return this.files[this.selected].source.modal;
 			}
 
@@ -707,6 +725,10 @@ module ASG {
 
 
 		public modalOpen(index : number) {
+
+			if (!this.modalAvailable) {
+				return;
+			}
 
 			this.selected = index ? index : this.selected;
 			this.modalVisible = true;
