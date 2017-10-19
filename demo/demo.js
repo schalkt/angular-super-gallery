@@ -3,6 +3,7 @@ var demo = angular.module('demo', ['angularSuperGallery']);
 demo.controller('DemoController', function () {
 
 	this.options1 = {
+		debug: true,
 		baseUrl: "https://",
 		fields: {
 			source: {
@@ -32,8 +33,9 @@ demo.controller('DemoController', function () {
 			},
 		},
 		image: {
-			height: 210,
-			wide: true,
+			height: 320,
+			wide: false,
+			enlarge: true,
 			transition: 'slideLR',
 		},
 	};
@@ -87,12 +89,18 @@ demo.controller('DemoController', function () {
 			wide: true,
 		},
 		panel: {
+			visible: false,
 			item: {
 				class: "col-md-4 thumbnail",
 				caption: true
 			},
 		},
 		image: {
+			wide: true,
+			heightAuto: {
+				initial: true,
+				onresize: true,
+			},
 			transition: 'fadeInOut'
 		}
 	};
@@ -111,35 +119,40 @@ demo.controller('DemoController', function () {
 			"panel": "https://i2.wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_300x168.jpg",
 			"image": "https://i2.wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_602x339.jpg",
 		},
-		"title": "Emma Stone"
+		"title": "Emma Stone",
+		"description": "Emily Jean Stone (born November 6, 1988) is an American actress.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_1920x1080.jpg",
 			"panel": "https://i2.wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_300x168.jpg",
 			"image": "https://i2.wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_602x339.jpg",
 		},
-		"title": "Amanda Seyfried"
+		"title": "Amanda Seyfried",
+		"description": "Amanda Michelle Seyfried (born December 3, 1985) is an American actress and singer-songwriter.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_1920x1080.jpg",
 			"panel": "https://i2.wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_300x168.jpg",
 			"image": "https://i2.wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_602x339.jpg",
 		},
-		"title": "Alizee"
+		"title": "Alizee",
+		"description": "Alizée Jacotey (born 21 August 1984) is a French singer, dancer and voice actress.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_1920x1080.jpg",
 			"panel": "https://i2.wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_300x168.jpg",
 			"image": "https://i2.wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_602x339.jpg",
 		},
-		"title": "Selena Gomez"
+		"title": "Selena Gomez",
+		"description": "Selena Marie Gomez (born July 22, 1992) is an American singer and actress.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_1920x1080.jpg",
 			"panel": "https://i2.wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_300x168.jpg",
 			"image": "https://i2.wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_602x339.jpg",
 		},
-		"title": "Margot Robbie"
+		"title": "Margot Robbie",
+		"description": "Margot Elise Robbie (born 2 July 1990) is an Australian actress and producer.",
 	}];
 
 });

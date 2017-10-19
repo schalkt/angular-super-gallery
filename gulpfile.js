@@ -10,7 +10,6 @@ var gulp         = require('gulp'),
 	uglify       = require('gulp-uglify'),
 	sourcemaps   = require('gulp-sourcemaps'),
 	runSequence  = require('run-sequence'),
-	merge2       = require('merge2'),
 	gzip         = require('gulp-gzip');
 
 

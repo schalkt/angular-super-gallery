@@ -122,6 +122,10 @@ module ASG {
 					this.toggleWide();
 					break;
 
+				case 'enlarge':
+					this.toggleEnlarge();
+					break;
+
 				case 'transition':
 					this.nextTransition();
 					break;
@@ -191,7 +195,6 @@ module ASG {
 
 		}
 
-
 		// toggle wide
 		private toggleWide() {
 
@@ -199,6 +202,12 @@ module ASG {
 
 		}
 
+		// toggle enlarge
+		private toggleEnlarge() {
+
+			this.config.enlarge = !this.config.enlarge;
+
+		}
 
 		// toggle menu
 		private toggleMenu() {

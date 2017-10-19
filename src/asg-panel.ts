@@ -56,7 +56,6 @@ module ASG {
 
 		}
 
-
 	}
 
 	var app : ng.IModule = angular.module('angularSuperGallery');
@@ -68,7 +67,8 @@ module ASG {
 			id: "@",
 			items: '=?',
 			options: '=?',
-			selected: '=?'
+			selected: '=?',
+			visible: '=?'
 		}
 	});
 

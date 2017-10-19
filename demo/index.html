@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>AngularJS Super Gallery Demo</title>
+	<title>AngularJS Super Gallery</title>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -39,19 +39,46 @@
 
 	<style>
 
+		.asg-custom asg-panel {
+			position: absolute;
+			z-index: 10;
+			overflow: hidden;
+		}
+
+		.asg-custom asg-panel > div {
+			width: 70px;
+		}
+
 		.thumbnail-custom {
-			width: 25%;
 			float: left;
+			height: 40px;
 			padding: 1px 1px 0px 0px;
 		}
 
 		.navbar-text {
-			margin-top: 10px;
-			margin-bottom: 10px;
+			margin: 0px;
+			padding: 9px 10px;
 		}
 
 		.navbar-inverse .navbar-brand {
 			color: #30c6d4;
+		}
+
+		.donate {
+			display: inline-block;
+			line-height: 0;
+			margin: 0px;
+		}
+
+		.donate .btn-donate {
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		.asg-info h3 {
+			margin: 0;
+			padding: 0;
+			font-size: 2rem;
 		}
 
 	</style>
@@ -69,18 +96,37 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">AngularJS Super Gallery Demo</a>
+			<a class="navbar-brand" href="#">AngularJS Super Gallery</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			<span class="navbar-text">
 				<a class="btn btn-sm btn-default" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
-					<img src="github.ico" width="16" height="16"/> github
+					<img src="github.png" width="16" height="16"/> GITHUB
 				</a>
 				<a class="btn btn-sm btn-default" href="https://www.npmjs.com/package/angular-super-gallery" target="_blank">
-					<img src="npmjs.png" width="16" height="16"/> npm
+					<img src="npmjs.png" width="16" height="16"/> NPM
 				</a>
+
+				<form class="donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+
+					 <!-- Identify your business so that you can collect the payments. -->
+					<input type="hidden" name="business" value="paypal2@schalk.hu">
+
+					<!-- Specify a Donate button. -->
+					<input type="hidden" name="cmd" value="_donations">
+
+					<!-- Specify details about the contribution -->
+					<input type="hidden" name="item_name" value="Donation for Angular Super Gallery">
+					<input type="hidden" name="currency_code" value="USD">
+					<button class="btn btn-sm btn-warning btn-donate">
+						Donate <img src="paypal.png" width="auto" height="16"/>
+					</button>
+					<img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+
+				</form>
+
 			</span>
 
 		</div><!-- /.navbar-collapse -->
@@ -93,23 +139,27 @@
 
 		<div class="col-md-6">
 
+			<!-- DEMO BEGIN -->
 			<div class="panel panel-default">
 
 				<div class="panel-heading">
-					<button class="btn btn-warning" data-ng-click="showModal1 = !showModal1">
-						open gallery
-					</button>
-					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions1 = !showOptions1">show
+					<strong>multiple images</strong> | custom thumbnails | modal with wide + controls
+					<button class="btn btn-xs pull-right" data-ng-click="showOptions1 = !showOptions1">show
 						config
 					</button>
 				</div>
-				<div class="panel-body">
+
+				<div class="panel-body asg-custom">
 
 					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
 
-					<asg-modal data-id="nature" data-visible="showModal1"></asg-modal>
-					<asg-image data-id="nature"></asg-image>
-					<asg-panel data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1"></asg-panel>
+					<!-- ASG BEGIN -->
+					<asg-modal data-id="nature"></asg-modal>
+
+					<asg-image data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1">
+						<asg-panel data-id="nature"></asg-panel>
+					</asg-image>
+					<!-- ASG END -->
 
 				</div>
 
@@ -119,21 +169,50 @@
 				</div>
 
 			</div>
+			<!-- DEMO END -->
+
+			<!-- DEMO BEGIN -->
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<strong>single image</strong> | fixed height + wide | modal with enlarge + hidden controls
+				</div>
+
+				<div class="panel-body">
+
+					<!-- ASG BEGIN -->
+					<asg-modal data-id="cars"></asg-modal>
+
+					<asg-image data-id="cars" class="clearfix"
+							   data-options="{
+								image: { height: 140, wide: true },
+								modal: { menu: false, wide: false, enlarge: true}
+								}"
+							   data-items="[{
+							   	source: { image: 'https://wallpaperscraft.com/image/lamborghini_miura_side_view_105726_960x544.jpg' }
+							   }]">
+					</asg-image>
+					<!-- ASG END -->
+
+				</div>
+
+				<div class="panel-footer text-center">
+					photo : <a target="_blank" href="https://wallpaperscraft.com/catalog/cars"/>wallpaperscraft.com</a>
+				</div>
+
+			</div>
+			<!-- DEMO END -->
 
 		</div>
 
 		<div class="col-md-6">
 
+			<!-- DEMO BEGIN -->
 			<div class="panel panel-default">
 
 				<div class="panel-heading">
-					<button class="btn btn-warning" data-ng-click="showModal2 = !showModal2">
-						open gallery
-					</button>
-					<button class="btn btn-primary" data-ng-click="showThumbnails2 = !showThumbnails2">
-						show thumbnails
-					</button>
-					<button class="btn btn-default btn-xs pull-right" data-ng-click="showOptions2 = !showOptions2">
+					<strong>multiple images</strong> | autoplay | modal with wide + hidden controls
+					<button class="btn btn-xs pull-right" data-ng-click="showOptions2 = !showOptions2">
 						show config
 					</button>
 				</div>
@@ -141,13 +220,40 @@
 
 					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
 
-					<asg-modal data-id="girls" data-visible="showModal2"></asg-modal>
+					<!-- ASG BEGIN -->
+					<asg-modal data-id="girls"></asg-modal>
+
+					<script type="text/ng-template" id="custom-info.html">
+						{{ $ctrl.file.description }}
+						<a target="_blank" href="{{ $ctrl.file.download }}">
+							Download {{ $ctrl.file.width }}px width and {{ $ctrl.file.height }}px height {{
+							$ctrl.file.extension|uppercase }} file.
+						</a>
+					</script>
+
+					<script type="text/ng-template" id="custom-control.html">
+						<button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()">
+							<span data-ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
+							<span data-ng-if="$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-stop"></span>
+						</button>
+						<button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm " data-ng-click="$ctrl.asg.toFirst(true)">
+							{{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
+						</button>
+						<button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.toggle('panel')">
+							{{ $ctrl.asg.options.panel.visible ? 'hide' : 'show' }} thumbnails
+						</button>
+					</script>
+
+					<asg-image data-id="girls">
+						<asg-info data-id="girls" data-template="custom-info.html"></asg-info>
+					</asg-image>
+					<asg-control data-id="girls" data-template="custom-control.html"></asg-control>
 					<asg-panel class="clearfix"
 							   data-id="girls"
 							   data-options="ctrl.options2"
-							   data-items="ctrl.files2"
-							   data-ng-show="showThumbnails2"></asg-panel>
-					<asg-image data-id="girls"></asg-image>
+							   data-items="ctrl.files2">
+					</asg-panel>
+					<!-- ASG END -->
 
 				</div>
 
@@ -157,36 +263,45 @@
 				</div>
 
 			</div>
+			<!-- DEMO END -->
 
-
-		</div>
-
-		<div class="col-md-6">
-
+			<!-- DEMO BEGIN -->
 			<div class="panel panel-default">
 
 				<div class="panel-heading">
-					single image + modal (wide : true, menu : false)
+					<strong>svg logos</strong> | autoplay | no modal | no control | auto height by first image
 				</div>
 
 				<div class="panel-body">
 
-					<asg-modal data-id="cars" data-options="{ modal: { wide: true, menu: false}}"></asg-modal>
-					<asg-image class="clearfix" data-id="cars"
-							   data-items="[{
-							   source: {
-							   		modal : 'https://wallpaperscraft.com/image/nissan_gt_r_red_rear_view_sportscar_103693_1920x1080.jpg',
-							   		image : 'https://wallpaperscraft.com/image/nissan_gt_r_red_rear_view_sportscar_103693_602x339.jpg'
-							   }}]"></asg-image>
+					<!-- ASG BEGIN -->
+					<asg-image data-options='{
+							   "baseUrl":"svg/",
+							   "image" : { "transition": "rotateLR"},
+							   "autoplay" : { "enabled": true, "delay": 1700}
+							   }'
+							   data-items="[
+							    'amazon-ws.svg',
+								'asus.svg',
+								'avast.svg',
+								'bluetooth.svg',
+								'burger-king.svg',
+								'continental.svg',
+								'hilti.svg',
+								'sennheiser.svg',
+							   ]">
+					</asg-image>
+					<!-- ASG END -->
 
 				</div>
 
 				<div class="panel-footer text-center">
-					photo : <a target="_blank" href="https://wallpaperscraft.com/catalog/cars"/>wallpaperscraft.com</a>
+					images :
+					<a target="_blank" href="https://www.google.hu/search?q=*.svg&newwindow=1&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi9_a2yufjWAhUIJMAKHf3hBlEQ_AUICigB&biw=1602&bih=787"/>internet</a>
 				</div>
 
 			</div>
-
+			<!-- DEMO END -->
 
 		</div>
 

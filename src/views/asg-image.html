@@ -1,6 +1,6 @@
 <div class="asg-image {{ $ctrl.asg.theme }}"
-	 data-ng-class="{'nomodal' : !$ctrl.asg.modalAvailable }"
-	 data-ng-style="{'height' : $ctrl.asg.options.image.height}">
+	 data-ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
+	 data-ng-style="{'min-height' : $ctrl.config.heightMin,'height' : $ctrl.height}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
 		 data-ng-swipe-left="$ctrl.asg.toForward()"
@@ -13,16 +13,15 @@
 
 			<img class="img-responsive source"
 				 data-ng-if="file.loaded.image"
-				 data-ng-class="{ wide : $ctrl.config.wide }"
+				 data-ng-class="{ wide : $ctrl.config.wide, enlarge : $ctrl.config.enlarge }"
 				 data-ng-src="{{ file.source.image }}"
 				 data-ng-mouseover="$ctrl.asg.hoverPreload(key)"
 				 data-ng-click="$ctrl.asg.modalOpen()"/>
 
 		</div>
 	</div>
-
+	<ng-transclude></ng-transclude>
 </div>
-
 
 
 

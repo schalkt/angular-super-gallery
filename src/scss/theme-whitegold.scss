@@ -66,6 +66,68 @@ $primary: #d4c386;
 
 }
 
+.asg-control.whitegold {
+
+  .btn {
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 0;
+  }
+
+  .btn-default {
+    border: 1px solid $white;
+    color: $white;
+    background-color: transparent;
+  }
+
+  .btn-default:focus, .btn-default:hover {
+    border: 1px solid $primary;
+    outline: none;
+    color: $primary;
+    background-color: $white;
+  }
+
+  background-color: $primary;
+
+}
+
+.asg-info.whitegold {
+
+  background-color: $primary;
+  color: $white;
+
+  a {
+    color: $white;
+    border-bottom: 1px dashed $primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 1px solid $primary;
+    }
+
+  }
+
+}
+
+.asg-image.whitegold {
+
+  background-color: $primary;
+  color: $white;
+
+  .asg-info {
+
+    background-color: rgba($black, 0.5);
+    color: darken($white, 5%);
+
+    a {
+      color: darken($white, 5%);
+    }
+
+  }
+
+}
+
 .asg-panel.whitegold {
   .item {
     &.selected {

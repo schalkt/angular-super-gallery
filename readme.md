@@ -1,7 +1,7 @@
 Angular Super Gallery
 ===
 
-*Angular 2 and Angular 4 versions are under development*
+*AngularJS image gallery*
 
 ### Demo
 
@@ -11,7 +11,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 ![angular-super-gallery-screenshot-2](http://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
 
 ### Requirements
-- [jQuery](https://github.com/jquery/jquery/tree/2.2.4) ^2.2.4
+- [jQuery](https://github.com/jquery/jquery/tree/2.2.4) ^3.2.1
 - [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.4
 - [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.4
 - [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.4
@@ -33,8 +33,6 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 ### Install
 
 - `npm install --save angular-super-gallery`
-- or `bower install --save angular-super-gallery`
-- webpack (CommonJS) supported
 
 ### Usage
 
@@ -97,58 +95,66 @@ or (no thumbnails)
 
 ### Available options
 ```
-{
-    debug: false, // image load and autoplay info in console.log
-    baseUrl: "", // url prefix
-    fields: {
-        source: {
-            modal: "url", // required, image url for modal component (large size)
-            panel: "url", // image url for panel component (thumbnail size)
-            image: "url" // image url for image (medium size)
-        },
-        title: "title", // title input field name
-        description: "description", // description input field name
-        thumbnail: "thumbnail" // thumbnail input field name
+debug: false, // image load and autoplay info in console.log
+baseUrl: "", // url prefix
+fields: {
+    source: {
+        modal: "url", // required, image url for modal component (large size)
+        panel: "url", // image url for panel component (thumbnail size)
+        image: "url" // image url for image (medium size)
     },
-    autoplay: {
-        enabled: false, // slideshow play enabled/disabled
-        delay: 4100 // autoplay delay in millisecond
+    title: "title", // title input field name
+    description: "description", // description input field name
+    thumbnail: "thumbnail" // thumbnail input field name
+},
+autoplay: {
+    enabled: false, // slideshow play enabled/disabled
+    delay: 4100 // autoplay delay in millisecond
+},
+theme: 'default', // css style [default, darkblue, whitegold]
+preloadDelay: 770,
+preload: [], // preload images by index number
+modal: {
+    title: "", // modal window title
+    subtitle: "", // modal window subtitle
+    caption: true, // show/hide image caption
+    menu: true, // show/hide modal menu
+    help: false, // show/hide help
+    transition: 'slideLR', // transition effect
+    wide: false, // enable/disable wide image display mode
+    enlarge: false, // enable/disable enlarge image (not working with wide)
+    keycodes: {
+        exit: [27], // ESC
+        playpause: [80], // p
+        forward: [32, 39], // SPACE, RIGHT ARROW
+        backward: [37], // LEFT ARROW
+        first: [38, 36], // UP ARROW, HOME
+        last: [40, 35], // DOWN ARROW, END
+        fullscreen: [13], // ENTER
+        menu: [77], // m
+        caption: [67], // c
+        help: [72], // h
+        wide: [87], // w
+        enlarge: [69], // e
+        transition: [84] // t
+    }
+},
+panel: {
+    visible: true,
+    item: {
+        class: 'col-md-3', // item class
+        caption: false
     },
-    theme: 'default', // css style [default, darkblue, whitegold]
-    preloadDelay: 770,
-    preload: [], // preload images by index number
-    modal: {
-        title: "", // modal window title
-        subtitle: "", // modal window subtitle
-        caption: true, // show/hide image caption
-        menu: true, // show/hide modal menu
-        help: false, // show/hide help
-        transition: 'rotateLR', // transition effect
-        wide: false, // enable/disable wide image display mode
-        keycodes: {
-            exit: [27], // ESC
-            playpause: [80], // p
-            forward: [32, 39], // SPACE, RIGHT ARROW
-            backward: [37], // LEFT ARROW
-            first: [38, 36], // UP ARROW, HOME
-            last: [40, 35], // DOWN ARROW, END
-            fullscreen: [70, 13], // f, ENTER
-            menu: [77], // m
-            caption: [67], // c
-            help: [72], // h
-            wide: [87], // w
-            transition: [84] // t
-        }
-    },
-    panel: {
-        item: {
-            class: 'col-md-3' // item class
-        },
-    },
-    image: {
-        transition: 'rotateLR', // transition effect
-        wide: false, // enable/disable wide image display mode
-        height: 300, // height
+},
+image: {
+    transition: 'slideLR', // transition effect
+    wide: false, // enable/disable wide image display mode
+    enlarge: false, // enable/disable enlarge image (not working with wide)
+    height: 0, // height
+    heightMin: 0, // min height
+    heightAuto: {
+        initial: true,
+        onresize: false
     }
 }
 ```
@@ -173,13 +179,14 @@ or (no thumbnails)
 - UP / HOME : first
 - DOWN / END : last
 - ESC : exit
-- P : play/pause
-- F / ENTER : toggle fullscreen
-- T : change transition effect
-- M : toggle menu
-- W : toggle wide screen
-- C : toggle caption
-- H : toggle help
+- ENTER : toggle fullscreen
+- p : play/pause
+- t : change transition effect
+- m : toggle menu
+- w : toggle wide screen
+- e : toggle image enlarge
+- c : toggle caption
+- h : toggle help
 
 
 ### Build
@@ -187,17 +194,16 @@ or (no thumbnails)
 - `typings install`
 - `gulp dev`
 - `gulp prod` (minified javascript and css file)
+- `gulp watch` (automatic build under development)
 
 
 ### Todo
-- fix responsive view
-- image preload fix
-- publish package to npm (webpack support)
+- panel custom template for thumbnails
+- thumbnails on modal
+- events (init, first image loaded, change image, modal open/close, etc.)
 - exit button must be visible on modal when menubar hidden
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
-- angular component for controls (play/stop/next/prev)
-- angular component for img
 - transitions fix in Microsoft Edge
 - rotateLR transition fix in Firefox on MAC (or somebody fix the Firefox ;)
 

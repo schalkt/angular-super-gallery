@@ -27,6 +27,18 @@
       max-height: none;
     }
 
+    &.enlarge {
+      max-width: none;
+      max-height: none;
+      width: auto;
+      height: 100%;
+    }
+
+    &.wide.enlarge {
+      width: 100%;
+      height: auto;
+    }
+
   }
 
 }

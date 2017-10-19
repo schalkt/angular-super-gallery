@@ -1,6 +1,7 @@
 .asg-image {
 
   position: relative;
+  overflow: hidden;
 
   .images {
 
@@ -23,6 +24,19 @@
 
   &.nomodal img {
     cursor: inherit;
+  }
+
+  .asg-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .asg-control {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
 }

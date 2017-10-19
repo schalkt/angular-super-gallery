@@ -1,4 +1,5 @@
-<div class="asg-panel {{ $ctrl.asg.theme }}">
+<div class="asg-panel {{ $ctrl.asg.theme }}"
+	 data-ng-show="$ctrl.config.visible">
 
 	<div data-ng-repeat="(key,file) in $ctrl.asg.files"
 		 class="item {{ $ctrl.asg.options.panel.item.class }}"

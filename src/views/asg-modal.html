@@ -5,14 +5,15 @@
 		<li>LEFT : backward</li>
 		<li>UP / HOME : first</li>
 		<li>DOWN / END : last</li>
+		<li>ENTER : toggle fullscreen</li>
 		<li>ESC : exit</li>
-		<li>P : play/pause</li>
-		<li>F / ENTER : toggle fullscreen</li>
-		<li>T : change transition effect</li>
-		<li>M : toggle menu</li>
-		<li>W : toggle wide screen</li>
-		<li>C : toggle caption</li>
-		<li>H : toggle help</li>
+		<li>p : play/pause</li>
+		<li>t : change transition effect</li>
+		<li>m : toggle menu</li>
+		<li>w : toggle wide screen</li>
+		<li>e : toggle image enlarge</li>
+		<li>c : toggle caption</li>
+		<li>h : toggle help</li>
 	</ul>
 </script>
 
@@ -123,7 +124,7 @@
 			 data-ng-class="{'loading' : !file.loaded.modal}">
 
 			<img class="source"
-				 data-ng-class="{ wide : $ctrl.config.wide }"
+				 data-ng-class="{ wide : $ctrl.config.wide, enlarge : $ctrl.config.enlarge }"
 				 data-ng-src="{{ file.source.modal }}" data-ng-if="file.loaded.modal"/>
 
 		</div>
