@@ -12,15 +12,20 @@ module ASG {
 		constructor(private service : IServiceController,
 					private $rootScope : ng.IRootScopeService,
 					private $element : ng.IRootElementService,
-					private $window : ng.IWindowService) {
+					private $window : ng.IWindowService,
+					private $scope : ng.IScope) {
 
 			angular.element($window).bind('resize', (event) => {
-
-				if (this.config.heightAuto.onresize) {
-					this.setHeight(this.asg.file);
-				}
-
+				this.onResize()
 			});
+
+		}
+
+		private onResize() {
+
+			if (this.config.heightAuto.onresize) {
+				this.setHeight(this.asg.file);
+			}
 
 		}
 
@@ -49,15 +54,13 @@ module ASG {
 
 		}
 
+		// height
 		public get height() {
-
-			if (this.config.heightAuto.onresize === true) {
-				//this.setHeight(this.asg.file);
-			}
 
 			return this.config.height;
 
 		}
+
 
 		// get image config
 		public get config() : IOptionsImage {
@@ -100,7 +103,7 @@ module ASG {
 	var app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component("asgImage", {
-		controller: ["asgService", "$rootScope", "$element", "$window", ASG.ImageController],
+		controller: ["asgService", "$rootScope", "$element", "$window", "$scope", ASG.ImageController],
 		templateUrl: 'views/asg-image.html',
 		transclude: true,
 		bindings: {

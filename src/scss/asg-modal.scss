@@ -10,6 +10,10 @@
   outline: none;
   opacity: 1;
 
+  .btn-size {
+    width: 64px;
+  }
+
   &.ng-hide-add, &.ng-hide-remove {
     transition: all ease 0.42s;
   }

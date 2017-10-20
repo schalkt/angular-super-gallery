@@ -1,22 +1,21 @@
 <div class="asg-image {{ $ctrl.asg.theme }}"
 	 data-ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
-	 data-ng-style="{'min-height' : $ctrl.config.heightMin,'height' : $ctrl.height}">
+	 data-ng-style="{'min-height' : $ctrl.config.heightMin, 'height' : $ctrl.height}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
-		 data-ng-swipe-left="$ctrl.asg.toForward()"
-		 data-ng-swipe-right="$ctrl.asg.toBackward()">
+		 data-ng-swipe-left="$ctrl.asg.toForward(true)"
+		 data-ng-swipe-right="$ctrl.asg.toBackward(true)">
 
 		<div class="img"
 			 data-ng-repeat="(key,file) in $ctrl.asg.files"
 			 data-ng-show="$ctrl.asg.selected == key"
 			 data-ng-class="{'loading' : !file.loaded.image}">
 
-			<img class="img-responsive source"
+			<div class="source {{ $ctrl.config.size }}"
+				 data-ng-style="{'background-image': 'url(' + file.source.image + ')'}"
 				 data-ng-if="file.loaded.image"
-				 data-ng-class="{ wide : $ctrl.config.wide, enlarge : $ctrl.config.enlarge }"
-				 data-ng-src="{{ file.source.image }}"
 				 data-ng-mouseover="$ctrl.asg.hoverPreload(key)"
-				 data-ng-click="$ctrl.asg.modalOpen()"/>
+				 data-ng-click="$ctrl.asg.modalOpen()"></div>
 
 		</div>
 	</div>

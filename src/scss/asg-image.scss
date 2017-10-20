@@ -14,12 +14,28 @@
     overflow: hidden;
     perspective: $perspective;
 
+    .source {
+      cursor: pointer;
+      background-size: auto;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+
+      &.cover {
+        background-size: cover;
+      }
+
+      &.contain {
+        background-size: contain;
+      }
+
+      &.stretch {
+        background-size: 100% 100%;
+      }
+
+    }
+
     @import "asg-transitions";
 
-  }
-
-  img {
-    cursor: pointer;
   }
 
   &.nomodal img {

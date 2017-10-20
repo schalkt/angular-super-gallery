@@ -9,7 +9,8 @@ module ASG {
 		private type : string = 'panel';
 		private asg : IServiceController;
 
-		constructor(private service : IServiceController) {
+		constructor(private service : IServiceController,
+					private $scope : ng.IScope) {
 
 		}
 
@@ -61,7 +62,7 @@ module ASG {
 	var app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component("asgPanel", {
-		controller: ["asgService", ASG.PanelController],
+		controller: ["asgService", "$scope", ASG.PanelController],
 		templateUrl: 'views/asg-panel.html',
 		bindings: {
 			id: "@",

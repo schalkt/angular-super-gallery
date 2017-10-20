@@ -11,7 +11,8 @@ module ASG {
 		private arrowsVisible : boolean = false;
 
 		constructor(private service : IServiceController,
-					private fullscreen) {
+					private fullscreen,
+					private $scope : ng.IScope) {
 
 		}
 
@@ -65,11 +66,18 @@ module ASG {
 				}
 
 			}
-
+			
 			return action;
 
 		}
 
+
+		public close(){
+
+			this.asg.modalClose();
+			this.fullscreen.cancel();
+
+		}
 
 		// do keyboard action
 		public keyUp(e : KeyboardEvent) {
@@ -79,7 +87,7 @@ module ASG {
 			switch (action) {
 
 				case 'exit':
-					this.asg.modalClose();
+					this.close();
 					break;
 
 				case 'playpause':
@@ -118,12 +126,8 @@ module ASG {
 					this.toggleHelp();
 					break;
 
-				case 'wide':
-					this.toggleWide();
-					break;
-
-				case 'enlarge':
-					this.toggleEnlarge();
+				case 'size':
+					this.toggleSize();
 					break;
 
 				case 'transition':
@@ -195,17 +199,13 @@ module ASG {
 
 		}
 
-		// toggle wide
-		private toggleWide() {
+		// toggle size
+		private toggleSize() {
 
-			this.config.wide = !this.config.wide;
-
-		}
-
-		// toggle enlarge
-		private toggleEnlarge() {
-
-			this.config.enlarge = !this.config.enlarge;
+			var index = this.asg.sizes.indexOf(this.config.size);
+			index = (index + 1) >= this.asg.sizes.length ? 0 : ++index;
+			this.config.size = this.asg.sizes[index];
+			this.asg.log('toggle image size:', [this.config.size, index]);
 
 		}
 
@@ -289,7 +289,7 @@ module ASG {
 	var app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component("asgModal", {
-		controller: ["asgService", "Fullscreen", ASG.ModalController],
+		controller: ["asgService", "Fullscreen", "$scope", ASG.ModalController],
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
 			id: "@",

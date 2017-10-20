@@ -11,8 +11,7 @@ module ASG {
 		transition? : string;
 		title? : string;
 		subtitle? : string;
-		wide? : boolean;
-		enlarge? : boolean;
+		size? : string;
 		keycodes? : {
 			exit? : Array<number>;
 			playpause? : Array<number>;
@@ -24,8 +23,7 @@ module ASG {
 			menu? : Array<number>;
 			caption? : Array<number>;
 			help? : Array<number>;
-			wide? : Array<number>;
-			enlarge? : Array<number>;
+			size? : Array<number>;
 			transition? : Array<number>;
 		}
 	}
@@ -50,14 +48,13 @@ module ASG {
 	export interface IOptionsImage {
 
 		transition? : string;
+		size? : string;
 		height? : number;
 		heightMin? : number;
 		heightAuto? : {
 			initial? : boolean,
 			onresize? : boolean
 		};
-		wide? : boolean;
-		enlarge? : boolean;
 
 	}
 
@@ -161,6 +158,8 @@ module ASG {
 
 		downloadLink() : string;
 
+		log(event : string, data? : any) : void;
+
 		modalVisible : boolean;
 		panelVisible : boolean;
 		modalAvailable : boolean;
@@ -170,6 +169,7 @@ module ASG {
 		items : Array<IFile>;
 		selected : number;
 		file : IFile;
+		sizes : Array<string>;
 
 	}
 
@@ -218,8 +218,7 @@ module ASG {
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
 				transition: 'slideLR', // transition effect
-				wide: false, // enable/disable wide image display mode
-				enlarge: false, // enable/disable enlarge image (not working with wide)
+				size: 'cover', // contain, cover, auto, stretch
 				keycodes: {
 					exit: [27], // ESC
 					playpause: [80], // p
@@ -231,8 +230,7 @@ module ASG {
 					menu: [77], // m
 					caption: [67], // c
 					help: [72], // h
-					wide: [87], // w
-					enlarge: [69], // e
+					size: [83], // s
 					transition: [84] // t
 				}
 			},
@@ -245,8 +243,7 @@ module ASG {
 			},
 			image: {
 				transition: 'slideLR', // transition effect
-				wide: false, // enable/disable wide image display mode
-				enlarge: false, // enable/disable enlarge image (not working with wide)
+				size: 'cover', // contain, cover, auto, stretch
 				height: 0, // height
 				heightMin: 0, // min height
 				heightAuto: {
@@ -255,6 +252,14 @@ module ASG {
 				}
 			}
 		};
+
+		// available image sizes
+		public sizes : Array<string> = [
+			'contain',
+			'cover',
+			'auto',
+			'stretch'
+		];
 
 		// available themes
 		public themes : Array<string> = [
@@ -335,7 +340,14 @@ module ASG {
 		public getInstance(component : any) {
 
 			if (!component.id) {
-				component.id = Math.random().toString(36).substring(7);
+
+				// get parent asg component id
+				if (component.$scope && component.$scope.$parent && component.$scope.$parent.$parent && component.$scope.$parent.$parent.$ctrl) {
+					component.id = component.$scope.$parent.$parent.$ctrl.id;
+				} else {
+					component.id = Math.random().toString(36).substring(7);
+				}
+
 			}
 
 			const id = component.id;
@@ -763,7 +775,7 @@ module ASG {
 		}
 
 		// toggle element visible
-		public toggle(element : string){
+		public toggle(element : string) {
 
 			this.options[element].visible = !this.options[element].visible;
 
@@ -859,7 +871,7 @@ module ASG {
 		}
 
 
-		private log(event : string, data? : any) {
+		public log(event : string, data? : any) {
 
 			if (this.options.debug) {
 				console.log('ASG | ' + this.id + ' : ' + event, data ? data : null);
