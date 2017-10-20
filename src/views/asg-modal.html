@@ -91,6 +91,10 @@
                     {{ $ctrl.config.size }}
                 </button>
 
+				<button class="btn btn-default btn-sm hidden-xs btn-transitions" data-ng-click="$ctrl.nextTransition()">
+                    {{ $ctrl.config.transition }}
+                </button>
+
                 <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleFullScreen()">
                     <span class="glyphicon glyphicon-fullscreen"></span>
                 </button>

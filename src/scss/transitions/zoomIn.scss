@@ -1,4 +1,4 @@
-&.zoomInOut {
+&.zoomIn {
 
   &.forward .img {
 
@@ -23,7 +23,7 @@
 
     &.ng-hide-remove {
       opacity: 0;
-      transform: scale($scaleIn);
+      transform: scale($scaleOut);
     }
 
   }
@@ -36,7 +36,7 @@
 
     &.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      transform: scale($scaleIn);
+      transform: scale($scaleOut);
     }
 
     &.ng-hide-add {

@@ -292,7 +292,7 @@ module ASG {
 		controller: ["asgService", "Fullscreen", "$scope", ASG.ModalController],
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
-			id: "@",
+			id: "@?",
 			items: '=?',
 			options: '=?',
 			selected: '=?',

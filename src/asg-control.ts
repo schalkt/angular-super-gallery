@@ -73,7 +73,7 @@ module ASG {
 		controller: ["asgService", "$scope", ASG.ControlController],
 		template: '<div class="asg-control {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
-			id: "@",
+			id: "@?",
 			selected: '=?',
 			template: "@?"
 		}

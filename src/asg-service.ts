@@ -272,6 +272,8 @@ module ASG {
 		public transitions : Array<string> = [
 			'no',
 			'fadeInOut',
+			'zoomIn',
+			'zoomOut',
 			'zoomInOut',
 			'rotateLR',
 			'rotateTB',

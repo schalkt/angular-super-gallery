@@ -174,6 +174,8 @@ image: {
 ### Transitions
 - no
 - fadeInOut
+- zoomIn
+- zoomOut
 - zoomInOut
 - rotateLR
 - rotateTB

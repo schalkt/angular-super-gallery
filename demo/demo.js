@@ -96,7 +96,7 @@ demo.controller('DemoController', function () {
 				initial: true,
 				onresize: true,
 			},
-			transition: 'fadeInOut'
+			transition: 'zoomInOut'
 		}
 	};
 

@@ -32,7 +32,7 @@ module ASG {
 		template: '<div class="asg-info {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		transclude: true,
 		bindings: {
-			id: "@",
+			id: "@?",
 			template: "@?"
 		}
 	});
