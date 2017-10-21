@@ -170,6 +170,17 @@ module ASG {
 		selected : number;
 		file : IFile;
 		sizes : Array<string>;
+		events : {
+			CONFIG_LOAD : string;
+			AUTOPLAY_START : string;
+			AUTOPLAY_STOP : string;
+			PARSE_IMAGES : string;
+			LOAD_IMAGE : string;
+			FIRST_IMAGE : string;
+			CHANGE_IMAGE : string;
+			MODAL_OPEN : string;
+			MODAL_CLOSE : string;
+		};
 
 	}
 
@@ -187,9 +198,11 @@ module ASG {
 		private _selected : number;
 		private _visible : boolean = false;
 		private autoplay : angular.IPromise<any>;
+		private first : boolean = false;
 
 		public options : IOptions = null;
 		public optionsLoaded : boolean = false;
+
 
 		public defaults : IOptions = {
 			debug: false, // image load and autoplay info in console.log
@@ -284,6 +297,18 @@ module ASG {
 			'flipY'
 		];
 
+		public events = {
+			CONFIG_LOAD: 'ASG-config-load-',
+			AUTOPLAY_START: 'ASG-autoplay-start-',
+			AUTOPLAY_STOP: 'ASG-autoplay-stop-',
+			PARSE_IMAGES: 'ASG-parse-images-',
+			LOAD_IMAGE: 'ASG-load-image-',
+			FIRST_IMAGE: 'ASG-first-image-',
+			CHANGE_IMAGE: 'ASG-change-image-',
+			MODAL_OPEN: 'ASG-modal-open-',
+			MODAL_CLOSE: 'ASG-modal-close-',
+		};
+
 		constructor(private timeout : ng.ITimeoutService,
 					private interval : ng.IIntervalService,
 					private location : ng.ILocationService,
@@ -338,6 +363,22 @@ module ASG {
 
 		}
 
+		// calculate object hash id
+		public objectHashId(object : any) : string {
+
+			let string = JSON.stringify(object);
+			let abc = string.replace(/[^a-zA-Z0-9]+/g, '');
+			let code = 0;
+
+			for (var i = 0, n = abc.length; i < n; i++) {
+				var charcode = abc.charCodeAt(i);
+				code += (charcode * i);
+			}
+
+			return code.toString(21);
+
+		}
+
 		// get service instance for current gallery by component id
 		public getInstance(component : any) {
 
@@ -347,7 +388,7 @@ module ASG {
 				if (component.$scope && component.$scope.$parent && component.$scope.$parent.$parent && component.$scope.$parent.$parent.$ctrl) {
 					component.id = component.$scope.$parent.$parent.$ctrl.id;
 				} else {
-					component.id = Math.random().toString(36).substring(7);
+					component.id = this.objectHashId(component.options);
 				}
 
 			}
@@ -429,7 +470,7 @@ module ASG {
 			// important!
 			options = this.options;
 
-			this.log('config', this.options);
+			this.event(this.events.CONFIG_LOAD, this.options);
 
 			return this.options;
 
@@ -437,6 +478,12 @@ module ASG {
 
 		// set selected image
 		public set selected(v : number) {
+
+			v = this.normalize(v);
+
+			if (v !== this._selected) {
+				this.event(this.events.CHANGE_IMAGE, {index: v, file: this.file});
+			}
 
 			this._selected = v;
 			this.preload();
@@ -455,7 +502,7 @@ module ASG {
 
 			this.autoPlayStop();
 			this.direction = index > this.selected ? 'forward' : 'backward';
-			this.selected = this.normalize(index);
+			this.selected = index;
 
 		}
 
@@ -469,7 +516,7 @@ module ASG {
 
 			stop && this.autoPlayStop();
 			this.direction = 'backward';
-			this.selected = this.normalize(--this.selected);
+			this.selected--;
 			this.loadImage(this.selected - 1);
 			this.setHash();
 			this.setFocus();
@@ -485,7 +532,7 @@ module ASG {
 
 			stop && this.autoPlayStop();
 			this.direction = 'forward';
-			this.selected = this.normalize(++this.selected);
+			this.selected++;
 			this.loadImage(this.selected + 1);
 			this.setHash();
 			this.setFocus();
@@ -533,21 +580,29 @@ module ASG {
 
 		public autoPlayStop() {
 
-			if (this.autoplay) {
-				this.interval.cancel(this.autoplay);
-				this.options.autoplay.enabled = false;
+			if (!this.autoplay) {
+				return;
 			}
+
+			this.interval.cancel(this.autoplay);
+			this.options.autoplay.enabled = false;
+			this.autoplay = null;
+			this.event(this.events.AUTOPLAY_STOP, {index: this.selected, file: this.file});
 
 		}
 
 		public autoPlayStart() {
 
-			this.options.autoplay.enabled = true;
+			if (this.autoplay) {
+				return;
+			}
 
+			this.options.autoplay.enabled = true;
 			this.autoplay = this.interval(() => {
 				this.toForward();
-				this.log('autoplay', {index: this.selected, file: this.file});
 			}, this.options.autoplay.delay);
+
+			this.event(this.events.AUTOPLAY_START, {index: this.selected, file: this.file});
 
 		}
 
@@ -628,7 +683,7 @@ module ASG {
 
 			});
 
-			this.log('images', this.files);
+			this.event(this.events.PARSE_IMAGES, this.files);
 
 		}
 
@@ -733,6 +788,10 @@ module ASG {
 		// after load image
 		private afterLoad(index, type, image) {
 
+			if (this.files[index].loaded[type] === true) {
+				return;
+			}
+
 			this.files[index].loaded[type] = true;
 
 			if (type == 'modal') {
@@ -743,10 +802,14 @@ module ASG {
 				this.files[index].download = this.files[index].source.modal;
 			}
 
-			var data = {index: index, file: this.file, img: image};
-			var eventName = ['asg-load', type, this.id].join('-');
-			this.$rootScope.$emit(eventName, data);
-			this.log('load source: ' + type, data);
+			let data = {type: type, index: index, file: this.file, img: image};
+
+			if (!this.first) {
+				this.first = true;
+				this.event(this.events.FIRST_IMAGE, data)
+			}
+
+			this.event(this.events.LOAD_IMAGE, data);
 
 		}
 
@@ -862,6 +925,7 @@ module ASG {
 			this.selected = index ? index : this.selected;
 			this.modalVisible = true;
 			this.setHash();
+			this.event(this.events.MODAL_OPEN, {index: this.selected});
 
 		}
 
@@ -869,14 +933,23 @@ module ASG {
 
 			this.location.hash('');
 			this.modalVisible = false;
+			this.event(this.events.MODAL_CLOSE, {index: this.selected});
 
 		}
 
 
+		private event(event : string, data? : any) {
+
+			event = event + this.id;
+			this.$rootScope.$emit(event, data);
+			this.log(event, data);
+
+		}
+
 		public log(event : string, data? : any) {
 
 			if (this.options.debug) {
-				console.log('ASG | ' + this.id + ' : ' + event, data ? data : null);
+				console.log(event, data ? data : null);
 			}
 
 		}

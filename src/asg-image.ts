@@ -35,7 +35,7 @@ module ASG {
 			this.asg = this.service.getInstance(this);
 
 			// set image component height
-			this.$rootScope.$on('asg-load-image-' + this.id, (event, data) => {
+			this.$rootScope.$on(this.asg.events.FIRST_IMAGE + this.id, (event, data) => {
 
 				if (!this.config.height && this.config.heightAuto.initial === true) {
 					this.setHeight(data.img);

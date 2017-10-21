@@ -33,7 +33,7 @@ demo.controller('DemoController', function () {
 		},
 		image: {
 			height: 320,
-			transition: 'slideLR',
+			transition: 'slideTB',
 		},
 	};
 

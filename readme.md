@@ -201,6 +201,18 @@ image: {
 - h : toggle help
 
 
+### Events
+- CONFIG_LOAD: `ASG-config-load-[gallery id]`,
+- AUTOPLAY_START: `ASG-autoplay-start-[gallery id]`,
+- AUTOPLAY_STOP: `ASG-autoplay-stop-[gallery id]`,
+- PARSE_IMAGES: `ASG-parse-images-[gallery id]`,
+- FIRST_IMAGE: `ASG-first-image-[gallery id]`,
+- LOAD_IMAGE: `ASG-load-image-[gallery id]`,
+- CHANGE_IMAGE: `ASG-change-image-[gallery id]`,
+- MODAL_OPEN: `ASG-modal-open-[gallery id]`,
+- MODAL_CLOSE: `ASG-modal-close-[gallery id]`,
+
+
 ### Build
 - `npm install`
 - `typings install`
@@ -210,10 +222,11 @@ image: {
 
 
 ### Todo
+- events (init, first image loaded, change image, modal open/close, etc.)
 - panel custom template for thumbnails
 - load images from API endpoint
+- options and info menu in modal
 - thumbnails (panel component) on modal
-- events (init, first image loaded, change image, modal open/close, etc.)
 - exit button must be visible on modal when menubar hidden
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
