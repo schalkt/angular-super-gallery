@@ -58,6 +58,7 @@ $primary: #30c6d4;
 
       }
     }
+
   }
 
   .caption {
@@ -69,9 +70,69 @@ $primary: #30c6d4;
 
 }
 
+.asg-control.darkblue {
+
+  .btn {
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 0;
+  }
+
+  .btn-default {
+    border: 1px solid $primary;
+    color: $primary;
+    background-color: transparent;
+  }
+
+  .btn-default:focus, .btn-default:hover {
+    border: 1px solid $primary;
+    outline: none;
+    color: $black;
+    background-color: $primary;
+  }
+
+  background-color: $black;
+
+}
+
 .asg-image.darkblue {
 
   background-color: $black;
+  color: $primary;
+
+  .asg-info {
+
+    top: -100px;
+    bottom: auto;
+    font-size: 12px;
+    background-color: rgba($black, 0);
+    transition: all 0.25s;
+
+    a {
+      color: $primary;
+      border-bottom: 1px dashed $primary;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+        border-bottom: 1px solid $primary;
+      }
+
+    }
+
+  }
+
+  &:hover .asg-info {
+    background-color: rgba($black, 0.77);
+    top: 0;
+  }
+
+}
+
+.asg-info.darkblue {
+
+  background-color: $black;
+  color: $primary;
 
 }
 

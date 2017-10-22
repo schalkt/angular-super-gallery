@@ -5,14 +5,14 @@
 		<li>LEFT : backward</li>
 		<li>UP / HOME : first</li>
 		<li>DOWN / END : last</li>
+		<li>ENTER : toggle fullscreen</li>
 		<li>ESC : exit</li>
-		<li>P : play/pause</li>
-		<li>F / ENTER : toggle fullscreen</li>
-		<li>T : change transition effect</li>
-		<li>M : toggle menu</li>
-		<li>W : toggle wide screen</li>
-		<li>C : toggle caption</li>
-		<li>H : toggle help</li>
+		<li>p : play/pause</li>
+		<li>t : change transition effect</li>
+		<li>m : toggle menu</li>
+		<li>s : toggle image size</li>
+		<li>c : toggle caption</li>
+		<li>h : toggle help</li>
 	</ul>
 </script>
 
@@ -87,8 +87,12 @@
                     <span data-ng-if="!$ctrl.config.menu" class="glyphicon glyphicon-chevron-down"></span>
                 </button>
 
-			 	<button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleWide()">
-                    <span class="glyphicon glyphicon-resize-horizontal"></span>
+			 	<button class="btn btn-default btn-sm btn-size" data-ng-click="$ctrl.toggleSize()">
+                    {{ $ctrl.config.size }}
+                </button>
+
+				<button class="btn btn-default btn-sm hidden-xs btn-transitions" data-ng-click="$ctrl.nextTransition()">
+                    {{ $ctrl.config.transition }}
                 </button>
 
                 <button class="btn btn-default btn-sm" data-ng-click="$ctrl.toggleFullScreen()">
@@ -99,7 +103,7 @@
                     <span class="glyphicon glyphicon-question-sign"></span>
                 </button>
 
-                <button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.modalClose()">
+                <button class="btn btn-default btn-sm" data-ng-click="$ctrl.close()">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
 
@@ -122,9 +126,9 @@
 			 data-ng-show="$ctrl.asg.selected == key"
 			 data-ng-class="{'loading' : !file.loaded.modal}">
 
-			<img class="source"
-				 data-ng-class="{ wide : $ctrl.config.wide }"
-				 data-ng-src="{{ file.source.modal }}" data-ng-if="file.loaded.modal"/>
+			<div class="source {{ $ctrl.config.size }}"
+				 data-ng-style="{'background-image': 'url(' + file.source.modal + ')'}"
+				 data-ng-if="file.loaded.modal"></div>
 
 		</div>
 

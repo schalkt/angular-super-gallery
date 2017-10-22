@@ -22,9 +22,20 @@
     bottom: 0;
     left: 0;
     right: 0;
+    background-size: auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 
-    &.wide {
-      max-height: none;
+    &.cover {
+      background-size: cover;
+    }
+
+    &.contain {
+      background-size: contain;
+    }
+
+    &.stretch {
+      background-size: 100% 100%;
     }
 
   }
@@ -43,6 +54,8 @@ $scaleOut: 0.86;
 @import 'transitions/slideLR';
 @import 'transitions/slideTB';
 @import 'transitions/fadeInOut';
+@import 'transitions/zoomIn';
+@import 'transitions/zoomOut';
 @import 'transitions/zoomInOut';
 @import 'transitions/flipX';
 @import 'transitions/flipY';

@@ -1,6 +1,7 @@
 .asg-image {
 
   position: relative;
+  overflow: hidden;
 
   .images {
 
@@ -13,16 +14,45 @@
     overflow: hidden;
     perspective: $perspective;
 
+    .source {
+      cursor: pointer;
+      background-size: auto;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+
+      &.cover {
+        background-size: cover;
+      }
+
+      &.contain {
+        background-size: contain;
+      }
+
+      &.stretch {
+        background-size: 100% 100%;
+      }
+
+    }
+
     @import "asg-transitions";
 
   }
 
-  img {
-    cursor: pointer;
-  }
-
   &.nomodal img {
     cursor: inherit;
+  }
+
+  .asg-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .asg-control {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
 }

@@ -1,13 +1,11 @@
 namespace ASG {
 
-	export class PanelController {
+	export class ControlController {
 
 		public id : string;
-		public options : IOptions;
-		public items : Array<IFile>;
-
-		private type = 'panel';
+		private type = 'control';
 		private asg : IServiceController;
+		private template = 'views/asg-control.html';
 
 		constructor(private service : IServiceController,
 					private $scope : ng.IScope) {
@@ -19,17 +17,26 @@ namespace ASG {
 			// get service instance
 			this.asg = this.service.getInstance(this);
 
+			this.$scope.forward = () => {
+				this.asg.toForward(true);
+			};
+
+			this.$scope.backward = () => {
+				this.asg.toBackward(true);
+			};
+
 		}
 
-		// get panel config
-		public get config() : IOptionsPanel {
+
+		// get image config
+		public get config() : IOptionsImage {
 
 			return this.asg.options[this.type];
 
 		}
 
-		// set panel config
-		public set config(value : IOptionsPanel) {
+		// set image config
+		public set config(value : IOptionsImage) {
 
 			this.asg.options[this.type] = value;
 
@@ -57,19 +64,18 @@ namespace ASG {
 
 		}
 
+
 	}
 
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.component('asgPanel', {
-		controller: ['asgService', '$scope', ASG.PanelController],
-		templateUrl: 'views/asg-panel.html',
+	app.component('asgControl', {
+		controller: ['asgService', '$scope', ASG.ControlController],
+		template: '<div class="asg-control {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
-			id: '@',
-			items: '=?',
-			options: '=?',
+			id: '@?',
 			selected: '=?',
-			visible: '=?'
+			template: '@?'
 		}
 	});
 

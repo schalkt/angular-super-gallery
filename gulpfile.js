@@ -10,8 +10,9 @@ var gulp         = require('gulp'),
 	uglify       = require('gulp-uglify'),
 	sourcemaps   = require('gulp-sourcemaps'),
 	runSequence  = require('run-sequence'),
-	merge2       = require('merge2'),
-	gzip         = require('gulp-gzip');
+	gzip         = require('gulp-gzip'),
+	tslint       = require('gulp-tslint'),
+	gutil        = require('gulp-util');
 
 
 var DIST = "dist";
@@ -25,6 +26,29 @@ var nanoOptions = {
 		removeAll: true
 	}
 };
+
+var banner = ['/**',
+	' * <%= pkg.name %> - <%= pkg.description %>',
+	' * ',
+	' * @version v<%= pkg.version %>',
+	' * @link <%= pkg.homepage %>',
+	' * @license <%= pkg.license %>',
+	' */',
+	''].join('\n');
+
+gulp.task("tslint", function () {
+
+	return gulp.src([
+		SRC + "/**/*.ts",
+	])
+		.pipe(tslint({
+			formatter: "prose"
+		}))
+		.pipe(tslint.report({
+			summarizeFailureOutput: true
+		}));
+
+});
 
 gulp.task("ts", function () {
 
@@ -56,17 +80,7 @@ gulp.task("js", ['ts', 'views'], function () {
 
 	var filename = "angular-super-gallery.js";
 	var header = require('gulp-header');
-
-
 	var package = require('./package.json');
-	var banner = ['/**',
-		' * <%= pkg.name %> - <%= pkg.description %>',
-		' * ',
-		' * @version v<%= pkg.version %>',
-		' * @link <%= pkg.homepage %>',
-		' * @license <%= pkg.license %>',
-		' */',
-		''].join('\n');
 
 	return gulp.src([
 		TEMP + "/*.js"
@@ -87,13 +101,19 @@ gulp.task("js", ['ts', 'views'], function () {
 gulp.task("js-min", function () {
 
 	var filename = "angular-super-gallery.js";
+	var header = require('gulp-header');
+	var package = require('./package.json');
 
 	return gulp.src([
 		DIST + "/" + filename,
 	])
 		.pipe(concat(filename))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(uglify({preserveComments: 'license'}))
+		.pipe(uglify().on('error', function (err) {
+			gutil.log(gutil.colors.red('[Error]'), err.toString());
+			this.emit('end');
+		}))
+		.pipe(header(banner, {pkg: package}))
 		.pipe(gulp.dest(DIST))
 		.pipe(debug())
 		.pipe(gzip({append: true}))
