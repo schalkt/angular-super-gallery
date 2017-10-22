@@ -20,13 +20,14 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 
 ### Features
-- separated angular components (image, modal, panel, info and controls)
-- responsive and highly configurable
+- separated Angular components (image, modal, panel, info and controls)
+- highly configurable
 - image display mode (cover, contain, auto, stretch)
 - multiple image sizes / thumbnail (for panel) , medium (for image), original (for modal)
-- 3 built-in themes
-- 9 image transitions (CSS3 3D)
+- responsive and 3 built-in themes
+- 11 image transitions (CSS3 3D)
 - configurable keyboard shortcuts in modal window ([keyCodes](https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes))
+- events (config load, image load, modal open/close, autoplay start/stop, etc.)
 - touch support (swipe)
 
 
@@ -42,6 +43,10 @@ angular.module("App", ['angularSuperGallery']);
 
 ### Quick usage in HTML
 ```
+
+<link href="/node_modules/angular-super-gallery/dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
+<script src="/node_modules/angular-super-gallery/dist/angular-super-gallery.js"></script>
+
 <asg-image 
        data-options='{"baseUrl" : "https://wallpaperscraft.com/image/"}'
        data-items='[
@@ -67,7 +72,6 @@ this.nature1Options = {
         }
     },
     modal: {
-        wide: true,
         transition: 'zoomInOut'
     },
     panel: {
@@ -222,7 +226,6 @@ image: {
 
 
 ### Todo
-- events (init, first image loaded, change image, modal open/close, etc.)
 - panel custom template for thumbnails
 - load images from API endpoint
 - options and info menu in modal
