@@ -1,4 +1,4 @@
-module ASG {
+namespace ASG {
 
 	export class ImageController {
 
@@ -6,7 +6,7 @@ module ASG {
 		public options : IOptions;
 		public items : Array<IFile>;
 
-		private type : string = 'image';
+		private type = 'image';
 		private asg : IServiceController;
 
 		constructor(private service : IServiceController,
@@ -16,7 +16,7 @@ module ASG {
 					private $scope : ng.IScope) {
 
 			angular.element($window).bind('resize', (event) => {
-				this.onResize()
+				this.onResize();
 			});
 
 		}
@@ -48,8 +48,8 @@ module ASG {
 		// set image component height
 		private setHeight(img) {
 
-			var width = this.$element.children('div').width();
-			var ratio = img.width / img.height;
+			let width = this.$element.children('div').width();
+			let ratio = img.width / img.height;
 			this.config.height = width / ratio;
 
 		}
@@ -100,14 +100,14 @@ module ASG {
 
 	}
 
-	var app : ng.IModule = angular.module('angularSuperGallery');
+	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.component("asgImage", {
-		controller: ["asgService", "$rootScope", "$element", "$window", "$scope", ASG.ImageController],
+	app.component('asgImage', {
+		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', ASG.ImageController],
 		templateUrl: 'views/asg-image.html',
 		transclude: true,
 		bindings: {
-			id: "@?",
+			id: '@?',
 			items: '=?',
 			options: '=?',
 			selected: '=?'

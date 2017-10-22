@@ -1,4 +1,4 @@
-module ASG {
+namespace ASG {
 
 	export class PanelController {
 
@@ -6,7 +6,7 @@ module ASG {
 		public options : IOptions;
 		public items : Array<IFile>;
 
-		private type : string = 'panel';
+		private type = 'panel';
 		private asg : IServiceController;
 
 		constructor(private service : IServiceController,
@@ -59,13 +59,13 @@ module ASG {
 
 	}
 
-	var app : ng.IModule = angular.module('angularSuperGallery');
+	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.component("asgPanel", {
-		controller: ["asgService", "$scope", ASG.PanelController],
+	app.component('asgPanel', {
+		controller: ['asgService', '$scope', ASG.PanelController],
 		templateUrl: 'views/asg-panel.html',
 		bindings: {
-			id: "@",
+			id: '@',
 			items: '=?',
 			options: '=?',
 			selected: '=?',

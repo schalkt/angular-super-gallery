@@ -1,11 +1,11 @@
-module ASG {
+namespace ASG {
 
 	export class InfoController {
 
 		public id : string;
-		private type : string = 'info';
+		private type = 'info';
 		private asg : IServiceController;
-		private template : string = 'views/asg-info.html';
+		private template = 'views/asg-info.html';
 
 		constructor(private service : IServiceController,
 					private $scope : ng.IScope) {
@@ -25,15 +25,15 @@ module ASG {
 
 	}
 
-	var app : ng.IModule = angular.module('angularSuperGallery');
+	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.component("asgInfo", {
-		controller: ["asgService", "$scope", ASG.InfoController],
+	app.component('asgInfo', {
+		controller: ['asgService', '$scope', ASG.InfoController],
 		template: '<div class="asg-info {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		transclude: true,
 		bindings: {
-			id: "@?",
-			template: "@?"
+			id: '@?',
+			template: '@?'
 		}
 	});
 

@@ -10,7 +10,8 @@ var gulp         = require('gulp'),
 	uglify       = require('gulp-uglify'),
 	sourcemaps   = require('gulp-sourcemaps'),
 	runSequence  = require('run-sequence'),
-	gzip         = require('gulp-gzip');
+	gzip         = require('gulp-gzip'),
+	tslint       = require('gulp-tslint');
 
 
 var DIST = "dist";
@@ -24,6 +25,21 @@ var nanoOptions = {
 		removeAll: true
 	}
 };
+
+
+gulp.task("tslint", function () {
+
+	return gulp.src([
+		SRC + "/**/*.ts",
+	])
+		.pipe(tslint({
+			formatter: "prose"
+		}))
+		.pipe(tslint.report({
+			summarizeFailureOutput: true
+		}));
+
+});
 
 gulp.task("ts", function () {
 

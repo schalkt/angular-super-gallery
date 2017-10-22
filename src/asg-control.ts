@@ -1,11 +1,11 @@
-module ASG {
+namespace ASG {
 
 	export class ControlController {
 
 		public id : string;
-		private type : string = 'control';
+		private type = 'control';
 		private asg : IServiceController;
-		private template : string = 'views/asg-control.html';
+		private template = 'views/asg-control.html';
 
 		constructor(private service : IServiceController,
 					private $scope : ng.IScope) {
@@ -19,11 +19,11 @@ module ASG {
 
 			this.$scope.forward = () => {
 				this.asg.toForward(true);
-			}
+			};
 
 			this.$scope.backward = () => {
 				this.asg.toBackward(true);
-			}
+			};
 
 		}
 
@@ -67,17 +67,16 @@ module ASG {
 
 	}
 
-	var app : ng.IModule = angular.module('angularSuperGallery');
+	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.component("asgControl", {
-		controller: ["asgService", "$scope", ASG.ControlController],
+	app.component('asgControl', {
+		controller: ['asgService', '$scope', ASG.ControlController],
 		template: '<div class="asg-control {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
-			id: "@?",
+			id: '@?',
 			selected: '=?',
-			template: "@?"
+			template: '@?'
 		}
 	});
-
 
 }

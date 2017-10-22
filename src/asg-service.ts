@@ -1,6 +1,6 @@
 ///<reference path="./../typings/index.d.ts" />
 
-module ASG {
+namespace ASG {
 
 	// modal component options
 	export interface IOptionsModal {
@@ -25,7 +25,7 @@ module ASG {
 			help? : Array<number>;
 			size? : Array<number>;
 			transition? : Array<number>;
-		}
+		};
 	}
 
 	// panel component options
@@ -35,7 +35,7 @@ module ASG {
 		item? : {
 			class? : string;
 			caption : boolean;
-		},
+		};
 
 	}
 
@@ -61,7 +61,7 @@ module ASG {
 	// gallery options
 	export interface IOptions {
 
-		debug? : boolean,
+		debug? : boolean;
 		baseUrl? : string;
 		fields? : {
 			source? : {
@@ -72,11 +72,11 @@ module ASG {
 			title? : string;
 			description? : string;
 			thumbnail? : string;
-		},
+		};
 		autoplay? : {
 			enabled? : boolean;
 			delay? : number;
-		},
+		};
 		theme? : string;
 		preloadDelay? : number;
 		preload? : Array<number>;
@@ -103,7 +103,6 @@ module ASG {
 		name? : string;
 		extension? : string;
 		description? : string;
-		//thumbnail? : string;
 		download? : string;
 		loaded? : {
 			modal? : boolean;
@@ -118,7 +117,29 @@ module ASG {
 	// service controller interface
 	export interface IServiceController {
 
-		getInstance(component : any) : IServiceController,
+		modalVisible : boolean;
+		panelVisible : boolean;
+		modalAvailable : boolean;
+		transitions : Array<string>;
+		themes : Array<string>;
+		options : IOptions;
+		items : Array<IFile>;
+		selected : number;
+		file : IFile;
+		sizes : Array<string>;
+		events : {
+			CONFIG_LOAD : string;
+			AUTOPLAY_START : string;
+			AUTOPLAY_STOP : string;
+			PARSE_IMAGES : string;
+			LOAD_IMAGE : string;
+			FIRST_IMAGE : string;
+			CHANGE_IMAGE : string;
+			MODAL_OPEN : string;
+			MODAL_CLOSE : string;
+		};
+
+		getInstance(component : any) : IServiceController;
 
 		setDefaults() : void;
 
@@ -152,70 +173,47 @@ module ASG {
 
 		toggle(element : string) : void;
 
-		el(selector) : any;
-
 		setHash() : void;
 
 		downloadLink() : string;
 
 		log(event : string, data? : any) : void;
 
-		modalVisible : boolean;
-		panelVisible : boolean;
-		modalAvailable : boolean;
-		transitions : Array<string>;
-		themes : Array<string>;
-		options : IOptions;
-		items : Array<IFile>;
-		selected : number;
-		file : IFile;
-		sizes : Array<string>;
-		events : {
-			CONFIG_LOAD : string;
-			AUTOPLAY_START : string;
-			AUTOPLAY_STOP : string;
-			PARSE_IMAGES : string;
-			LOAD_IMAGE : string;
-			FIRST_IMAGE : string;
-			CHANGE_IMAGE : string;
-			MODAL_OPEN : string;
-			MODAL_CLOSE : string;
-		};
 
 	}
 
 	// service controller
 	export class ServiceController {
 
-		public slug : string = 'asg';
+		public slug = 'asg';
 		public id : string;
 		public items : any;
 		public files : Array<IFile> = [];
 		public direction : string;
-		public modalAvailable : boolean = false;
+		public modalAvailable = false;
 
 		private instances : {} = {};
 		private _selected : number;
-		private _visible : boolean = false;
+		private _visible = false;
 		private autoplay : angular.IPromise<any>;
-		private first : boolean = false;
+		private first = false;
 
 		public options : IOptions = null;
-		public optionsLoaded : boolean = false;
+		public optionsLoaded = false;
 
 
 		public defaults : IOptions = {
 			debug: false, // image load and autoplay info in console.log
-			baseUrl: "", // url prefix
+			baseUrl: '', // url prefix
 			fields: {
 				source: {
-					modal: "url", // required, image url for modal component (large size)
-					panel: "url", // image url for panel component (thumbnail size)
-					image: "url" // image url for image (medium size)
+					modal: 'url', // required, image url for modal component (large size)
+					panel: 'url', // image url for panel component (thumbnail size)
+					image: 'url' // image url for image (medium size)
 				},
-				title: "title", // title input field name
-				description: "description", // description input field name
-				thumbnail: "thumbnail" // thumbnail input field name
+				title: 'title', // title input field name
+				description: 'description', // description input field name
+				thumbnail: 'thumbnail' // thumbnail input field name
 			},
 			autoplay: {
 				enabled: false, // slideshow play enabled/disabled
@@ -225,21 +223,21 @@ module ASG {
 			preloadDelay: 770,
 			preload: [], // preload images by index number
 			modal: {
-				title: "", // modal window title
-				subtitle: "", // modal window subtitle
+				title: '', // modal window title
+				subtitle: '', // modal window subtitle
 				caption: true, // show/hide image caption
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
 				keycodes: {
-					exit: [27], // ESC
+					exit: [27], // esc
 					playpause: [80], // p
-					forward: [32, 39], // SPACE, RIGHT ARROW
-					backward: [37], // LEFT ARROW
-					first: [38, 36], // UP ARROW, HOME
-					last: [40, 35], // DOWN ARROW, END
-					fullscreen: [13], // ENTER
+					forward: [32, 39], // space, right arrow
+					backward: [37], // left arrow
+					first: [38, 36], // up arrow, home
+					last: [40, 35], // down arrow, end
+					fullscreen: [13], // enter
 					menu: [77], // m
 					caption: [67], // c
 					help: [72], // h
@@ -316,20 +314,14 @@ module ASG {
 
 		}
 
-		public $onInit() {
-
-
-		}
-
-
 		private parseHash() {
 
 			if (!this.id) {
 				return;
 			}
 
-			var hash = this.location.hash();
-			var parts = hash ? hash.split('-') : null;
+			let hash = this.location.hash();
+			let parts = hash ? hash.split('-') : null;
 
 			if (parts === null) {
 				return;
@@ -347,7 +339,7 @@ module ASG {
 				return;
 			}
 
-			var index = parseInt(parts[2], 10);
+			let index = parseInt(parts[2], 10);
 
 			if (!angular.isNumber(index)) {
 				return;
@@ -370,8 +362,8 @@ module ASG {
 			let abc = string.replace(/[^a-zA-Z0-9]+/g, '');
 			let code = 0;
 
-			for (var i = 0, n = abc.length; i < n; i++) {
-				var charcode = abc.charCodeAt(i);
+			for (let i = 0, n = abc.length; i < n; i++) {
+				let charcode = abc.charCodeAt(i);
 				code += (charcode * i);
 			}
 
@@ -397,7 +389,7 @@ module ASG {
 			let instance = this.instances[id];
 
 			// new instance and set options and items
-			if (instance == undefined) {
+			if (instance === undefined) {
 				instance = new ServiceController(this.timeout, this.interval, this.location, this.$rootScope);
 				instance.id = id;
 			}
@@ -438,7 +430,7 @@ module ASG {
 			if (angular.isString(items[0]) === true) {
 
 				this.items = [];
-				for (var i = 0; i < items.length; i++) {
+				for (let i = 0; i < items.length; i++) {
 					this.items.push({source: {modal: items[i]}});
 				}
 
@@ -514,7 +506,10 @@ module ASG {
 				$event.stopPropagation();
 			}
 
-			stop && this.autoPlayStop();
+			if (stop) {
+				this.autoPlayStop();
+			}
+
 			this.direction = 'backward';
 			this.selected--;
 			this.loadImage(this.selected - 1);
@@ -530,7 +525,10 @@ module ASG {
 				$event.stopPropagation();
 			}
 
-			stop && this.autoPlayStop();
+			if (stop) {
+				this.autoPlayStop();
+			}
+
 			this.direction = 'forward';
 			this.selected++;
 			this.loadImage(this.selected + 1);
@@ -542,7 +540,10 @@ module ASG {
 		// go to first
 		public toFirst(stop? : boolean) {
 
-			stop && this.autoPlayStop();
+			if (stop) {
+				this.autoPlayStop();
+			}
+
 			this.direction = 'backward';
 			this.selected = 0;
 			this.setHash();
@@ -552,7 +553,10 @@ module ASG {
 		// go to last
 		public toLast(stop? : boolean) {
 
-			stop && this.autoPlayStop();
+			if (stop) {
+				this.autoPlayStop();
+			}
+
 			this.direction = 'forward';
 			this.selected = this.items.length - 1;
 			this.setHash();
@@ -611,21 +615,21 @@ module ASG {
 
 			const self = this;
 
-			var getAvailableSource = function (type : string, source : ISource) {
+			let getAvailableSource = function (type : string, source : ISource) {
 
 				if (source[type]) {
 					return source[type];
 				}
 
-				if (type == 'panel') {
+				if (type === 'panel') {
 					return getAvailableSource('image', source);
 				}
 
-				if (type == 'image') {
+				if (type === 'image') {
 					return getAvailableSource('modal', source);
 				}
 
-				if (type == 'modal') {
+				if (type === 'modal') {
 					return getAvailableSource('image', source);
 				}
 
@@ -656,13 +660,13 @@ module ASG {
 
 				let title, description;
 
-				if (self.options.fields != undefined) {
+				if (self.options.fields !== undefined) {
 					title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
 				} else {
 					title = filename;
 				}
 
-				if (self.options.fields != undefined) {
+				if (self.options.fields !== undefined) {
 					description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
 				} else {
 					description = null;
@@ -702,13 +706,13 @@ module ASG {
 
 			this.timeout(() => {
 				this.loadImage(this.selected + 1);
-			}, (wait != undefined) ? wait : this.options.preloadDelay);
+			}, (wait !== undefined) ? wait : this.options.preloadDelay);
 
 		}
 
 		public normalize(index : number) {
 
-			var last = this.files.length - 1;
+			let last = this.files.length - 1;
 
 			if (index > last) {
 				return (index - last) - 1;
@@ -729,7 +733,8 @@ module ASG {
 				return;
 			}
 
-			var self = this;
+			let self = this;
+
 			indexes.forEach((index : number) => {
 				self.loadImage(index);
 			});
@@ -747,18 +752,18 @@ module ASG {
 				return;
 			}
 
-			if (this.files[index].loaded['modal']) {
+			if (this.files[index].loaded.modal) {
 				return;
 			}
 
-			var image = new Image();
-			image.src = this.files[index].source['image'];
+			let image = new Image();
+			image.src = this.files[index].source.image;
 			image.addEventListener('load', () => {
 				this.afterLoad(index, 'image', image);
 			});
 
-			var modal = new Image();
-			modal.src = this.files[index].source['modal'];
+			let modal = new Image();
+			modal.src = this.files[index].source.modal;
 			modal.addEventListener('load', (event) => {
 				this.afterLoad(index, 'modal', modal);
 			});
@@ -769,8 +774,8 @@ module ASG {
 		private getFilename(index : number, type? : string) {
 
 			type = type ? type : 'modal';
-			var fileparts = this.files[index].source[type].split('/');
-			var filename = fileparts[fileparts.length - 1];
+			let fileparts = this.files[index].source[type].split('/');
+			let filename = fileparts[fileparts.length - 1];
 			return filename;
 
 		}
@@ -779,8 +784,8 @@ module ASG {
 		private getExtension(index : number, type? : string) {
 
 			type = type ? type : 'modal';
-			var fileparts = this.files[index].source[type].split('.');
-			var extension = fileparts[fileparts.length - 1];
+			let fileparts = this.files[index].source[type].split('.');
+			let extension = fileparts[fileparts.length - 1];
 			return extension;
 
 		}
@@ -794,7 +799,7 @@ module ASG {
 
 			this.files[index].loaded[type] = true;
 
-			if (type == 'modal') {
+			if (type === 'modal') {
 				this.files[index].width = image.width;
 				this.files[index].height = image.height;
 				this.files[index].name = this.getFilename(index, type);
@@ -806,7 +811,7 @@ module ASG {
 
 			if (!this.first) {
 				this.first = true;
-				this.event(this.events.FIRST_IMAGE, data)
+				this.event(this.events.FIRST_IMAGE, data);
 			}
 
 			this.event(this.events.LOAD_IMAGE, data);
@@ -825,7 +830,7 @@ module ASG {
 		// get the download link
 		public downloadLink() {
 
-			if (this.selected != undefined && this.files.length > 0) {
+			if (this.selected !== undefined && this.files.length > 0) {
 				return this.files[this.selected].source.modal;
 			}
 
@@ -893,20 +898,24 @@ module ASG {
 		// initialize the gallery
 		private modalInit() {
 
-			var self = this;
+			let self = this;
 
 			this.timeout(() => {
 
 				// submenu click events
-				var element = '.gallery-modal.' + self.id + ' li.dropdown-submenu';
+				let element = '.gallery-modal.' + self.id + ' li.dropdown-submenu';
+
 				this.el(element).off().on('click', function (event) {
+
 					event.stopPropagation();
+
 					if (this.el(this).hasClass('open')) {
 						this.el(this).removeClass('open');
 					} else {
 						this.el(element).removeClass('open');
 						this.el(this).addClass('open');
 					}
+
 				});
 
 				self.setFocus();
@@ -954,7 +963,7 @@ module ASG {
 
 		}
 
-		public el(selector) : any {
+		private el(selector) : any {
 
 			return angular.element(selector);
 
@@ -963,9 +972,9 @@ module ASG {
 
 	}
 
-	var app : ng.IModule = angular.module('angularSuperGallery');
+	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.service('asgService', ["$timeout", "$interval", "$location", "$rootScope", ServiceController]);
+	app.service('asgService', ['$timeout', '$interval', '$location', '$rootScope', ServiceController]);
 
 }
 

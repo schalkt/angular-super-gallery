@@ -1,4 +1,4 @@
-module ASG {
+namespace ASG {
 
 	export class ModalController {
 
@@ -6,9 +6,9 @@ module ASG {
 		public options : IOptions;
 		public items : Array<IFile>;
 
-		private type : string = 'modal';
+		private type = 'modal';
 		private asg : IServiceController;
-		private arrowsVisible : boolean = false;
+		private arrowsVisible = false;
 
 		constructor(private service : IServiceController,
 					private fullscreen,
@@ -32,7 +32,7 @@ module ASG {
 				return;
 			}
 
-			var ngClass = [];
+			let ngClass = [];
 
 			if (!this.config.menu) {
 				ngClass.push('nomenu');
@@ -47,18 +47,18 @@ module ASG {
 		// get action from keycodes
 		private getActionByKeyCode(keyCode : number) {
 
-			var keys = Object.keys(this.config.keycodes);
-			var action;
+			let keys = Object.keys(this.config.keycodes);
+			let action;
 
-			for (var key in keys) {
+			for (let key in keys) {
 
-				var codes = this.config.keycodes[keys[key]];
+				let codes = this.config.keycodes[keys[key]];
 
 				if (!codes) {
 					continue;
 				}
 
-				var index = codes.indexOf(keyCode);
+				let index = codes.indexOf(keyCode);
 
 				if (index > -1) {
 					action = keys[key];
@@ -66,13 +66,13 @@ module ASG {
 				}
 
 			}
-			
+
 			return action;
 
 		}
 
 
-		public close(){
+		public close() {
 
 			this.asg.modalClose();
 			this.fullscreen.cancel();
@@ -82,7 +82,7 @@ module ASG {
 		// do keyboard action
 		public keyUp(e : KeyboardEvent) {
 
-			var action : string = this.getActionByKeyCode(e.keyCode);
+			let action : string = this.getActionByKeyCode(e.keyCode);
 
 			switch (action) {
 
@@ -134,6 +134,10 @@ module ASG {
 					this.nextTransition();
 					break;
 
+				default:
+					console.warn('unknown keyboard action');
+					break;
+
 			}
 
 		}
@@ -142,8 +146,8 @@ module ASG {
 		// switch to next transition effect
 		private nextTransition() {
 
-			var idx = this.asg.transitions.indexOf(this.config.transition) + 1;
-			var next = idx >= this.asg.transitions.length ? 0 : idx;
+			let idx = this.asg.transitions.indexOf(this.config.transition) + 1;
+			let next = idx >= this.asg.transitions.length ? 0 : idx;
 			this.config.transition = this.asg.transitions[next];
 
 		}
@@ -157,6 +161,7 @@ module ASG {
 			} else {
 				this.fullscreen.all();
 			}
+
 			this.asg.setFocus();
 
 		}
@@ -202,7 +207,7 @@ module ASG {
 		// toggle size
 		private toggleSize() {
 
-			var index = this.asg.sizes.indexOf(this.config.size);
+			let index = this.asg.sizes.indexOf(this.config.size);
 			index = (index + 1) >= this.asg.sizes.length ? 0 : ++index;
 			this.config.size = this.asg.sizes[index];
 			this.asg.log('toggle image size:', [this.config.size, index]);
@@ -286,17 +291,17 @@ module ASG {
 	}
 
 
-	var app : ng.IModule = angular.module('angularSuperGallery');
+	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.component("asgModal", {
-		controller: ["asgService", "Fullscreen", "$scope", ASG.ModalController],
+	app.component('asgModal', {
+		controller: ['asgService', 'Fullscreen', '$scope', ASG.ModalController],
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
-			id: "@?",
+			id: '@?',
 			items: '=?',
 			options: '=?',
 			selected: '=?',
-			visible: "=?"
+			visible: '=?'
 		}
 	});
 
