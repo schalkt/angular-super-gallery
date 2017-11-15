@@ -2,7 +2,11 @@
   "name": "angular-super-gallery",
   "version": "1.0.1",
   "description": "AngularJS Super Gallery",
-  "homepage": "https://github.com/schalkt/angular-super-gallery",
+  "homepage": "http://schalk.hu/projects/angular-super-gallery/demo/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schalkt/angular-super-gallery.git"
+  },
   "keywords": [
     "angular",
     "image",
@@ -46,11 +50,11 @@
     "typings": "^2.1.1"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
     "angular": "1.6.*",
     "angular-animate": "1.6.*",
-    "angular-fullscreen": "git+https://github.com/fabiobiondi/angular-fullscreen.git",
     "angular-touch": "1.6.*",
-    "bootstrap": "3.3.*"
+    "bootstrap": "3.3.*",
+    "jquery": "^3.2.1",
+    "screenfull": "^3.3.2"
   }
 }

@@ -12,10 +12,10 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 ### Requirements
 - [jQuery](https://github.com/jquery/jquery/tree/3.2.1) ^3.2.1
-- [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.4
-- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.4
-- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.4
-- [angular-fullscreen](https://github.com/fabiobiondi/angular-fullscreen) 1.0.1 
+- [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.6
+- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.6
+- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.6
+- [screenfull](https://www.npmjs.com/package/screenfull) 3.3.2
 - [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.7
 
 

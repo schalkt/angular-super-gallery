@@ -2,7 +2,7 @@
 
 namespace ASG {
 
-	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'FBAngular', 'ngTouch']);
+	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'ngTouch']);
 
 	app.filter('asgBytes', () => {
 		return function (bytes : any, precision : number) : string {
