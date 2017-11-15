@@ -1,4 +1,4 @@
-namespace ASG {
+namespace angularSuperGallery {
 
 	export class InfoController {
 
@@ -28,7 +28,7 @@ namespace ASG {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgInfo', {
-		controller: ['asgService', '$scope', ASG.InfoController],
+		controller: ['asgService', '$scope', angularSuperGallery.InfoController],
 		template: '<div class="asg-info {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		transclude: true,
 		bindings: {

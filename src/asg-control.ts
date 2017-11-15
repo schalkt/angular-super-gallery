@@ -1,4 +1,4 @@
-namespace ASG {
+namespace angularSuperGallery {
 
 	export class ControlController {
 
@@ -70,7 +70,7 @@ namespace ASG {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgControl', {
-		controller: ['asgService', '$scope', ASG.ControlController],
+		controller: ['asgService', '$scope', angularSuperGallery.ControlController],
 		template: '<div class="asg-control {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@?',

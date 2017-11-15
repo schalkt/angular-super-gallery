@@ -1,6 +1,6 @@
 ///<reference path="./../typings/index.d.ts" />
 
-namespace ASG {
+namespace angularSuperGallery {
 
 	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'ngTouch']);
 

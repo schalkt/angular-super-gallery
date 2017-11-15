@@ -1,6 +1,6 @@
 ///<reference path="./../typings/index.d.ts" />
 
-namespace ASG {
+namespace angularSuperGallery {
 
 	// modal component options
 	export interface IOptionsModal {

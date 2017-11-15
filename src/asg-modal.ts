@@ -1,7 +1,7 @@
 
 var screenfull;
 
-namespace ASG {
+namespace angularSuperGallery {
 
 	export class ModalController {
 
@@ -291,7 +291,7 @@ namespace ASG {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgModal', {
-		controller: ['asgService', '$scope', ASG.ModalController],
+		controller: ['asgService', '$scope', angularSuperGallery.ModalController],
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
 			id: '@?',

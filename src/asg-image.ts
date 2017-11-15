@@ -1,4 +1,4 @@
-namespace ASG {
+namespace angularSuperGallery {
 
 	export class ImageController {
 
@@ -103,7 +103,7 @@ namespace ASG {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgImage', {
-		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', ASG.ImageController],
+		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', angularSuperGallery.ImageController],
 		templateUrl: 'views/asg-image.html',
 		transclude: true,
 		bindings: {
