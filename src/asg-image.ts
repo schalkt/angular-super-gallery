@@ -48,7 +48,7 @@ namespace angularSuperGallery {
 		// set image component height
 		private setHeight(img) {
 
-			let width = this.$element.children('div').width();
+			let width = this.$element.children('div')[0].clientWidth;
 			let ratio = img.width / img.height;
 			this.config.height = width / ratio;
 

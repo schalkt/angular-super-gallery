@@ -255,8 +255,8 @@ namespace angularSuperGallery {
 			image: {
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
-				height: 0, // height
-				heightMin: 0, // min height
+				height: null, // height
+				heightMin: null, // min height
 				heightAuto: {
 					initial: true,
 					onresize: false
