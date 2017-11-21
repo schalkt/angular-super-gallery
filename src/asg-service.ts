@@ -1,6 +1,6 @@
 ///<reference path="./../typings/index.d.ts" />
 
-namespace ASG {
+namespace angularSuperGallery {
 
 	// modal component options
 	export interface IOptionsModal {
@@ -255,8 +255,8 @@ namespace ASG {
 			image: {
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
-				height: 0, // height
-				heightMin: 0, // min height
+				height: null, // height
+				heightMin: null, // min height
 				heightAuto: {
 					initial: true,
 					onresize: false

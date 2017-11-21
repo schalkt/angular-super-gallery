@@ -1,4 +1,4 @@
-namespace ASG {
+namespace angularSuperGallery {
 
 	export class ImageController {
 
@@ -48,7 +48,7 @@ namespace ASG {
 		// set image component height
 		private setHeight(img) {
 
-			let width = this.$element.children('div').width();
+			let width = this.$element.children('div')[0].clientWidth;
 			let ratio = img.width / img.height;
 			this.config.height = width / ratio;
 
@@ -103,7 +103,7 @@ namespace ASG {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgImage', {
-		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', ASG.ImageController],
+		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', angularSuperGallery.ImageController],
 		templateUrl: 'views/asg-image.html',
 		transclude: true,
 		bindings: {

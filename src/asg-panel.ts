@@ -1,4 +1,4 @@
-namespace ASG {
+namespace angularSuperGallery {
 
 	export class PanelController {
 
@@ -62,7 +62,7 @@ namespace ASG {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgPanel', {
-		controller: ['asgService', '$scope', ASG.PanelController],
+		controller: ['asgService', '$scope', angularSuperGallery.PanelController],
 		templateUrl: 'views/asg-panel.html',
 		bindings: {
 			id: '@',

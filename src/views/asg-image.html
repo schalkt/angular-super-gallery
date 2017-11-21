@@ -1,6 +1,6 @@
 <div class="asg-image {{ $ctrl.asg.theme }}"
 	 data-ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
-	 data-ng-style="{'min-height' : $ctrl.config.heightMin, 'height' : $ctrl.height}">
+	 data-ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
 		 data-ng-swipe-left="$ctrl.asg.toForward(true)"

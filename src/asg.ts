@@ -1,8 +1,8 @@
 ///<reference path="./../typings/index.d.ts" />
 
-namespace ASG {
+namespace angularSuperGallery {
 
-	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'FBAngular', 'ngTouch']);
+	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'ngTouch']);
 
 	app.filter('asgBytes', () => {
 		return function (bytes : any, precision : number) : string {
