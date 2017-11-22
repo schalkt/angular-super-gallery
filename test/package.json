@@ -1,0 +1,19 @@
+{
+	"name": "test",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"angular-super-gallery": "https://github.com/schalkt/angular-super-gallery#develop"
+	},
+	"devDependencies": {
+		"webpack": "^3.8.1",
+		"i": "^0.3.6",
+		"npm": "^5.5.1",
+		"webpack-css-loaders": "^1.0.0"
+	},
+	"scripts": {
+		"build": "webpack -p",
+		"watch": "webpack --watch"
+	}
+}
