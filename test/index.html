@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Example Angular Super Gallery</title>
+	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="./bundle.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+
+			<!-- ASG BEGIN -->
+			<asg-image data-options='{
+								debug: true,
+			 					theme: "darkblue",
+			 					baseUrl: "https://wallpaperscraft.com/image/",
+			 					autoplay: { enabled: true, delay: 2000 },
+								image: { transition: "zoomInOut" },
+								modal: { transition: "zoomInOut" }
+							}'
+					   data-items="['lamborghini_miura_side_view_105726_1920x1080.jpg','honda_nsx_movement_side_view_111399_1920x1080.jpg']">
+				<asg-modal></asg-modal>
+			</asg-image>
+			<!-- ASG END -->
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

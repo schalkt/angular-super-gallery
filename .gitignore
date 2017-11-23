@@ -2,4 +2,7 @@
 temp
 typings
 node_modules
-bower_components
+test/node_modules
+test/fonts
+test/bundle.js
+test/yarn*
