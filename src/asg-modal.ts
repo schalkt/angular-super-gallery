@@ -1,6 +1,3 @@
-
-var screenfull;
-
 namespace angularSuperGallery {
 
 	export class ModalController {
@@ -14,6 +11,7 @@ namespace angularSuperGallery {
 		private arrowsVisible = false;
 
 		constructor(private service : IServiceController,
+					private $window : ng.IWindowService,
 					private $scope : ng.IScope) {
 
 		}
@@ -77,7 +75,7 @@ namespace angularSuperGallery {
 		public close() {
 
 			this.asg.modalClose();
-			screenfull.exit();
+			this.$window.screenfull.exit();
 
 		}
 
@@ -158,7 +156,7 @@ namespace angularSuperGallery {
 		// toggle fullscreen
 		private toggleFullScreen() {
 
-			screenfull.toggle();
+			this.$window.screenfull.toggle();
 			this.asg.setFocus();
 
 		}
@@ -291,7 +289,7 @@ namespace angularSuperGallery {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgModal', {
-		controller: ['asgService', '$scope', angularSuperGallery.ModalController],
+		controller: ['asgService', '$window', '$scope', angularSuperGallery.ModalController],
 		templateUrl: 'views/asg-modal.html',
 		bindings: {
 			id: '@?',
