@@ -72,10 +72,52 @@ namespace angularSuperGallery {
 		}
 
 
-		public close() {
+		public close($event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			this.asg.modalClose();
 			this.$window.screenfull.exit();
+
+		}
+
+		public setFocus($event? : UIEvent) {
+
+			this.asg.modalClick($event);
+
+		}
+
+		public autoPlayToggle($event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.asg.autoPlayToggle();
+
+		}
+
+		public toFirst(stop? : boolean, $event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.asg.toFirst();
+
+		}
+
+		public toBackward(stop? : boolean, $event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.asg.toBackward(stop);
+
+		}
+
+		public toForward(stop? : boolean, $event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.asg.toForward(stop);
+
+		}
+
+		public toLast(stop? : boolean, $event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.asg.toLast(stop);
 
 		}
 
@@ -144,8 +186,9 @@ namespace angularSuperGallery {
 
 
 		// switch to next transition effect
-		private nextTransition() {
+		private nextTransition($event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			let idx = this.asg.transitions.indexOf(this.config.transition) + 1;
 			let next = idx >= this.asg.transitions.length ? 0 : idx;
 			this.config.transition = this.asg.transitions[next];
@@ -154,26 +197,26 @@ namespace angularSuperGallery {
 
 
 		// toggle fullscreen
-		private toggleFullScreen() {
+		private toggleFullScreen($event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			this.$window.screenfull.toggle();
-			this.asg.setFocus();
 
 		}
 
 		// set transition effect
-		public setTransition(transition) {
+		public setTransition(transition, $event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			this.config.transition = transition;
-			this.asg.setFocus();
 
 		}
 
 		// set theme
-		public setTheme(theme : string) {
+		public setTheme(theme : string, $event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			this.asg.options.theme = theme;
-			this.asg.setFocus();
 
 		}
 
@@ -192,16 +235,17 @@ namespace angularSuperGallery {
 		}
 
 		// toggle help
-		private toggleHelp() {
+		private toggleHelp($event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			this.config.help = !this.config.help;
-			this.asg.setFocus();
 
 		}
 
 		// toggle size
-		private toggleSize() {
+		private toggleSize($event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			let index = this.asg.sizes.indexOf(this.config.size);
 			index = (index + 1) >= this.asg.sizes.length ? 0 : ++index;
 			this.config.size = this.asg.sizes[index];
@@ -210,8 +254,9 @@ namespace angularSuperGallery {
 		}
 
 		// toggle menu
-		private toggleMenu() {
+		private toggleMenu($event? : UIEvent) {
 
+			this.asg.modalClick($event);
 			this.config.menu = !this.config.menu;
 
 		}
@@ -222,6 +267,7 @@ namespace angularSuperGallery {
 			this.config.caption = !this.config.caption;
 
 		}
+
 
 		// get modal visible
 		public get visible() {
@@ -242,7 +288,6 @@ namespace angularSuperGallery {
 			}
 
 			this.asg.modalVisible = value;
-			console.log('modal set visible', this.asg, this);
 			this.asg.setHash();
 
 		}

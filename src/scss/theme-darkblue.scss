@@ -5,6 +5,10 @@ $primary: #30c6d4;
 
 .asg-modal.darkblue {
 
+  .frame {
+    margin: 2%;
+  }
+
   .btn {
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
@@ -34,16 +38,11 @@ $primary: #30c6d4;
     background-color: $black;
     color: $primary;
     .title {
-      margin: 9px 10px 2px 12px;
+      text-transform: uppercase;
     }
     .subtitle {
-      margin: 6px 10px 2px 2px;
-      padding: 7px 16px 6px 16px;
       background: $primary;
       color: $black;
-    }
-    .buttons {
-      margin: 6px 4px 4px 14px;
     }
   }
 

@@ -157,6 +157,8 @@ namespace angularSuperGallery {
 
 		modalClose() : void;
 
+		modalClick($event? : UIEvent) : void;
+
 		toBackward(stop? : boolean) : void;
 
 		toForward(stop? : boolean) : void;
@@ -176,6 +178,8 @@ namespace angularSuperGallery {
 		setHash() : void;
 
 		downloadLink() : string;
+
+		el(selector) : any;
 
 		log(event : string, data? : any) : void;
 
@@ -500,11 +504,7 @@ namespace angularSuperGallery {
 
 
 		// go to backward
-		public toBackward(stop? : boolean, $event? : UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
-			}
+		public toBackward(stop? : boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -514,16 +514,11 @@ namespace angularSuperGallery {
 			this.selected--;
 			this.loadImage(this.selected - 1);
 			this.setHash();
-			this.setFocus();
 
 		}
 
 		// go to forward
-		public toForward(stop? : boolean, $event? : UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
-			}
+		public toForward(stop? : boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -533,7 +528,6 @@ namespace angularSuperGallery {
 			this.selected++;
 			this.loadImage(this.selected + 1);
 			this.setHash();
-			this.setFocus();
 
 		}
 
@@ -887,14 +881,6 @@ namespace angularSuperGallery {
 
 		}
 
-		// set the focus
-		public setFocus() {
-
-			this.el('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
-
-		}
-
-
 		// initialize the gallery
 		private modalInit() {
 
@@ -909,11 +895,11 @@ namespace angularSuperGallery {
 
 					event.stopPropagation();
 
-					if (this.el(this).hasClass('open')) {
-						this.el(this).removeClass('open');
+					if (this.el(element).hasClass('open')) {
+						this.el(element).removeClass('open');
 					} else {
 						this.el(element).removeClass('open');
-						this.el(this).addClass('open');
+						this.el(element).addClass('open');
 					}
 
 				});
@@ -935,6 +921,7 @@ namespace angularSuperGallery {
 			this.modalVisible = true;
 			this.setHash();
 			this.event(this.events.MODAL_OPEN, {index: this.selected});
+			this.setFocus();
 
 		}
 
@@ -946,6 +933,24 @@ namespace angularSuperGallery {
 
 		}
 
+		public modalClick($event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			this.setFocus();
+
+		}
+
+		// set the focus
+		public setFocus() {
+
+			if (this.modalVisible) {
+				this.el('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
+			}
+
+		}
 
 		private event(event : string, data? : any) {
 
@@ -963,7 +968,7 @@ namespace angularSuperGallery {
 
 		}
 
-		private el(selector) : any {
+		public el(selector) : any {
 
 			return angular.element(selector);
 

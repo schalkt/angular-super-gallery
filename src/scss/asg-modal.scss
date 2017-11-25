@@ -1,14 +1,29 @@
 .asg-modal {
 
   z-index: 99999;
+  line-height: inherit;
   position: fixed;
-  top: 0px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 0;
   outline: none;
   opacity: 1;
+  background-color: rgba(255, 255, 255, 0.77);
+
+  .frame {
+    z-index: 7700;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    box-shadow: 0px 0px 10px #141414;
+    background-color: #141414;
+  }
 
   .btn-size {
     width: 64px;
@@ -43,8 +58,7 @@
 
     .title {
       display: inline-block;
-      margin: 7px 10px 2px 12px;
-      text-transform: uppercase;
+      margin: 7px 10px 4px 12px;
       float: left;
       font-size: 1.2em;
     }
@@ -99,7 +113,7 @@
   .images {
 
     position: absolute;
-    top: 42px;
+    top: 37px;
     right: 0px;
     bottom: 0px;
     left: 0px;
