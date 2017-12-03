@@ -13,6 +13,10 @@ demo.controller('DemoController', function () {
 			}
 		},
 		theme: 'darkblue',
+		thumbnail: {
+			height: 42,
+			index: true
+		},
 		modal: {
 			caption: false,
 			title: "Angular Super Gallery Demo",
@@ -22,18 +26,22 @@ demo.controller('DemoController', function () {
 				playpause: [80, 75],
 				forward: [32, 39, 76],
 				backward: [37, 74],
-			}
+			},
+			thumbnail: {
+				height: 77,
+				index: true,
+				above: true
+			},
 		},
 		panel: {
 			item: {
-				class: "thumbnail-custom",
-				title: false,
-				index: true
+				class: "custom",
+				title: false
 			},
 		},
 		image: {
 			height: 320,
-			transition: 'slideTB',
+			transition: 'slideLR',
 		},
 	};
 
@@ -69,8 +77,15 @@ demo.controller('DemoController', function () {
 		"link": "wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_1920x1080.jpg",
 		"thumbnail": "i1.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_300x168.jpg",
 		"medium": "i1.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_602x339.jpg",
+	}, {
+		"link": "wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_300x168.jpg",
+		"medium": "i1.wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_602x339.jpg",
+	}, {
+		"link": "wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_300x168.jpg",
+		"medium": "i1.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_602x339.jpg",
 	}];
-
 
 	this.options2 = {
 		debug: true,
@@ -83,12 +98,21 @@ demo.controller('DemoController', function () {
 		modal: {
 			menu: false,
 			transition: 'zoomInOut',
+			caption: {
+				position: 'bottom'
+			},
+			thumbnail: {
+				height: 90,
+				index: false,
+				above: false
+			},
 		},
 		panel: {
 			visible: false,
 			item: {
 				class: "col-md-4 thumbnail",
-				caption: true
+				caption: true,
+				index: true
 			},
 		},
 		image: {
@@ -102,12 +126,20 @@ demo.controller('DemoController', function () {
 
 	this.files2 = [{
 		"source": {
+			"modal": "https://wallpaperscraft.com/image/jessica_alba_girl_actress_107513_1920x1080.jpg",
+			"panel": "https://i2.wallpaperscraft.com/image/jessica_alba_girl_actress_107513_300x168.jpg",
+			"image": "https://i2.wallpaperscraft.com/image/jessica_alba_girl_actress_107513_602x339.jpg",
+		},
+		"title": "Jessica Alba",
+		"description": "Jessica Marie Alba (born April 28, 1981) is an American actress and businesswoman.",
+	}, {
+		"source": {
 			"modal": "https://wallpaperscraft.com/image/miranda_kerr_smile_celebrity_brunette_24761_1920x1080.jpg",
 			"panel": "https://i2.wallpaperscraft.com/image/miranda_kerr_smile_celebrity_brunette_24761_300x168.jpg",
 			"image": "https://i2.wallpaperscraft.com/image/miranda_kerr_smile_celebrity_brunette_24761_602x339.jpg",
 		},
 		"title": "Miranda Kerr",
-		"description": "Miranda May Kerr (born 20 April 1983) is an Australian model."
+		"description": "Miranda May Kerr (born 20 April, 1983) is an Australian model."
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_1920x1080.jpg",
@@ -115,7 +147,7 @@ demo.controller('DemoController', function () {
 			"image": "https://i2.wallpaperscraft.com/image/emma_stone_face_red_hair_person_look_69999_602x339.jpg",
 		},
 		"title": "Emma Stone",
-		"description": "Emily Jean Stone (born November 6, 1988) is an American actress.",
+		"description": "Emily Jean Stone (born 6 November, 1988) is an American actress.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_1920x1080.jpg",
@@ -123,7 +155,7 @@ demo.controller('DemoController', function () {
 			"image": "https://i2.wallpaperscraft.com/image/amanda_seyfried_blonde_dress_28910_602x339.jpg",
 		},
 		"title": "Amanda Seyfried",
-		"description": "Amanda Michelle Seyfried (born December 3, 1985) is an American actress and singer-songwriter.",
+		"description": "Amanda Michelle Seyfried (born 3 December, 1985) is an American actress and singer-songwriter.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_1920x1080.jpg",
@@ -131,7 +163,7 @@ demo.controller('DemoController', function () {
 			"image": "https://i2.wallpaperscraft.com/image/alizee_singer_face_hairstyle_sweet_750_602x339.jpg",
 		},
 		"title": "Alizee",
-		"description": "Alizée Jacotey (born 21 August 1984) is a French singer, dancer and voice actress.",
+		"description": "Alizée Jacotey (born 21 August, 1984) is a French singer, dancer and voice actress.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_1920x1080.jpg",
@@ -139,7 +171,7 @@ demo.controller('DemoController', function () {
 			"image": "https://i2.wallpaperscraft.com/image/selena_gomez_girl_smile_hat_hair_13141_602x339.jpg",
 		},
 		"title": "Selena Gomez",
-		"description": "Selena Marie Gomez (born July 22, 1992) is an American singer and actress.",
+		"description": "Selena Marie Gomez (born 22 July, 1992) is an American singer and actress.",
 	}, {
 		"source": {
 			"modal": "https://wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_1920x1080.jpg",
@@ -147,7 +179,7 @@ demo.controller('DemoController', function () {
 			"image": "https://i2.wallpaperscraft.com/image/margot_robbie_actress_celebrity_sweater_103421_602x339.jpg",
 		},
 		"title": "Margot Robbie",
-		"description": "Margot Elise Robbie (born 2 July 1990) is an Australian actress and producer.",
+		"description": "Margot Elise Robbie (born 2 July, 1990) is an Australian actress and producer.",
 	}];
 
 });

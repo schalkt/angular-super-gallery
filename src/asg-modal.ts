@@ -177,7 +177,7 @@ namespace angularSuperGallery {
 					break;
 
 				default:
-					console.warn('unknown keyboard action');
+					this.asg.log('unknown keyboard action: ' + e.keyCode);
 					break;
 
 			}
@@ -201,6 +201,14 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.$window.screenfull.toggle();
+
+		}
+
+		// toggle thumbnails
+		private toggleThumbnails($event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.config.thumbnail.visible = !this.config.thumbnail.visible;
 
 		}
 
@@ -264,10 +272,23 @@ namespace angularSuperGallery {
 		// toggle caption
 		private toggleCaption() {
 
-			this.config.caption = !this.config.caption;
+			this.config.caption.visible = !this.config.caption.visible;
 
 		}
 
+		// get margint top
+		public get marginTop() {
+
+			return this.config.marginTop;
+
+		}
+
+		// get margin bottom
+		public get marginBottom() {
+
+			return this.config.marginBottom;
+
+		}
 
 		// get modal visible
 		public get visible() {
@@ -336,6 +357,7 @@ namespace angularSuperGallery {
 	app.component('asgModal', {
 		controller: ['asgService', '$window', '$scope', angularSuperGallery.ModalController],
 		templateUrl: 'views/asg-modal.html',
+		transclude: true,
 		bindings: {
 			id: '@?',
 			items: '=?',

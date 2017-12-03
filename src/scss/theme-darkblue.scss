@@ -3,10 +3,82 @@ $white: #fefefe;
 $white_darken: darken($white, 14%);
 $primary: #30c6d4;
 
+.asg-thumbnail.darkblue {
+
+  background-color: $black;
+  padding: 4px 0px 0px 0px;
+
+  .item {
+
+    margin: 0px 4px 0px 0px;
+    opacity: 0.64;
+
+    &.selected {
+      opacity: 1;
+    }
+
+    img {
+      height: 42px;
+    }
+
+    &:hover, &.selected {
+      .index {
+        opacity: 1;
+        right: 0px;
+      }
+    }
+
+    .index {
+      background-color: rgba($black, 0.64);
+      color: $primary;
+      top: 0px;
+      right: -10px;
+      bottom: 0px;
+      opacity: 0;
+    }
+
+    background-color: $black;
+
+  }
+}
+
+.asg-image.darkblue {
+
+  background-color: $black;
+  color: $primary;
+
+  .asg-info {
+
+    top: -100px;
+    bottom: auto;
+    font-size: 12px;
+    background-color: rgba($black, 0);
+    transition: all 0.25s;
+
+    a {
+      color: $primary;
+      border-bottom: 1px dashed $primary;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+        border-bottom: 1px solid $primary;
+      }
+
+    }
+
+  }
+
+  &:hover .asg-info {
+    background-color: rgba($black, 0.77);
+    top: 0;
+  }
+}
+
 .asg-modal.darkblue {
 
   .frame {
-    margin: 2%;
+    margin: 0;
   }
 
   .btn {
@@ -67,6 +139,24 @@ $primary: #30c6d4;
     }
   }
 
+  .asg-thumbnail {
+
+    bottom: -20px;
+    opacity: 0;
+    background-color: rgba($black, 0.77);
+
+    &:hover {
+      bottom: 0px;
+      opacity: 1;
+    }
+
+    .item {
+      img {
+        height: 77px;
+      }
+    }
+  }
+
 }
 
 .asg-control.darkblue {
@@ -91,40 +181,6 @@ $primary: #30c6d4;
   }
 
   background-color: $black;
-
-}
-
-.asg-image.darkblue {
-
-  background-color: $black;
-  color: $primary;
-
-  .asg-info {
-
-    top: -100px;
-    bottom: auto;
-    font-size: 12px;
-    background-color: rgba($black, 0);
-    transition: all 0.25s;
-
-    a {
-      color: $primary;
-      border-bottom: 1px dashed $primary;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: none;
-        border-bottom: 1px solid $primary;
-      }
-
-    }
-
-  }
-
-  &:hover .asg-info {
-    background-color: rgba($black, 0.77);
-    top: 0;
-  }
 
 }
 

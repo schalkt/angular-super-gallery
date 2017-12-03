@@ -3,6 +3,59 @@ $white: #f1f1f1;
 $white_darken: darken($white, 14%);
 $primary: #d4c386;
 
+.asg-thumbnail.whitegold {
+
+  background-color: #d4c386;
+  padding: 4px;
+
+  .item {
+
+    margin: 0px 4px 0px 0px;
+    opacity: 0.64;
+
+    &.selected {
+      opacity: 1;
+    }
+
+    &:hover, &.selected {
+      .index {
+        opacity: 1;
+        right: 0px;
+      }
+    }
+
+    .index {
+      background-color: rgba($black, 0.64);
+      color: $primary;
+      top: 0px;
+      right: -10px;
+      bottom: 0px;
+      opacity: 0;
+    }
+
+    background-color: $black;
+
+  }
+}
+
+.asg-image.whitegold {
+
+  background-color: $primary;
+  color: $white;
+
+  .asg-info {
+
+    background-color: rgba($black, 0.5);
+    color: darken($white, 5%);
+
+    a {
+      color: darken($white, 5%);
+    }
+
+  }
+
+}
+
 .asg-modal.whitegold {
 
   .btn {
@@ -47,7 +100,6 @@ $primary: #d4c386;
   }
 
   .images {
-    top: 38px;
     .img {
       .source {
       }
@@ -101,24 +153,6 @@ $primary: #d4c386;
     &:hover {
       text-decoration: none;
       border-bottom: 1px solid $primary;
-    }
-
-  }
-
-}
-
-.asg-image.whitegold {
-
-  background-color: $primary;
-  color: $white;
-
-  .asg-info {
-
-    background-color: rgba($black, 0.5);
-    color: darken($white, 5%);
-
-    a {
-      color: darken($white, 5%);
     }
 
   }

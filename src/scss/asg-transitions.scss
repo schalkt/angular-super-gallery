@@ -42,12 +42,6 @@
 
 }
 
-$animspeed: 0.77s;
-$animsize: 14%;
-$rotate: 32deg;
-$scaleIn: 1.14;
-$scaleOut: 0.86;
-
 @import 'transitions/rotateLR';
 @import 'transitions/rotateTB';
 @import 'transitions/rotateZY';

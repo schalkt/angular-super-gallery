@@ -1,17 +1,17 @@
-<button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()">
-	<span data-ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
-	<span data-ng-if="$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-stop"></span>
+<button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.autoPlayToggle()">
+	<span ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
+	<span ng-if="$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-stop"></span>
 </button>
 
-<button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm " data-ng-click="$ctrl.asg.toFirst(true)">
+<button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm " ng-click="$ctrl.asg.toFirst(true)">
 	{{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
 </button>
 
-<button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.toBackward(true)">
+<button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toBackward(true)">
 	<span class="glyphicon glyphicon-chevron-left"></span>
 </button>
 
-<button data-ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.toForward(true)">
+<button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toForward(true)">
 	<span class="glyphicon glyphicon-chevron-right"></span>
 </button>
 
