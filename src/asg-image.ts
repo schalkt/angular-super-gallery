@@ -41,7 +41,7 @@ namespace angularSuperGallery {
 					this.setHeight(data.img);
 				}
 
-				this.asg.thumbnailsMove(50);
+				this.asg.thumbnailsMove(200);
 
 			});
 

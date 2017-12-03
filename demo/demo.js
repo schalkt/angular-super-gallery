@@ -29,8 +29,7 @@ demo.controller('DemoController', function () {
 			},
 			thumbnail: {
 				height: 77,
-				index: true,
-				above: true
+				index: true
 			},
 		},
 		panel: {
@@ -104,7 +103,7 @@ demo.controller('DemoController', function () {
 			thumbnail: {
 				height: 90,
 				index: false,
-				above: false
+				dynamic: true
 			},
 		},
 		panel: {

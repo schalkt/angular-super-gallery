@@ -141,14 +141,7 @@ $primary: #30c6d4;
 
   .asg-thumbnail {
 
-    bottom: -20px;
-    opacity: 0;
     background-color: rgba($black, 0.77);
-
-    &:hover {
-      bottom: 0px;
-      opacity: 1;
-    }
 
     .item {
       img {

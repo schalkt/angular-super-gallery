@@ -50,9 +50,8 @@ namespace angularSuperGallery {
 	export interface IOptionsThumbnail {
 
 		height? : number,
-		visible? : boolean;
 		index? : boolean;
-		above? : boolean;
+		dynamic? : boolean;
 
 	}
 
@@ -263,9 +262,8 @@ namespace angularSuperGallery {
 				help: false, // show/hide help
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
-					visible: true, // show/hide thumbnails
 					index: false, // show index number on thumbnail
-					above: false, // thumbnails above the images
+					dynamic: false, // if true thumbnails visible only when mouseover
 				},
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
@@ -286,8 +284,8 @@ namespace angularSuperGallery {
 			},
 			thumbnail: {
 				height: 50, // thumbnail image height in pixel
-				visible: true, // show/hide thumbnails
 				index: false, // show index number on thumbnail
+				dynamic: false, // if true thumbnails visible only when mouseover
 			},
 			panel: {
 				visible: true,
@@ -360,7 +358,7 @@ namespace angularSuperGallery {
 					private $window : ng.IWindowService) {
 
 			angular.element($window).bind('resize', (event) => {
-				this.thumbnailsMove(100);
+				this.thumbnailsMove(200);
 			});
 
 		}
@@ -558,6 +556,7 @@ namespace angularSuperGallery {
 			this.autoPlayStop();
 			this.direction = index > this.selected ? 'forward' : 'backward';
 			this.selected = index;
+			this.setHash();
 
 		}
 

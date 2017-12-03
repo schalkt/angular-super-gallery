@@ -5,11 +5,19 @@
   transition: all ease $animspeed / 2;
   padding: 0;
 
-  &.above {
+  &.dynamic {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
+    bottom: -20px;
+    opacity: 0;
+
+    &:hover {
+      bottom: 0px;
+      opacity: 1;
+    }
+
   }
 
   .items {

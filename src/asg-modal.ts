@@ -208,7 +208,7 @@ namespace angularSuperGallery {
 		private toggleThumbnails($event? : UIEvent) {
 
 			this.asg.modalClick($event);
-			this.config.thumbnail.visible = !this.config.thumbnail.visible;
+			this.config.thumbnail.dynamic = !this.config.thumbnail.dynamic;
 
 		}
 

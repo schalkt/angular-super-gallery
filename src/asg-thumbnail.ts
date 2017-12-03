@@ -30,9 +30,9 @@ namespace angularSuperGallery {
 		}
 
 		// get above from config
-		public get above() {
+		public get dynamic() {
 
-			return this.config.above ? 'above' : null;
+			return this.config.dynamic ? 'dynamic' : null;
 
 		}
 
@@ -90,7 +90,7 @@ namespace angularSuperGallery {
 
 	app.component('asgThumbnail', {
 		controller: ['asgService', '$scope', '$element', angularSuperGallery.ThumbnailController],
-		template: '<div ng-show="$ctrl.config.visible" class="asg-thumbnail {{ $ctrl.asg.theme }} {{ $ctrl.id }} {{ $ctrl.above }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div ng-show="$ctrl.config.visible" class="asg-thumbnail {{ $ctrl.asg.theme }} {{ $ctrl.id }} {{ $ctrl.dynamic }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@',
 			items: '=?',
