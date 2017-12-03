@@ -147,10 +147,9 @@ modal: {
     menu: true, // show/hide modal menu
     help: false, // show/hide help
     thumbnail: {
-        height: 50, // thumbnail image height in pixel
-        visible: true, // show/hide thumbnails
+        height: 77, // thumbnail image height in pixel
         index: false, // show index number on thumbnail
-        above: false, // thumbnails above the images
+        dynamic: false, // if true thumbnails visible only when mouseover
     },
     transition: 'slideLR', // transition effect
     size: 'cover', // contain, cover, auto, stretch
@@ -171,8 +170,8 @@ modal: {
 },
 thumbnail: {
     height: 50, // thumbnail image height in pixel
-    visible: true, // show/hide thumbnails
     index: false, // show index number on thumbnail
+    dynamic: false, // if true thumbnails visible only when mouseover
 },
 panel: {
     visible: true,
