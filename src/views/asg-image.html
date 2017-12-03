@@ -1,21 +1,21 @@
-<div class="asg-image {{ $ctrl.asg.theme }}"
-	 data-ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
-	 data-ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
+<div class="asg-image {{ $ctrl.asg.theme }} {{ $ctrl.id }}"
+	 ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
+	 ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
-		 data-ng-swipe-left="$ctrl.asg.toForward(true)"
-		 data-ng-swipe-right="$ctrl.asg.toBackward(true)">
+		 ng-swipe-left="$ctrl.asg.toForward(true)"
+		 ng-swipe-right="$ctrl.asg.toBackward(true)">
 
 		<div class="img"
-			 data-ng-repeat="(key,file) in $ctrl.asg.files"
-			 data-ng-show="$ctrl.asg.selected == key"
-			 data-ng-class="{'loading' : !file.loaded.image}">
+			 ng-repeat="(key,file) in $ctrl.asg.files"
+			 ng-show="$ctrl.asg.selected == key"
+			 ng-class="{'loading' : !file.loaded.image}">
 
 			<div class="source {{ $ctrl.config.size }}"
-				 data-ng-style="{'background-image': 'url(' + file.source.image + ')'}"
-				 data-ng-if="file.loaded.image"
-				 data-ng-mouseover="$ctrl.asg.hoverPreload(key)"
-				 data-ng-click="$ctrl.asg.modalOpen()"></div>
+				 ng-style="{'background-image': 'url(' + file.source.image + ')'}"
+				 ng-if="file.loaded.image"
+				 ng-mouseover="$ctrl.asg.hoverPreload(key)"
+				 ng-click="$ctrl.asg.modalOpen()"></div>
 
 		</div>
 	</div>

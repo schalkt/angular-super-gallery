@@ -1,0 +1,87 @@
+.asg-thumbnail {
+
+  position: relative;
+  overflow: hidden;
+  transition: all ease $animspeed / 2;
+  padding: 0;
+
+  &.dynamic {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    bottom: -20px;
+    opacity: 0;
+
+    &:hover {
+      bottom: 0px;
+      opacity: 1;
+    }
+
+  }
+
+  .items {
+
+    position: relative;
+    white-space: nowrap;
+    transition: all ease $animspeed / 2;
+
+    .item {
+
+      overflow: hidden;
+      position: relative;
+      display: inline-block;
+      margin: 0px 0px 0px 0px;
+      transition: all ease $animspeed / 2;
+      vertical-align: top;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      &.selected {
+
+      }
+
+      &:hover {
+
+      }
+
+      img {
+        cursor: pointer;
+        display: block;
+        width: auto;
+        margin: 0px;
+      }
+
+      .index {
+        transition: all ease $animspeed / 2;
+        position: absolute;
+        z-index: 9999;
+        top: 5px;
+        right: 5px;
+        padding: 1px 2px 0px 4px;
+        font-size: 9px;
+        cursor: pointer;
+      }
+
+    }
+
+  }
+
+}
+
+.asg-modal {
+
+  .asg-thumbnail {
+    .items {
+      img {
+        height: 85px;
+      }
+      .index {
+        font-size: 12px;
+      }
+    }
+  }
+
+}

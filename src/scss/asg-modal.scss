@@ -1,14 +1,32 @@
 .asg-modal {
 
   z-index: 99999;
+  line-height: inherit;
   position: fixed;
-  top: 0px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 0;
   outline: none;
   opacity: 1;
+
+  .frame {
+    z-index: 7400;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn {
+    text-transform: lowercase;
+  }
 
   .btn-size {
     width: 64px;
@@ -36,15 +54,14 @@
   .header {
 
     position: relative;
-    display: inline-block;
+    display: block;
     width: 100%;
     height: auto;
     z-index: 7700;
 
     .title {
       display: inline-block;
-      margin: 7px 10px 2px 12px;
-      text-transform: uppercase;
+      margin: 7px 10px 4px 12px;
       float: left;
       font-size: 1.2em;
     }
@@ -98,14 +115,11 @@
 
   .images {
 
-    position: absolute;
-    top: 42px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
+    perspective: $perspective;
+    position: relative;
     z-index: auto;
     overflow: hidden;
-    perspective: $perspective;
+    height: 100%;
 
     @import "asg-transitions";
 
@@ -118,7 +132,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: auto;
+    z-index: 700;
 
     .toBackward, .toForward {
 
@@ -137,25 +151,30 @@
     }
 
     .toBackward {
-      right: 50%;
       left: 0;
     }
 
     .toForward {
       right: 0;
-      left: 50%;
     }
 
   }
 
   .caption {
 
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
-    bottom: 0;
-    z-index: 100;
     opacity: 0;
+    z-index: 200;
+
+    &.top {
+      top: 0;
+    }
+
+    &.bottom {
+      bottom: 0;
+    }
 
     &.visible {
       opacity: 1;
@@ -167,7 +186,7 @@
 
     .content {
 
-      padding: 5px 10px;
+      padding: 7px 10px;
       text-align: center;
       margin: auto;
 

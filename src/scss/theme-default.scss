@@ -2,12 +2,20 @@ $black: #050505;
 $white: #fefefe;
 $white_darken: darken($white, 14%);
 
+.asg-thumbnail {
+  .item {
+    .index {
+      background-color: $white_darken;
+    }
+  }
+}
+
 .asg-modal.default {
 
-  background-color: $black;
+  background-color: $white_darken;
 
   .highlight {
-
+    background-color: $white;
   }
 
   .header {

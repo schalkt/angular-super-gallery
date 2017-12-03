@@ -38,22 +38,6 @@
 
 	<style>
 
-		.asg-custom asg-panel {
-			position: absolute;
-			z-index: 10;
-			overflow: hidden;
-		}
-
-		.asg-custom asg-panel > div {
-			width: 70px;
-		}
-
-		.thumbnail-custom {
-			float: left;
-			height: 40px;
-			padding: 1px 1px 0px 0px;
-		}
-
 		.navbar-text {
 			margin: 0px;
 			padding: 9px 10px;
@@ -153,10 +137,12 @@
 					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
 
 					<!-- ASG BEGIN -->
-					<asg-image data-options="ctrl.options1" data-items="ctrl.files1">
-						<asg-panel></asg-panel>
-						<asg-modal></asg-modal>
+					<asg-image data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1">
+						<asg-modal>
+							<asg-thumbnail></asg-thumbnail>
+						</asg-modal>
 					</asg-image>
+					<asg-thumbnail data-id="nature"></asg-thumbnail>
 					<!-- ASG END -->
 
 				</div>
@@ -242,7 +228,9 @@
 
 					<asg-image data-id="girls">
 						<asg-info data-template="custom-info.html"></asg-info>
-						<asg-modal></asg-modal>
+						<asg-modal>
+							<asg-thumbnail></asg-thumbnail>
+						</asg-modal>
 					</asg-image>
 					<asg-control data-id="girls" data-template="custom-control.html"></asg-control>
 					<asg-panel data-id="girls"

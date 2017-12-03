@@ -7,6 +7,7 @@ namespace angularSuperGallery {
 		public items : Array<IFile>;
 
 		private type = 'panel';
+		private template = 'views/asg-panel.html';
 		private asg : IServiceController;
 
 		constructor(private service : IServiceController,
@@ -18,6 +19,13 @@ namespace angularSuperGallery {
 
 			// get service instance
 			this.asg = this.service.getInstance(this);
+
+		}
+
+		public setSelected(index : number, $event? : UIEvent) {
+
+			this.asg.modalClick($event);
+			this.asg.setSelected(index);
 
 		}
 
@@ -63,13 +71,14 @@ namespace angularSuperGallery {
 
 	app.component('asgPanel', {
 		controller: ['asgService', '$scope', angularSuperGallery.PanelController],
-		templateUrl: 'views/asg-panel.html',
+		template: '<div class="asg-panel {{ $ctrl.asg.theme }}" ng-mouseover="$ctrl.asg.over.panel = true;" ng-mouseleave="$ctrl.asg.over.panel = false;" ng-show="$ctrl.config.visible"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@',
 			items: '=?',
 			options: '=?',
 			selected: '=?',
-			visible: '=?'
+			visible: '=?',
+			template: '@?'
 		}
 	});
 

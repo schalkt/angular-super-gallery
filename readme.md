@@ -20,7 +20,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 
 ### Features
-- separated Angular components (image, modal, panel, info and controls)
+- separated Angular components (image, modal, thumbnails, panel, info and controls)
 - highly configurable
 - image display mode (cover, contain, auto, stretch)
 - multiple image sizes / thumbnail (for panel) , medium (for image), original (for modal)
@@ -34,7 +34,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 ### Install
 
 - `npm install --save angular-super-gallery`
-
+- or `yarn add angular-super-gallery`
 
 ### Setup in AngularJS
 ```
@@ -43,7 +43,6 @@ angular.module("App", ['angularSuperGallery']);
 
 ### Quick usage in HTML
 ```
-
 <link href="/node_modules/angular-super-gallery/dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
 <script src="/node_modules/angular-super-gallery/dist/angular-super-gallery.js"></script>
 
@@ -53,7 +52,9 @@ angular.module("App", ['angularSuperGallery']);
         "porsche_panamera_rear_view_white_auto_96846_1920x1080.jpg",
         "subaru_brz_subaru_cars_sunset_93895_1920x1080.jpg" 
        ]'>
-    <asg-modal></asg-modal>
+    <asg-modal>
+        <asg-thumbnail></asg-thumbnail>
+    </asg-modal>
 </asg-image>
 ```
 
@@ -101,29 +102,33 @@ this.nature1 = [
 
 in HTML
 ```
-<asg-image data-id="nature"></asg-image>
-<asg-panel data-id="nature" data-options="ctrl.nature1Options" data-items="ctrl.nature1"></asg-panel>
-<asg-modal data-id="nature" data-visible="ctrl.showModal"></asg-modal>
+<asg-image data-id="nature" data-options="ctrl.nature1Options" data-items="ctrl.nature1">
+    <asg-thumbnail></asg-thumbnail>
+    <asg-modal data-visible="ctrl.showModal"></asg-modal>
+</asg-image>
+<asg-panel data-id="nature"></asg-panel>
 ```
 or (without thumbnails)
 ```
-<asg-image data-id="nature" data-options="ctrl.nature1Options" data-items="ctrl.nature1"></asg-image>
-<asg-modal data-id="nature" data-visible="ctrl.showModal"></asg-modal>
+<asg-image data-options="ctrl.nature1Options" data-items="ctrl.nature1">
+    <asg-modal data-visible="ctrl.showModal"></asg-modal>
+</asg-image>
+
 ```
 
 ### Available options
 ```
 debug: false, // image load and autoplay info in console.log
-baseUrl: "", // url prefix
+baseUrl: '', // url prefix
 fields: {
     source: {
-        modal: "url", // required, image url for modal component (large size)
-        panel: "url", // image url for panel component (thumbnail size)
-        image: "url" // image url for image (medium size)
+        modal: 'url', // required, image url for modal component (large size)
+        panel: 'url', // image url for panel component (thumbnail size)
+        image: 'url' // image url for image (medium size)
     },
-    title: "title", // title input field name
-    description: "description", // description input field name
-    thumbnail: "thumbnail" // thumbnail input field name
+    title: 'title', // title input field name
+    description: 'description', // description input field name
+    thumbnail: 'thumbnail' // thumbnail input field name
 },
 autoplay: {
     enabled: false, // slideshow play enabled/disabled
@@ -133,21 +138,30 @@ theme: 'default', // css style [default, darkblue, whitegold]
 preloadDelay: 770,
 preload: [], // preload images by index number
 modal: {
-    title: "", // modal window title
-    subtitle: "", // modal window subtitle
-    caption: true, // show/hide image caption
+    title: '', // modal window title
+    subtitle: '', // modal window subtitle
+    caption: {
+        visible: true, // show/hide image caption
+        position: 'top' // caption position [top, bottom]
+    },
     menu: true, // show/hide modal menu
     help: false, // show/hide help
+    thumbnail: {
+        height: 50, // thumbnail image height in pixel
+        visible: true, // show/hide thumbnails
+        index: false, // show index number on thumbnail
+        above: false, // thumbnails above the images
+    },
     transition: 'slideLR', // transition effect
-    size: 'contain', // contain, cover, auto, stretch
+    size: 'cover', // contain, cover, auto, stretch
     keycodes: {
-        exit: [27], // ESC
+        exit: [27], // esc
         playpause: [80], // p
-        forward: [32, 39], // SPACE, RIGHT ARROW
-        backward: [37], // LEFT ARROW
-        first: [38, 36], // UP ARROW, HOME
-        last: [40, 35], // DOWN ARROW, END
-        fullscreen: [13], // ENTER
+        forward: [32, 39], // space, right arrow
+        backward: [37], // left arrow
+        first: [38, 36], // up arrow, home
+        last: [40, 35], // down arrow, end
+        fullscreen: [13], // enter
         menu: [77], // m
         caption: [67], // c
         help: [72], // h
@@ -155,18 +169,24 @@ modal: {
         transition: [84] // t
     }
 },
+thumbnail: {
+    height: 50, // thumbnail image height in pixel
+    visible: true, // show/hide thumbnails
+    index: false, // show index number on thumbnail
+},
 panel: {
     visible: true,
     item: {
         class: 'col-md-3', // item class
-        caption: false
+        caption: false,
+        index: false,
     },
 },
 image: {
     transition: 'slideLR', // transition effect
-    size: 'contain', // contain, cover, auto, stretch
-    height: 0, // height
-    heightMin: 0, // min height
+    size: 'cover', // contain, cover, auto, stretch
+    height: null, // height
+    heightMin: null, // min height
     heightAuto: {
         initial: true,
         onresize: false
@@ -215,6 +235,7 @@ image: {
 - CHANGE_IMAGE: `ASG-change-image-[gallery id]`,
 - MODAL_OPEN: `ASG-modal-open-[gallery id]`,
 - MODAL_CLOSE: `ASG-modal-close-[gallery id]`,
+- THUMBNAIL_MOVE: `ASG-thumbnail-move-[gallery id]`,
 
 
 ### Build
@@ -226,10 +247,13 @@ image: {
 
 
 ### Todo
-- panel custom template for thumbnails
+- open modal on thumbnail click
+- indicator component
+- arrows for image
+- panel needed?
+- enable/disable modal and image arrows
 - load images from API endpoint
 - options and info menu in modal
-- thumbnails (panel component) on modal
 - exit button must be visible on modal when menubar hidden
 - image zoom / drag / rotate
 - image info (original width and height / bytes)

@@ -7,11 +7,17 @@ namespace angularSuperGallery {
 
 		menu? : boolean;
 		help? : boolean;
-		caption? : boolean;
+		caption? : {
+			visible : boolean;
+			position : string;
+		};
 		transition? : string;
 		title? : string;
 		subtitle? : string;
 		size? : string;
+		thumbnail? : IOptionsThumbnail;
+		marginTop? : number;
+		marginBottom? : number;
 		keycodes? : {
 			exit? : Array<number>;
 			playpause? : Array<number>;
@@ -35,7 +41,17 @@ namespace angularSuperGallery {
 		item? : {
 			class? : string;
 			caption : boolean;
+			index : boolean;
 		};
+
+	}
+
+	// thumbnail component options
+	export interface IOptionsThumbnail {
+
+		height? : number,
+		index? : boolean;
+		dynamic? : boolean;
 
 	}
 
@@ -83,6 +99,7 @@ namespace angularSuperGallery {
 		modal? : IOptionsModal;
 		panel? : IOptionsPanel;
 		image? : IOptionsImage;
+		thumbnail? : IOptionsThumbnail;
 
 	}
 
@@ -114,6 +131,11 @@ namespace angularSuperGallery {
 
 	}
 
+	export interface IOver {
+		modalImage : boolean;
+		panel : boolean;
+	}
+
 	// service controller interface
 	export interface IServiceController {
 
@@ -127,6 +149,7 @@ namespace angularSuperGallery {
 		selected : number;
 		file : IFile;
 		sizes : Array<string>;
+		id : string;
 		events : {
 			CONFIG_LOAD : string;
 			AUTOPLAY_START : string;
@@ -153,9 +176,15 @@ namespace angularSuperGallery {
 
 		setFocus() : void;
 
+		setSelected(index : number);
+
 		modalOpen(index : number) : void;
 
 		modalClose() : void;
+
+		modalClick($event? : UIEvent) : void;
+
+		thumbnailsMove(delay? : number) : void;
 
 		toBackward(stop? : boolean) : void;
 
@@ -176,6 +205,8 @@ namespace angularSuperGallery {
 		setHash() : void;
 
 		downloadLink() : string;
+
+		el(selector) : any;
 
 		log(event : string, data? : any) : void;
 
@@ -200,8 +231,6 @@ namespace angularSuperGallery {
 
 		public options : IOptions = null;
 		public optionsLoaded = false;
-
-
 		public defaults : IOptions = {
 			debug: false, // image load and autoplay info in console.log
 			baseUrl: '', // url prefix
@@ -225,9 +254,17 @@ namespace angularSuperGallery {
 			modal: {
 				title: '', // modal window title
 				subtitle: '', // modal window subtitle
-				caption: true, // show/hide image caption
+				caption: {
+					visible: true, // show/hide image caption
+					position: 'top' // caption position [top, bottom]
+				},
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
+				thumbnail: {
+					height: 50, // thumbnail image height in pixel
+					index: false, // show index number on thumbnail
+					dynamic: false, // if true thumbnails visible only when mouseover
+				},
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
 				keycodes: {
@@ -245,11 +282,17 @@ namespace angularSuperGallery {
 					transition: [84] // t
 				}
 			},
+			thumbnail: {
+				height: 50, // thumbnail image height in pixel
+				index: false, // show index number on thumbnail
+				dynamic: false, // if true thumbnails visible only when mouseover
+			},
 			panel: {
 				visible: true,
 				item: {
 					class: 'col-md-3', // item class
-					caption: false
+					caption: false,
+					index: false,
 				},
 			},
 			image: {
@@ -305,12 +348,18 @@ namespace angularSuperGallery {
 			CHANGE_IMAGE: 'ASG-change-image-',
 			MODAL_OPEN: 'ASG-modal-open-',
 			MODAL_CLOSE: 'ASG-modal-close-',
+			THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
 		};
 
 		constructor(private timeout : ng.ITimeoutService,
 					private interval : ng.IIntervalService,
 					private location : ng.ILocationService,
-					private $rootScope : ng.IRootScopeService) {
+					private $rootScope : ng.IRootScopeService,
+					private $window : ng.IWindowService) {
+
+			angular.element($window).bind('resize', (event) => {
+				this.thumbnailsMove(200);
+			});
 
 		}
 
@@ -359,6 +408,11 @@ namespace angularSuperGallery {
 		public objectHashId(object : any) : string {
 
 			let string = JSON.stringify(object);
+
+			if (!string) {
+				return null;
+			}
+
 			let abc = string.replace(/[^a-zA-Z0-9]+/g, '');
 			let code = 0;
 
@@ -390,7 +444,7 @@ namespace angularSuperGallery {
 
 			// new instance and set options and items
 			if (instance === undefined) {
-				instance = new ServiceController(this.timeout, this.interval, this.location, this.$rootScope);
+				instance = new ServiceController(this.timeout, this.interval, this.location, this.$rootScope, this.$window);
 				instance.id = id;
 			}
 
@@ -472,13 +526,20 @@ namespace angularSuperGallery {
 		public set selected(v : number) {
 
 			v = this.normalize(v);
-
-			if (v !== this._selected) {
-				this.event(this.events.CHANGE_IMAGE, {index: v, file: this.file});
-			}
+			let prev = this._selected;
 
 			this._selected = v;
 			this.preload();
+
+			if (prev !== this._selected) {
+
+				this.thumbnailsMove();
+				this.event(this.events.CHANGE_IMAGE, {
+					index: v,
+					file: this.file
+				});
+
+			}
 
 		}
 
@@ -495,16 +556,13 @@ namespace angularSuperGallery {
 			this.autoPlayStop();
 			this.direction = index > this.selected ? 'forward' : 'backward';
 			this.selected = index;
+			this.setHash();
 
 		}
 
 
 		// go to backward
-		public toBackward(stop? : boolean, $event? : UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
-			}
+		public toBackward(stop? : boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -514,16 +572,11 @@ namespace angularSuperGallery {
 			this.selected--;
 			this.loadImage(this.selected - 1);
 			this.setHash();
-			this.setFocus();
 
 		}
 
 		// go to forward
-		public toForward(stop? : boolean, $event? : UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
-			}
+		public toForward(stop? : boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -533,7 +586,6 @@ namespace angularSuperGallery {
 			this.selected++;
 			this.loadImage(this.selected + 1);
 			this.setHash();
-			this.setFocus();
 
 		}
 
@@ -887,14 +939,6 @@ namespace angularSuperGallery {
 
 		}
 
-		// set the focus
-		public setFocus() {
-
-			this.el('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
-
-		}
-
-
 		// initialize the gallery
 		private modalInit() {
 
@@ -903,17 +947,17 @@ namespace angularSuperGallery {
 			this.timeout(() => {
 
 				// submenu click events
-				let element = '.gallery-modal.' + self.id + ' li.dropdown-submenu';
+				let element = '.asg-modal.' + self.id + ' li.dropdown-submenu';
 
 				this.el(element).off().on('click', function (event) {
 
 					event.stopPropagation();
 
-					if (this.el(this).hasClass('open')) {
-						this.el(this).removeClass('open');
+					if (this.el(element).hasClass('open')) {
+						this.el(element).removeClass('open');
 					} else {
 						this.el(element).removeClass('open');
-						this.el(this).addClass('open');
+						this.el(element).addClass('open');
 					}
 
 				});
@@ -935,6 +979,8 @@ namespace angularSuperGallery {
 			this.modalVisible = true;
 			this.setHash();
 			this.event(this.events.MODAL_OPEN, {index: this.selected});
+			this.setFocus();
+			this.thumbnailsMove(200);
 
 		}
 
@@ -946,6 +992,82 @@ namespace angularSuperGallery {
 
 		}
 
+		// move thumbnails to correct position
+		public thumbnailsMove(delay? : number) {
+
+			let move = () => {
+
+				let containers = this.el('.asg-thumbnail.' + this.id);
+
+				for (var i = 0; i < containers.length; i++) {
+
+					let container = containers[i];
+
+					if (container.offsetWidth) {
+
+						let items : any = this.el(container.querySelectorAll('.items'))[0];
+						let item : any = this.el(container.querySelectorAll('.item'))[0];
+						let thumbnail, moveX, remain;
+
+						if (item) {
+
+							if (items.scrollWidth > container.offsetWidth) {
+								thumbnail = items.scrollWidth / this.files.length;
+								moveX = (container.offsetWidth / 2) - (this.selected * thumbnail) - thumbnail / 2;
+								remain = items.scrollWidth + moveX;
+								moveX = moveX > 0 ? 0 : moveX;
+								moveX = remain < container.offsetWidth ? container.offsetWidth - items.scrollWidth : moveX;
+							} else {
+								thumbnail = this.getRealWidth(item);
+								moveX = (container.offsetWidth - thumbnail * this.files.length) / 2;
+							}
+
+							items.style.left = moveX + 'px';
+
+							this.event(this.events.THUMBNAIL_MOVE, {
+								thumbnail: thumbnail,
+								move: moveX,
+								remain: remain,
+								container: container.offsetWidth,
+								items: items.scrollWidth
+							})
+
+						}
+
+					}
+
+				}
+			};
+
+			if (delay) {
+				this.timeout(() => {
+					move();
+				}, delay);
+			} else {
+				move();
+			}
+
+
+		}
+
+		public modalClick($event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			this.setFocus();
+
+		}
+
+		// set the focus
+		public setFocus() {
+
+			if (this.modalVisible) {
+				this.el('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
+			}
+
+		}
 
 		private event(event : string, data? : any) {
 
@@ -963,18 +1085,43 @@ namespace angularSuperGallery {
 
 		}
 
-		private el(selector) : any {
+		public el(selector) : any {
 
 			return angular.element(selector);
 
 		}
 
+		// calculating element real width
+		public getRealWidth(item) {
+
+			let style = item.currentStyle || window.getComputedStyle(item),
+				width = item.offsetWidth,
+				margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
+				//padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
+				border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+
+			return width + margin + border;
+
+		}
+
+		// calculating element real height
+		public getRealHeight(item) {
+
+			let style = item.currentStyle || window.getComputedStyle(item),
+				height = item.offsetHeight,
+				margin = parseFloat(style.marginTop) + parseFloat(style.marginBottom),
+				//padding = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom),
+				border = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+
+			return height + margin + border;
+
+		}
 
 	}
 
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
-	app.service('asgService', ['$timeout', '$interval', '$location', '$rootScope', ServiceController]);
+	app.service('asgService', ['$timeout', '$interval', '$location', '$rootScope', '$window', ServiceController]);
 
 }
 

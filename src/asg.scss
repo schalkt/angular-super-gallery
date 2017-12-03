@@ -1,4 +1,9 @@
 $perspective: 1280px;
+$animspeed: 0.64s;
+$animsize: 14%;
+$rotate: 32deg;
+$scaleIn: 1.14;
+$scaleOut: 0.86;
 
 body.yhidden {
   overflow-y: hidden;
@@ -7,6 +12,7 @@ body.yhidden {
 @import "scss/asg-image";
 @import "scss/asg-modal";
 @import "scss/asg-panel";
+@import "scss/asg-thumbnail";
 @import "scss/asg-info";
 @import "scss/asg-control";
 @import "scss/theme-default";
