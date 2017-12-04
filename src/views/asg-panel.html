@@ -1,17 +1,17 @@
-<div ng-repeat="(key,file) in $ctrl.asg.files"
-	 class="item {{ $ctrl.asg.options.panel.item.class }}"
-	 ng-class="{'selected' : $ctrl.asg.selected == key}"
-	 ng-mouseover="indexShow = true"
-	 ng-mouseleave="indexShow = false">
+<div class="items">
+	<div class="item {{ $ctrl.asg.options.panel.item.class }}"
+		 ng-mouseover="$ctrl.hover(key, $event)"
+		 ng-repeat="(key,file) in $ctrl.asg.files"
+		 ng-class="{'selected' : $ctrl.asg.selected == key}">
 
-	<img ng-src="{{ file.source.panel }}"
-		 ng-click="$ctrl.setSelected(key, $event)"
-		 ng-mouseover="$ctrl.asg.hoverPreload(key)"
-		 alt="{{ file.title }}"/>
-	<span class="index" ng-if="$ctrl.config.item.index && indexShow">{{ key + 1 }}</span>
+		<img ng-src="{{ file.source.panel }}"
+			 ng-click="$ctrl.setSelected(key, $event)"
+			 alt="{{ file.title }}"/>
 
-	<div class="caption" ng-if="$ctrl.config.item.caption">
-		<span>{{ file.title }}</span>
+		<span class="index" ng-if="$ctrl.config.item.index">{{ key + 1 }}</span>
+
+		<div class="caption" ng-if="$ctrl.config.item.caption">
+			<span>{{ file.title }}</span>
+		</div>
 	</div>
-
 </div>

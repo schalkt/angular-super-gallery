@@ -43,6 +43,13 @@ namespace angularSuperGallery {
 			caption : boolean;
 			index : boolean;
 		};
+		hover? : {
+			select : boolean;
+		};
+		click? : {
+			select : boolean;
+			modal : boolean;
+		};
 
 	}
 
@@ -52,6 +59,13 @@ namespace angularSuperGallery {
 		height? : number,
 		index? : boolean;
 		dynamic? : boolean;
+		click? : {
+			select : boolean;
+			modal : boolean;
+		};
+		hover? : {
+			select : boolean;
+		};
 
 	}
 
@@ -68,8 +82,8 @@ namespace angularSuperGallery {
 		height? : number;
 		heightMin? : number;
 		heightAuto? : {
-			initial? : boolean,
-			onresize? : boolean
+			initial? : boolean;
+			onresize? : boolean;
 		};
 
 	}
@@ -198,6 +212,8 @@ namespace angularSuperGallery {
 
 		loadImages(indexes : Array<number>) : void;
 
+		hoverPreload(index : number) : void;
+
 		autoPlayToggle() : void;
 
 		toggle(element : string) : void;
@@ -264,6 +280,13 @@ namespace angularSuperGallery {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
 					dynamic: false, // if true thumbnails visible only when mouseover
+					click: {
+						select: true, // set selected image when true
+						modal: false // open modal when true
+					},
+					hover: {
+						select: false // set selected image on mouseover when true
+					},
 				},
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
@@ -286,6 +309,13 @@ namespace angularSuperGallery {
 				height: 50, // thumbnail image height in pixel
 				index: false, // show index number on thumbnail
 				dynamic: false, // if true thumbnails visible only when mouseover
+				click: {
+					select: true, // set selected image when true
+					modal: false // open modal when true
+				},
+				hover: {
+					select: false // set selected image on mouseover when true
+				},
 			},
 			panel: {
 				visible: true,
@@ -293,6 +323,13 @@ namespace angularSuperGallery {
 					class: 'col-md-3', // item class
 					caption: false,
 					index: false,
+				},
+				hover: {
+					select: false // set selected image on mouseover when true
+				},
+				click: {
+					select: false, // set selected image when true
+					modal: true // open modal when true
 				},
 			},
 			image: {
@@ -747,11 +784,9 @@ namespace angularSuperGallery {
 
 		}
 
-
+		// preload the image when mouseover
 		public hoverPreload(index : number) {
-
 			this.loadImage(index);
-
 		}
 
 
@@ -979,7 +1014,7 @@ namespace angularSuperGallery {
 				return;
 			}
 
-			this.selected = index ? index : this.selected;
+			this.selected = index !== undefined ? index : this.selected;
 			this.modalVisible = true;
 			this.setHash();
 			this.event(this.events.MODAL_OPEN, {index: this.selected});

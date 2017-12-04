@@ -161,12 +161,18 @@ $primary: #d4c386;
 
 .asg-panel.whitegold {
   .item {
+
     &.selected {
       border-color: $black;
     }
+
     .index {
-      background-color: rgba($black, 0.56);
+      background-color: $primary;
       color: $white;
+      top: inherit;
+      bottom: 14px;
+      font-size: 11px;
+      padding: 2px 6px;
     }
   }
 }

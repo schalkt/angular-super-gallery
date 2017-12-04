@@ -246,10 +246,8 @@ image: {
 
 
 ### Todo
-- open modal on thumbnail click
 - indicator component
 - arrows for image
-- panel needed?
 - enable/disable modal and image arrows
 - load images from API endpoint
 - options and info menu in modal

@@ -41,7 +41,26 @@ namespace angularSuperGallery {
 		public setSelected(index : number, $event? : MouseEvent) {
 
 			this.asg.modalClick($event);
-			this.asg.setSelected(index);
+
+			if (this.config.click.modal) {
+				this.asg.modalOpen(index);
+				return;
+			}
+
+			if (this.config.click.select) {
+				this.asg.setSelected(index);
+			}
+
+		}
+
+		// prelod when mouseover and set selected if enabled
+		public hover(index : number, $event? : MouseEvent) {
+
+			this.asg.hoverPreload(index);
+
+			if (this.config.hover.select === true) {
+				this.asg.setSelected(index);
+			}
 
 		}
 

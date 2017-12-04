@@ -23,10 +23,29 @@ namespace angularSuperGallery {
 
 		}
 
-		public setSelected(index : number, $event? : UIEvent) {
+		// set selected image
+		public setSelected(index : number, $event? : MouseEvent) {
 
 			this.asg.modalClick($event);
-			this.asg.setSelected(index);
+
+			if (this.config.click.modal) {
+				this.asg.modalOpen(index);
+				return;
+			}
+
+			if (this.config.click.select) {
+				this.asg.setSelected(index);
+			}
+
+		}
+
+		public hover(index : number, $event? : MouseEvent) {
+
+			this.asg.hoverPreload(index);
+
+			if (this.config.hover.select === true) {
+				this.asg.setSelected(index);
+			}
 
 		}
 
@@ -72,7 +91,8 @@ namespace angularSuperGallery {
 
 	app.component('asgPanel', {
 		controller: ['asgService', '$scope', angularSuperGallery.PanelController],
-		template: '<div class="asg-panel {{ $ctrl.asg.theme }}" ng-mouseover="$ctrl.asg.over.panel = true;" ng-mouseleave="$ctrl.asg.over.panel = false;" ng-show="$ctrl.config.visible"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div class="asg-panel {{ $ctrl.asg.theme }}" ng-mouseover="$ctrl.asg.over.panel = true;" ng-mouseleave="$ctrl.asg.over.panel = false;" ng-show="$ctrl.config.visible"><div ng-include="$ctrl.template"></div><ng-transclude></ng-transclude></div>',
+		transclude: true,
 		bindings: {
 			id: '@',
 			items: '=?',

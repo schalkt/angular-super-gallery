@@ -64,6 +64,41 @@
 			font-size: 2rem;
 		}
 
+		.custom-panel .asg-panel .items {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			flex-shrink: 1;
+			justify-content: space-around;
+			align-items: stretch;
+			align-content: stretch;
+
+		}
+
+		.custom-panel .asg-panel .item {
+			display: inline;
+			height: 100px;
+			transition: all ease 0.2s;
+			opacity: 0.77;
+			z-index: 10;
+		}
+
+		.custom-panel .asg-panel .item.selected {
+			opacity: 1;
+		}
+
+		.custom-panel .asg-panel .item:hover {
+			opacity: 1;
+			transform: scale(1.2);
+			z-index: 11;
+			box-shadow: 0px 0px 10px #141414;
+		}
+
+		.custom-panel .asg-panel .item img {
+			height: 100%;
+			max-width: inherit;
+		}
+
 	</style>
 
 </head>
@@ -143,6 +178,9 @@
 						</asg-modal>
 					</asg-image>
 					<asg-thumbnail data-id="nature"></asg-thumbnail>
+					<hr>
+					<strong>custom panel</strong> | select the image when mouseover
+					<asg-panel data-id="nature" class="custom-panel" data-options="ctrl.options1" data-items="ctrl.files1"></asg-panel>
 					<!-- ASG END -->
 
 				</div>
@@ -168,7 +206,7 @@
 					<asg-image data-options='{
 								image: { height: 160, size: "cover" },
 								modal: { menu: false, caption: false, size: "auto"}
-								}' 
+								}'
 							   data-base-url="https://wallpaperscraft.com/image/"
 							   data-items="[{
 							   	source: { image: 'lamborghini_miura_side_view_105726_960x544.jpg' }
@@ -222,7 +260,7 @@
 							{{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
 						</button>
 						<button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.toggle('panel')">
-							{{ $ctrl.asg.options.panel.visible ? 'hide' : 'show' }} thumbnails
+							{{ $ctrl.asg.options.panel.visible ? 'hide' : 'show' }} panel
 						</button>
 					</script>
 

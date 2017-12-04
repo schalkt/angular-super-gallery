@@ -15,7 +15,7 @@ demo.controller('DemoController', function () {
 		theme: 'darkblue',
 		thumbnail: {
 			height: 42,
-			index: true
+			index: true,
 		},
 		modal: {
 			caption: false,
@@ -29,10 +29,17 @@ demo.controller('DemoController', function () {
 			},
 			thumbnail: {
 				height: 77,
-				index: true
+				index: true,
 			},
 		},
 		panel: {
+			click: {
+				select: false,
+				modal: true
+			},
+			hover: {
+				select: true
+			},
 			item: {
 				class: "custom",
 				title: false
@@ -113,6 +120,10 @@ demo.controller('DemoController', function () {
 				caption: true,
 				index: true
 			},
+			click: {
+				select: true,
+				modal: false
+			},
 		},
 		image: {
 			heightAuto: {
@@ -122,6 +133,7 @@ demo.controller('DemoController', function () {
 			transition: 'zoomInOut'
 		}
 	};
+
 
 	this.files2 = [{
 		"source": {

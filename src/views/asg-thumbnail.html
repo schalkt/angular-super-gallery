@@ -1,11 +1,11 @@
 <div class="items">
 	<div class="item"
 		 ng-click="$ctrl.setSelected(key, $event)"
+		 ng-mouseover="$ctrl.hover(key, $event)"
 		 ng-repeat="(key,file) in $ctrl.asg.files"
 		 ng-class="{'selected' : $ctrl.asg.selected == key}">
 
 		<img ng-src="{{ file.source.panel }}"
-			 ng-mouseover="$ctrl.asg.hoverPreload(key)"
 			 ng-style="{'height': $ctrl.config.height + 'px'}"
 			 alt="{{ file.title }}"/>
 
