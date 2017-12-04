@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'image';
 		private asg : IServiceController;
@@ -112,7 +113,8 @@ namespace angularSuperGallery {
 			id: '@?',
 			items: '=?',
 			options: '=?',
-			selected: '=?'
+			selected: '=?',
+			baseUrl: '@?'
 		}
 	});
 

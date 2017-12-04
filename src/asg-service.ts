@@ -448,6 +448,10 @@ namespace angularSuperGallery {
 				instance.id = id;
 			}
 
+			if (component.baseUrl) {
+				component.options.baseUrl = component.baseUrl;
+			}
+
 			instance.setOptions(component.options);
 			instance.setItems(component.items);
 			instance.selected = component.selected ? component.selected : 0;

@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'thumbnail';
 		private template = 'views/asg-thumbnail.html';
@@ -97,7 +98,8 @@ namespace angularSuperGallery {
 			options: '=?',
 			selected: '=?',
 			visible: '=?',
-			template: '@?'
+			template: '@?',
+			baseUrl: '@?'
 		}
 	});
 

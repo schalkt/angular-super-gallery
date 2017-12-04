@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'modal';
 		private asg : IServiceController;
@@ -363,7 +364,8 @@ namespace angularSuperGallery {
 			items: '=?',
 			options: '=?',
 			selected: '=?',
-			visible: '=?'
+			visible: '=?',
+			baseUrl: '@?'
 		}
 	});
 

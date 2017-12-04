@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'panel';
 		private template = 'views/asg-panel.html';
@@ -78,7 +79,8 @@ namespace angularSuperGallery {
 			options: '=?',
 			selected: '=?',
 			visible: '=?',
-			template: '@?'
+			template: '@?',
+			baseUrl: '@?'
 		}
 	});
 
