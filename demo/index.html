@@ -72,6 +72,7 @@
 			justify-content: space-around;
 			align-items: stretch;
 			align-content: stretch;
+			perspective: 1280px;
 
 		}
 
@@ -80,6 +81,7 @@
 			height: 100px;
 			transition: all ease 0.2s;
 			opacity: 0.77;
+			transform: scale(1);
 			z-index: 10;
 		}
 
@@ -88,9 +90,9 @@
 		}
 
 		.custom-panel .asg-panel .item:hover {
+			z-index: 11;
 			opacity: 1;
 			transform: scale(1.2);
-			z-index: 11;
 			box-shadow: 0px 0px 10px #141414;
 		}
 
@@ -179,7 +181,7 @@
 					</asg-image>
 					<asg-thumbnail data-id="nature"></asg-thumbnail>
 					<hr>
-					<strong>custom panel</strong> | select the image when mouseover
+					<strong>custom panel</strong> | auto select the image when mouseover
 					<asg-panel data-id="nature" class="custom-panel" data-options="ctrl.options1" data-items="ctrl.files1"></asg-panel>
 					<!-- ASG END -->
 

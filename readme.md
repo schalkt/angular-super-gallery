@@ -246,9 +246,9 @@ image: {
 
 
 ### Todo
-- indicator component
-- arrows for image
+- add modal click and close to options
 - enable/disable modal and image arrows
+- indicator component
 - load images from API endpoint
 - options and info menu in modal
 - exit button must be visible on modal when menubar hidden

@@ -229,20 +229,6 @@ namespace angularSuperGallery {
 
 		}
 
-		// overlay arrows hide
-		public arrowsHide() {
-
-			this.arrowsVisible = false;
-
-		}
-
-		// overlay arrows show
-		public arrowsShow() {
-
-			this.arrowsVisible = true;
-
-		}
-
 		// toggle help
 		private toggleHelp($event? : UIEvent) {
 

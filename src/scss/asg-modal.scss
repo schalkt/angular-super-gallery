@@ -133,6 +133,13 @@
     left: 0;
     right: 0;
     z-index: 700;
+    transition: all ease 0.2s;
+    transform: scale(0.9);
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     .toBackward, .toForward {
 

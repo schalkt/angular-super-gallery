@@ -132,13 +132,12 @@
 			 ng-mouseleave="$ctrl.asg.over.modalImage = false;">
 
 			<div class="arrows"
-				 ng-mouseover="$ctrl.arrowsShow()"
-				 ng-mouseleave="$ctrl.arrowsHide()"
+				 ng-if="$ctrl.config.arrows"
 				 ng-swipe-left="$ctrl.asg.toForward(true)"
 				 ng-swipe-right="$ctrl.asg.toBackward(true)"
 				 ng-click="$ctrl.close($event)">
 
-				<div ng-if="!$ctrl.asg.isSingle" ng-show="$ctrl.arrowsVisible" class="toBackward">
+				<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 
 					<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
 							data-ng-click="$ctrl.toBackward(true, $event)">
@@ -151,7 +150,7 @@
 
 				</div>
 
-				<div ng-if="!$ctrl.asg.isSingle" ng-show="$ctrl.arrowsVisible" class="toForward">
+				<div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
 					<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
 							data-ng-click="$ctrl.toForward(true, $event)">

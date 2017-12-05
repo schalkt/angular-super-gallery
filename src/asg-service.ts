@@ -14,6 +14,7 @@ namespace angularSuperGallery {
 		transition? : string;
 		title? : string;
 		subtitle? : string;
+		arrows? : boolean;
 		size? : string;
 		thumbnail? : IOptionsThumbnail;
 		marginTop? : number;
@@ -79,6 +80,7 @@ namespace angularSuperGallery {
 
 		transition? : string;
 		size? : string;
+		arrows? : boolean;
 		height? : number;
 		heightMin? : number;
 		heightAuto? : {
@@ -276,6 +278,7 @@ namespace angularSuperGallery {
 				},
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
+				arrows : true, // show/hide arrows
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
@@ -335,6 +338,7 @@ namespace angularSuperGallery {
 			image: {
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
+				arrows : true, // show/hide arrows
 				height: null, // height
 				heightMin: null, // min height
 				heightAuto: {

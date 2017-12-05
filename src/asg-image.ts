@@ -79,6 +79,26 @@ namespace angularSuperGallery {
 
 		}
 
+		public toBackward(stop? : boolean, $event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			this.asg.toBackward(stop);
+
+		}
+
+		public toForward(stop? : boolean, $event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			this.asg.toForward(stop);
+
+		}
+
 		// set selected image
 		public set selected(v : number) {
 

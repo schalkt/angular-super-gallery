@@ -54,6 +54,25 @@ $primary: #d4c386;
 
   }
 
+  .btn {
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 0;
+  }
+
+  .btn-default {
+    border: 1px solid $white;
+    color: $white;
+    background-color: transparent;
+  }
+
+  .btn-default:focus, .btn-default:hover {
+    border: 1px solid $primary;
+    outline: none;
+    color: $primary;
+    background-color: $white;
+  }
+
 }
 
 .asg-modal.whitegold {
