@@ -38,8 +38,12 @@
 
   }
 
-  &.nomodal .source {
-    cursor: inherit;
+  &.modalon .source {
+    cursor: pointer;
+  }
+
+  &.modalon .arrows {
+    cursor: pointer;
   }
 
   .asg-info {
@@ -64,7 +68,6 @@
     right: 0;
     z-index: 700;
     opacity: 0;
-    cursor: pointer;
     transition: all ease 0.2s;
     transform: scale(0.9);
 

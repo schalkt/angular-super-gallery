@@ -29,7 +29,7 @@ namespace angularSuperGallery {
 
 	app.component('asgInfo', {
 		controller: ['asgService', '$scope', angularSuperGallery.InfoController],
-		template: '<div class="asg-info {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div class="asg-info {{ $ctrl.asg.classes }}"><div ng-include="$ctrl.template"></div></div>',
 		transclude: true,
 		bindings: {
 			id: '@?',

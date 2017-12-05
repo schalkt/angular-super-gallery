@@ -47,6 +47,9 @@ demo.controller('DemoController', function () {
 		},
 		image: {
 			height: 320,
+			click: {
+				modal: true
+			},
 			transition: 'rotateLR',
 		},
 	};

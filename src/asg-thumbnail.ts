@@ -30,13 +30,6 @@ namespace angularSuperGallery {
 
 		}
 
-		// get above from config
-		public get dynamic() {
-
-			return this.config.dynamic ? 'dynamic' : null;
-
-		}
-
 		// set selected image
 		public setSelected(index : number, $event? : MouseEvent) {
 
@@ -104,13 +97,27 @@ namespace angularSuperGallery {
 
 		}
 
+		// get above from config
+		public get dynamic() {
+
+			return this.config.dynamic ? 'dynamic' : '';
+
+		}
+
+		// get classes
+		public get classes() : string {
+
+			return this.asg.classes + ' ' + this.dynamic;
+
+		}
+
 	}
 
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgThumbnail', {
 		controller: ['asgService', '$scope', '$element', angularSuperGallery.ThumbnailController],
-		template: '<div ng-show="$ctrl.config.visible" class="asg-thumbnail {{ $ctrl.asg.theme }} {{ $ctrl.id }} {{ $ctrl.dynamic }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div class="asg-thumbnail {{ $ctrl.classes }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@',
 			items: '=?',

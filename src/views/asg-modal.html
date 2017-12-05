@@ -16,9 +16,9 @@
 	</ul>
 </script>
 
-<div class="asg-modal {{ $ctrl.id }}"
+<div class="asg-modal {{ $ctrl.asg.classes }}"
 	 ng-class="$ctrl.getClass()"
-	 ng-click="$ctrl.close($event);"
+	 ng-click="$ctrl.imageClick($event);"
 	 ng-show="$ctrl.asg.modalVisible"
 	 ng-cloak>
 
@@ -135,7 +135,7 @@
 				 ng-if="$ctrl.config.arrows"
 				 ng-swipe-left="$ctrl.asg.toForward(true)"
 				 ng-swipe-right="$ctrl.asg.toBackward(true)"
-				 ng-click="$ctrl.close($event)">
+				 ng-click="$ctrl.imageClick($event)">
 
 				<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 

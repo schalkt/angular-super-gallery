@@ -1,5 +1,5 @@
-<div class="asg-image {{ $ctrl.asg.theme }} {{ $ctrl.id }}"
-	 ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
+<div class="asg-image {{ $ctrl.asg.classes }}"
+	 ng-class="{'modalon' : $ctrl.modalAvailable }"
 	 ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
@@ -15,7 +15,7 @@
 				 ng-style="{'background-image': 'url(' + file.source.image + ')'}"
 				 ng-if="file.loaded.image"
 				 ng-mouseover="$ctrl.asg.hoverPreload(key)"
-				 ng-click="$ctrl.asg.modalOpen()"></div>
+				 ng-click="$ctrl.modalOpen($event)"></div>
 
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 		 ng-if="$ctrl.config.arrows"
 		 ng-swipe-left="$ctrl.asg.toForward(true)"
 		 ng-swipe-right="$ctrl.asg.toBackward(true)"
-		 ng-click="$ctrl.asg.modalOpen()">
+		 ng-click="$ctrl.modalOpen($event)">
 
 		<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 

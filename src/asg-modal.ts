@@ -81,6 +81,17 @@ namespace angularSuperGallery {
 
 		}
 
+		public imageClick($event? : UIEvent) {
+
+			this.asg.modalClick($event);
+
+			if (this.config.click.close) {
+				this.asg.modalClose();
+				this.$window.screenfull.exit();
+			}
+
+		}
+
 		public setFocus($event? : UIEvent) {
 
 			this.asg.modalClick($event);

@@ -19,6 +19,9 @@ namespace angularSuperGallery {
 		thumbnail? : IOptionsThumbnail;
 		marginTop? : number;
 		marginBottom? : number;
+		click? : {
+			close : boolean;
+		};
 		keycodes? : {
 			exit? : Array<number>;
 			playpause? : Array<number>;
@@ -81,6 +84,9 @@ namespace angularSuperGallery {
 		transition? : string;
 		size? : string;
 		arrows? : boolean;
+		click? : {
+			modal : boolean;
+		};
 		height? : number;
 		heightMin? : number;
 		heightAuto? : {
@@ -160,6 +166,7 @@ namespace angularSuperGallery {
 		modalAvailable : boolean;
 		transitions : Array<string>;
 		themes : Array<string>;
+		classes : string;
 		options : IOptions;
 		items : Array<IFile>;
 		selected : number;
@@ -250,17 +257,16 @@ namespace angularSuperGallery {
 		public options : IOptions = null;
 		public optionsLoaded = false;
 		public defaults : IOptions = {
-			debug: false, // image load and autoplay info in console.log
+			debug: false, // image load, autoplay, etc. info in console.log
 			baseUrl: '', // url prefix
 			fields: {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)
 					panel: 'url', // image url for panel component (thumbnail size)
-					image: 'url' // image url for image (medium size)
+					image: 'url' // image url for image (medium or custom size)
 				},
-				title: 'title', // title input field name
-				description: 'description', // description input field name
-				thumbnail: 'thumbnail' // thumbnail input field name
+				title: 'title', // title field name
+				description: 'description', // description field name
 			},
 			autoplay: {
 				enabled: false, // slideshow play enabled/disabled
@@ -278,7 +284,10 @@ namespace angularSuperGallery {
 				},
 				menu: true, // show/hide modal menu
 				help: false, // show/hide help
-				arrows : true, // show/hide arrows
+				arrows: true, // show/hide arrows
+				click: {
+					close: true // when click on the image close the modal
+				},
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
@@ -324,8 +333,8 @@ namespace angularSuperGallery {
 				visible: true,
 				item: {
 					class: 'col-md-3', // item class
-					caption: false,
-					index: false,
+					caption: false, // show/hide image caption
+					index: false, // show/hide image index
 				},
 				hover: {
 					select: false // set selected image on mouseover when true
@@ -338,12 +347,15 @@ namespace angularSuperGallery {
 			image: {
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
-				arrows : true, // show/hide arrows
-				height: null, // height
-				heightMin: null, // min height
+				arrows: true, // show/hide arrows
+				click: {
+					modal: true // when click on the image open the modal window
+				},
+				height: null, // height in pixel
+				heightMin: null, // min height in pixel
 				heightAuto: {
-					initial: true,
-					onresize: false
+					initial: true, // calculate div height by first image
+					onresize: false // calculate div height on window resize
 				}
 			}
 		};
@@ -933,14 +945,14 @@ namespace angularSuperGallery {
 
 
 		// get the file
-		public get file() {
+		public get file() : IFile {
 
 			return this.files[this.selected];
 
 		}
 
 		// toggle element visible
-		public toggle(element : string) {
+		public toggle(element : string) : void {
 
 			this.options[element].visible = !this.options[element].visible;
 
@@ -948,7 +960,7 @@ namespace angularSuperGallery {
 
 
 		// get visible
-		public get modalVisible() {
+		public get modalVisible() : boolean {
 
 			return this._visible;
 
@@ -956,9 +968,16 @@ namespace angularSuperGallery {
 
 
 		// get theme
-		public get theme() {
+		public get theme() : string {
 
 			return this.options.theme;
+
+		}
+
+		// get classes
+		public get classes() : string {
+
+			return this.options.theme + ' ' + this.id;
 
 		}
 

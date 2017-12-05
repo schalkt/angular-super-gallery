@@ -121,6 +121,27 @@ namespace angularSuperGallery {
 
 		}
 
+		// modal available
+		public get modalAvailable() {
+
+			return this.asg.modalAvailable && this.config.click.modal;
+
+		}
+
+		// open the modal
+		public modalOpen($event : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+
+			if (this.config.click.modal) {
+				this.asg.modalOpen(this.asg.selected);
+			}
+
+		}
+
 	}
 
 	let app : ng.IModule = angular.module('angularSuperGallery');
