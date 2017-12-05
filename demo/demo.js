@@ -47,7 +47,6 @@ demo.controller('DemoController', function () {
 		},
 		image: {
 			height: 320,
-			arrows: false,
 			transition: 'rotateLR',
 		},
 	};
