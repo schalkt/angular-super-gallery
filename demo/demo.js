@@ -18,15 +18,12 @@ demo.controller('DemoController', function () {
 			index: true,
 		},
 		modal: {
-			caption: false,
+			caption: {
+				visible: false,
+				position: 'bottom'
+			},
 			title: "Angular Super Gallery Demo",
 			subtitle: "Nature Wallpapers Full HD",
-			keycodes: {
-				exit: [27, 81],
-				playpause: [80, 75],
-				forward: [32, 39, 76],
-				backward: [37, 74],
-			},
 			thumbnail: {
 				height: 77,
 				index: true,

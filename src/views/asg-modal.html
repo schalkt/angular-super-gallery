@@ -124,12 +124,12 @@
 
 		</div>
 
-		<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include src="'help.html'"></div>
-
 		<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}"
 			 ng-style="{'top': $ctrl.marginTop + 'px', 'bottom': $ctrl.marginBottom + 'px'}"
 			 ng-mouseover="$ctrl.asg.over.modalImage = true;"
 			 ng-mouseleave="$ctrl.asg.over.modalImage = false;">
+
+			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include src="'help.html'"></div>
 
 			<div class="arrows"
 				 ng-if="$ctrl.config.arrows"

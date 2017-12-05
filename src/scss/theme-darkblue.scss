@@ -154,8 +154,10 @@ $primary: #30c6d4;
 
   .caption {
     .content {
-      background-color: rgba($black, 0.77);
+      background-color: rgba($black, 0.64);
       color: $primary;
+      padding: 0px;
+      line-height: 32px;
     }
   }
 

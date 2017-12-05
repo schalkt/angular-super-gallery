@@ -169,11 +169,11 @@
 
   .caption {
 
-    position: relative;
+    position: absolute;
     left: 0;
     right: 0;
     opacity: 0;
-    z-index: 200;
+    z-index: 900;
 
     &.top {
       top: 0;

@@ -246,12 +246,12 @@ image: {
 
 
 ### Todo
-- add modal click and close to options
-- enable/disable modal and image arrows
-- indicator component
-- load images from API endpoint
-- options and info menu in modal
 - exit button must be visible on modal when menubar hidden
+- indicator component
+- preload on image or thumbnail hover to options
+- load images from API endpoint
+- slideshow mode (fullscreen, hide menu and arrows, start autoplay)
+- options and info menu in modal
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
 - transitions fix in Microsoft Edge (or fix Edge :)
