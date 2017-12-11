@@ -19,8 +19,12 @@ demo.controller('DemoController', function () {
 		},
 		modal: {
 			caption: {
-				visible: false,
+				visible: true,
 				position: 'bottom'
+			},
+			header: {
+				enabled: true,
+				dynamic: false
 			},
 			title: "Angular Super Gallery Demo",
 			subtitle: "Nature Wallpapers Full HD",
@@ -102,7 +106,6 @@ demo.controller('DemoController', function () {
 		},
 		theme: 'whitegold',
 		modal: {
-			menu: false,
 			transition: 'zoomInOut',
 			caption: {
 				position: 'bottom'

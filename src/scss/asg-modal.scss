@@ -11,6 +11,23 @@
   outline: none;
   opacity: 1;
 
+  &.dynamic {
+
+    .header {
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      &:hover {
+        opacity: 0.75;
+      }
+
+    }
+
+  }
+
   .frame {
     z-index: 7400;
     position: absolute;
@@ -134,7 +151,7 @@
     right: 0;
     z-index: 700;
     transition: all ease 0.2s;
-    transform: scale(0.9);
+    transform: scale(1.1);
 
     &:hover {
       opacity: 1;

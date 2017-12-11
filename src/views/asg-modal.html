@@ -26,7 +26,7 @@
 
 	<div class="frame" ng-click="$ctrl.asg.modalClick($event);">
 
-		<div class="header" ng-click="$ctrl.asg.modalClick($event);">
+		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
 
 			<span class="buttons visible-xs pull-right">
 				 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs">

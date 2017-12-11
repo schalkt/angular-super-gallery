@@ -35,8 +35,8 @@ namespace angularSuperGallery {
 
 			let ngClass = [];
 
-			if (!this.config.menu) {
-				ngClass.push('nomenu');
+			if (this.config.header.dynamic) {
+				ngClass.push('dynamic');
 			}
 
 			ngClass.push(this.asg.options.theme);
@@ -263,7 +263,7 @@ namespace angularSuperGallery {
 		private toggleMenu($event? : UIEvent) {
 
 			this.asg.modalClick($event);
-			this.config.menu = !this.config.menu;
+			this.config.header.dynamic = !this.config.header.dynamic;
 
 		}
 

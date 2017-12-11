@@ -5,11 +5,14 @@ namespace angularSuperGallery {
 	// modal component options
 	export interface IOptionsModal {
 
-		menu? : boolean;
+		header? : {
+			enabled? : boolean;
+			dynamic? : boolean;
+		};
 		help? : boolean;
 		caption? : {
-			visible : boolean;
-			position : string;
+			visible? : boolean;
+			position? : string;
 		};
 		transition? : string;
 		title? : string;
@@ -62,6 +65,7 @@ namespace angularSuperGallery {
 
 		height? : number,
 		index? : boolean;
+		enabled? : boolean;
 		dynamic? : boolean;
 		click? : {
 			select : boolean;
@@ -282,7 +286,10 @@ namespace angularSuperGallery {
 					visible: true, // show/hide image caption
 					position: 'top' // caption position [top, bottom]
 				},
-				menu: true, // show/hide modal menu
+				header : {
+					enabled : true, // enable/disable modal menu
+					dynamic : false // show/hide modal menu on mouseover
+				},
 				help: false, // show/hide help
 				arrows: true, // show/hide arrows
 				click: {
@@ -291,6 +298,7 @@ namespace angularSuperGallery {
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
+					enabled : true, // enable/disable thumbnails
 					dynamic: false, // if true thumbnails visible only when mouseover
 					click: {
 						select: true, // set selected image when true
