@@ -15,24 +15,32 @@ demo.controller('DemoController', function () {
 		theme: 'darkblue',
 		thumbnail: {
 			height: 42,
-			index: true
+			index: true,
 		},
 		modal: {
-			caption: false,
+			caption: {
+				visible: true,
+				position: 'bottom'
+			},
+			header: {
+				enabled: true,
+				dynamic: false
+			},
 			title: "Angular Super Gallery Demo",
 			subtitle: "Nature Wallpapers Full HD",
-			keycodes: {
-				exit: [27, 81],
-				playpause: [80, 75],
-				forward: [32, 39, 76],
-				backward: [37, 74],
-			},
 			thumbnail: {
 				height: 77,
-				index: true
+				index: true,
 			},
 		},
 		panel: {
+			click: {
+				select: false,
+				modal: true
+			},
+			hover: {
+				select: true
+			},
 			item: {
 				class: "custom",
 				title: false
@@ -40,7 +48,10 @@ demo.controller('DemoController', function () {
 		},
 		image: {
 			height: 320,
-			transition: 'slideLR',
+			click: {
+				modal: true
+			},
+			transition: 'rotateLR',
 		},
 	};
 
@@ -95,7 +106,6 @@ demo.controller('DemoController', function () {
 		},
 		theme: 'whitegold',
 		modal: {
-			menu: false,
 			transition: 'zoomInOut',
 			caption: {
 				position: 'bottom'
@@ -113,6 +123,10 @@ demo.controller('DemoController', function () {
 				caption: true,
 				index: true
 			},
+			click: {
+				select: true,
+				modal: false
+			},
 		},
 		image: {
 			heightAuto: {
@@ -122,6 +136,7 @@ demo.controller('DemoController', function () {
 			transition: 'zoomInOut'
 		}
 	};
+
 
 	this.files2 = [{
 		"source": {

@@ -18,29 +18,3 @@ body.yhidden {
 @import "scss/theme-default";
 @import "scss/theme-darkblue";
 @import "scss/theme-whitegold";
-
-.asg-modal {
-
-  &.nomenu {
-
-    .header {
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      left: 0;
-      right: 0;
-
-      &:hover {
-        opacity: 0.75;
-      }
-
-    }
-
-    .images {
-      top: 0px;
-      bottom: 0px;
-    }
-
-  }
-
-}

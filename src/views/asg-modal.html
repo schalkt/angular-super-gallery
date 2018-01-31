@@ -16,9 +16,9 @@
 	</ul>
 </script>
 
-<div class="asg-modal {{ $ctrl.id }}"
+<div class="asg-modal {{ $ctrl.asg.classes }}"
 	 ng-class="$ctrl.getClass()"
-	 ng-click="$ctrl.close($event);"
+	 ng-click="$ctrl.imageClick($event);"
 	 ng-show="$ctrl.asg.modalVisible"
 	 ng-cloak>
 
@@ -26,7 +26,7 @@
 
 	<div class="frame" ng-click="$ctrl.asg.modalClick($event);">
 
-		<div class="header" ng-click="$ctrl.asg.modalClick($event);">
+		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
 
 			<span class="buttons visible-xs pull-right">
 				 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs">
@@ -124,21 +124,20 @@
 
 		</div>
 
-		<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include src="'help.html'"></div>
-
 		<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}"
 			 ng-style="{'top': $ctrl.marginTop + 'px', 'bottom': $ctrl.marginBottom + 'px'}"
 			 ng-mouseover="$ctrl.asg.over.modalImage = true;"
 			 ng-mouseleave="$ctrl.asg.over.modalImage = false;">
 
+			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include src="'help.html'"></div>
+
 			<div class="arrows"
-				 ng-mouseover="$ctrl.arrowsShow()"
-				 ng-mouseleave="$ctrl.arrowsHide()"
+				 ng-if="$ctrl.config.arrows"
 				 ng-swipe-left="$ctrl.asg.toForward(true)"
 				 ng-swipe-right="$ctrl.asg.toBackward(true)"
-				 ng-click="$ctrl.close($event)">
+				 ng-click="$ctrl.imageClick($event)">
 
-				<div ng-if="!$ctrl.asg.isSingle" ng-show="$ctrl.arrowsVisible" class="toBackward">
+				<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 
 					<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
 							data-ng-click="$ctrl.toBackward(true, $event)">
@@ -151,7 +150,7 @@
 
 				</div>
 
-				<div ng-if="!$ctrl.asg.isSingle" ng-show="$ctrl.arrowsVisible" class="toForward">
+				<div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
 					<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
 							data-ng-click="$ctrl.toForward(true, $event)">

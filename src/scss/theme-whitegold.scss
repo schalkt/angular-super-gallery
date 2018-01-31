@@ -54,6 +54,27 @@ $primary: #d4c386;
 
   }
 
+  .btn {
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 0;
+    background-image: none;
+    text-shadow: none;
+  }
+
+  .btn-default {
+    border: 1px solid $white;
+    color: $white;
+    background-color: transparent;
+  }
+
+  .btn-default:focus, .btn-default:hover {
+    border: 1px solid $primary;
+    outline: none;
+    color: $primary;
+    background-color: $white;
+  }
+
 }
 
 .asg-modal.whitegold {
@@ -62,6 +83,8 @@ $primary: #d4c386;
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
+    background-image: none;
+    text-shadow: none;
   }
 
   .btn-default {
@@ -121,6 +144,8 @@ $primary: #d4c386;
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
+    background-image: none;
+    text-shadow: none;
   }
 
   .btn-default {
@@ -160,13 +185,26 @@ $primary: #d4c386;
 }
 
 .asg-panel.whitegold {
+
   .item {
+
     &.selected {
-      border-color: $black;
+
+      border-color: $primary;
+
+      .index {
+        background-color: $primary;
+        color: $white;
+      }
+
     }
+
     .index {
-      background-color: rgba($black, 0.56);
-      color: $white;
+      color: $primary;
+      top: inherit;
+      bottom: 14px;
+      font-size: 11px;
+      padding: 2px 6px;
     }
   }
 }

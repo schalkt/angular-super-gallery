@@ -1,5 +1,5 @@
-<div class="asg-image {{ $ctrl.asg.theme }} {{ $ctrl.id }}"
-	 ng-class="{'nomodal' : !$ctrl.asg.modalAvailable}"
+<div class="asg-image {{ $ctrl.asg.classes }}"
+	 ng-class="{'modalon' : $ctrl.modalAvailable }"
 	 ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
@@ -15,9 +15,42 @@
 				 ng-style="{'background-image': 'url(' + file.source.image + ')'}"
 				 ng-if="file.loaded.image"
 				 ng-mouseover="$ctrl.asg.hoverPreload(key)"
-				 ng-click="$ctrl.asg.modalOpen()"></div>
+				 ng-click="$ctrl.modalOpen($event)"></div>
 
 		</div>
+	</div>
+	<div class="arrows"
+		 ng-if="$ctrl.config.arrows"
+		 ng-swipe-left="$ctrl.asg.toForward(true)"
+		 ng-swipe-right="$ctrl.asg.toBackward(true)"
+		 ng-click="$ctrl.modalOpen($event)">
+
+		<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
+
+			<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
+					data-ng-click="$ctrl.toBackward(true, $event)">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</button>
+
+			<button class="btn btn-default btn-md pull-left visible-sm" ng-click="$ctrl.toBackward(true, $event)">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</button>
+
+		</div>
+
+		<div ng-if="!$ctrl.asg.isSingle" class="toForward">
+
+			<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
+					data-ng-click="$ctrl.toForward(true, $event)">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+
+			<button class="btn btn-default btn-md pull-right visible-sm" ng-click="$ctrl.toForward(true, $event)">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+
+		</div>
+
 	</div>
 	<ng-transclude></ng-transclude>
 </div>

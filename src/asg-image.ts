@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'image';
 		private asg : IServiceController;
@@ -78,6 +79,26 @@ namespace angularSuperGallery {
 
 		}
 
+		public toBackward(stop? : boolean, $event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			this.asg.toBackward(stop);
+
+		}
+
+		public toForward(stop? : boolean, $event? : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			this.asg.toForward(stop);
+
+		}
+
 		// set selected image
 		public set selected(v : number) {
 
@@ -100,6 +121,27 @@ namespace angularSuperGallery {
 
 		}
 
+		// modal available
+		public get modalAvailable() {
+
+			return this.asg.modalAvailable && this.config.click.modal;
+
+		}
+
+		// open the modal
+		public modalOpen($event : UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+
+			if (this.config.click.modal) {
+				this.asg.modalOpen(this.asg.selected);
+			}
+
+		}
+
 	}
 
 	let app : ng.IModule = angular.module('angularSuperGallery');
@@ -112,7 +154,8 @@ namespace angularSuperGallery {
 			id: '@?',
 			items: '=?',
 			options: '=?',
-			selected: '=?'
+			selected: '=?',
+			baseUrl: '@?'
 		}
 	});
 

@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'thumbnail';
 		private template = 'views/asg-thumbnail.html';
@@ -29,18 +30,30 @@ namespace angularSuperGallery {
 
 		}
 
-		// get above from config
-		public get dynamic() {
-
-			return this.config.dynamic ? 'dynamic' : null;
-
-		}
-
 		// set selected image
 		public setSelected(index : number, $event? : MouseEvent) {
 
 			this.asg.modalClick($event);
-			this.asg.setSelected(index);
+
+			if (this.config.click.modal) {
+				this.asg.modalOpen(index);
+				return;
+			}
+
+			if (this.config.click.select) {
+				this.asg.setSelected(index);
+			}
+
+		}
+
+		// prelod when mouseover and set selected if enabled
+		public hover(index : number, $event? : MouseEvent) {
+
+			this.asg.hoverPreload(index);
+
+			if (this.config.hover.select === true) {
+				this.asg.setSelected(index);
+			}
 
 		}
 
@@ -84,20 +97,35 @@ namespace angularSuperGallery {
 
 		}
 
+		// get above from config
+		public get dynamic() {
+
+			return this.config.dynamic ? 'dynamic' : '';
+
+		}
+
+		// get classes
+		public get classes() : string {
+
+			return this.asg.classes + ' ' + this.dynamic;
+
+		}
+
 	}
 
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgThumbnail', {
 		controller: ['asgService', '$scope', '$element', angularSuperGallery.ThumbnailController],
-		template: '<div ng-show="$ctrl.config.visible" class="asg-thumbnail {{ $ctrl.asg.theme }} {{ $ctrl.id }} {{ $ctrl.dynamic }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div class="asg-thumbnail {{ $ctrl.classes }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@',
 			items: '=?',
 			options: '=?',
 			selected: '=?',
 			visible: '=?',
-			template: '@?'
+			template: '@?',
+			baseUrl: '@?'
 		}
 	});
 

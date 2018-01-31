@@ -184,7 +184,7 @@ gulp.task("watch", function () {
 	var watch = require("gulp-watch");
 	var batch = require("gulp-batch");
 
-	watch(SRC + "/views/*.html", batch(function (events, done) {
+	watch(SRC + "/**/*.html", batch(function (events, done) {
 		gulp.start("js", done);
 	}));
 

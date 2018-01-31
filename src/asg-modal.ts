@@ -5,6 +5,7 @@ namespace angularSuperGallery {
 		public id : string;
 		public options : IOptions;
 		public items : Array<IFile>;
+		public baseUrl : string;
 
 		private type = 'modal';
 		private asg : IServiceController;
@@ -34,8 +35,8 @@ namespace angularSuperGallery {
 
 			let ngClass = [];
 
-			if (!this.config.menu) {
-				ngClass.push('nomenu');
+			if (this.config.header.dynamic) {
+				ngClass.push('dynamic');
 			}
 
 			ngClass.push(this.asg.options.theme);
@@ -77,6 +78,17 @@ namespace angularSuperGallery {
 			this.asg.modalClick($event);
 			this.asg.modalClose();
 			this.$window.screenfull.exit();
+
+		}
+
+		public imageClick($event? : UIEvent) {
+
+			this.asg.modalClick($event);
+
+			if (this.config.click.close) {
+				this.asg.modalClose();
+				this.$window.screenfull.exit();
+			}
 
 		}
 
@@ -228,20 +240,6 @@ namespace angularSuperGallery {
 
 		}
 
-		// overlay arrows hide
-		public arrowsHide() {
-
-			this.arrowsVisible = false;
-
-		}
-
-		// overlay arrows show
-		public arrowsShow() {
-
-			this.arrowsVisible = true;
-
-		}
-
 		// toggle help
 		private toggleHelp($event? : UIEvent) {
 
@@ -265,7 +263,7 @@ namespace angularSuperGallery {
 		private toggleMenu($event? : UIEvent) {
 
 			this.asg.modalClick($event);
-			this.config.menu = !this.config.menu;
+			this.config.header.dynamic = !this.config.header.dynamic;
 
 		}
 
@@ -363,7 +361,8 @@ namespace angularSuperGallery {
 			items: '=?',
 			options: '=?',
 			selected: '=?',
-			visible: '=?'
+			visible: '=?',
+			baseUrl: '@?'
 		}
 	});
 

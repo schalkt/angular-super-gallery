@@ -118,17 +118,16 @@ or (without thumbnails)
 
 ### Available options
 ```
-debug: false, // image load and autoplay info in console.log
+debug: false, // image load, autoplay, etc. info in console.log
 baseUrl: '', // url prefix
 fields: {
     source: {
         modal: 'url', // required, image url for modal component (large size)
         panel: 'url', // image url for panel component (thumbnail size)
-        image: 'url' // image url for image (medium size)
+        image: 'url' // image url for image (medium or custom size)
     },
-    title: 'title', // title input field name
-    description: 'description', // description input field name
-    thumbnail: 'thumbnail' // thumbnail input field name
+    title: 'title', // title field name
+    description: 'description', // description field name
 },
 autoplay: {
     enabled: false, // slideshow play enabled/disabled
@@ -144,12 +143,27 @@ modal: {
         visible: true, // show/hide image caption
         position: 'top' // caption position [top, bottom]
     },
-    menu: true, // show/hide modal menu
+    header : {
+        enabled : true, // enable/disable modal menu
+        dynamic : false // show/hide modal menu on mouseover
+    },
     help: false, // show/hide help
+    arrows: true, // show/hide arrows
+    click: {
+        close: true // when click on the image close the modal
+    },
     thumbnail: {
-        height: 77, // thumbnail image height in pixel
+        height: 50, // thumbnail image height in pixel
         index: false, // show index number on thumbnail
+        enabled : true, // enable/disable thumbnails
         dynamic: false, // if true thumbnails visible only when mouseover
+        click: {
+            select: true, // set selected image when true
+            modal: false // open modal when true
+        },
+        hover: {
+            select: false // set selected image on mouseover when true
+        },
     },
     transition: 'slideLR', // transition effect
     size: 'cover', // contain, cover, auto, stretch
@@ -172,23 +186,41 @@ thumbnail: {
     height: 50, // thumbnail image height in pixel
     index: false, // show index number on thumbnail
     dynamic: false, // if true thumbnails visible only when mouseover
+    click: {
+        select: true, // set selected image when true
+        modal: false // open modal when true
+    },
+    hover: {
+        select: false // set selected image on mouseover when true
+    },
 },
 panel: {
     visible: true,
     item: {
         class: 'col-md-3', // item class
-        caption: false,
-        index: false,
+        caption: false, // show/hide image caption
+        index: false, // show/hide image index
+    },
+    hover: {
+        select: false // set selected image on mouseover when true
+    },
+    click: {
+        select: false, // set selected image when true
+        modal: true // open modal when true
     },
 },
 image: {
     transition: 'slideLR', // transition effect
     size: 'cover', // contain, cover, auto, stretch
-    height: null, // height
-    heightMin: null, // min height
+    arrows: true, // show/hide arrows
+    click: {
+        modal: true // when click on the image open the modal window
+    },
+    height: null, // height in pixel
+    heightMin: null, // min height in pixel
     heightAuto: {
-        initial: true,
-        onresize: false
+        initial: true, // calculate div height by first image
+        onresize: false // calculate div height on window resize
     }
 }
 ```
@@ -246,16 +278,15 @@ image: {
 
 
 ### Todo
-- open modal on thumbnail click
-- indicator component
-- arrows for image
-- panel needed?
-- enable/disable modal and image arrows
-- load images from API endpoint
-- options and info menu in modal
 - exit button must be visible on modal when menubar hidden
+- indicator component
+- preload on image or thumbnail hover to options
+- load images from API endpoint
+- slideshow mode (fullscreen, hide menu and arrows, start autoplay)
+- options and info menu in modal
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
+- npm and gulp -> yarn and webpack
 - transitions fix in Microsoft Edge (or fix Edge :)
 
 

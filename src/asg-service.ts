@@ -5,19 +5,26 @@ namespace angularSuperGallery {
 	// modal component options
 	export interface IOptionsModal {
 
-		menu? : boolean;
+		header? : {
+			enabled? : boolean;
+			dynamic? : boolean;
+		};
 		help? : boolean;
 		caption? : {
-			visible : boolean;
-			position : string;
+			visible? : boolean;
+			position? : string;
 		};
 		transition? : string;
 		title? : string;
 		subtitle? : string;
+		arrows? : boolean;
 		size? : string;
 		thumbnail? : IOptionsThumbnail;
 		marginTop? : number;
 		marginBottom? : number;
+		click? : {
+			close : boolean;
+		};
 		keycodes? : {
 			exit? : Array<number>;
 			playpause? : Array<number>;
@@ -43,6 +50,13 @@ namespace angularSuperGallery {
 			caption : boolean;
 			index : boolean;
 		};
+		hover? : {
+			select : boolean;
+		};
+		click? : {
+			select : boolean;
+			modal : boolean;
+		};
 
 	}
 
@@ -51,7 +65,15 @@ namespace angularSuperGallery {
 
 		height? : number,
 		index? : boolean;
+		enabled? : boolean;
 		dynamic? : boolean;
+		click? : {
+			select : boolean;
+			modal : boolean;
+		};
+		hover? : {
+			select : boolean;
+		};
 
 	}
 
@@ -65,11 +87,15 @@ namespace angularSuperGallery {
 
 		transition? : string;
 		size? : string;
+		arrows? : boolean;
+		click? : {
+			modal : boolean;
+		};
 		height? : number;
 		heightMin? : number;
 		heightAuto? : {
-			initial? : boolean,
-			onresize? : boolean
+			initial? : boolean;
+			onresize? : boolean;
 		};
 
 	}
@@ -144,6 +170,7 @@ namespace angularSuperGallery {
 		modalAvailable : boolean;
 		transitions : Array<string>;
 		themes : Array<string>;
+		classes : string;
 		options : IOptions;
 		items : Array<IFile>;
 		selected : number;
@@ -198,6 +225,8 @@ namespace angularSuperGallery {
 
 		loadImages(indexes : Array<number>) : void;
 
+		hoverPreload(index : number) : void;
+
 		autoPlayToggle() : void;
 
 		toggle(element : string) : void;
@@ -232,17 +261,16 @@ namespace angularSuperGallery {
 		public options : IOptions = null;
 		public optionsLoaded = false;
 		public defaults : IOptions = {
-			debug: false, // image load and autoplay info in console.log
+			debug: false, // image load, autoplay, etc. info in console.log
 			baseUrl: '', // url prefix
 			fields: {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)
 					panel: 'url', // image url for panel component (thumbnail size)
-					image: 'url' // image url for image (medium size)
+					image: 'url' // image url for image (medium or custom size)
 				},
-				title: 'title', // title input field name
-				description: 'description', // description input field name
-				thumbnail: 'thumbnail' // thumbnail input field name
+				title: 'title', // title field name
+				description: 'description', // description field name
 			},
 			autoplay: {
 				enabled: false, // slideshow play enabled/disabled
@@ -258,12 +286,27 @@ namespace angularSuperGallery {
 					visible: true, // show/hide image caption
 					position: 'top' // caption position [top, bottom]
 				},
-				menu: true, // show/hide modal menu
+				header : {
+					enabled : true, // enable/disable modal menu
+					dynamic : false // show/hide modal menu on mouseover
+				},
 				help: false, // show/hide help
+				arrows: true, // show/hide arrows
+				click: {
+					close: true // when click on the image close the modal
+				},
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
+					enabled : true, // enable/disable thumbnails
 					dynamic: false, // if true thumbnails visible only when mouseover
+					click: {
+						select: true, // set selected image when true
+						modal: false // open modal when true
+					},
+					hover: {
+						select: false // set selected image on mouseover when true
+					},
 				},
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
@@ -286,23 +329,41 @@ namespace angularSuperGallery {
 				height: 50, // thumbnail image height in pixel
 				index: false, // show index number on thumbnail
 				dynamic: false, // if true thumbnails visible only when mouseover
+				click: {
+					select: true, // set selected image when true
+					modal: false // open modal when true
+				},
+				hover: {
+					select: false // set selected image on mouseover when true
+				},
 			},
 			panel: {
 				visible: true,
 				item: {
 					class: 'col-md-3', // item class
-					caption: false,
-					index: false,
+					caption: false, // show/hide image caption
+					index: false, // show/hide image index
+				},
+				hover: {
+					select: false // set selected image on mouseover when true
+				},
+				click: {
+					select: false, // set selected image when true
+					modal: true // open modal when true
 				},
 			},
 			image: {
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
-				height: null, // height
-				heightMin: null, // min height
+				arrows: true, // show/hide arrows
+				click: {
+					modal: true // when click on the image open the modal window
+				},
+				height: null, // height in pixel
+				heightMin: null, // min height in pixel
 				heightAuto: {
-					initial: true,
-					onresize: false
+					initial: true, // calculate div height by first image
+					onresize: false // calculate div height on window resize
 				}
 			}
 		};
@@ -446,6 +507,10 @@ namespace angularSuperGallery {
 			if (instance === undefined) {
 				instance = new ServiceController(this.timeout, this.interval, this.location, this.$rootScope, this.$window);
 				instance.id = id;
+			}
+
+			if (component.baseUrl) {
+				component.options.baseUrl = component.baseUrl;
 			}
 
 			instance.setOptions(component.options);
@@ -743,11 +808,9 @@ namespace angularSuperGallery {
 
 		}
 
-
+		// preload the image when mouseover
 		public hoverPreload(index : number) {
-
 			this.loadImage(index);
-
 		}
 
 
@@ -890,14 +953,14 @@ namespace angularSuperGallery {
 
 
 		// get the file
-		public get file() {
+		public get file() : IFile {
 
 			return this.files[this.selected];
 
 		}
 
 		// toggle element visible
-		public toggle(element : string) {
+		public toggle(element : string) : void {
 
 			this.options[element].visible = !this.options[element].visible;
 
@@ -905,7 +968,7 @@ namespace angularSuperGallery {
 
 
 		// get visible
-		public get modalVisible() {
+		public get modalVisible() : boolean {
 
 			return this._visible;
 
@@ -913,9 +976,16 @@ namespace angularSuperGallery {
 
 
 		// get theme
-		public get theme() {
+		public get theme() : string {
 
 			return this.options.theme;
+
+		}
+
+		// get classes
+		public get classes() : string {
+
+			return this.options.theme + ' ' + this.id;
 
 		}
 
@@ -975,7 +1045,7 @@ namespace angularSuperGallery {
 				return;
 			}
 
-			this.selected = index ? index : this.selected;
+			this.selected = index !== undefined ? index : this.selected;
 			this.modalVisible = true;
 			this.setHash();
 			this.event(this.events.MODAL_OPEN, {index: this.selected});

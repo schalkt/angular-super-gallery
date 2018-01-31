@@ -11,6 +11,23 @@
   outline: none;
   opacity: 1;
 
+  &.dynamic {
+
+    .header {
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      &:hover {
+        opacity: 0.75;
+      }
+
+    }
+
+  }
+
   .frame {
     z-index: 7400;
     position: absolute;
@@ -133,6 +150,13 @@
     left: 0;
     right: 0;
     z-index: 700;
+    transition: all ease 0.2s;
+    transform: scale(1.1);
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     .toBackward, .toForward {
 
@@ -140,6 +164,7 @@
       top: 45%;
 
       .btn {
+        padding:10px 16px;
         opacity: 0.4;
 
         &:hover {
@@ -162,11 +187,11 @@
 
   .caption {
 
-    position: relative;
+    position: absolute;
     left: 0;
     right: 0;
     opacity: 0;
-    z-index: 200;
+    z-index: 900;
 
     &.top {
       top: 0;

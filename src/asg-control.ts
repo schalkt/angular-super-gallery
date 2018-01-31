@@ -71,7 +71,7 @@ namespace angularSuperGallery {
 
 	app.component('asgControl', {
 		controller: ['asgService', '$scope', angularSuperGallery.ControlController],
-		template: '<div class="asg-control {{ $ctrl.asg.theme }}"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div class="asg-control {{ $ctrl.asg.classes }}"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@?',
 			selected: '=?',

@@ -1,6 +1,6 @@
 {
   "name": "angular-super-gallery",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "AngularJS Super Gallery",
   "homepage": "http://schalk.hu/projects/angular-super-gallery/demo/",
   "repository": {
@@ -18,6 +18,7 @@
   ],
   "author": "Tamas Schalk <github@schalk.hu> (https://github.com/schalkt)",
   "license": "MIT",
+  "main" : "index.js",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^2.0.0",

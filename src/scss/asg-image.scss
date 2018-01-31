@@ -38,8 +38,12 @@
 
   }
 
-  &.nomodal .source {
-    cursor: inherit;
+  &.modalon .source {
+    cursor: pointer;
+  }
+
+  &.modalon .arrows {
+    cursor: pointer;
   }
 
   .asg-info {
@@ -53,6 +57,50 @@
     position: absolute;
     bottom: 0;
     right: 0;
+  }
+
+  .arrows {
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 700;
+    opacity: 0;
+    transition: all ease 0.2s;
+    transform: scale(1.1);
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .toBackward, .toForward {
+
+      position: absolute;
+      top: 45%;
+
+      .btn {
+        padding: 10px 16px;
+        opacity: 0.7;
+
+        &:hover {
+          opacity: 1;
+        }
+
+      }
+
+    }
+
+    .toBackward {
+      left: 0;
+    }
+
+    .toForward {
+      right: 0;
+    }
+
   }
 
 }
