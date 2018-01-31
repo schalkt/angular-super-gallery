@@ -27,9 +27,8 @@
 			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 			crossorigin="anonymous"></script>
 
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	<link href="https://bootswatch.com/3/slate/bootstrap.min.css"
 		  rel="stylesheet"
-		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 		  crossorigin="anonymous">
 
 	<link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
@@ -41,10 +40,6 @@
 		.navbar-text {
 			margin: 0px;
 			padding: 9px 10px;
-		}
-
-		.navbar-inverse .navbar-brand {
-			color: #30c6d4;
 		}
 
 		.donate {
@@ -101,6 +96,10 @@
 			max-width: inherit;
 		}
 
+		.svg-logos .panel-body {
+			background-color: #c8c8c8;
+		}
+
 	</style>
 
 </head>
@@ -122,10 +121,10 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 			<span class="navbar-text">
-				<a class="btn btn-sm btn-default" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
+				<a class="btn btn-sm btn-primary" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
 					<img src="github.png" width="16" height="16"/> GITHUB
 				</a>
-				<a class="btn btn-sm btn-default" href="https://www.npmjs.com/package/angular-super-gallery" target="_blank">
+				<a class="btn btn-sm btn-primary" href="https://www.npmjs.com/package/angular-super-gallery" target="_blank">
 					<img src="npmjs.png" width="16" height="16"/> NPM
 				</a>
 
@@ -164,7 +163,7 @@
 
 				<div class="panel-heading">
 					<strong>multiple images</strong> | thumbnails | modal + controls
-					<button class="btn btn-xs pull-right" data-ng-click="showOptions1 = !showOptions1">show
+					<button class="btn btn-xs btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show
 						config
 					</button>
 				</div>
@@ -235,7 +234,7 @@
 
 				<div class="panel-heading">
 					<strong>multiple images</strong> | autoplay | modal + hidden controls
-					<button class="btn btn-xs pull-right" data-ng-click="showOptions2 = !showOptions2">
+					<button class="btn btn-xs btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">
 						show config
 					</button>
 				</div>
@@ -292,7 +291,7 @@
 			<!-- DEMO END -->
 
 			<!-- DEMO BEGIN -->
-			<div class="panel panel-default">
+			<div class="panel panel-default svg-logos">
 
 				<div class="panel-heading">
 					<strong>svg logos</strong> | autoplay | no modal | no control | auto height by first image
@@ -303,7 +302,7 @@
 					<!-- ASG BEGIN -->
 					<asg-image data-options='{
 							   "baseUrl":"svg/",
-							   "image" : { "transition": "rotateLR", "size": "contain", "arrows": false },
+							   "image" : { "transition": "rotateLR", "size": "contain", "arrows": false},
 							   "autoplay" : { "enabled": true, "delay": 2000}
 							   }'
 							   data-items="[
