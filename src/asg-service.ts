@@ -286,9 +286,9 @@ namespace angularSuperGallery {
 					visible: true, // show/hide image caption
 					position: 'top' // caption position [top, bottom]
 				},
-				header : {
-					enabled : true, // enable/disable modal menu
-					dynamic : false // show/hide modal menu on mouseover
+				header: {
+					enabled: true, // enable/disable modal menu
+					dynamic: false // show/hide modal menu on mouseover
 				},
 				help: false, // show/hide help
 				arrows: true, // show/hide arrows
@@ -298,7 +298,7 @@ namespace angularSuperGallery {
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
-					enabled : true, // enable/disable thumbnails
+					enabled: true, // enable/disable thumbnails
 					dynamic: false, // if true thumbnails visible only when mouseover
 					click: {
 						select: true, // set selected image when true
@@ -995,15 +995,21 @@ namespace angularSuperGallery {
 
 			this._visible = value;
 
+			let body = document.body;
+			let className = ' asg-yhidden';
+
 			if (value) {
 
 				this.preload(1);
 				this.modalInit();
-				this.el('body').addClass('yhidden');
+
+				if (body.className.indexOf(className) < 0) {
+					body.className = body.className + className;
+				}
 
 			} else {
 
-				this.el('body').removeClass('yhidden');
+				body.className = body.className.replace(className, '');
 
 			}
 
@@ -1156,6 +1162,10 @@ namespace angularSuperGallery {
 		}
 
 		public el(selector) : any {
+
+			console.log(selector, angular.element(selector));
+			console.log(selector, document.querySelectorAll(selector));
+
 
 			return angular.element(selector);
 
