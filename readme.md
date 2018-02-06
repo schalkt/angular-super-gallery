@@ -33,19 +33,25 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 ### Install
 
-- `npm install --save angular-super-gallery`
-- or `yarn add angular-super-gallery`
+- `npm install --save angular-super-gallery` or `yarn add angular-super-gallery`
 
 ### Setup in AngularJS
 ```
-angular.module("App", ['angularSuperGallery']);
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'angular-super-gallery/dist/angular-super-gallery.css';
+import 'jquery';
+import 'angular';
+import 'bootstrap';
+import 'angular-animate';
+import 'angular-touch';
+import 'screenfull';
+import angularSuperGallery from 'angular-super-gallery';
+
+angular.module("app", [angularSuperGallery]);
 ```
 
 ### Quick usage in HTML
 ```
-<link href="/node_modules/angular-super-gallery/dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
-<script src="/node_modules/angular-super-gallery/dist/angular-super-gallery.js"></script>
-
 <asg-image 
        data-options='{"baseUrl" : "https://wallpaperscraft.com/image/"}'
        data-items='[

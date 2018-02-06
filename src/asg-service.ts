@@ -235,7 +235,7 @@ namespace angularSuperGallery {
 
 		downloadLink() : string;
 
-		el(selector) : any;
+		el(selector) : NodeList;
 
 		log(event : string, data? : any) : void;
 
@@ -286,9 +286,9 @@ namespace angularSuperGallery {
 					visible: true, // show/hide image caption
 					position: 'top' // caption position [top, bottom]
 				},
-				header : {
-					enabled : true, // enable/disable modal menu
-					dynamic : false // show/hide modal menu on mouseover
+				header: {
+					enabled: true, // enable/disable modal menu
+					dynamic: false // show/hide modal menu on mouseover
 				},
 				help: false, // show/hide help
 				arrows: true, // show/hide arrows
@@ -298,7 +298,7 @@ namespace angularSuperGallery {
 				thumbnail: {
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
-					enabled : true, // enable/disable thumbnails
+					enabled: true, // enable/disable thumbnails
 					dynamic: false, // if true thumbnails visible only when mouseover
 					click: {
 						select: true, // set selected image when true
@@ -482,7 +482,7 @@ namespace angularSuperGallery {
 				code += (charcode * i);
 			}
 
-			return code.toString(21);
+			return 'hash' + code.toString(21);
 
 		}
 
@@ -995,15 +995,21 @@ namespace angularSuperGallery {
 
 			this._visible = value;
 
+			let body = document.body;
+			let className = ' asg-yhidden';
+
 			if (value) {
 
 				this.preload(1);
 				this.modalInit();
-				this.el('body').addClass('yhidden');
+
+				if (body.className.indexOf(className) < 0) {
+					body.className = body.className + className;
+				}
 
 			} else {
 
-				this.el('body').removeClass('yhidden');
+				body.className = body.className.replace(className, '');
 
 			}
 
@@ -1015,25 +1021,7 @@ namespace angularSuperGallery {
 			let self = this;
 
 			this.timeout(() => {
-
-				// submenu click events
-				let element = '.asg-modal.' + self.id + ' li.dropdown-submenu';
-
-				this.el(element).off().on('click', function (event) {
-
-					event.stopPropagation();
-
-					if (this.el(element).hasClass('open')) {
-						this.el(element).removeClass('open');
-					} else {
-						this.el(element).removeClass('open');
-						this.el(element).addClass('open');
-					}
-
-				});
-
 				self.setFocus();
-
 			}, 100);
 
 		}
@@ -1067,16 +1055,20 @@ namespace angularSuperGallery {
 
 			let move = () => {
 
-				let containers = this.el('.asg-thumbnail.' + this.id);
+				let containers = this.el('div.asg-thumbnail.' + this.id);
+
+				if (!containers.length) {
+					return;
+				}
 
 				for (var i = 0; i < containers.length; i++) {
 
-					let container = containers[i];
+					let container : any = containers[i];
 
 					if (container.offsetWidth) {
 
-						let items : any = this.el(container.querySelectorAll('.items'))[0];
-						let item : any = this.el(container.querySelectorAll('.item'))[0];
+						let items : any = container.querySelector('div.items');
+						let item : any = container.querySelector('div.item');
 						let thumbnail, moveX, remain;
 
 						if (item) {
@@ -1134,7 +1126,13 @@ namespace angularSuperGallery {
 		public setFocus() {
 
 			if (this.modalVisible) {
-				this.el('.asg-modal.' + this.id + ' .keyInput').trigger('focus').focus();
+
+				let element : Node = this.el('div.asg-modal.' + this.id + ' .keyInput')[0];
+
+				if (element) {
+					angular.element(element)[0].focus();
+				}
+
 			}
 
 		}
@@ -1155,9 +1153,10 @@ namespace angularSuperGallery {
 
 		}
 
-		public el(selector) : any {
+		// get element
+		public el(selector) : NodeList {
 
-			return angular.element(selector);
+			return document.querySelectorAll(selector);
 
 		}
 

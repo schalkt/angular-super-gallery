@@ -1,0 +1,14 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #101010;
+    padding: 5%;
+    height: 100%;
+    color: #c2c2c2;
+}
+
+.asg-modal {
+    background-color: #101010;
+}

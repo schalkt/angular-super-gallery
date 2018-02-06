@@ -3,37 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Example Angular Super Gallery</title>
-	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="./bundle.js"></script>
-	<style>
-		html {
-			height: 100%;
-		}
-
-		body {
-			background-color: #212121;
-			padding: 5%;
-			height: 100%;
-			color: #d5d5d5;
-		}
-
-		.asg-image {
-			box-shadow: 0px 0px 20px 2px #101010;
-		}
-
-		.asg-modal .frame {
-			margin: 5%;
-		}
-
-		.asg-control {
-			opacity: 0.4;
-		}
-
-		.asg-control:hover {
-			opacity: 0.7;
-		}
-
-	</style>
 </head>
 <body>
 
@@ -47,11 +17,16 @@
 			 					theme: "",
 			 					baseUrl: "https://wallpaperscraft.com/image/",
 			 					autoplay: { enabled: true, delay: 2700 },
-								image: { transition: "slideLR" },
+								image: { transition: "slideLR", "arrows" : false},
 								modal: { transition: "slideLR", title: "my cars ...in my dreams :)" }
 							}'
-					   data-items="['lamborghini_miura_side_view_105726_1920x1080.jpg','honda_nsx_movement_side_view_111399_1920x1080.jpg']">
-				<asg-modal></asg-modal>
+					   data-items="[
+					  		'honda_nsx_movement_side_view_111399_1920x1080.jpg',
+							'chevrolet_corvette_z06_blue_side_view_mountain_103870_1920x1080.jpg'
+					   ]">
+				<asg-modal>
+					<asg-thumbnail></asg-thumbnail>
+				</asg-modal>
 				<asg-control></asg-control>
 			</asg-image>
 			<!-- ASG END -->

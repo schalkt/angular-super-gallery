@@ -3,7 +3,7 @@ var demo = angular.module('demo', ['angularSuperGallery']);
 demo.controller('DemoController', function () {
 
 	this.options1 = {
-		debug: true,
+		debug: false,
 		baseUrl: "https://",
 		fields: {
 			source: {
@@ -98,7 +98,7 @@ demo.controller('DemoController', function () {
 	}];
 
 	this.options2 = {
-		debug: true,
+		debug: false,
 		preloadDelay: 1200,
 		autoplay: {
 			enabled: true,

@@ -77,7 +77,10 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.asg.modalClose();
-			this.$window.screenfull.exit();
+
+			if (this.$window.screenfull) {
+				this.$window.screenfull.exit();
+			}
 
 		}
 
@@ -87,7 +90,10 @@ namespace angularSuperGallery {
 
 			if (this.config.click.close) {
 				this.asg.modalClose();
-				this.$window.screenfull.exit();
+
+				if (this.$window.screenfull) {
+					this.$window.screenfull.exit();
+				}
 			}
 
 		}
@@ -212,7 +218,10 @@ namespace angularSuperGallery {
 		private toggleFullScreen($event? : UIEvent) {
 
 			this.asg.modalClick($event);
-			this.$window.screenfull.toggle();
+
+			if (this.$window.screenfull) {
+				this.$window.screenfull.toggle();
+			}
 
 		}
 
