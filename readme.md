@@ -146,6 +146,7 @@ modal: {
     title: '', // modal window title
     subtitle: '', // modal window subtitle
     caption: {
+        disabled: false, // disable image caption
         visible: true, // show/hide image caption
         position: 'top' // caption position [top, bottom]
     },
@@ -163,6 +164,7 @@ modal: {
         index: false, // show index number on thumbnail
         enabled : true, // enable/disable thumbnails
         dynamic: false, // if true thumbnails visible only when mouseover
+        autohide: true, // hide thumbnail component when single image
         click: {
             select: true, // set selected image when true
             modal: false // open modal when true
@@ -192,6 +194,7 @@ thumbnail: {
     height: 50, // thumbnail image height in pixel
     index: false, // show index number on thumbnail
     dynamic: false, // if true thumbnails visible only when mouseover
+    autohide: true, // hide thumbnail component when single image
     click: {
         select: true, // set selected image when true
         modal: false // open modal when true
@@ -284,7 +287,9 @@ image: {
 
 
 ### Todo
+- header component with controls = modal header?
 - exit button must be visible on modal when menubar hidden
+- selectable modal controls
 - indicator component
 - preload on image or thumbnail hover to options
 - load images from API endpoint

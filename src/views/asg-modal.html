@@ -177,6 +177,7 @@
 			</div>
 
 			<div class="caption {{ $ctrl.config.caption.position }}"
+				 ng-show="!$ctrl.config.caption.disabled"
 				 ng-class="{'visible' : $ctrl.config.caption.visible}">
 				<div class="content">
 					<span class="title">{{ $ctrl.asg.file.title }}</span>
