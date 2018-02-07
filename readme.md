@@ -153,6 +153,7 @@ modal: {
     header : {
         enabled : true, // enable/disable modal menu
         dynamic : false // show/hide modal menu on mouseover
+        buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'], // visible buttons setup
     },
     help: false, // show/hide help
     arrows: true, // show/hide arrows
@@ -287,6 +288,7 @@ image: {
 
 
 ### Todo
+- control component custom buttons
 - header component with controls = modal header?
 - exit button must be visible on modal when menubar hidden
 - selectable modal controls

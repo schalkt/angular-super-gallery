@@ -1,21 +1,3 @@
-<script type="text/ng-template" id="help.html">
-	<ul>
-		<li>SPACE : forward</li>
-		<li>RIGHT : forward</li>
-		<li>LEFT : backward</li>
-		<li>UP / HOME : first</li>
-		<li>DOWN / END : last</li>
-		<li>ENTER : toggle fullscreen</li>
-		<li>ESC : exit</li>
-		<li>p : play/pause</li>
-		<li>t : change transition effect</li>
-		<li>m : toggle menu</li>
-		<li>s : toggle image size</li>
-		<li>c : toggle caption</li>
-		<li>h : toggle help</li>
-	</ul>
-</script>
-
 <div class="asg-modal {{ $ctrl.asg.classes }}"
 	 ng-class="$ctrl.getClass()"
 	 ng-click="$ctrl.imageClick($event);"
@@ -29,92 +11,11 @@
 		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
 
 			<span class="buttons visible-xs pull-right">
-				 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-xs">
-						{{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
-				 </button>
+				<span ng-include="'asg-index-xs'"></span>
 			</span>
 
 			<span class="buttons hidden-xs pull-right">
-
-			   <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.autoPlayToggle($event)">
-                    <span ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
-				   <span ng-if="$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-stop"></span>
-                </button>
-
-                <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm " ng-click="$ctrl.toFirst(true, $event)">
-                    {{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}
-                </button>
-
-                <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.toBackward(true, $event)">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </button>
-
-                <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.toForward(true, $event)">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </button>
-
-             <span ng-if="!$ctrl.asg.isSingle && false" class="dropdown">
-                    <button class="btn btn-default btn-sm dropdown-toggle ng-binding" type="button"
-							data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                        <li class="dropdown-submenu">
-                            <a class="transitions" tabindex="-1" href="#">Transitions <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#" ng-click="$ctrl.setTransition(transition, $event)"
-									   ng-repeat="transition in $ctrl.asg.transitions">
-                                    <span ng-class="{'highlight' : transition == $ctrl.config.transition}">
-                                        {{ transition }}</span></a>
-                                </li>
-                            </ul>
-                        </li>
-						<li class="dropdown-submenu">
-                            <a class="themes" tabindex="-1" href="#">Themes <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#" ng-click="$ctrl.setTheme(theme, $event)"
-									   ng-repeat="theme in $ctrl.themes">
-                                    <span ng-class="{'highlight' : theme == $ctrl.asg.options.theme}">
-                                        {{ theme }}</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#" tabindex="-1" ng-click="$ctrl.toggleHelp($event)">Help</a></li>
-                    </ul>
-                </span>
-
-
-                <button class="btn btn-default btn-sm" ng-click="$ctrl.toggleMenu($event)">
-                    <span ng-if="$ctrl.config.menu" class="glyphicon glyphicon-chevron-up"></span>
-                    <span ng-if="!$ctrl.config.menu" class="glyphicon glyphicon-chevron-down"></span>
-                </button>
-
-			 	<button class="btn btn-default btn-sm btn-size" ng-click="$ctrl.toggleSize($event)">
-                    {{ $ctrl.config.size }}
-                </button>
-
-				<button class="btn btn-default btn-sm hidden-xs btn-transitions"
-						data-ng-if="!$ctrl.asg.isSingle"
-						data-ng-click="$ctrl.nextTransition($event)">
-                    {{ $ctrl.config.transition }}
-                </button>
-
-				<button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.toggleThumbnails($event)">
-				   <span class="glyphicon glyphicon-option-horizontal"></span>
-			    </button>
-
-                <button class="btn btn-default btn-sm" ng-click="$ctrl.toggleFullScreen($event)">
-                    <span class="glyphicon glyphicon-fullscreen"></span>
-                </button>
-
-				<button class="btn btn-default btn-sm" ng-click="$ctrl.toggleHelp($event)">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                </button>
-
-                <button class="btn btn-default btn-sm" ng-click="$ctrl.close($event)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-
+				<span ng-repeat="item in ::$ctrl.config.header.buttons" ng-include="('views/button/asg-' + item + '.html')"></span>
             </span>
 
 			<span ng-if="$ctrl.config.title">
@@ -129,7 +30,7 @@
 			 ng-mouseover="$ctrl.asg.over.modalImage = true;"
 			 ng-mouseleave="$ctrl.asg.over.modalImage = false;">
 
-			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include src="'help.html'"></div>
+			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'views/asg-help.html'"></div>
 
 			<div class="arrows"
 				 ng-if="$ctrl.config.arrows"

@@ -8,6 +8,7 @@ namespace angularSuperGallery {
 		header? : {
 			enabled? : boolean;
 			dynamic? : boolean;
+			buttons : Array<string>;
 		};
 		help? : boolean;
 		caption? : {
@@ -292,9 +293,9 @@ namespace angularSuperGallery {
 				},
 				header: {
 					enabled: true, // enable/disable modal menu
-					dynamic: false // show/hide modal menu on mouseover
+					dynamic: false, // show/hide modal menu on mouseover
+					buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
 				},
-				//buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
 				help: false, // show/hide help
 				arrows: true, // show/hide arrows
 				click: {
@@ -580,6 +581,11 @@ namespace angularSuperGallery {
 
 			if (options) {
 				this.options = angular.merge(this.defaults, options);
+
+				if (options.modal && options.modal.header && options.modal.header.buttons) {
+					this.options.modal.header.buttons = options.modal.header.buttons;
+				}
+
 				this.optionsLoaded = true;
 			} else {
 				this.options = this.defaults;
