@@ -8,9 +8,11 @@ namespace angularSuperGallery {
 		header? : {
 			enabled? : boolean;
 			dynamic? : boolean;
+			buttons : Array<string>;
 		};
 		help? : boolean;
 		caption? : {
+			disabled? : boolean;
 			visible? : boolean;
 			position? : string;
 		};
@@ -67,6 +69,7 @@ namespace angularSuperGallery {
 		index? : boolean;
 		enabled? : boolean;
 		dynamic? : boolean;
+		autohide : boolean;
 		click? : {
 			select : boolean;
 			modal : boolean;
@@ -177,6 +180,7 @@ namespace angularSuperGallery {
 		file : IFile;
 		sizes : Array<string>;
 		id : string;
+		isSingle : boolean;
 		events : {
 			CONFIG_LOAD : string;
 			AUTOPLAY_START : string;
@@ -283,12 +287,14 @@ namespace angularSuperGallery {
 				title: '', // modal window title
 				subtitle: '', // modal window subtitle
 				caption: {
+					disabled: false, // disable image caption
 					visible: true, // show/hide image caption
 					position: 'top' // caption position [top, bottom]
 				},
 				header: {
 					enabled: true, // enable/disable modal menu
-					dynamic: false // show/hide modal menu on mouseover
+					dynamic: false, // show/hide modal menu on mouseover
+					buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
 				},
 				help: false, // show/hide help
 				arrows: true, // show/hide arrows
@@ -300,6 +306,7 @@ namespace angularSuperGallery {
 					index: false, // show index number on thumbnail
 					enabled: true, // enable/disable thumbnails
 					dynamic: false, // if true thumbnails visible only when mouseover
+					autohide: true, // hide thumbnail component when single image
 					click: {
 						select: true, // set selected image when true
 						modal: false // open modal when true
@@ -329,6 +336,7 @@ namespace angularSuperGallery {
 				height: 50, // thumbnail image height in pixel
 				index: false, // show index number on thumbnail
 				dynamic: false, // if true thumbnails visible only when mouseover
+				autohide: false, // hide thumbnail component when single image
 				click: {
 					select: true, // set selected image when true
 					modal: false // open modal when true
@@ -482,7 +490,7 @@ namespace angularSuperGallery {
 				code += (charcode * i);
 			}
 
-			return 'hash' + code.toString(21);
+			return 'id' + code.toString(21);
 
 		}
 
@@ -573,6 +581,11 @@ namespace angularSuperGallery {
 
 			if (options) {
 				this.options = angular.merge(this.defaults, options);
+
+				if (options.modal && options.modal.header && options.modal.header.buttons) {
+					this.options.modal.header.buttons = options.modal.header.buttons;
+				}
+
 				this.optionsLoaded = true;
 			} else {
 				this.options = this.defaults;

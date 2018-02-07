@@ -78,18 +78,18 @@
 
     .title {
       display: inline-block;
-      margin: 7px 10px 4px 12px;
+      margin: 6px 10px 4px 12px;
       float: left;
       font-size: 1.2em;
     }
 
     .subtitle {
       display: inline-block;
-      margin: 4px 10px 2px 2px;
+      margin: 4px 10px 4px 2px;
       text-transform: uppercase;
       float: left;
       font-size: 0.8em;
-      padding: 8px 16px 6px 16px;
+      padding: 6px 16px 6px 16px;
     }
 
     .file {
@@ -100,6 +100,11 @@
 
     .buttons {
       margin: 4px 4px 4px 14px;
+
+      .btn {
+        margin: 0px 1px;
+      }
+
     }
 
   }

@@ -104,6 +104,13 @@ namespace angularSuperGallery {
 
 		}
 
+		// autohide and isSingle == true ?
+		public get autohide() {
+
+			return this.config.autohide && this.asg.isSingle ? true : false;
+
+		}
+
 		// get classes
 		public get classes() : string {
 
@@ -117,7 +124,7 @@ namespace angularSuperGallery {
 
 	app.component('asgThumbnail', {
 		controller: ['asgService', '$scope', '$element', angularSuperGallery.ThumbnailController],
-		template: '<div class="asg-thumbnail {{ $ctrl.classes }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
+		template: '<div data-ng-if="!$ctrl.autohide" class="asg-thumbnail {{ $ctrl.classes }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@',
 			items: '=?',
