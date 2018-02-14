@@ -288,6 +288,8 @@ image: {
 
 
 ### Todo
+- new option: disable hash in modal
+- remember website hash and set back when modal closed
 - control component custom buttons
 - header component with controls = modal header?
 - exit button must be visible on modal when menubar hidden
