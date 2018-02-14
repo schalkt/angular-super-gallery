@@ -108,6 +108,7 @@ namespace angularSuperGallery {
 
 		debug? : boolean;
 		baseUrl? : string;
+		hashUrl? : boolean;
 		fields? : {
 			source? : {
 				modal? : string;
@@ -267,6 +268,7 @@ namespace angularSuperGallery {
 		public defaults : IOptions = {
 			debug: false, // image load, autoplay, etc. info in console.log
 			baseUrl: '', // url prefix
+			hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
 			fields: {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)
@@ -435,6 +437,10 @@ namespace angularSuperGallery {
 		private parseHash() {
 
 			if (!this.id) {
+				return;
+			}
+
+			if (!this.options.hashUrl) {
 				return;
 			}
 
@@ -695,7 +701,7 @@ namespace angularSuperGallery {
 
 		public setHash() {
 
-			if (this.modalVisible) {
+			if (this.modalVisible && this.options.hashUrl) {
 				this.location.hash([this.slug, this.id, this.selected + 1].join('-'));
 			}
 
