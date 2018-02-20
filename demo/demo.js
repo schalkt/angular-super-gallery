@@ -100,6 +100,7 @@ demo.controller('DemoController', function () {
 	this.options2 = {
 		debug: false,
 		preloadDelay: 1200,
+		hashUrl: false,
 		autoplay: {
 			enabled: true,
 			delay: 3800
