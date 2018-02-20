@@ -1063,7 +1063,10 @@ namespace angularSuperGallery {
 
 		public modalClose() {
 
-			this.location.hash('');
+			if (this.options.hashUrl) {
+				this.location.hash('');
+			}
+
 			this.modalVisible = false;
 			this.event(this.events.MODAL_CLOSE, {index: this.selected});
 
