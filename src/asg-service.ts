@@ -267,8 +267,8 @@ namespace angularSuperGallery {
 		public optionsLoaded = false;
 		public defaults : IOptions = {
 			debug: false, // image load, autoplay, etc. info in console.log
-			baseUrl: '', // url prefix
 			hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
+			baseUrl: '', // url prefix
 			fields: {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)

@@ -3,6 +3,12 @@ Angular Super Gallery
 
 *AngularJS image gallery*
 
+[![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/)
+[![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
+[![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
+[![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
+[![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
+
 ### Demo
 
 See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gallery/demo/)
@@ -12,11 +18,11 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 ### Requirements
 - [jQuery](https://github.com/jquery/jquery/tree/3.2.1) ^3.2.1
-- [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.6
-- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.6
-- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.6
-- [screenfull](https://www.npmjs.com/package/screenfull) 3.3.2
-- [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.7
+- [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.x
+- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.x
+- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.x
+- [screenfull](https://www.npmjs.com/package/screenfull) 3.3.x
+- [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.x
 
 
 ### Features
@@ -24,7 +30,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 - highly configurable
 - image display mode (cover, contain, auto, stretch)
 - multiple image sizes / thumbnail (for panel) , medium (for image), original (for modal)
-- responsive and 3 built-in themes
+- responsive and 4 built-in themes
 - 11 image transitions (CSS3 3D)
 - configurable keyboard shortcuts in modal window ([keyCodes](https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes))
 - events (config load, image load, modal open/close, autoplay start/stop, etc.)
@@ -35,7 +41,7 @@ See demo/index.html or [online demo](http://schalk.hu/projects/angular-super-gal
 
 - `npm install --save angular-super-gallery` or `yarn add angular-super-gallery`
 
-### Setup in AngularJS
+### Setup
 ```
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'angular-super-gallery/dist/angular-super-gallery.css';
@@ -124,48 +130,79 @@ or (without thumbnails)
 
 ### Available options
 ```
-debug: false, // image load, autoplay, etc. info in console.log
-baseUrl: '', // url prefix
-fields: {
-    source: {
-        modal: 'url', // required, image url for modal component (large size)
-        panel: 'url', // image url for panel component (thumbnail size)
-        image: 'url' // image url for image (medium or custom size)
+    debug: false, // image load, autoplay, etc. info in console.log
+    hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
+    baseUrl: '', // url prefix
+    fields: {
+        source: {
+            modal: 'url', // required, image url for modal component (large size)
+            panel: 'url', // image url for panel component (thumbnail size)
+            image: 'url' // image url for image (medium or custom size)
+        },
+        title: 'title', // title field name
+        description: 'description', // description field name
     },
-    title: 'title', // title field name
-    description: 'description', // description field name
-},
-autoplay: {
-    enabled: false, // slideshow play enabled/disabled
-    delay: 4100 // autoplay delay in millisecond
-},
-theme: 'default', // css style [default, darkblue, whitegold]
-preloadDelay: 770,
-preload: [], // preload images by index number
-modal: {
-    title: '', // modal window title
-    subtitle: '', // modal window subtitle
-    caption: {
-        disabled: false, // disable image caption
-        visible: true, // show/hide image caption
-        position: 'top' // caption position [top, bottom]
+    autoplay: {
+        enabled: false, // slideshow play enabled/disabled
+        delay: 4100 // autoplay delay in millisecond
     },
-    header : {
-        enabled : true, // enable/disable modal menu
-        dynamic : false // show/hide modal menu on mouseover
-        buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'], // visible buttons setup
-    },
-    help: false, // show/hide help
-    arrows: true, // show/hide arrows
-    click: {
-        close: true // when click on the image close the modal
+    theme: 'default', // css style [default, darkblue, whitegold]
+    preloadDelay: 770,
+    preload: [], // preload images by index number
+    modal: {
+        title: '', // modal window title
+        subtitle: '', // modal window subtitle
+        caption: {
+            disabled: false, // disable image caption
+            visible: true, // show/hide image caption
+            position: 'top' // caption position [top, bottom]
+        },
+        header: {
+            enabled: true, // enable/disable modal menu
+            dynamic: false, // show/hide modal menu on mouseover
+            buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
+        },
+        help: false, // show/hide help
+        arrows: true, // show/hide arrows
+        click: {
+            close: true // when click on the image close the modal
+        },
+        thumbnail: {
+            height: 50, // thumbnail image height in pixel
+            index: false, // show index number on thumbnail
+            enabled: true, // enable/disable thumbnails
+            dynamic: false, // if true thumbnails visible only when mouseover
+            autohide: true, // hide thumbnail component when single image
+            click: {
+                select: true, // set selected image when true
+                modal: false // open modal when true
+            },
+            hover: {
+                select: false // set selected image on mouseover when true
+            },
+        },
+        transition: 'slideLR', // transition effect
+        size: 'cover', // contain, cover, auto, stretch
+        keycodes: {
+            exit: [27], // esc
+            playpause: [80], // p
+            forward: [32, 39], // space, right arrow
+            backward: [37], // left arrow
+            first: [38, 36], // up arrow, home
+            last: [40, 35], // down arrow, end
+            fullscreen: [13], // enter
+            menu: [77], // m
+            caption: [67], // c
+            help: [72], // h
+            size: [83], // s
+            transition: [84] // t
+        }
     },
     thumbnail: {
         height: 50, // thumbnail image height in pixel
         index: false, // show index number on thumbnail
-        enabled : true, // enable/disable thumbnails
         dynamic: false, // if true thumbnails visible only when mouseover
-        autohide: true, // hide thumbnail component when single image
+        autohide: false, // hide thumbnail component when single image
         click: {
             select: true, // set selected image when true
             modal: false // open modal when true
@@ -174,65 +211,35 @@ modal: {
             select: false // set selected image on mouseover when true
         },
     },
-    transition: 'slideLR', // transition effect
-    size: 'cover', // contain, cover, auto, stretch
-    keycodes: {
-        exit: [27], // esc
-        playpause: [80], // p
-        forward: [32, 39], // space, right arrow
-        backward: [37], // left arrow
-        first: [38, 36], // up arrow, home
-        last: [40, 35], // down arrow, end
-        fullscreen: [13], // enter
-        menu: [77], // m
-        caption: [67], // c
-        help: [72], // h
-        size: [83], // s
-        transition: [84] // t
+    panel: {
+        visible: true,
+        item: {
+            class: 'col-md-3', // item class
+            caption: false, // show/hide image caption
+            index: false, // show/hide image index
+        },
+        hover: {
+            select: false // set selected image on mouseover when true
+        },
+        click: {
+            select: false, // set selected image when true
+            modal: true // open modal when true
+        },
+    },
+    image: {
+        transition: 'slideLR', // transition effect
+        size: 'cover', // contain, cover, auto, stretch
+        arrows: true, // show/hide arrows
+        click: {
+            modal: true // when click on the image open the modal window
+        },
+        height: null, // height in pixel
+        heightMin: null, // min height in pixel
+        heightAuto: {
+            initial: true, // calculate div height by first image
+            onresize: false // calculate div height on window resize
+        }
     }
-},
-thumbnail: {
-    height: 50, // thumbnail image height in pixel
-    index: false, // show index number on thumbnail
-    dynamic: false, // if true thumbnails visible only when mouseover
-    autohide: true, // hide thumbnail component when single image
-    click: {
-        select: true, // set selected image when true
-        modal: false // open modal when true
-    },
-    hover: {
-        select: false // set selected image on mouseover when true
-    },
-},
-panel: {
-    visible: true,
-    item: {
-        class: 'col-md-3', // item class
-        caption: false, // show/hide image caption
-        index: false, // show/hide image index
-    },
-    hover: {
-        select: false // set selected image on mouseover when true
-    },
-    click: {
-        select: false, // set selected image when true
-        modal: true // open modal when true
-    },
-},
-image: {
-    transition: 'slideLR', // transition effect
-    size: 'cover', // contain, cover, auto, stretch
-    arrows: true, // show/hide arrows
-    click: {
-        modal: true // when click on the image open the modal window
-    },
-    height: null, // height in pixel
-    heightMin: null, // min height in pixel
-    heightAuto: {
-        initial: true, // calculate div height by first image
-        onresize: false // calculate div height on window resize
-    }
-}
 ```
 
 
@@ -288,10 +295,10 @@ image: {
 
 
 ### Todo
+- remember website hash and set back when modal closed
 - control component custom buttons
 - header component with controls = modal header?
 - exit button must be visible on modal when menubar hidden
-- selectable modal controls
 - indicator component
 - preload on image or thumbnail hover to options
 - load images from API endpoint
