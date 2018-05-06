@@ -46,6 +46,13 @@ namespace angularSuperGallery {
 
 			});
 
+			// scope apply when image loaded
+			this.$rootScope.$on(this.asg.events.LOAD_IMAGE + this.id, (event, data) => {
+
+				this.$scope.$apply();
+
+			});
+
 		}
 
 		// set image component height
@@ -78,7 +85,7 @@ namespace angularSuperGallery {
 			this.asg.options[this.type] = value;
 
 		}
-
+	
 		public toBackward(stop? : boolean, $event? : UIEvent) {
 
 			if ($event) {
@@ -96,6 +103,14 @@ namespace angularSuperGallery {
 			}
 
 			this.asg.toForward(stop);
+
+		}
+
+		public hover(index : number, $event? : MouseEvent) {
+			
+			if (this.config.arrows.preload === true) {
+				this.asg.hoverPreload(index);
+			}
 
 		}
 
@@ -134,7 +149,6 @@ namespace angularSuperGallery {
 			if ($event) {
 				$event.stopPropagation();
 			}
-
 
 			if (this.config.click.modal) {
 				this.asg.modalOpen(this.asg.selected);

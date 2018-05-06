@@ -13,6 +13,7 @@ namespace angularSuperGallery {
 
 		constructor(private service : IServiceController,
 					private $window : ng.IWindowService,
+					private $rootScope : ng.IRootScopeService,
 					private $scope : ng.IScope) {
 
 		}
@@ -24,6 +25,11 @@ namespace angularSuperGallery {
 			this.asg = this.service.getInstance(this);
 			this.asg.modalAvailable = true;
 
+			// scope apply when image loaded
+			this.$rootScope.$on(this.asg.events.LOAD_IMAGE + this.id, (event, data) => {
+				this.$scope.$apply();
+			});
+					
 		}
 
 
@@ -94,6 +100,14 @@ namespace angularSuperGallery {
 				if (this.$window.screenfull) {
 					this.$window.screenfull.exit();
 				}
+			}
+
+		}
+
+		public hover(index : number, $event? : MouseEvent) {
+			
+			if (this.config.arrows.preload === true) {
+				this.asg.hoverPreload(index);
 			}
 
 		}
@@ -362,7 +376,7 @@ namespace angularSuperGallery {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgModal', {
-		controller: ['asgService', '$window', '$scope', angularSuperGallery.ModalController],
+		controller: ['asgService', '$window', '$rootScope', '$scope', angularSuperGallery.ModalController],
 		templateUrl: 'views/asg-modal.html',
 		transclude: true,
 		bindings: {

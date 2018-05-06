@@ -12,7 +12,38 @@
   bottom: 0px;
   opacity: 1;
 
-  .source {
+  background-size: auto;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+ 
+  >.placeholder {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: auto;
+    overflow: hidden;
+    background-size: auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+
+    &.cover {
+      background-size: cover;
+    }
+
+    &.contain {
+      background-size: contain;
+    }
+
+    &.stretch {
+      background-size: 100% 100%;
+    }
+
+  } 
+
+  >.source {
     max-width: 100%;
     max-height: 100%;
     margin: auto;
@@ -25,6 +56,8 @@
     background-size: auto;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    transition: all ease .5s;
+    opacity: 0;
 
     &.cover {
       background-size: cover;
@@ -36,6 +69,16 @@
 
     &.stretch {
       background-size: 100% 100%;
+    }
+
+  }
+
+  &.loaded {
+      
+    background-image: none;
+
+    .source {            
+      opacity: 1;
     }
 
   }

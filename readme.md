@@ -12,6 +12,7 @@ Angular Super Gallery
 [![bitHound Overall Score](https://www.bithound.io/github/schalkt/angular-super-gallery/badges/score.svg)](https://www.bithound.io/github/schalkt/angular-super-gallery)
 [![bitHound Dependencies](https://www.bithound.io/github/schalkt/angular-super-gallery/badges/dependencies.svg)](https://www.bithound.io/github/schalkt/angular-super-gallery/develop/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/schalkt/angular-super-gallery/badges/code.svg)](https://www.bithound.io/github/schalkt/angular-super-gallery)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/angular-super-gallery/badge)](https://www.jsdelivr.com/package/npm/angular-super-gallery)
 
 ### Demo
 
@@ -105,11 +106,11 @@ this.nature1Options = {
 this.nature1 = [
     {
         "link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
-  		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x168.jpg",
+  		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x188.jpg",
   		"medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
   	}, {
   		"link": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
-  		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x168.jpg",
+  		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x188.jpg",
   		"medium": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_602x339.jpg",
   	}
 ];
@@ -150,8 +151,9 @@ or (without thumbnails)
         enabled: false, // slideshow play enabled/disabled
         delay: 4100 // autoplay delay in millisecond
     },
-    theme: 'default', // css style [default, darkblue, whitegold]
-    preloadDelay: 770,
+    theme: 'default', // css style [default, darkblue, darkred, whitegold]
+    preloadNext: false, // preload next image (forward/backward)
+    preloadDelay: 770, // preload delay for preloadNext
     preload: [], // preload images by index number
     modal: {
         title: '', // modal window title
@@ -167,7 +169,10 @@ or (without thumbnails)
             buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
         },
         help: false, // show/hide help
-        arrows: true, // show/hide arrows
+        arrows: {
+            enabled: true, // show/hide arrows
+            preload: true, // preload image on mouseover
+        },
         click: {
             close: true // when click on the image close the modal
         },
@@ -182,6 +187,7 @@ or (without thumbnails)
                 modal: false // open modal when true
             },
             hover: {
+                preload: true, // preload image on mouseover
                 select: false // set selected image on mouseover when true
             },
         },
@@ -212,6 +218,7 @@ or (without thumbnails)
             modal: false // open modal when true
         },
         hover: {
+            preload: true, // preload image on mouseover
             select: false // set selected image on mouseover when true
         },
     },
@@ -223,6 +230,7 @@ or (without thumbnails)
             index: false, // show/hide image index
         },
         hover: {
+            preload: true, // preload image on mouseover
             select: false // set selected image on mouseover when true
         },
         click: {
@@ -233,7 +241,10 @@ or (without thumbnails)
     image: {
         transition: 'slideLR', // transition effect
         size: 'cover', // contain, cover, auto, stretch
-        arrows: true, // show/hide arrows
+        arrows: {
+            enabled: true,  // show/hide arrows
+            preload: true, // preload image on mouseover
+        },
         click: {
             modal: true // when click on the image open the modal window
         },
@@ -304,7 +315,6 @@ or (without thumbnails)
 - header component with controls = modal header?
 - exit button must be visible on modal when menubar hidden
 - indicator component
-- preload on image or thumbnail hover to options
 - load images from API endpoint
 - slideshow mode (fullscreen, hide menu and arrows, start autoplay)
 - options and info menu in modal

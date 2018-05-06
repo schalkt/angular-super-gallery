@@ -3,6 +3,7 @@
 		 ng-click="$ctrl.setSelected(key, $event)"
 		 ng-mouseover="$ctrl.hover(key, $event)"
 		 ng-repeat="(key,file) in $ctrl.asg.files"
+		 ng-style="{'background-color': file.source.color}"
 		 ng-class="{'selected' : $ctrl.asg.selected == key}">
 
 		<img ng-src="{{ file.source.panel }}"
