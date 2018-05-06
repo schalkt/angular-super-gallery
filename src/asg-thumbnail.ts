@@ -25,7 +25,7 @@ namespace angularSuperGallery {
 
 			// get parent asg component (modal)
 			if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent.$ctrl) {
-				this.modal = this.$scope.$parent.$parent.$ctrl.type == 'modal' ? true : false;
+				this.modal = this.$scope.$parent.$parent.$ctrl.type === 'modal' ? true : false;
 			}
 
 		}
@@ -48,9 +48,11 @@ namespace angularSuperGallery {
 
 		// prelod when mouseover and set selected if enabled
 		public hover(index : number, $event? : MouseEvent) {
-
-			this.asg.hoverPreload(index);
-
+			
+			if (this.config.hover.preload === true) {
+				this.asg.hoverPreload(index);
+			}
+						
 			if (this.config.hover.select === true) {
 				this.asg.setSelected(index);
 			}
@@ -60,7 +62,7 @@ namespace angularSuperGallery {
 		// get thumbnail config
 		public get config() : IOptionsThumbnail {
 
-			return this.modal ? this.asg.options['modal'][this.type] : this.asg.options[this.type];
+			return this.modal ? this.asg.options.modal[this.type] : this.asg.options[this.type];
 
 		}
 
@@ -70,7 +72,7 @@ namespace angularSuperGallery {
 			if (this.modal) {
 				this.asg.options[this.type] = value;
 			} else {
-				this.asg.options['modal'][this.type] = value;
+				this.asg.options.modal[this.type] = value;
 			}
 
 		}

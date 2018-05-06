@@ -8,19 +8,20 @@
 
 		<div class="img"
 			 ng-repeat="(key,file) in $ctrl.asg.files"
-			 ng-show="$ctrl.asg.selected == key"
-			 ng-class="{'loading' : !file.loaded.image}">
+			 ng-show="$ctrl.asg.selected == key"		
+			 ng-style="$ctrl.asg.preloadStyle(file)"
+			 ng-class="{'loaded' : file.loaded.image}">
 
+			<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file)"></div>
 			<div class="source {{ $ctrl.config.size }}"
-				 ng-style="{'background-image': 'url(' + file.source.image + ')'}"
-				 ng-if="file.loaded.image"
+				 ng-style="{'background-image': 'url(' + file.source.image + ')'}"				 
 				 ng-mouseover="$ctrl.asg.hoverPreload(key)"
 				 ng-click="$ctrl.modalOpen($event)"></div>
 
 		</div>
 	</div>
 	<div class="arrows"
-		 ng-if="$ctrl.config.arrows"
+		 ng-if="$ctrl.config.arrows.enabled"
 		 ng-swipe-left="$ctrl.asg.toForward(true)"
 		 ng-swipe-right="$ctrl.asg.toBackward(true)"
 		 ng-click="$ctrl.modalOpen($event)">
@@ -28,11 +29,14 @@
 		<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 
 			<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
-					data-ng-click="$ctrl.toBackward(true, $event)">
+					ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
+					ng-click="$ctrl.toBackward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
-			<button class="btn btn-default btn-md pull-left visible-sm" ng-click="$ctrl.toBackward(true, $event)">
+			<button class="btn btn-default btn-md pull-left visible-sm" 
+					ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"	
+					ng-click="$ctrl.toBackward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-left"></span>
 			</button>
 
@@ -41,11 +45,14 @@
 		<div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
 			<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
-					data-ng-click="$ctrl.toForward(true, $event)">
+					ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
+					ng-click="$ctrl.toForward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 
-			<button class="btn btn-default btn-md pull-right visible-sm" ng-click="$ctrl.toForward(true, $event)">
+			<button class="btn btn-default btn-md pull-right visible-sm" 
+					ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
+					ng-click="$ctrl.toForward(true, $event)">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
 

@@ -15,15 +15,22 @@
 			<asg-image data-options='{
 								debug: true,
 			 					theme: "",
-			 					baseUrl: "https://wallpaperscraft.com/image/",
+			 					baseUrl: "https://images.wallpaperscraft.com/image/",
 			 					autoplay: { enabled: true, delay: 2700 },
 								image: { transition: "slideLR", "arrows" : false},
 								modal: { transition: "slideLR", title: "my cars ...in my dreams :)" }
 							}'
-					   data-items="[
-					  		'honda_nsx_movement_side_view_111399_1920x1080.jpg',
-							'chevrolet_corvette_z06_blue_side_view_mountain_103870_1920x1080.jpg'
-					   ]">
+							data-items="[{
+								source :{
+									image: 'honda_nsx_movement_side_view_111399_960x544.jpg',
+									modal: 'honda_nsx_movement_side_view_111399_1920x1080.jpg'
+								}
+							}, {
+								source :{
+									image: 'chevrolet_corvette_z06_blue_side_view_mountain_103870_960x544.jpg',
+									modal: 'chevrolet_corvette_z06_blue_side_view_mountain_103870_1920x1080.jpg'
+								}
+							}]">
 				<asg-modal>
 					<asg-thumbnail></asg-thumbnail>
 				</asg-modal>

@@ -40,8 +40,10 @@ namespace angularSuperGallery {
 		}
 
 		public hover(index : number, $event? : MouseEvent) {
-
-			this.asg.hoverPreload(index);
+			
+			if (this.config.hover.preload === true) {
+				this.asg.hoverPreload(index);
+			}
 
 			if (this.config.hover.select === true) {
 				this.asg.setSelected(index);

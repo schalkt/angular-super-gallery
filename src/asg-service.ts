@@ -5,59 +5,63 @@ namespace angularSuperGallery {
 	// modal component options
 	export interface IOptionsModal {
 
-		header? : {
-			enabled? : boolean;
-			dynamic? : boolean;
-			buttons : Array<string>;
+		header?: {
+			enabled?: boolean;
+			dynamic?: boolean;
+			buttons: Array<string>;
 		};
-		help? : boolean;
-		caption? : {
-			disabled? : boolean;
-			visible? : boolean;
-			position? : string;
+		help?: boolean;
+		caption?: {
+			disabled?: boolean;
+			visible?: boolean;
+			position?: string;
 		};
-		transition? : string;
-		title? : string;
-		subtitle? : string;
-		arrows? : boolean;
-		size? : string;
-		thumbnail? : IOptionsThumbnail;
-		marginTop? : number;
-		marginBottom? : number;
-		click? : {
-			close : boolean;
+		transition?: string;
+		title?: string;
+		subtitle?: string;
+		arrows?: {
+			preload?: boolean;
+			enabled?: boolean;
 		};
-		keycodes? : {
-			exit? : Array<number>;
-			playpause? : Array<number>;
-			forward? : Array<number>;
-			backward? : Array<number>;
-			first? : Array<number>;
-			last? : Array<number>;
-			fullscreen? : Array<number>;
-			menu? : Array<number>;
-			caption? : Array<number>;
-			help? : Array<number>;
-			size? : Array<number>;
-			transition? : Array<number>;
+		size?: string;
+		thumbnail?: IOptionsThumbnail;
+		marginTop?: number;
+		marginBottom?: number;
+		click?: {
+			close: boolean;
+		};
+		keycodes?: {
+			exit?: Array<number>;
+			playpause?: Array<number>;
+			forward?: Array<number>;
+			backward?: Array<number>;
+			first?: Array<number>;
+			last?: Array<number>;
+			fullscreen?: Array<number>;
+			menu?: Array<number>;
+			caption?: Array<number>;
+			help?: Array<number>;
+			size?: Array<number>;
+			transition?: Array<number>;
 		};
 	}
 
 	// panel component options
 	export interface IOptionsPanel {
 
-		visible? : boolean;
-		item? : {
-			class? : string;
-			caption : boolean;
-			index : boolean;
+		visible?: boolean;
+		item?: {
+			class?: string;
+			caption: boolean;
+			index: boolean;
 		};
-		hover? : {
-			select : boolean;
+		hover?: {
+			preload: boolean;
+			select: boolean;
 		};
-		click? : {
-			select : boolean;
-			modal : boolean;
+		click?: {
+			select: boolean;
+			modal: boolean;
 		};
 
 	}
@@ -65,17 +69,18 @@ namespace angularSuperGallery {
 	// thumbnail component options
 	export interface IOptionsThumbnail {
 
-		height? : number,
-		index? : boolean;
-		enabled? : boolean;
-		dynamic? : boolean;
-		autohide : boolean;
-		click? : {
-			select : boolean;
-			modal : boolean;
+		height?: number;
+		index?: boolean;
+		enabled?: boolean;
+		dynamic?: boolean;
+		autohide: boolean;
+		click?: {
+			select: boolean;
+			modal: boolean;
 		};
-		hover? : {
-			select : boolean;
+		hover?: {
+			preload: boolean;
+			select: boolean;
 		};
 
 	}
@@ -88,17 +93,20 @@ namespace angularSuperGallery {
 	// image component options
 	export interface IOptionsImage {
 
-		transition? : string;
-		size? : string;
-		arrows? : boolean;
-		click? : {
-			modal : boolean;
+		transition?: string;
+		size?: string;
+		arrows?: {
+			preload?: boolean;
+			enabled?: boolean;
 		};
-		height? : number;
-		heightMin? : number;
-		heightAuto? : {
-			initial? : boolean;
-			onresize? : boolean;
+		click?: {
+			modal: boolean;
+		};
+		height?: number;
+		heightMin?: number;
+		heightAuto?: {
+			initial?: boolean;
+			onresize?: boolean;
 		};
 
 	}
@@ -106,143 +114,148 @@ namespace angularSuperGallery {
 	// gallery options
 	export interface IOptions {
 
-		debug? : boolean;
-		baseUrl? : string;
-		hashUrl? : boolean;
-		fields? : {
-			source? : {
-				modal? : string;
-				panel? : string;
-				image? : string;
+		debug?: boolean;
+		baseUrl?: string;
+		hashUrl?: boolean;
+		fields?: {
+			source?: {
+				modal?: string;
+				panel?: string;
+				image?: string;
+				placeholder?: string;
 			}
-			title? : string;
-			description? : string;
-			thumbnail? : string;
+			title?: string;
+			description?: string;
+			thumbnail?: string;
 		};
-		autoplay? : {
-			enabled? : boolean;
-			delay? : number;
+		autoplay?: {
+			enabled?: boolean;
+			delay?: number;
 		};
-		theme? : string;
-		preloadDelay? : number;
-		preload? : Array<number>;
-		modal? : IOptionsModal;
-		panel? : IOptionsPanel;
-		image? : IOptionsImage;
-		thumbnail? : IOptionsThumbnail;
+		theme?: string;
+		preload?: Array<number>;
+		preloadNext?: boolean;
+		preloadDelay?: number;
+		loadingImage?: string;
+		modal?: IOptionsModal;
+		panel?: IOptionsPanel;
+		image?: IOptionsImage;
+		thumbnail?: IOptionsThumbnail;
 
 	}
 
 	// image source
 	export interface ISource {
 
-		modal : string; // original, required
-		panel? : string;
-		image? : string;
+		modal: string; // original, required
+		panel?: string;
+		image?: string;
+		color?: string;
+		placeholder?: string;
 
 	}
 
 	// image file
 	export interface IFile {
 
-		source : ISource;
-		title? : string;
-		name? : string;
-		extension? : string;
-		description? : string;
-		download? : string;
-		loaded? : {
-			modal? : boolean;
-			panel? : boolean;
-			image? : boolean;
+		source: ISource;
+		title?: string;
+		name?: string;
+		extension?: string;
+		description?: string;
+		download?: string;
+		loaded?: {
+			modal?: boolean;
+			panel?: boolean;
+			image?: boolean;
 		};
-		width? : number;
-		height? : number;
+		width?: number;
+		height?: number;
 
 	}
 
 	export interface IOver {
-		modalImage : boolean;
-		panel : boolean;
+		modalImage: boolean;
+		panel: boolean;
 	}
 
 	// service controller interface
 	export interface IServiceController {
 
-		modalVisible : boolean;
-		panelVisible : boolean;
-		modalAvailable : boolean;
-		transitions : Array<string>;
-		themes : Array<string>;
-		classes : string;
-		options : IOptions;
-		items : Array<IFile>;
-		selected : number;
-		file : IFile;
-		sizes : Array<string>;
-		id : string;
-		isSingle : boolean;
-		events : {
-			CONFIG_LOAD : string;
-			AUTOPLAY_START : string;
-			AUTOPLAY_STOP : string;
-			PARSE_IMAGES : string;
-			LOAD_IMAGE : string;
-			FIRST_IMAGE : string;
-			CHANGE_IMAGE : string;
-			MODAL_OPEN : string;
-			MODAL_CLOSE : string;
+		modalVisible: boolean;
+		panelVisible: boolean;
+		modalAvailable: boolean;
+		transitions: Array<string>;
+		themes: Array<string>;
+		classes: string;
+		options: IOptions;
+		items: Array<IFile>;
+		selected: number;
+		file: IFile;
+		sizes: Array<string>;
+		id: string;
+		isSingle: boolean;
+		events: {
+			CONFIG_LOAD: string;
+			AUTOPLAY_START: string;
+			AUTOPLAY_STOP: string;
+			PARSE_IMAGES: string;
+			LOAD_IMAGE: string;
+			FIRST_IMAGE: string;
+			CHANGE_IMAGE: string;
+			MODAL_OPEN: string;
+			MODAL_CLOSE: string;
 		};
 
-		getInstance(component : any) : IServiceController;
+		getInstance(component: any): IServiceController;
 
-		setDefaults() : void;
+		setDefaults(): void;
 
-		setOptions(options : IOptions) : IOptions;
+		setOptions(options: IOptions): IOptions;
 
-		setItems(items : Array<IFile>) : void;
+		setItems(items: Array<IFile>): void;
 
-		preload(wait? : number) : void;
+		preload(wait?: number): void;
 
-		normalize(index : number) : number;
+		normalize(index: number): number;
 
-		setFocus() : void;
+		setFocus(): void;
 
-		setSelected(index : number);
+		setSelected(index: number);
 
-		modalOpen(index : number) : void;
+		modalOpen(index: number): void;
 
-		modalClose() : void;
+		modalClose(): void;
 
-		modalClick($event? : UIEvent) : void;
+		modalClick($event?: UIEvent): void;
 
-		thumbnailsMove(delay? : number) : void;
+		thumbnailsMove(delay?: number): void;
 
-		toBackward(stop? : boolean) : void;
+		toBackward(stop?: boolean): void;
 
-		toForward(stop? : boolean) : void;
+		toForward(stop?: boolean): void;
 
-		toFirst(stop? : boolean) : void;
+		toFirst(stop?: boolean): void;
 
-		toLast(stop? : boolean) : void;
+		toLast(stop?: boolean): void;
 
-		loadImage(index? : number) : void;
+		loadImage(index?: number): void;
 
-		loadImages(indexes : Array<number>) : void;
+		loadImages(indexes: Array<number>): void;
 
-		hoverPreload(index : number) : void;
+		hoverPreload(index: number): void;
 
-		autoPlayToggle() : void;
+		autoPlayToggle(): void;
 
-		toggle(element : string) : void;
+		toggle(element: string): void;
 
-		setHash() : void;
+		setHash(): void;
 
-		downloadLink() : string;
+		downloadLink(): string;
 
-		el(selector) : NodeList;
+		el(selector): NodeList;
 
-		log(event : string, data? : any) : void;
+		log(event: string, data?: any): void;
 
 
 	}
@@ -251,21 +264,21 @@ namespace angularSuperGallery {
 	export class ServiceController {
 
 		public slug = 'asg';
-		public id : string;
-		public items : any;
-		public files : Array<IFile> = [];
-		public direction : string;
+		public id: string;
+		public items: any;
+		public files: Array<IFile> = [];
+		public direction: string;
 		public modalAvailable = false;
 
-		private instances : {} = {};
-		private _selected : number;
+		private instances: {} = {};
+		private _selected: number;
 		private _visible = false;
-		private autoplay : angular.IPromise<any>;
+		private autoplay: angular.IPromise<any>;
 		private first = false;
 
-		public options : IOptions = null;
+		public options: IOptions = null;
 		public optionsLoaded = false;
-		public defaults : IOptions = {
+		public defaults: IOptions = {
 			debug: false, // image load, autoplay, etc. info in console.log
 			hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
 			baseUrl: '', // url prefix
@@ -273,7 +286,8 @@ namespace angularSuperGallery {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)
 					panel: 'url', // image url for panel component (thumbnail size)
-					image: 'url' // image url for image (medium or custom size)
+					image: 'url', // image url for image (medium or custom size)
+					placeholder: null // image url for preload lowres image
 				},
 				title: 'title', // title field name
 				description: 'description', // description field name
@@ -282,8 +296,10 @@ namespace angularSuperGallery {
 				enabled: false, // slideshow play enabled/disabled
 				delay: 4100 // autoplay delay in millisecond
 			},
-			theme: 'default', // css style [default, darkblue, whitegold]
-			preloadDelay: 770,
+			theme: 'default', // css style [default, darkblue, darkred, whitegold]		
+			preloadNext: false, // preload next image (forward/backward)
+			preloadDelay: 770, // preload delay for preloadNext
+			loadingImage: 'preload.svg', // loader image
 			preload: [], // preload images by index number
 			modal: {
 				title: '', // modal window title
@@ -299,7 +315,10 @@ namespace angularSuperGallery {
 					buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
 				},
 				help: false, // show/hide help
-				arrows: true, // show/hide arrows
+				arrows: {
+					enabled: true, // show/hide arrows
+					preload: true, // preload image on mouseover
+				},
 				click: {
 					close: true // when click on the image close the modal
 				},
@@ -314,6 +333,7 @@ namespace angularSuperGallery {
 						modal: false // open modal when true
 					},
 					hover: {
+						preload: true, // preload image on mouseover
 						select: false // set selected image on mouseover when true
 					},
 				},
@@ -344,6 +364,7 @@ namespace angularSuperGallery {
 					modal: false // open modal when true
 				},
 				hover: {
+					preload: true, // preload image on mouseover
 					select: false // set selected image on mouseover when true
 				},
 			},
@@ -355,6 +376,7 @@ namespace angularSuperGallery {
 					index: false, // show/hide image index
 				},
 				hover: {
+					preload: true, // preload image on mouseover
 					select: false // set selected image on mouseover when true
 				},
 				click: {
@@ -365,7 +387,10 @@ namespace angularSuperGallery {
 			image: {
 				transition: 'slideLR', // transition effect
 				size: 'cover', // contain, cover, auto, stretch
-				arrows: true, // show/hide arrows
+				arrows: {
+					enabled: true,  // show/hide arrows
+					preload: true, // preload image on mouseover
+				},
 				click: {
 					modal: true // when click on the image open the modal window
 				},
@@ -379,7 +404,7 @@ namespace angularSuperGallery {
 		};
 
 		// available image sizes
-		public sizes : Array<string> = [
+		public sizes: Array<string> = [
 			'contain',
 			'cover',
 			'auto',
@@ -387,14 +412,14 @@ namespace angularSuperGallery {
 		];
 
 		// available themes
-		public themes : Array<string> = [
+		public themes: Array<string> = [
 			'default',
 			'darkblue',
 			'whitegold'
 		];
 
 		// available transitions
-		public transitions : Array<string> = [
+		public transitions: Array<string> = [
 			'no',
 			'fadeInOut',
 			'zoomIn',
@@ -422,11 +447,11 @@ namespace angularSuperGallery {
 			THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
 		};
 
-		constructor(private timeout : ng.ITimeoutService,
-					private interval : ng.IIntervalService,
-					private location : ng.ILocationService,
-					private $rootScope : ng.IRootScopeService,
-					private $window : ng.IWindowService) {
+		constructor(private timeout: ng.ITimeoutService,
+			private interval: ng.IIntervalService,
+			private location: ng.ILocationService,
+			private $rootScope: ng.IRootScopeService,
+			private $window: ng.IWindowService) {
 
 			angular.element($window).bind('resize', (event) => {
 				this.thumbnailsMove(200);
@@ -480,7 +505,7 @@ namespace angularSuperGallery {
 		}
 
 		// calculate object hash id
-		public objectHashId(object : any) : string {
+		public objectHashId(object: any): string {
 
 			let string = JSON.stringify(object);
 
@@ -501,7 +526,7 @@ namespace angularSuperGallery {
 		}
 
 		// get service instance for current gallery by component id
-		public getInstance(component : any) {
+		public getInstance(component: any) {
 
 			if (!component.id) {
 
@@ -548,7 +573,7 @@ namespace angularSuperGallery {
 		}
 
 		// prepare images array
-		public setItems(items : Array<IFile>) {
+		public setItems(items: Array<IFile>) {
 
 			if (!items) {
 				return;
@@ -564,7 +589,7 @@ namespace angularSuperGallery {
 
 				this.items = [];
 				for (let i = 0; i < items.length; i++) {
-					this.items.push({source: {modal: items[i]}});
+					this.items.push({ source: { modal: items[i] } });
 				}
 
 			} else {
@@ -578,7 +603,7 @@ namespace angularSuperGallery {
 		}
 
 		// options setup
-		public setOptions(options : IOptions) {
+		public setOptions(options: IOptions) {
 
 			// if options already setup
 			if (this.optionsLoaded) {
@@ -607,12 +632,13 @@ namespace angularSuperGallery {
 		}
 
 		// set selected image
-		public set selected(v : number) {
+		public set selected(v: number) {
 
 			v = this.normalize(v);
 			let prev = this._selected;
 
 			this._selected = v;
+			this.loadImage(this._selected);
 			this.preload();
 
 			if (prev !== this._selected) {
@@ -635,7 +661,7 @@ namespace angularSuperGallery {
 		}
 
 
-		public setSelected(index : number) {
+		public setSelected(index: number) {
 
 			this.autoPlayStop();
 			this.direction = index > this.selected ? 'forward' : 'backward';
@@ -646,7 +672,7 @@ namespace angularSuperGallery {
 
 
 		// go to backward
-		public toBackward(stop? : boolean) {
+		public toBackward(stop?: boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -654,13 +680,12 @@ namespace angularSuperGallery {
 
 			this.direction = 'backward';
 			this.selected--;
-			this.loadImage(this.selected - 1);
 			this.setHash();
 
 		}
 
 		// go to forward
-		public toForward(stop? : boolean) {
+		public toForward(stop?: boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -668,13 +693,12 @@ namespace angularSuperGallery {
 
 			this.direction = 'forward';
 			this.selected++;
-			this.loadImage(this.selected + 1);
 			this.setHash();
 
 		}
 
 		// go to first
-		public toFirst(stop? : boolean) {
+		public toFirst(stop?: boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -687,7 +711,7 @@ namespace angularSuperGallery {
 		}
 
 		// go to last
-		public toLast(stop? : boolean) {
+		public toLast(stop?: boolean) {
 
 			if (stop) {
 				this.autoPlayStop();
@@ -727,7 +751,7 @@ namespace angularSuperGallery {
 			this.interval.cancel(this.autoplay);
 			this.options.autoplay.enabled = false;
 			this.autoplay = null;
-			this.event(this.events.AUTOPLAY_STOP, {index: this.selected, file: this.file});
+			this.event(this.events.AUTOPLAY_STOP, { index: this.selected, file: this.file });
 
 		}
 
@@ -742,7 +766,7 @@ namespace angularSuperGallery {
 				this.toForward();
 			}, this.options.autoplay.delay);
 
-			this.event(this.events.AUTOPLAY_START, {index: this.selected, file: this.file});
+			this.event(this.events.AUTOPLAY_START, { index: this.selected, file: this.file });
 
 		}
 
@@ -751,10 +775,10 @@ namespace angularSuperGallery {
 
 			const self = this;
 
-			let getAvailableSource = function (type : string, source : ISource) {
+			let getAvailableSource = function (type: string, source: ISource) {
 
 				if (source[type]) {
-					return source[type];
+					return self.options.baseUrl + source[type];
 				}
 
 				if (type === 'panel') {
@@ -771,29 +795,27 @@ namespace angularSuperGallery {
 
 			};
 
-
 			angular.forEach(this.items, function (value, key) {
 
 				if (!value.source) {
-
 					value.source = {
 						modal: value[self.options.fields.source.modal],
 						panel: value[self.options.fields.source.panel],
 						image: value[self.options.fields.source.image],
+						placeholder: value[self.options.fields.source.placeholder]
 					};
-
 				}
 
 				let source = {
-					modal: self.options.baseUrl + getAvailableSource('modal', value.source),
-					panel: self.options.baseUrl + getAvailableSource('panel', value.source),
-					image: self.options.baseUrl + getAvailableSource('image', value.source),
+					modal: getAvailableSource('modal', value.source),
+					panel: getAvailableSource('panel', value.source),
+					image: getAvailableSource('image', value.source),
+					color: value.color ? value.color : 'transparent',
+					placeholder: value.placeholder ? self.options.baseUrl + value.placeholder : null
 				};
-
 
 				let parts = source.modal.split('/');
 				let filename = parts[parts.length - 1];
-
 				let title, description;
 
 				if (self.options.fields !== undefined) {
@@ -828,23 +850,26 @@ namespace angularSuperGallery {
 		}
 
 		// preload the image when mouseover
-		public hoverPreload(index : number) {
-			this.loadImage(index);
-		}
+		public hoverPreload(index: number) {
 
+			this.loadImage(index);
+
+		}
 
 		// image preload
-		private preload(wait? : number) {
+		private preload(wait?: number) {
 
-			this.loadImage(this.selected);
+			let index = this.direction === 'forward' ? this.selected + 1 : this.selected - 1;
 
-			this.timeout(() => {
-				this.loadImage(this.selected + 1);
-			}, (wait !== undefined) ? wait : this.options.preloadDelay);
+			if (this.options.preloadNext === true) {
+				this.timeout(() => {
+					this.loadImage(index);
+				}, (wait !== undefined) ? wait : this.options.preloadDelay);
+			}
 
 		}
 
-		public normalize(index : number) {
+		public normalize(index: number) {
 
 			let last = this.files.length - 1;
 
@@ -861,51 +886,61 @@ namespace angularSuperGallery {
 		}
 
 
-		public loadImages(indexes : Array<number>, type : string) {
+		public loadImages(indexes: Array<number>, type: string) {
 
-			if (!indexes) {
+			if (!indexes || indexes.length === 0) {
 				return;
 			}
 
 			let self = this;
 
-			indexes.forEach((index : number) => {
+			indexes.forEach((index: number) => {
 				self.loadImage(index);
 			});
 
 		}
 
 
-		public loadImage(index? : number, callback? : {}) {
+		public loadImage(index?: number, callback?: {}) {
 
 			index = index ? index : this.selected;
 			index = this.normalize(index);
 
 			if (!this.files[index]) {
-				this.log('invalid file index', {index: index});
+				this.log('invalid file index', { index: index });
 				return;
 			}
 
-			if (this.files[index].loaded.modal) {
-				return;
+			if (this.modalVisible) {
+
+				if (this.files[index].loaded.modal === true) {
+					return;
+				}
+
+				let modal = new Image();
+				modal.src = this.files[index].source.modal;
+				modal.addEventListener('load', (event) => {
+					this.afterLoad(index, 'modal', modal);
+				});
+
+			} else {
+
+				if (this.files[index].loaded.image === true) {
+					return;
+				}
+
+				let image = new Image();
+				image.src = this.files[index].source.image;
+				image.addEventListener('load', () => {
+					this.afterLoad(index, 'image', image);
+				});
+
 			}
-
-			let image = new Image();
-			image.src = this.files[index].source.image;
-			image.addEventListener('load', () => {
-				this.afterLoad(index, 'image', image);
-			});
-
-			let modal = new Image();
-			modal.src = this.files[index].source.modal;
-			modal.addEventListener('load', (event) => {
-				this.afterLoad(index, 'modal', modal);
-			});
 
 		}
 
 		// get file name
-		private getFilename(index : number, type? : string) {
+		private getFilename(index: number, type?: string) {
 
 			type = type ? type : 'modal';
 			let fileparts = this.files[index].source[type].split('/');
@@ -915,7 +950,7 @@ namespace angularSuperGallery {
 		}
 
 		// get file extension
-		private getExtension(index : number, type? : string) {
+		private getExtension(index: number, type?: string) {
 
 			type = type ? type : 'modal';
 			let fileparts = this.files[index].source[type].split('.');
@@ -928,6 +963,7 @@ namespace angularSuperGallery {
 		private afterLoad(index, type, image) {
 
 			if (this.files[index].loaded[type] === true) {
+				this.files[index].loaded[type] = true;
 				return;
 			}
 
@@ -941,7 +977,7 @@ namespace angularSuperGallery {
 				this.files[index].download = this.files[index].source.modal;
 			}
 
-			let data = {type: type, index: index, file: this.file, img: image};
+			let data = { type: type, index: index, file: this.file, img: image };
 
 			if (!this.first) {
 				this.first = true;
@@ -972,14 +1008,14 @@ namespace angularSuperGallery {
 
 
 		// get the file
-		public get file() : IFile {
+		public get file(): IFile {
 
 			return this.files[this.selected];
 
 		}
 
 		// toggle element visible
-		public toggle(element : string) : void {
+		public toggle(element: string): void {
 
 			this.options[element].visible = !this.options[element].visible;
 
@@ -987,7 +1023,7 @@ namespace angularSuperGallery {
 
 
 		// get visible
-		public get modalVisible() : boolean {
+		public get modalVisible(): boolean {
 
 			return this._visible;
 
@@ -995,22 +1031,55 @@ namespace angularSuperGallery {
 
 
 		// get theme
-		public get theme() : string {
+		public get theme(): string {
 
 			return this.options.theme;
 
 		}
 
 		// get classes
-		public get classes() : string {
+		public get classes(): string {
 
 			return this.options.theme + ' ' + this.id;
 
 		}
 
+		// get preload style
+		public preloadStyle(file: IFile) {
+
+			let style = {};
+
+			if (file.source.color) {
+				style['background-color'] = file.source.color;
+			}
+
+			if (this.options.loadingImage) {
+				style['background-image'] = 'url(' + this.options.loadingImage + ')';
+			}
+
+			return style;
+
+		}
+
+		// get placeholder style
+		public placeholderStyle(file: IFile) {
+
+			let style = {};
+
+			if (file.source.color) {
+				style['background-color'] = file.source.color;
+			}
+
+			if (file.source.placeholder) {
+				style['background-image'] = 'url(' + file.source.placeholder + ')';
+			} 
+
+			return style;
+
+		}
 
 		// set visible
-		public set modalVisible(value : boolean) {
+		public set modalVisible(value: boolean) {
 
 			this._visible = value;
 
@@ -1019,7 +1088,6 @@ namespace angularSuperGallery {
 
 			if (value) {
 
-				this.preload(1);
 				this.modalInit();
 
 				if (body.className.indexOf(className) < 0) {
@@ -1046,7 +1114,7 @@ namespace angularSuperGallery {
 		}
 
 
-		public modalOpen(index : number) {
+		public modalOpen(index: number) {
 
 			if (!this.modalAvailable) {
 				return;
@@ -1054,8 +1122,9 @@ namespace angularSuperGallery {
 
 			this.selected = index !== undefined ? index : this.selected;
 			this.modalVisible = true;
+			this.loadImage();
 			this.setHash();
-			this.event(this.events.MODAL_OPEN, {index: this.selected});
+			this.event(this.events.MODAL_OPEN, { index: this.selected });
 			this.setFocus();
 			this.thumbnailsMove(200);
 
@@ -1068,12 +1137,13 @@ namespace angularSuperGallery {
 			}
 
 			this.modalVisible = false;
-			this.event(this.events.MODAL_CLOSE, {index: this.selected});
+			this.loadImage();
+			this.event(this.events.MODAL_CLOSE, { index: this.selected });
 
 		}
 
 		// move thumbnails to correct position
-		public thumbnailsMove(delay? : number) {
+		public thumbnailsMove(delay?: number) {
 
 			let move = () => {
 
@@ -1083,14 +1153,14 @@ namespace angularSuperGallery {
 					return;
 				}
 
-				for (var i = 0; i < containers.length; i++) {
+				for (let i = 0; i < containers.length; i++) {
 
-					let container : any = containers[i];
+					let container: any = containers[i];
 
 					if (container.offsetWidth) {
 
-						let items : any = container.querySelector('div.items');
-						let item : any = container.querySelector('div.item');
+						let items: any = container.querySelector('div.items');
+						let item: any = container.querySelector('div.item');
 						let thumbnail, moveX, remain;
 
 						if (item) {
@@ -1114,7 +1184,7 @@ namespace angularSuperGallery {
 								remain: remain,
 								container: container.offsetWidth,
 								items: items.scrollWidth
-							})
+							});
 
 						}
 
@@ -1134,7 +1204,7 @@ namespace angularSuperGallery {
 
 		}
 
-		public modalClick($event? : UIEvent) {
+		public modalClick($event?: UIEvent) {
 
 			if ($event) {
 				$event.stopPropagation();
@@ -1149,7 +1219,7 @@ namespace angularSuperGallery {
 
 			if (this.modalVisible) {
 
-				let element : Node = this.el('div.asg-modal.' + this.id + ' .keyInput')[0];
+				let element: Node = this.el('div.asg-modal.' + this.id + ' .keyInput')[0];
 
 				if (element) {
 					angular.element(element)[0].focus();
@@ -1159,7 +1229,7 @@ namespace angularSuperGallery {
 
 		}
 
-		private event(event : string, data? : any) {
+		private event(event: string, data?: any) {
 
 			event = event + this.id;
 			this.$rootScope.$emit(event, data);
@@ -1167,7 +1237,7 @@ namespace angularSuperGallery {
 
 		}
 
-		public log(event : string, data? : any) {
+		public log(event: string, data?: any) {
 
 			if (this.options.debug) {
 				console.log(event, data ? data : null);
@@ -1176,7 +1246,7 @@ namespace angularSuperGallery {
 		}
 
 		// get element
-		public el(selector) : NodeList {
+		public el(selector): NodeList {
 
 			return document.querySelectorAll(selector);
 
@@ -1188,7 +1258,7 @@ namespace angularSuperGallery {
 			let style = item.currentStyle || window.getComputedStyle(item),
 				width = item.offsetWidth,
 				margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
-				//padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
+				// padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
 				border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
 
 			return width + margin + border;
@@ -1201,7 +1271,7 @@ namespace angularSuperGallery {
 			let style = item.currentStyle || window.getComputedStyle(item),
 				height = item.offsetHeight,
 				margin = parseFloat(style.marginTop) + parseFloat(style.marginBottom),
-				//padding = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom),
+				// padding = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom),
 				border = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
 
 			return height + margin + border;
@@ -1210,7 +1280,7 @@ namespace angularSuperGallery {
 
 	}
 
-	let app : ng.IModule = angular.module('angularSuperGallery');
+	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.service('asgService', ['$timeout', '$interval', '$location', '$rootScope', '$window', ServiceController]);
 
