@@ -185,6 +185,7 @@ namespace angularSuperGallery {
 		modalVisible: boolean;
 		panelVisible: boolean;
 		modalAvailable: boolean;
+		modalInitialized: boolean;
 		transitions: Array<string>;
 		themes: Array<string>;
 		classes: string;
@@ -269,6 +270,7 @@ namespace angularSuperGallery {
 		public files: Array<IFile> = [];
 		public direction: string;
 		public modalAvailable = false;
+		public modalInitialized = false;
 
 		private instances: {} = {};
 		private _selected: number;
@@ -1045,7 +1047,7 @@ namespace angularSuperGallery {
 		}
 
 		// get preload style
-		public preloadStyle(file: IFile) {
+		public preloadStyle(file: IFile, type: string) {
 
 			let style = {};
 
@@ -1053,7 +1055,7 @@ namespace angularSuperGallery {
 				style['background-color'] = file.source.color;
 			}
 
-			if (this.options.loadingImage) {
+			if (this.options.loadingImage && file.loaded[type] === false) {
 				style['background-image'] = 'url(' + this.options.loadingImage + ')';
 			}
 
@@ -1072,7 +1074,7 @@ namespace angularSuperGallery {
 
 			if (file.source.placeholder) {
 				style['background-image'] = 'url(' + file.source.placeholder + ')';
-			} 
+			}
 
 			return style;
 
@@ -1082,6 +1084,9 @@ namespace angularSuperGallery {
 		public set modalVisible(value: boolean) {
 
 			this._visible = value;
+
+			// set index 0 if !selected 
+			this.selected = this.selected ? this.selected : 0;
 
 			let body = document.body;
 			let className = ' asg-yhidden';
@@ -1111,6 +1116,12 @@ namespace angularSuperGallery {
 				self.setFocus();
 			}, 100);
 
+			this.timeout(() => {
+				this.modalInitialized = true;
+			}, 770);
+
+			this.thumbnailsMove(420);
+
 		}
 
 
@@ -1125,8 +1136,6 @@ namespace angularSuperGallery {
 			this.loadImage();
 			this.setHash();
 			this.event(this.events.MODAL_OPEN, { index: this.selected });
-			this.setFocus();
-			this.thumbnailsMove(200);
 
 		}
 
@@ -1136,6 +1145,7 @@ namespace angularSuperGallery {
 				this.location.hash('');
 			}
 
+			this.modalInitialized = false;
 			this.modalVisible = false;
 			this.loadImage();
 			this.event(this.events.MODAL_CLOSE, { index: this.selected });

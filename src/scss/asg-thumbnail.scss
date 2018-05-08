@@ -4,6 +4,11 @@
   overflow: hidden;
   transition: all ease $animspeed / 2;
   padding: 0;
+  opacity: 0;
+
+  &.initialized {
+    opacity: 1;
+  }
 
   &.dynamic {
     position: absolute;

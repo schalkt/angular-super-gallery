@@ -9,7 +9,7 @@
 		<div class="img"
 			 ng-repeat="(key,file) in $ctrl.asg.files"
 			 ng-show="$ctrl.asg.selected == key"		
-			 ng-style="$ctrl.asg.preloadStyle(file)"
+			 ng-style="$ctrl.asg.preloadStyle(file, 'image')"
 			 ng-class="{'loaded' : file.loaded.image}">
 
 			<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file)"></div>
