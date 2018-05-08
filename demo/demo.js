@@ -71,7 +71,7 @@ demo.controller('DemoController', function () {
 		"thumbnail": "i1.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_300x188.jpg",
 		"medium": "i1.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_602x339.jpg",
 	}, {
-		"link": "wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_1920x1200.jpg",
+		"link": "wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_1920x1080.jpg",
 		"thumbnail": "i1.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_300x188.jpg",
 		"medium": "i1.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_602x339.jpg",
 	}, {
