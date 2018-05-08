@@ -2,19 +2,19 @@ namespace angularSuperGallery {
 
 	export class ThumbnailController {
 
-		public id : string;
-		public options : IOptions;
-		public items : Array<IFile>;
-		public baseUrl : string;
+		public id: string;
+		public options: IOptions;
+		public items: Array<IFile>;
+		public baseUrl: string;
 
 		private type = 'thumbnail';
 		private template = 'views/asg-thumbnail.html';
-		private asg : IServiceController;
+		private asg: IServiceController;
 		private modal = false;
 
-		constructor(private service : IServiceController,
-					private $scope : ng.IScope,
-					private $element : ng.IRootElementService) {
+		constructor(private service: IServiceController,
+			private $scope: ng.IScope,
+			private $element: ng.IRootElementService) {
 
 		}
 
@@ -31,7 +31,7 @@ namespace angularSuperGallery {
 		}
 
 		// set selected image
-		public setSelected(index : number, $event? : MouseEvent) {
+		public setSelected(index: number, $event?: MouseEvent) {
 
 			this.asg.modalClick($event);
 
@@ -47,12 +47,12 @@ namespace angularSuperGallery {
 		}
 
 		// prelod when mouseover and set selected if enabled
-		public hover(index : number, $event? : MouseEvent) {
-			
+		public hover(index: number, $event?: MouseEvent) {
+
 			if (this.config.hover.preload === true) {
 				this.asg.hoverPreload(index);
 			}
-						
+
 			if (this.config.hover.select === true) {
 				this.asg.setSelected(index);
 			}
@@ -60,14 +60,14 @@ namespace angularSuperGallery {
 		}
 
 		// get thumbnail config
-		public get config() : IOptionsThumbnail {
+		public get config(): IOptionsThumbnail {
 
 			return this.modal ? this.asg.options.modal[this.type] : this.asg.options[this.type];
 
 		}
 
 		// set thumbnail config
-		public set config(value : IOptionsThumbnail) {
+		public set config(value: IOptionsThumbnail) {
 
 			if (this.modal) {
 				this.asg.options[this.type] = value;
@@ -78,7 +78,7 @@ namespace angularSuperGallery {
 		}
 
 		// set selected image
-		public set selected(v : number) {
+		public set selected(v: number) {
 
 			if (!this.asg) {
 				return;
@@ -114,15 +114,21 @@ namespace angularSuperGallery {
 		}
 
 		// get classes
-		public get classes() : string {
+		public get classes(): string {
 
-			return this.asg.classes + ' ' + this.dynamic;
+			let show = 'initialized';
+
+			if (this.modal) {
+				show = this.asg.modalInitialized ? 'initialized' : 'initializing';
+			} 
+
+			return this.asg.classes + ' ' + this.dynamic + ' ' + show;
 
 		}
 
 	}
 
-	let app : ng.IModule = angular.module('angularSuperGallery');
+	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgThumbnail', {
 		controller: ['asgService', '$scope', '$element', angularSuperGallery.ThumbnailController],
