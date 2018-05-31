@@ -310,9 +310,12 @@ or (without thumbnails)
 
 
 ### Todo
-- remember website hash and set back when modal closed
+
+- add edit mode (upload, delete, rename, etc.) for admin page
+- remove caption from modal and add asg-info
 - control component custom buttons
 - header component with controls = modal header?
+- fix info component image width and height data
 - exit button must be visible on modal when menubar hidden
 - indicator component
 - load images from API endpoint
@@ -320,8 +323,9 @@ or (without thumbnails)
 - options and info menu in modal
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
-- npm and gulp -> yarn and webpack
-- transitions fix in Microsoft Edge (or fix Edge :)
+- gulp -> webpack
+- preloader svg fix in Microsoft Edge (or fix Edge :)
+- remember website hash and set back when modal closed
 
 
 ### Photos

@@ -8,13 +8,16 @@ namespace angularSuperGallery {
 		public baseUrl: string;
 
 		private type = 'thumbnail';
-		private template = 'views/asg-thumbnail.html';
+		private template;
 		private asg: IServiceController;
 		private modal = false;
 
-		constructor(private service: IServiceController,
+		constructor(
+			private service: IServiceController,
 			private $scope: ng.IScope,
 			private $element: ng.IRootElementService) {
+
+			this.template = 'views/asg-thumbnail.html';
 
 		}
 
@@ -120,7 +123,7 @@ namespace angularSuperGallery {
 
 			if (this.modal) {
 				show = this.asg.modalInitialized ? 'initialized' : 'initializing';
-			} 
+			}
 
 			return this.asg.classes + ' ' + this.dynamic + ' ' + show;
 

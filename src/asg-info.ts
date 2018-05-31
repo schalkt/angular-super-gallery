@@ -2,13 +2,17 @@ namespace angularSuperGallery {
 
 	export class InfoController {
 
-		public id : string;
-		private type = 'info';
-		private asg : IServiceController;
-		private template = 'views/asg-info.html';
+		public id: string;
+		private asg: IServiceController;
+		private type;
+		private template;
 
-		constructor(private service : IServiceController,
-					private $scope : ng.IScope) {
+		constructor(
+			private service: IServiceController,
+			private $scope: ng.IScope) {
+
+			this.type = 'info';
+			this.template = 'views/asg-info.html';
 
 		}
 
@@ -25,7 +29,7 @@ namespace angularSuperGallery {
 
 	}
 
-	let app : ng.IModule = angular.module('angularSuperGallery');
+	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgInfo', {
 		controller: ['asgService', '$scope', angularSuperGallery.InfoController],

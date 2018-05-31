@@ -2,17 +2,20 @@ namespace angularSuperGallery {
 
 	export class PanelController {
 
-		public id : string;
-		public options : IOptions;
-		public items : Array<IFile>;
-		public baseUrl : string;
+		public id: string;
+		public options: IOptions;
+		public items: Array<IFile>;
+		public baseUrl: string;
 
 		private type = 'panel';
-		private template = 'views/asg-panel.html';
-		private asg : IServiceController;
+		private template;
+		private asg: IServiceController;
 
-		constructor(private service : IServiceController,
-					private $scope : ng.IScope) {
+		constructor(
+			private service: IServiceController,
+			private $scope: ng.IScope) {
+
+			this.template = 'views/asg-panel.html';
 
 		}
 
@@ -24,7 +27,7 @@ namespace angularSuperGallery {
 		}
 
 		// set selected image
-		public setSelected(index : number, $event? : MouseEvent) {
+		public setSelected(index: number, $event?: MouseEvent) {
 
 			this.asg.modalClick($event);
 
@@ -39,8 +42,8 @@ namespace angularSuperGallery {
 
 		}
 
-		public hover(index : number, $event? : MouseEvent) {
-			
+		public hover(index: number, $event?: MouseEvent) {
+
 			if (this.config.hover.preload === true) {
 				this.asg.hoverPreload(index);
 			}
@@ -52,21 +55,21 @@ namespace angularSuperGallery {
 		}
 
 		// get panel config
-		public get config() : IOptionsPanel {
+		public get config(): IOptionsPanel {
 
 			return this.asg.options[this.type];
 
 		}
 
 		// set panel config
-		public set config(value : IOptionsPanel) {
+		public set config(value: IOptionsPanel) {
 
 			this.asg.options[this.type] = value;
 
 		}
 
 		// set selected image
-		public set selected(v : number) {
+		public set selected(v: number) {
 
 			if (!this.asg) {
 				return;
@@ -89,7 +92,7 @@ namespace angularSuperGallery {
 
 	}
 
-	let app : ng.IModule = angular.module('angularSuperGallery');
+	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgPanel', {
 		controller: ['asgService', '$scope', angularSuperGallery.PanelController],

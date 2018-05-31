@@ -2,13 +2,16 @@ namespace angularSuperGallery {
 
 	export class ControlController {
 
-		public id : string;
+		public id: string;
 		private type = 'control';
-		private asg : IServiceController;
-		private template = 'views/asg-control.html';
+		private asg: IServiceController;
+		private template;
 
-		constructor(private service : IServiceController,
-					private $scope : ng.IScope) {
+		constructor(
+			private service: IServiceController,
+			private $scope: ng.IScope) {
+
+			this.template = 'views/asg-control.html';
 
 		}
 
@@ -29,21 +32,21 @@ namespace angularSuperGallery {
 
 
 		// get image config
-		public get config() : IOptionsImage {
+		public get config(): IOptionsImage {
 
 			return this.asg.options[this.type];
 
 		}
 
 		// set image config
-		public set config(value : IOptionsImage) {
+		public set config(value: IOptionsImage) {
 
 			this.asg.options[this.type] = value;
 
 		}
 
 		// set selected image
-		public set selected(v : number) {
+		public set selected(v: number) {
 
 			if (!this.asg) {
 				return;
@@ -67,7 +70,7 @@ namespace angularSuperGallery {
 
 	}
 
-	let app : ng.IModule = angular.module('angularSuperGallery');
+	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgControl', {
 		controller: ['asgService', '$scope', angularSuperGallery.ControlController],

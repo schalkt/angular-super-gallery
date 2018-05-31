@@ -1093,11 +1093,11 @@ namespace angularSuperGallery {
 
 			if (value) {
 
-				this.modalInit();
-
 				if (body.className.indexOf(className) < 0) {
 					body.className = body.className + className;
 				}
+
+				this.modalInit();
 
 			} else {
 
@@ -1116,11 +1116,11 @@ namespace angularSuperGallery {
 				self.setFocus();
 			}, 100);
 
+			this.thumbnailsMove(440);
+
 			this.timeout(() => {
 				this.modalInitialized = true;
-			}, 770);
-
-			this.thumbnailsMove(420);
+			}, 460);		
 
 		}
 
