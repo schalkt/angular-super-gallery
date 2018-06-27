@@ -8,10 +8,6 @@ Angular Super Gallery
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
 [![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://david-dm.org/schalkt/angular-super-gallery)
-
-[![bitHound Overall Score](https://www.bithound.io/github/schalkt/angular-super-gallery/badges/score.svg)](https://www.bithound.io/github/schalkt/angular-super-gallery)
-[![bitHound Dependencies](https://www.bithound.io/github/schalkt/angular-super-gallery/badges/dependencies.svg)](https://www.bithound.io/github/schalkt/angular-super-gallery/develop/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/schalkt/angular-super-gallery/badges/code.svg)](https://www.bithound.io/github/schalkt/angular-super-gallery)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/angular-super-gallery/badge)](https://www.jsdelivr.com/package/npm/angular-super-gallery)
 
 ### Demo
