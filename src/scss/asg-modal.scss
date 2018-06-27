@@ -249,14 +249,14 @@
     .help {
       left: 0;
       right: 0;
-      bottom: 7%;
-      font-size: 2em;
-      text-align: center;
+      top: 0;
+      font-size: 1.1em;
+      text-align: right;
 
       li {
         margin: 0;
-        padding: 4px;
-        display: inline-block;
+        padding: 2px;
+        display: block;
       }
 
     }
@@ -264,10 +264,10 @@
     .header {
 
       text-align: center;
-      font-size: 30px;
+      font-size: 18px;
 
       .title, .subtitle {
-        margin-top: 2%;
+        margin-top: 1%;
         float: none;
         clear: both;
       }
@@ -278,8 +278,8 @@
         clear: both !important;
 
         .btn {
-          font-size: 1.1em;
-          margin: 2% 0;
+          font-size: 0.7em;
+          margin: 1% 0;
         }
 
       }
@@ -287,7 +287,7 @@
 
     .caption {
       .content {
-        font-size: 2em;
+        font-size: 1.1em;
       }
     }
 
