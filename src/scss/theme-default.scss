@@ -6,6 +6,7 @@ $white_darken: darken($white, 14%);
   .item {
     .index {
       background-color: $white_darken;
+      color: $black;
     }
   }
 }
@@ -61,8 +62,8 @@ $white_darken: darken($white, 14%);
       border-color: $black;
     }
     .index {
-      background-color: rgba($black, 0.56);
-      color: $white;
+      background-color: $white_darken;
+      color: $black;
     }
   }
 }

@@ -1,7 +1,6 @@
-Angular Super Gallery
-===
+# Angular Super Gallery
 
-*AngularJS image gallery*
+AngularJS image gallery
 
 [![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/)
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
@@ -10,14 +9,15 @@ Angular Super Gallery
 [![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://david-dm.org/schalkt/angular-super-gallery)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/angular-super-gallery/badge)](https://www.jsdelivr.com/package/npm/angular-super-gallery)
 
-### Demo
+## Demo
 
 [online demo](http://schalk.hu/projects/angular-super-gallery/demo/) or see /demo/index.html
 
 ![angular-super-gallery-screenshot-1](http://schalk.hu/projects/angular-super-gallery/screenshot1.jpg)
 ![angular-super-gallery-screenshot-2](http://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
 
-### Requirements
+## Requirements
+
 - [jQuery](https://github.com/jquery/jquery/tree/3.2.1) ^3.2.1
 - [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.x
 - [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.x
@@ -25,8 +25,8 @@ Angular Super Gallery
 - [screenfull](https://www.npmjs.com/package/screenfull) 3.3.x
 - [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.x
 
+## Features
 
-### Features
 - separated Angular components (image, modal, thumbnails, panel, info and controls)
 - highly configurable
 - image display mode (cover, contain, auto, stretch)
@@ -37,13 +37,13 @@ Angular Super Gallery
 - events (config load, image load, modal open/close, autoplay start/stop, etc.)
 - touch support (swipe)
 
-
-### Install
+## Install
 
 - `npm install --save angular-super-gallery` or `yarn add angular-super-gallery`
 
-### Setup
-```
+## Setup
+
+```javascript
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'angular-super-gallery/dist/angular-super-gallery.css';
 import 'jquery';
@@ -57,13 +57,14 @@ import angularSuperGallery from 'angular-super-gallery';
 angular.module("app", [angularSuperGallery]);
 ```
 
-### Quick usage in HTML
-```
-<asg-image 
+## Quick usage in HTML
+
+```html
+<asg-image
        data-options='{"baseUrl" : "https://wallpaperscraft.com/image/"}'
        data-items='[
         "porsche_panamera_rear_view_white_auto_96846_1920x1080.jpg",
-        "subaru_brz_subaru_cars_sunset_93895_1920x1080.jpg" 
+        "subaru_brz_subaru_cars_sunset_93895_1920x1080.jpg"
        ]'>
     <asg-modal>
         <asg-thumbnail></asg-thumbnail>
@@ -71,10 +72,11 @@ angular.module("app", [angularSuperGallery]);
 </asg-image>
 ```
 
-### Advanced usage
+## Advanced usage
 
 setup in controller
-```
+
+```javascript
 this.showModal = false;
 this.nature1Options = {
     baseUrl: "https://",
@@ -97,13 +99,11 @@ this.nature1Options = {
         transition: 'fadeInOut'
     }
 };
-
-
 this.nature1 = [
-    {
-        "link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
-  		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x188.jpg",
-  		"medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
+	{
+		"link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
+		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x188.jpg",
+		"medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
   	}, {
   		"link": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
   		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x188.jpg",
@@ -112,25 +112,28 @@ this.nature1 = [
 ];
 ```
 
-
 in HTML
-```
+
+```html
 <asg-image data-id="nature" data-options="ctrl.nature1Options" data-items="ctrl.nature1">
     <asg-thumbnail></asg-thumbnail>
     <asg-modal data-visible="ctrl.showModal"></asg-modal>
 </asg-image>
 <asg-panel data-id="nature"></asg-panel>
 ```
+
 or (without thumbnails)
-```
+
+```html
 <asg-image data-options="ctrl.nature1Options" data-items="ctrl.nature1">
     <asg-modal data-visible="ctrl.showModal"></asg-modal>
 </asg-image>
 
 ```
 
-### Available options
-```
+## Available options
+
+```javascript
     debug: false, // image load, autoplay, etc. info in console.log
     hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
     baseUrl: '', // url prefix
@@ -253,8 +256,59 @@ or (without thumbnails)
     }
 ```
 
+## Edit
 
-### Transitions
+### Add new image or images to the gallery by id
+
+```javascript
+$rootScope.$broadcast('ASG-gallery-edit', {
+    id: 'nature',
+    add: [{
+        "link": "wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_1920x1080.jpg",
+        "thumbnail": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_300x168.jpg",
+        "medium": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_960x544.jpg",
+    }]
+});
+```
+
+### Update gallery options
+
+```javascript
+    $rootScope.$broadcast('ASG-gallery-edit', {
+        id: 'nature',
+        options: this.options1
+    });
+```
+
+### Reload gallery images
+
+```javascript
+    $rootScope.$broadcast('ASG-gallery-edit', {
+        id: 'nature',
+        refresh: true
+    });
+```
+
+### Delete image
+
+```javascript
+    $rootScope.$broadcast('ASG-gallery-edit', {
+        id: 'nature',
+        delete: null // index number or null for delete selected image
+    });
+```
+
+### Update gallery images
+
+```javascript
+    $rootScope.$broadcast('ASG-gallery-edit', {
+        id: 'nature',
+        update: ['image1url', 'image2url', {source: {image: 'image3url', title: 'image3title'}}]; // use image url or object
+    });
+```
+
+## Transitions
+
 - no
 - fadeInOut
 - zoomIn
@@ -268,8 +322,8 @@ or (without thumbnails)
 - flipX
 - flipY
 
+## Default keyboard shortcuts in modal window
 
-### Default keyboard shortcuts in modal window
 - RIGHT / SPACE : forward
 - LEFT : backward
 - UP / HOME : first
@@ -283,8 +337,8 @@ or (without thumbnails)
 - c : toggle caption
 - h : toggle help
 
+## Events
 
-### Events
 - CONFIG_LOAD: `ASG-config-load-[gallery id]`,
 - AUTOPLAY_START: `ASG-autoplay-start-[gallery id]`,
 - AUTOPLAY_STOP: `ASG-autoplay-stop-[gallery id]`,
@@ -296,16 +350,15 @@ or (without thumbnails)
 - MODAL_CLOSE: `ASG-modal-close-[gallery id]`,
 - THUMBNAIL_MOVE: `ASG-thumbnail-move-[gallery id]`,
 
+## Build
 
-### Build
 - `npm install`
 - `typings install`
 - `gulp dev`
 - `gulp prod` (minified javascript and css file)
 - `gulp watch` (automatic build under development)
 
-
-### Todo
+## Todo
 
 - add edit mode (upload, delete, rename, etc.) for admin page
 - remove caption from modal and add asg-info
@@ -323,9 +376,10 @@ or (without thumbnails)
 - preloader svg fix in Microsoft Edge (or fix Edge :)
 - remember website hash and set back when modal closed
 
+## Photos
 
-### Photos
 [wallpaperscraft.com](https://wallpaperscraft.com)
 
-### License
+## License
+
 MIT

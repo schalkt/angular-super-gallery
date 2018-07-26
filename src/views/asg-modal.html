@@ -73,7 +73,7 @@
 			</div>
 
 			<div class="img"
-				 ng-repeat="(key,file) in $ctrl.asg.files"
+				 ng-repeat="(key,file) in $ctrl.asg.files track by $index"
 				 ng-show="$ctrl.asg.selected == key"		
 				 ng-style="$ctrl.asg.preloadStyle(file, 'modal')"	 
 				 ng-class="{'loaded' : file.loaded.modal}">

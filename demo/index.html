@@ -193,9 +193,45 @@
 						</asg-modal>
 					</asg-image>
 					<asg-thumbnail data-id="nature"></asg-thumbnail>
+					<hr>	
+						<div class="row">					
+								
+							<div class="col-md-6 text-center">
+								<button class="btn btn-xs btn-success btn-block" ng-click="ctrl.add1()">Add image</button>
+								<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>							
+								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update1()">Change first image</button>
+								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update12()">Update images</button>
+								<button class="btn btn-xs btn-primary btn-block" ng-click="ctrl.reload1()">Reload gallery</button>
+								<button class="btn btn-xs btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
+							</div>
+							<div class="col-md-6 text-center">
+								<label>Theme</label>
+								<select class="form-control" data-ng-model="ctrl.options1.theme" data-ng-change="ctrl.updateOptions1()">
+									<option value="darkblue">Darkblue</option>
+									<option value="darkred">Darkred</option>
+									<option value="whitegold">Whitegold</option>
+									<option value="default">Default</option>
+								</select>
+								<label>Transitions</label>
+								<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.updateOptions1()">									
+									<option value="no">no</option>
+									<option value="fadeInOut">fadeInOut</option>
+									<option value="zoomIn">zoomIn</option>
+									<option value="zoomOut">zoomOut</option>
+									<option value="zoomInOut">zoomInOut</option>
+									<option value="rotateLR">rotateLR</option>
+									<option value="rotateTB">rotateTB</option>
+									<option value="rotateZY">rotateZY</option>
+									<option value="slideLR">slideLR</option>
+									<option value="slideTB">slideTB</option>
+									<option value="flipX">flipX</option>
+									<option value="flipY">flipY</option>
+								</select>
+							</div>
+						</div>
 					<hr>
 					<strong>custom panel</strong> | auto select the image when mouseover
-					<asg-panel data-id="nature" class="custom-panel" data-options="ctrl.options1" data-items="ctrl.files1"></asg-panel>
+					<asg-panel data-id="nature" class="custom-panel"></asg-panel>
 					<!-- ASG END -->
 
 				</div>
