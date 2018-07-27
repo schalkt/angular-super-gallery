@@ -1244,16 +1244,14 @@ namespace angularSuperGallery {
 		public editGallery(data: IEdit, component) {
 
 			this.editing = true;
+			var selected = this.selected;
 
 			if (data.options !== undefined) {
 				this.optionsLoaded = false;
-				data.options.image.height
 				this.setOptions(data.options);
 			}
 
-			if (data.delete !== undefined) {
-				data.delete = data.delete === null ? this.selected : data.delete;
-				this.selected = null;
+			if (data.delete !== undefined) {				
 				this.deleteImage(data.delete);
 			}
 
@@ -1270,7 +1268,7 @@ namespace angularSuperGallery {
 
 			if (data.update) {
 
-				this.selected = null;
+				//this.selected = null;
 
 				var length = data.update.length;
 				for (var key = 0; key < length; key++) {
@@ -1286,12 +1284,11 @@ namespace angularSuperGallery {
 			this.timeout(() => {
 
 				if (data.add) {
-					this.selected = this.files.length - 1;
-				} else {
-					this.selected;
-				}
+					selected = this.files.length - 1;
+				} 
 				
-				this.forceSelect(this.files[this.selected] ? this.selected : 0);
+				selected = this.files[selected] ? selected : (selected >= this.files.length ? selected - 1 : selected + 1);
+				this.forceSelect(this.files[selected] ? selected : 0);
 				this.thumbnailsMove(220);
 				this.editing = false;
 				this.event(this.events.GALLERY_UPDATED, data);
