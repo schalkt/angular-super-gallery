@@ -179,6 +179,14 @@ namespace angularSuperGallery {
 		panel: boolean;
 	}
 
+	export interface IEdit {
+		delete: number;
+		add: Array<IFile>;
+		update: Array<IFile>;
+		refresh: boolean;
+		options: IOptions;
+	}
+
 	// service controller interface
 	export interface IServiceController {
 
@@ -206,6 +214,8 @@ namespace angularSuperGallery {
 			CHANGE_IMAGE: string;
 			MODAL_OPEN: string;
 			MODAL_CLOSE: string;
+			GALLERY_UPDATED: string;
+			GALLERY_EDIT: string;
 		};
 
 		getInstance(component: any): IServiceController;
@@ -214,7 +224,7 @@ namespace angularSuperGallery {
 
 		setOptions(options: IOptions): IOptions;
 
-		setItems(items: Array<IFile>): void;
+		setItems(items: Array<IFile>, force?: boolean): void;
 
 		preload(wait?: number): void;
 
@@ -277,6 +287,7 @@ namespace angularSuperGallery {
 		private _visible = false;
 		private autoplay: angular.IPromise<any>;
 		private first = false;
+		private editing = false;
 
 		public options: IOptions = null;
 		public optionsLoaded = false;
@@ -447,6 +458,8 @@ namespace angularSuperGallery {
 			MODAL_OPEN: 'ASG-modal-open-',
 			MODAL_CLOSE: 'ASG-modal-close-',
 			THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
+			GALLERY_UPDATED: 'ASG-gallery-updated-',
+			GALLERY_EDIT: 'ASG-gallery-edit',
 		};
 
 		constructor(private timeout: ng.ITimeoutService,
@@ -569,6 +582,13 @@ namespace angularSuperGallery {
 
 			}
 
+			// update images when edit event
+			instance.$rootScope.$on(this.events.GALLERY_EDIT, (event, data) => {
+				if (id === data.id && component.items) {
+					instance.editGallery(data, component);
+				}
+			});
+
 			this.instances[id] = instance;
 			return instance;
 
@@ -581,25 +601,7 @@ namespace angularSuperGallery {
 				return;
 			}
 
-			// if already
-			if (this.items) {
-				return;
-			}
-
-			// parse array string elements
-			if (angular.isString(items[0]) === true) {
-
-				this.items = [];
-				for (let i = 0; i < items.length; i++) {
-					this.items.push({ source: { modal: items[i] } });
-				}
-
-			} else {
-
-				this.items = items;
-
-			}
-
+			this.items = items;
 			this.prepareItems();
 
 		}
@@ -613,7 +615,9 @@ namespace angularSuperGallery {
 			}
 
 			if (options) {
-				this.options = angular.merge(this.defaults, options);
+
+				options = angular.merge(angular.copy(this.defaults), options);
+				this.options = angular.copy(options);
 
 				if (options.modal && options.modal.header && options.modal.header.buttons) {
 					this.options.modal.header.buttons = options.modal.header.buttons;
@@ -621,7 +625,7 @@ namespace angularSuperGallery {
 
 				this.optionsLoaded = true;
 			} else {
-				this.options = this.defaults;
+				this.options = angular.copy(this.defaults);
 			}
 
 			// important!
@@ -659,6 +663,20 @@ namespace angularSuperGallery {
 		public get selected() {
 
 			return this._selected;
+
+		}
+
+		// force select image
+		public forceSelect(index) {
+
+			index = this.normalize(index);
+			this._selected = index;
+			this.loadImage(this._selected);
+			this.preload();
+			this.event(this.events.CHANGE_IMAGE, {
+				index: index,
+				file: this.file
+			});
 
 		}
 
@@ -775,77 +793,10 @@ namespace angularSuperGallery {
 
 		private prepareItems() {
 
-			const self = this;
-
-			let getAvailableSource = function (type: string, source: ISource) {
-
-				if (source[type]) {
-					return self.options.baseUrl + source[type];
-				}
-
-				if (type === 'panel') {
-					return getAvailableSource('image', source);
-				}
-
-				if (type === 'image') {
-					return getAvailableSource('modal', source);
-				}
-
-				if (type === 'modal') {
-					return getAvailableSource('image', source);
-				}
-
+			var length = this.items.length;
+			for (var key = 0; key < length; key++) {
+				this.addImage(this.items[key]);
 			};
-
-			angular.forEach(this.items, function (value, key) {
-
-				if (!value.source) {
-					value.source = {
-						modal: value[self.options.fields.source.modal],
-						panel: value[self.options.fields.source.panel],
-						image: value[self.options.fields.source.image],
-						placeholder: value[self.options.fields.source.placeholder]
-					};
-				}
-
-				let source = {
-					modal: getAvailableSource('modal', value.source),
-					panel: getAvailableSource('panel', value.source),
-					image: getAvailableSource('image', value.source),
-					color: value.color ? value.color : 'transparent',
-					placeholder: value.placeholder ? self.options.baseUrl + value.placeholder : null
-				};
-
-				let parts = source.modal.split('/');
-				let filename = parts[parts.length - 1];
-				let title, description;
-
-				if (self.options.fields !== undefined) {
-					title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
-				} else {
-					title = filename;
-				}
-
-				if (self.options.fields !== undefined) {
-					description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
-				} else {
-					description = null;
-				}
-
-				let file = {
-					source: source,
-					title: title,
-					description: description,
-					loaded: {
-						modal: false,
-						panel: false,
-						image: false
-					}
-				};
-
-				self.files.push(file);
-
-			});
 
 			this.event(this.events.PARSE_IMAGES, this.files);
 
@@ -1042,7 +993,7 @@ namespace angularSuperGallery {
 		// get classes
 		public get classes(): string {
 
-			return this.options.theme + ' ' + this.id;
+			return this.options.theme + ' ' + this.id + (this.editing ? ' editing' : '');
 
 		}
 
@@ -1120,7 +1071,7 @@ namespace angularSuperGallery {
 
 			this.timeout(() => {
 				this.modalInitialized = true;
-			}, 460);		
+			}, 460);
 
 		}
 
@@ -1285,6 +1236,172 @@ namespace angularSuperGallery {
 				border = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
 
 			return height + margin + border;
+
+		}
+
+
+		// edit gallery
+		public editGallery(data: IEdit, component) {
+
+			this.editing = true;
+			var selected = this.selected;
+
+			if (data.options !== undefined) {
+				this.optionsLoaded = false;
+				this.setOptions(data.options);
+			}
+
+			if (data.delete !== undefined) {				
+				this.deleteImage(data.delete);
+			}
+
+			if (data.add) {
+				var length = data.add.length;
+				for (var key = 0; key < length; key++) {
+					this.addImage(data.add[key]);
+				}				
+			}
+
+			if (data.refresh) {
+				data.update = component.items;
+			}
+
+			if (data.update) {
+
+				//this.selected = null;
+
+				var length = data.update.length;
+				for (var key = 0; key < length; key++) {
+					this.addImage(data.update[key], key);
+				};
+
+				var count = this.files.length - data.update.length;
+				if (count > 0) {
+					this.deleteImage(length, count);
+				}
+			}
+
+			this.timeout(() => {
+
+				if (data.add) {
+					selected = this.files.length - 1;
+				} 
+				
+				selected = this.files[selected] ? selected : (selected >= this.files.length ? selected - 1 : selected + 1);
+				this.forceSelect(this.files[selected] ? selected : 0);
+				this.thumbnailsMove(220);
+				this.editing = false;
+				this.event(this.events.GALLERY_UPDATED, data);
+
+			}, 440);
+
+		}
+
+
+		// delete image
+		public deleteImage(index: number, count?: number) {
+
+			index = index === null || index === undefined ? this.selected : index;
+			this.files.splice(index, count ? count : 1);
+
+		}
+
+		// add image
+		public addImage(value: any, index?: number) {
+
+			const self = this;
+
+			if (angular.isString(value) === true) {
+				value = { source: { modal: value } };
+			}
+
+			let getAvailableSource = function (type: string, source: ISource) {
+
+				if (source[type]) {
+
+					return self.options.baseUrl + source[type];
+
+				} else {
+
+					if (type === 'panel') {
+						type = 'image';
+						if (source[type]) {
+							return self.options.baseUrl + source[type];
+						}
+					}
+
+					if (type === 'image') {
+						type = 'modal';
+						if (source[type]) {
+							return self.options.baseUrl + source[type];
+						}
+					}
+
+					if (type === 'modal') {
+						type = 'image';
+						if (source[type]) {
+							return self.options.baseUrl + source[type];
+						}
+					}
+
+				}
+
+			};
+
+			if (!value.source) {
+				value.source = {
+					modal: value[self.options.fields.source.modal],
+					panel: value[self.options.fields.source.panel],
+					image: value[self.options.fields.source.image],
+					placeholder: value[self.options.fields.source.placeholder]
+				};
+			}
+
+			let source = {
+				modal: getAvailableSource('modal', value.source),
+				panel: getAvailableSource('panel', value.source),
+				image: getAvailableSource('image', value.source),
+				color: value.color ? value.color : 'transparent',
+				placeholder: value.placeholder ? self.options.baseUrl + value.placeholder : null
+			};
+
+			if (!source.modal) {
+				self.log('invalid image data', { source: source, value: value });
+				return;
+			}
+
+			let parts = source.modal.split('/');
+			let filename = parts[parts.length - 1];
+			let title, description;
+
+			if (self.options.fields !== undefined) {
+				title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
+			} else {
+				title = filename;
+			}
+
+			if (self.options.fields !== undefined) {
+				description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
+			} else {
+				description = null;
+			}
+
+			let file = {
+				source: source,
+				title: title,
+				description: description,
+				loaded: {
+					modal: false,
+					panel: false,
+					image: false
+				}
+			};
+
+			if (index !== undefined && this.files[index] !== undefined) {
+				this.files[index] = file;
+			} else {
+				this.files.push(file);
+			}
 
 		}
 

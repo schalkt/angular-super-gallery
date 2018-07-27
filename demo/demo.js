@@ -1,6 +1,6 @@
 var demo = angular.module('demo', ['angularSuperGallery']);
 
-demo.controller('DemoController', function () {
+demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 
 	this.options1 = {
 		debug: true,
@@ -100,6 +100,89 @@ demo.controller('DemoController', function () {
 		"medium": "images.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_960x544.jpg",
 	}];
 
+	this.add1 = function () {
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			add: [{
+				"link": "wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_1920x1080.jpg",
+				"thumbnail": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_300x168.jpg",
+				"medium": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_960x544.jpg",
+			}]
+		});
+	};
+
+	this.updateOptions1 = function () {
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			options: this.options1
+		});
+	};
+
+	this.update1 = function () {
+
+		this.files1[0] = {
+			"link": "wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_960x544.jpg",
+		};
+
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			refresh: true
+		});
+
+	};
+
+	this.update12 = function () {
+
+		this.files1 = [{
+			"link": "wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/sea_wave_beautifully_90798_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_960x544.jpg",
+		}];
+
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			update: this.files1
+		});
+
+	};
+
+	this.delete1 = function () {
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			delete: null // index number or null for delete selected image
+		});
+	};
+
+	this.reload1 = function () {
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			refresh: true
+		});
+	};
+
+	this.reset1 = function () {
+
+		this.options1 = angular.copy(this.options1Backup);
+		this.files1 = angular.copy(this.files1Backup);
+
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			update: this.files1,
+			options: this.options1
+		});
+	};
+
+	this.options1Backup = angular.copy(this.options1);
+	this.files1Backup = angular.copy(this.files1);
+
+	//-----------------------------
+
 	this.options2 = {
 		debug: false,
 		loadingImage: 'preload.svg',
@@ -140,7 +223,7 @@ demo.controller('DemoController', function () {
 				onresize: true,
 			},
 			transition: 'zoomInOut'
-		}
+		},
 	};
 
 
@@ -202,4 +285,4 @@ demo.controller('DemoController', function () {
 		"description": "Margot Elise Robbie (born 2 July, 1990) is an Australian actress and producer.",
 	}];
 
-});
+}]);

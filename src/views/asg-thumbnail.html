@@ -2,7 +2,7 @@
 	<div class="item"
 		 ng-click="$ctrl.setSelected(key, $event)"
 		 ng-mouseover="$ctrl.hover(key, $event)"
-		 ng-repeat="(key,file) in $ctrl.asg.files"
+		 ng-repeat="(key,file) in $ctrl.asg.files track by $index"
 		 ng-style="{'background-color': file.source.color}"
 		 ng-class="{'selected' : $ctrl.asg.selected == key}">
 
