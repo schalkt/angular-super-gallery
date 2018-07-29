@@ -59,46 +59,47 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 	};
 
 	this.files1 = [{
-		"link": "wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/tree_field_plain_green_sky_lonely_day_summer_45608_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/tree_field_plain_green_sky_lonely_day_summer_45608_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/tree_field_plain_green_sky_lonely_day_summer_45608_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_960x544.jpg",
-	}, {
-		"link": "wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_1920x1080.jpg",
-		"thumbnail": "images.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_300x168.jpg",
-		"medium": "images.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_960x544.jpg",
-	}];
+			"link": "wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/beach_tropics_sea_sand_summer_84726_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/mountains_grass_trees_day_summer_93030_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/dawn_grass_sky_summer_light_87653_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/beach_sand_palm_trees_tropical_90404_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/tree_field_plain_green_sky_lonely_day_summer_45608_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/tree_field_plain_green_sky_lonely_day_summer_45608_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/tree_field_plain_green_sky_lonely_day_summer_45608_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/mountains_nature_river_grass_beautiful_landscape_93282_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/tree_sun_blue_lilac_krone_spring_flowering_from_below_light_53319_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/lake_sunset_trees_landscape_beach_art_night_reflection_48159_960x544.jpg",
+		}, {
+			"link": "wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/mount_rainier_usa_mountains_snow_trees_grass_flowers_slope_100278_960x544.jpg",
+		},{
+			"link": "wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_1920x1080.jpg",
+			"thumbnail": "images.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_300x168.jpg",
+			"medium": "images.wallpaperscraft.com/image/trees_park_autumn_grass_leaves_90983_960x544.jpg",
+		}
+	];
 
 	this.add1 = function () {
 		$rootScope.$broadcast('ASG-gallery-edit', {
@@ -111,7 +112,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		});
 	};
 
-	this.updateOptions1 = function () {
+	this.update1options = function () {
 		$rootScope.$broadcast('ASG-gallery-edit', {
 			id: 'nature',
 			options: this.options1
@@ -120,22 +121,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 
 	this.update1 = function () {
 
-		this.files1[0] = {
-			"link": "wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_1920x1080.jpg",
-			"thumbnail": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_300x168.jpg",
-			"medium": "images.wallpaperscraft.com/image/tree_fog_nature_beautiful_84257_960x544.jpg",
-		};
-
-		$rootScope.$broadcast('ASG-gallery-edit', {
-			id: 'nature',
-			refresh: true
-		});
-
-	};
-
-	this.update12 = function () {
-
-		this.files1 = [{
+		var newGalleryImages = [{
 			"link": "wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_1920x1080.jpg",
 			"thumbnail": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_300x168.jpg",
 			"medium": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_960x544.jpg",
@@ -147,8 +133,8 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 
 		$rootScope.$broadcast('ASG-gallery-edit', {
 			id: 'nature',
-			update: this.files1
-		});
+			update: newGalleryImages
+		});		
 
 	};
 
@@ -156,13 +142,6 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		$rootScope.$broadcast('ASG-gallery-edit', {
 			id: 'nature',
 			delete: null // index number or null for delete selected image
-		});
-	};
-
-	this.reload1 = function () {
-		$rootScope.$broadcast('ASG-gallery-edit', {
-			id: 'nature',
-			refresh: true
 		});
 	};
 

@@ -185,6 +185,8 @@ namespace angularSuperGallery {
 		update: Array<IFile>;
 		refresh: boolean;
 		options: IOptions;
+		delayThumbnails: number;
+		delayRefresh: number;
 	}
 
 	// service controller interface
@@ -1241,41 +1243,38 @@ namespace angularSuperGallery {
 
 
 		// edit gallery
-		public editGallery(data: IEdit, component) {
+		public editGallery(edit: IEdit, component) {
 
 			this.editing = true;
 			var selected = this.selected;
 
-			if (data.options !== undefined) {
+			if (edit.options !== undefined) {
 				this.optionsLoaded = false;
-				this.setOptions(data.options);
+				this.setOptions(edit.options);
 			}
 
-			if (data.delete !== undefined) {				
-				this.deleteImage(data.delete);
+			if (edit.delete !== undefined) {
+				this.deleteImage(edit.delete);
 			}
 
-			if (data.add) {
-				var length = data.add.length;
+			if (edit.add) {
+				selected = this.files.length;
+				var length = edit.add.length;
 				for (var key = 0; key < length; key++) {
-					this.addImage(data.add[key]);
-				}				
+					this.addImage(edit.add[key]);
+				}
 			}
 
-			if (data.refresh) {
-				data.update = component.items;
-			}
+			if (edit.update) {
 
-			if (data.update) {
+				this.selected = null;
 
-				//this.selected = null;
-
-				var length = data.update.length;
+				var length = edit.update.length;
 				for (var key = 0; key < length; key++) {
-					this.addImage(data.update[key], key);
+					this.addImage(edit.update[key], key);
 				};
 
-				var count = this.files.length - data.update.length;
+				var count = this.files.length - edit.update.length;
 				if (count > 0) {
 					this.deleteImage(length, count);
 				}
@@ -1283,17 +1282,14 @@ namespace angularSuperGallery {
 
 			this.timeout(() => {
 
-				if (data.add) {
-					selected = this.files.length - 1;
-				} 
-				
 				selected = this.files[selected] ? selected : (selected >= this.files.length ? selected - 1 : selected + 1);
-				this.forceSelect(this.files[selected] ? selected : 0);
-				this.thumbnailsMove(220);
-				this.editing = false;
-				this.event(this.events.GALLERY_UPDATED, data);
 
-			}, 440);
+				this.forceSelect(this.files[selected] ? selected : 0);
+				this.editing = false;
+				this.event(this.events.GALLERY_UPDATED, edit);
+				this.thumbnailsMove(edit.delayThumbnails !== undefined ? edit.delayThumbnails : 220);
+
+			}, (edit.delayRefresh !== undefined ? edit.delayRefresh : 440));
 
 		}
 
@@ -1308,6 +1304,10 @@ namespace angularSuperGallery {
 
 		// add image
 		public addImage(value: any, index?: number) {
+
+			if (value === undefined || value === null) {
+				return;
+			}
 
 			const self = this;
 

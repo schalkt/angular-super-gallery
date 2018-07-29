@@ -197,23 +197,21 @@
 						<div class="row">					
 								
 							<div class="col-md-6 text-center">
-								<button class="btn btn-xs btn-success btn-block" ng-click="ctrl.add1()">Add image</button>
-								<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>							
-								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update1()">Change first image</button>
-								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update12()">Update images</button>
-								<button class="btn btn-xs btn-primary btn-block" ng-click="ctrl.reload1()">Reload gallery</button>
+								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update1()">Change gallery images</button>
+								<button class="btn btn-xs btn-success btn-block" ng-click="ctrl.add1()">Add new image(s) to gallery</button>
+								<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>								
 								<button class="btn btn-xs btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
 							</div>
 							<div class="col-md-6 text-center">
 								<label>Theme</label>
-								<select class="form-control" data-ng-model="ctrl.options1.theme" data-ng-change="ctrl.updateOptions1()">
+								<select class="form-control" data-ng-model="ctrl.options1.theme" data-ng-change="ctrl.update1options()">
 									<option value="darkblue">Darkblue</option>
 									<option value="darkred">Darkred</option>
 									<option value="whitegold">Whitegold</option>
 									<option value="default">Default</option>
 								</select>
 								<label>Transitions</label>
-								<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.updateOptions1()">									
+								<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.update1options()">									
 									<option value="no">no</option>
 									<option value="fadeInOut">fadeInOut</option>
 									<option value="zoomIn">zoomIn</option>
