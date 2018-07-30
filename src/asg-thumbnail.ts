@@ -1,4 +1,5 @@
 import { IOptions, IFile, IServiceController, IOptionsThumbnail } from './asg-interfaces';
+import { IScope, IRootElementService } from 'angular';
 
 export class ThumbnailController {
 
@@ -14,8 +15,8 @@ export class ThumbnailController {
 
 	constructor(
 		private service: IServiceController,
-		private $scope: ng.IScope,
-		private $element: ng.IRootElementService) {
+		private $scope: IScope,
+		private $element: IRootElementService) {
 
 		this.template = 'views/asg-thumbnail.html';
 

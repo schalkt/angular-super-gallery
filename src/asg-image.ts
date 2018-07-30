@@ -1,6 +1,6 @@
 import { IOptions, IFile, IServiceController, IOptionsImage } from './asg-interfaces';
 import {
-	element
+	element, IRootScopeService, IRootElementService, IWindowService, IScope
 } from 'angular';
 
 export class ImageController {
@@ -14,10 +14,10 @@ export class ImageController {
 	private asg : IServiceController;
 
 	constructor(private service : IServiceController,
-				private $rootScope : ng.IRootScopeService,
-				private $element : ng.IRootElementService,
-				private $window : ng.IWindowService,
-				private $scope : ng.IScope) {
+				private $rootScope : IRootScopeService,
+				private $element : IRootElementService,
+				private $window : IWindowService,
+				private $scope : IScope) {
 
 		element($window).bind('resize', (event) => {
 			this.onResize();
