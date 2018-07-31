@@ -18,7 +18,7 @@
   ],
   "author": "Tamas Schalk <github@schalk.hu> (https://github.com/schalkt)",
   "license": "MIT",
-  "main": "index.js",
+  "main" : "index.js",
   "devDependencies": {
     "gulp": "3.9.1",
     "gulp-angular-templatecache": "2.2.1",
@@ -46,12 +46,9 @@
     "gulp-util": "3.0.8",
     "gulp-watch": "5.0.0",
     "run-sequence": "2.2.1",
-    "ts-loader": "^4.4.2",
     "tslint": "5.10.0",
     "typescript": "2.9.2",
-    "typings": "2.1.1",
-    "webpack-stream": "^5.1.0",
-    "@types/angular": "^1.6.49"
+    "typings": "2.1.1"
   },
   "dependencies": {
     "angular": "1.7.2",

@@ -12,8 +12,7 @@ var gulp         = require('gulp'),
 	runSequence  = require('run-sequence'),
 	gzip         = require('gulp-gzip'),
 	tslint       = require('gulp-tslint'),
-	gutil        = require('gulp-util'),
-	webpack      = require('webpack-stream');
+	gutil        = require('gulp-util');
 
 
 var DIST = "dist";
@@ -56,30 +55,21 @@ gulp.task("ts", function () {
 	var tsc = require("gulp-typescript");
 	var filename = "angular-super-gallery.js";
 
-	return gulp.src(SRC + "/asg.ts")
+	return gulp.src([
+		SRC + "/**/*.ts",
+	])
 		.pipe(gulpif(!PROD, sourcemaps.init()))
-		.pipe(webpack({
-			mode: PROD ? "production" : "development",
-			target: 'web',
-			output: {
-			  filename: filename,
-			},
-			resolve: {
-				// Add `.ts` and `.tsx` as a resolvable extension.
-				extensions: [".ts", ".tsx", ".js"]
-			},
-			module: {
-				rules: [
-					// all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-					{ test: /\.tsx?$/, loader: "ts-loader" }
-				]
-			},
-			externals: [
-				'angular',
-				'angular-animate',
-				'angular-touch',
-			]
-		  }))
+		.pipe(order([
+			"asg.ts",
+			"asg-factory.ts"
+		], {
+			base: SRC
+		}))
+		.pipe(tsc({
+			target: 'ES5',
+			removeComments: true
+		}))
+		.pipe(concat(filename))
 		.pipe(gulpif(!PROD, sourcemaps.write()))
 		.pipe(gulp.dest(TEMP))
 		.pipe(debug());
