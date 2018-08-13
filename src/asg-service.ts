@@ -117,6 +117,7 @@ namespace angularSuperGallery {
 		debug?: boolean;
 		baseUrl?: string;
 		hashUrl?: boolean;
+		duplicates?: boolean;
 		fields?: {
 			source?: {
 				modal?: string;
@@ -214,6 +215,7 @@ namespace angularSuperGallery {
 			LOAD_IMAGE: string;
 			FIRST_IMAGE: string;
 			CHANGE_IMAGE: string;
+			DOUBLE_IMAGE: string;
 			MODAL_OPEN: string;
 			MODAL_CLOSE: string;
 			GALLERY_UPDATED: string;
@@ -297,6 +299,7 @@ namespace angularSuperGallery {
 			debug: false, // image load, autoplay, etc. info in console.log
 			hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
 			baseUrl: '', // url prefix
+			duplicates: false, // enable or disable same images (url) in gallery
 			fields: {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)
@@ -311,7 +314,7 @@ namespace angularSuperGallery {
 				enabled: false, // slideshow play enabled/disabled
 				delay: 4100 // autoplay delay in millisecond
 			},
-			theme: 'default', // css style [default, darkblue, darkred, whitegold]		
+			theme: 'default', // css style [default, darkblue, darkred, whitegold]
 			preloadNext: false, // preload next image (forward/backward)
 			preloadDelay: 770, // preload delay for preloadNext
 			loadingImage: 'preload.svg', // loader image
@@ -457,6 +460,7 @@ namespace angularSuperGallery {
 			LOAD_IMAGE: 'ASG-load-image-',
 			FIRST_IMAGE: 'ASG-first-image-',
 			CHANGE_IMAGE: 'ASG-change-image-',
+			DOUBLE_IMAGE: 'ASG-double-image-',
 			MODAL_OPEN: 'ASG-modal-open-',
 			MODAL_CLOSE: 'ASG-modal-close-',
 			THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
@@ -795,10 +799,10 @@ namespace angularSuperGallery {
 
 		private prepareItems() {
 
-			var length = this.items.length;
-			for (var key = 0; key < length; key++) {
+			let length = this.items.length;
+			for (let key = 0; key < length; key++) {
 				this.addImage(this.items[key]);
-			};
+			}
 
 			this.event(this.events.PARSE_IMAGES, this.files);
 
@@ -1038,7 +1042,7 @@ namespace angularSuperGallery {
 
 			this._visible = value;
 
-			// set index 0 if !selected 
+			// set index 0 if !selected
 			this.selected = this.selected ? this.selected : 0;
 
 			let body = document.body;
@@ -1246,7 +1250,7 @@ namespace angularSuperGallery {
 		public editGallery(edit: IEdit, component) {
 
 			this.editing = true;
-			var selected = this.selected;
+			let selected = this.selected;
 
 			if (edit.options !== undefined) {
 				this.optionsLoaded = false;
@@ -1259,8 +1263,8 @@ namespace angularSuperGallery {
 
 			if (edit.add) {
 				selected = this.files.length;
-				var length = edit.add.length;
-				for (var key = 0; key < length; key++) {
+				let length = edit.add.length;
+				for (let key = 0; key < length; key++) {
 					this.addImage(edit.add[key]);
 				}
 			}
@@ -1269,12 +1273,13 @@ namespace angularSuperGallery {
 
 				this.selected = null;
 
-				var length = edit.update.length;
-				for (var key = 0; key < length; key++) {
-					this.addImage(edit.update[key], key);
-				};
+				let length = edit.update.length;
 
-				var count = this.files.length - edit.update.length;
+				for (let key = 0; key < length; key++) {
+					this.addImage(edit.update[key], key);
+				}
+
+				let count = this.files.length - edit.update.length;
 				if (count > 0) {
 					this.deleteImage(length, count);
 				}
@@ -1302,6 +1307,21 @@ namespace angularSuperGallery {
 
 		}
 
+		// find image in gallery by modal source
+		public findImage(filename : string) {
+
+			let length = this.files.length;
+
+			for (let key = 0; key < length; key++) {
+				if (this.files[key].source.modal === filename) {
+					return this.files[key];
+				}
+			}
+
+			return false;
+
+		}
+
 		// add image
 		public addImage(value: any, index?: number) {
 
@@ -1315,32 +1335,32 @@ namespace angularSuperGallery {
 				value = { source: { modal: value } };
 			}
 
-			let getAvailableSource = function (type: string, source: ISource) {
+			let getAvailableSource = function (type: string, src: ISource) {
 
-				if (source[type]) {
+				if (src[type]) {
 
-					return self.options.baseUrl + source[type];
+					return self.options.baseUrl + src[type];
 
 				} else {
 
 					if (type === 'panel') {
 						type = 'image';
-						if (source[type]) {
-							return self.options.baseUrl + source[type];
+						if (src[type]) {
+							return self.options.baseUrl + src[type];
 						}
 					}
 
 					if (type === 'image') {
 						type = 'modal';
-						if (source[type]) {
-							return self.options.baseUrl + source[type];
+						if (src[type]) {
+							return self.options.baseUrl + src[type];
 						}
 					}
 
 					if (type === 'modal') {
 						type = 'image';
-						if (source[type]) {
-							return self.options.baseUrl + source[type];
+						if (src[type]) {
+							return self.options.baseUrl + src[type];
 						}
 					}
 
@@ -1400,7 +1420,14 @@ namespace angularSuperGallery {
 			if (index !== undefined && this.files[index] !== undefined) {
 				this.files[index] = file;
 			} else {
+
+				if (self.options.duplicates !== true && this.findImage(file.source.modal)) {
+					self.event(self.events.DOUBLE_IMAGE, file);
+					return;
+				}
+
 				this.files.push(file);
+
 			}
 
 		}
