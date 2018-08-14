@@ -448,6 +448,8 @@ namespace angularSuperGallery {
 			'rotateZY',
 			'slideLR',
 			'slideTB',
+			'zlideLR',
+			'zlideTB',
 			'flipX',
 			'flipY'
 		];
