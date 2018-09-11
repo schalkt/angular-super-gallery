@@ -29,6 +29,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 				enabled: true,
 				dynamic: false
 			},
+			transition: 'rotateLR',
 			title: "Angular Super Gallery Demo",
 			subtitle: "Nature Wallpapers Full HD",
 			thumbnail: {
@@ -54,7 +55,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 			click: {
 				modal: true
 			},
-			transition: 'rotateLR',
+			transition: 'zlideLR',
 		},
 	};
 
@@ -134,7 +135,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		$rootScope.$broadcast('ASG-gallery-edit', {
 			id: 'nature',
 			update: newGalleryImages
-		});		
+		});
 
 	};
 

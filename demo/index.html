@@ -153,7 +153,7 @@
 					<li><a target="_blank" href="http://angularjs.bestjquery.com/angular-super-image-gallery/"><span class="glyphicon glyphicon-link"></span> angularjs.bestjquery.com</a></li>
 					<li><a target="_blank" href="http://www.onlinecode.org/super-angularjs-image-gallery/"><span class="glyphicon glyphicon-link"></span> onlinecode.org</a></li>
 					<li><a target="_blank" href="https://angularscript.com/angular-super-image-gallery/"><span class="glyphicon glyphicon-link"></span> angularscript.com</a></li>
-					<li><a target="_blank" href="https://www.jsdelivr.com/package/npm/angular-super-gallery"><span class="glyphicon glyphicon-link"></span> jsdelivr.com</a></li>					
+					<li><a target="_blank" href="https://www.jsdelivr.com/package/npm/angular-super-gallery"><span class="glyphicon glyphicon-link"></span> jsdelivr.com</a></li>
 					<li><a target="_blank" href="https://david-dm.org/schalkt/angular-super-gallery"><span class="glyphicon glyphicon-link"></span> david-dm.org</a></li>
 					<li><a target="_blank" href="https://www.bithound.io/github/schalkt/angular-super-gallery"><span class="glyphicon glyphicon-link"></span> bithound.io</a></li>
 					<li><a target="_blank" href="https://snyk.io/test/github/schalkt/angular-super-gallery"><span class="glyphicon glyphicon-link"></span> snyk.io</a></li>
@@ -193,13 +193,13 @@
 						</asg-modal>
 					</asg-image>
 					<asg-thumbnail data-id="nature"></asg-thumbnail>
-					<hr>	
-						<div class="row">					
-								
+					<hr>
+						<div class="row">
+
 							<div class="col-md-6 text-center">
 								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update1()">Change gallery images</button>
 								<button class="btn btn-xs btn-success btn-block" ng-click="ctrl.add1()">Add new image(s) to gallery</button>
-								<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>								
+								<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>
 								<button class="btn btn-xs btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
 							</div>
 							<div class="col-md-6 text-center">
@@ -211,7 +211,7 @@
 									<option value="default">Default</option>
 								</select>
 								<label>Transitions</label>
-								<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.update1options()">									
+								<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.update1options()">
 									<option value="no">no</option>
 									<option value="fadeInOut">fadeInOut</option>
 									<option value="zoomIn">zoomIn</option>
@@ -222,6 +222,8 @@
 									<option value="rotateZY">rotateZY</option>
 									<option value="slideLR">slideLR</option>
 									<option value="slideTB">slideTB</option>
+									<option value="zlideLR">zlideLR</option>
+									<option value="zlideTB">zlideTB</option>
 									<option value="flipX">flipX</option>
 									<option value="flipY">flipY</option>
 								</select>

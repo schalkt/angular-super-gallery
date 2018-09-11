@@ -15,7 +15,7 @@
   background-size: auto;
   background-position: 50% 50%;
   background-repeat: no-repeat;
- 
+
   >.placeholder {
     position: absolute;
     top: 0px;
@@ -41,7 +41,7 @@
       background-size: 100% 100%;
     }
 
-  } 
+  }
 
   >.source {
     max-width: 100%;
@@ -74,10 +74,10 @@
   }
 
   &.loaded {
-      
+
     background-image: none;
 
-    .source {            
+    .source {
       opacity: 1;
     }
 
@@ -90,6 +90,8 @@
 @import 'transitions/rotateZY';
 @import 'transitions/slideLR';
 @import 'transitions/slideTB';
+@import 'transitions/zlideLR';
+@import 'transitions/zlideTB';
 @import 'transitions/fadeInOut';
 @import 'transitions/zoomIn';
 @import 'transitions/zoomOut';
