@@ -377,7 +377,7 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 - image info (original width and height / bytes)
 - gulp -> webpack
 - preloader svg fix in Microsoft Edge (or fix Edge :)
-- remember website hash and set back when modal closed
+- remember website hash and set back when modal closed?
 
 ## Photos
 
