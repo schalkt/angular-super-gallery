@@ -15,7 +15,7 @@
 			</span>
 
 			<span class="buttons hidden-xs pull-right">
-				<span ng-repeat="item in ::$ctrl.config.header.buttons" ng-include="('views/button/asg-' + item + '.html')"></span>
+				<span ng-repeat="item in $ctrl.config.header.buttons" ng-include="('views/button/asg-' + item + '.html')"></span>
             </span>
 
 			<span ng-if="$ctrl.config.title">
@@ -46,7 +46,7 @@
 						<span class="glyphicon glyphicon-chevron-left"></span>
 					</button>
 
-					<button class="btn btn-default btn-md pull-left visible-sm" 
+					<button class="btn btn-default btn-md pull-left visible-sm"
 						ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
 						ng-click="$ctrl.toBackward(true, $event)">
 						<span class="glyphicon glyphicon-chevron-left"></span>
@@ -57,13 +57,13 @@
 				<div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
 					<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
-							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"		
+							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
 							ng-click="$ctrl.toForward(true, $event)">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 					</button>
 
-					<button class="btn btn-default btn-md pull-right visible-sm" 
-							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"	
+					<button class="btn btn-default btn-md pull-right visible-sm"
+							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
 							ng-click="$ctrl.toForward(true, $event)">
 						<span class="glyphicon glyphicon-chevron-right"></span>
 					</button>
@@ -74,13 +74,13 @@
 
 			<div class="img"
 				 ng-repeat="(key,file) in $ctrl.asg.files track by $index"
-				 ng-show="$ctrl.asg.selected == key"		
-				 ng-style="$ctrl.asg.preloadStyle(file, 'modal')"	 
+				 ng-show="$ctrl.asg.selected == key"
+				 ng-style="$ctrl.asg.preloadStyle(file, 'modal')"
 				 ng-class="{'loaded' : file.loaded.modal}">
 
 				<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file)"></div>
 				<div class="source {{ $ctrl.config.size }}"
-					 ng-if="file.loaded.modal"		 
+					 ng-if="file.loaded.modal"
 					 ng-style="{'background-image': 'url(' + file.source.modal + ')'}">
 				</div>
 

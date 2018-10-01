@@ -624,14 +624,22 @@ namespace angularSuperGallery {
 
 			if (options) {
 
-				options = angular.merge(angular.copy(this.defaults), options);
-				this.options = angular.copy(options);
+				this.options = angular.copy(this.defaults);
+				angular.merge(this.options, options);
 
 				if (options.modal && options.modal.header && options.modal.header.buttons) {
+
 					this.options.modal.header.buttons = options.modal.header.buttons;
+
+					// remove duplicates from buttons
+					this.options.modal.header.buttons = this.options.modal.header.buttons.filter(function (x, i, a) {
+						return a.indexOf(x) === i;
+					});
+
 				}
 
 				this.optionsLoaded = true;
+
 			} else {
 				this.options = angular.copy(this.defaults);
 			}
