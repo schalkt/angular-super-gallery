@@ -123,11 +123,14 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 	this.update1 = function () {
 
 		var newGalleryImages = [{
-			"link": "wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_1920x1080.jpg",
-			"thumbnail": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_300x168.jpg",
-			"medium": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_960x544.jpg",
+			"title": "Road trees",
+			"source" : {
+				"modal": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_1920x1080.jpg",
+				"panel": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_300x168.jpg",
+				"image": "images.wallpaperscraft.com/image/summer_nature_road_leaves_trees_90616_960x544.jpg",
+			}
 		}, {
-			"link": "wallpaperscraft.com/image/sea_wave_beautifully_90798_1920x1080.jpg",
+			"link": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_1920x1080.jpg",
 			"thumbnail": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_300x168.jpg",
 			"medium": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_960x544.jpg",
 		}];
@@ -176,6 +179,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		theme: 'whitegold',
 		modal: {
 			transition: 'zoomInOut',
+			titleFromImage: true,
 			caption: {
 				position: 'bottom'
 			},

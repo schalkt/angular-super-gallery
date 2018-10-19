@@ -15,10 +15,13 @@ namespace angularSuperGallery {
 			disabled?: boolean;
 			visible?: boolean;
 			position?: string;
+			download?: boolean;
 		};
 		transition?: string;
 		title?: string;
 		subtitle?: string;
+		titleFromImage? : boolean;
+		subtitleFromImage? : boolean;
 		arrows?: {
 			preload?: boolean;
 			enabled?: boolean;
@@ -322,10 +325,13 @@ namespace angularSuperGallery {
 			modal: {
 				title: '', // modal window title
 				subtitle: '', // modal window subtitle
+				titleFromImage: false, // force update the gallery title by image title
+				subtitleFromImage: false, // force update the gallery subtitle by image description
 				caption: {
 					disabled: false, // disable image caption
 					visible: true, // show/hide image caption
-					position: 'top' // caption position [top, bottom]
+					position: 'top', // caption position [top, bottom]
+					download: false // show/hide download link
 				},
 				header: {
 					enabled: true, // enable/disable modal menu
@@ -644,6 +650,14 @@ namespace angularSuperGallery {
 				this.options = angular.copy(this.defaults);
 			}
 
+			// if !this.$window.screenfull
+			if (!this.$window.screenfull) {
+				this.options.modal.header.buttons = this.options.modal.header.buttons.filter(function (x, i, a) {
+					return x !== 'fullscreen';
+				});
+			}
+
+
 			// important!
 			options = this.options;
 
@@ -662,6 +676,18 @@ namespace angularSuperGallery {
 			this._selected = v;
 			this.loadImage(this._selected);
 			this.preload();
+
+			if (this.file) {
+
+				if (this.options.modal.titleFromImage && this.file.title) {
+					this.options.modal.title = this.file.title;
+				}
+
+				if (this.options.modal.subtitleFromImage && this.file.description) {
+					this.options.modal.subtitle = this.file.description;
+				}
+
+			}
 
 			if (prev !== this._selected) {
 
