@@ -283,7 +283,7 @@ namespace angularSuperGallery {
 
 		public slug = 'asg';
 		public id: string;
-		public items: any;
+		public items: Array<IFile> = [];
 		public files: Array<IFile> = [];
 		public direction: string;
 		public modalAvailable = false;
@@ -598,7 +598,7 @@ namespace angularSuperGallery {
 
 			// update images when edit event
 			instance.$rootScope.$on(this.events.GALLERY_EDIT, (event, data) => {
-				if (id === data.id && component.items) {
+				if (id === data.id) {
 					instance.editGallery(data, component);
 				}
 			});
@@ -611,11 +611,8 @@ namespace angularSuperGallery {
 		// prepare images array
 		public setItems(items: Array<IFile>) {
 
-			if (!items) {
-				return;
-			}
-
-			this.items = items;
+			this.items = items ? items : [];
+			console.log(this.items);
 			this.prepareItems();
 
 		}

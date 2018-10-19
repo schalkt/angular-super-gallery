@@ -178,6 +178,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		},
 		theme: 'whitegold',
 		modal: {
+			title: '',
 			transition: 'zoomInOut',
 			titleFromImage: true,
 			caption: {
