@@ -19,9 +19,9 @@ AngularJS image gallery
 ## Requirements
 
 - [jQuery](https://github.com/jquery/jquery/tree/3.2.1) ^3.2.1
-- [angular](https://github.com/angular/angular.js/tree/v1.6.4) 1.6.x
-- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.6.4) 1.6.x
-- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.6.4) 1.6.x
+- [angular](https://github.com/angular/angular.js/tree/v1.7.5) 1.7.x
+- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.7.5) 1.7.x
+- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.7.5) 1.7.x
 - [screenfull](https://www.npmjs.com/package/screenfull) 3.3.x
 - [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.x
 

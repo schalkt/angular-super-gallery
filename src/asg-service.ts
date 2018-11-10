@@ -1079,19 +1079,19 @@ namespace angularSuperGallery {
 			this.selected = this.selected ? this.selected : 0;
 
 			let body = document.body;
-			let className = ' asg-yhidden';
+			let className = 'asg-yhidden';
 
 			if (value) {
 
 				if (body.className.indexOf(className) < 0) {
-					body.className = body.className + className;
+					body.className = body.className + ' ' + className;
 				}
 
 				this.modalInit();
 
 			} else {
 
-				body.className = body.className.replace(className, '');
+				body.className = body.className.replace(className, '').trim();
 
 			}
 
