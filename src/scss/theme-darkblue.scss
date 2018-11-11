@@ -5,214 +5,226 @@ $primary: #30c6d4;
 
 .asg-thumbnail.darkblue {
 
-  background-color: $black;
-  padding: 4px 0px 0px 0px;
+	background-color: $black;
+	padding: 4px 0px 0px 0px;
 
-  .item {
+	.item {
 
-    margin: 0px 4px 0px 0px;
-    opacity: 0.64;
+		margin: 0px 4px 0px 0px;
 
-    &.selected {
-      opacity: 1;
-    }
+		img {
+			height: 42px;
+			opacity: 0.64;
+		}
 
-    img {
-      height: 42px;
-    }
+		.index {
+			background-color: rgba($black, 0.64);
+			color: $primary;
+			top: 0px;
+			right: -10px;
+			bottom: 0px;
+			opacity: 0;
+		}
 
-    &:hover, &.selected {
-      .index {
-        opacity: 1;
-        right: 0px;
-      }
-    }
+		background-color: $black;
 
-    .index {
-      background-color: rgba($black, 0.64);
-      color: $primary;
-      top: 0px;
-      right: -10px;
-      bottom: 0px;
-      opacity: 0;
-    }
+		&.selected {
+			img {
+				opacity: 1;
+			}
+			.index {
+				opacity: 1;
+				right: 0px;
+			}
+		}
 
-    background-color: $black;
+		&:hover {
+			.index {
+				opacity: 0.77;
+				right: 0px;
+			}
+		}
 
-  }
+	}
 }
 
 .asg-image.darkblue {
 
-  background-color: $black;
-  color: $primary;
+	background-color: $black;
+	color: $primary;
 
-  .asg-info {
+	.asg-info {
 
-    top: -100px;
-    bottom: auto;
-    font-size: 12px;
-    background-color: rgba($black, 0);
-    transition: all 0.25s;
+		top: -100px;
+		bottom: auto;
+		font-size: 12px;
+		background-color: rgba($black, 0);
+		transition: all 0.25s;
 
-    a {
-      color: $primary;
-      border-bottom: 1px dashed $primary;
-      text-decoration: none;
+		a {
+			color: $primary;
+			border-bottom: 1px dashed $primary;
+			text-decoration: none;
 
-      &:hover {
-        text-decoration: none;
-        border-bottom: 1px solid $primary;
-      }
+			&:hover {
+				text-decoration: none;
+				border-bottom: 1px solid $primary;
+			}
 
-    }
+		}
 
-  }
+	}
 
-  &:hover .asg-info {
-    background-color: rgba($black, 0.77);
-    top: 0;
-  }
+	&:hover .asg-info {
+		background-color: rgba($black, 0.77);
+		top: 0;
+	}
 
-  .btn {
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    border-radius: 0;
-    background-image: none;
-    text-shadow: none;
-  }
+	.btn {
+		-webkit-transition: all .3s ease-in-out;
+		transition: all .3s ease-in-out;
+		border-radius: 0;
+		background-image: none;
+		text-shadow: none;
+	}
 
-  .btn-default {
-    border: 1px solid $primary;
-    color: $primary;
-    background-color: transparent;
-  }
+	.btn-default {
+		border: 1px solid $primary;
+		color: $primary;
+		background-color: transparent;
+	}
 
-  .btn-default:focus, .btn-default:hover {
-    border: 1px solid $primary;
-    outline: none;
-    color: $black;
-    background-color: $primary;
-  }
+	.btn-default:focus,
+	.btn-default:hover {
+		border: 1px solid $primary;
+		outline: none;
+		color: $black;
+		background-color: $primary;
+	}
 
 }
 
 .asg-modal.darkblue {
 
-  .frame {
-    margin: 0;
-  }
+	.frame {
+		margin: 0;
+	}
 
-  .btn {
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    border-radius: 0;
-    background-image: none;
-    text-shadow: none;
-  }
+	.btn {
+		-webkit-transition: all .3s ease-in-out;
+		transition: all .3s ease-in-out;
+		border-radius: 0;
+		background-image: none;
+		text-shadow: none;
+	}
 
-  .btn-default {
-    border: 1px solid $primary;
-    color: $primary;
-    background-color: transparent;
-  }
+	.btn-default {
+		border: 1px solid $primary;
+		color: $primary;
+		background-color: transparent;
+	}
 
-  .btn-default:focus, .btn-default:hover {
-    border: 1px solid $primary;
-    outline: none;
-    color: $black;
-    background-color: $primary;
-  }
+	.btn-default:focus,
+	.btn-default:hover {
+		border: 1px solid $primary;
+		outline: none;
+		color: $black;
+		background-color: $primary;
+	}
 
-  background-color: $black;
+	background-color: $black;
 
-  .header {
-    background-color: $black;
-    color: $primary;
-    .title {
-      text-transform: uppercase;
-    }
-    .subtitle {
-      background: $primary;
-      color: $black;
-    }
-  }
+	.header {
+		background-color: $black;
+		color: $primary;
 
-  .help {
-    background-color: rgba($black, 0.77);
-    color: $primary;
-  }
+		.title {
+			text-transform: uppercase;
+		}
 
-  .caption {
-    .content {
-      background-color: rgba($black, 0.64);
-      color: $primary;
-      padding: 0px;
-      line-height: 32px;
-    }
-  }
+		.subtitle {
+			background: $primary;
+			color: $black;
+		}
+	}
 
-  .asg-thumbnail {
+	.help {
+		background-color: rgba($black, 0.77);
+		color: $primary;
+	}
 
-    background-color: rgba($black, 0.77);
+	.caption {
+		.content {
+			background-color: rgba($black, 0.64);
+			color: $primary;
+			padding: 0px;
+			line-height: 32px;
+		}
+	}
 
-    .item {
-      img {
-        height: 77px;
-      }
-    }
-  }
+	.asg-thumbnail {
+
+		background-color: rgba($black, 0.77);
+
+		.item {
+			img {
+				height: 77px;
+			}
+		}
+	}
 
 }
 
 .asg-control.darkblue {
 
-  .btn {
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    border-radius: 0;
-    background-image: none;
-    text-shadow: none;
-  }
+	.btn {
+		-webkit-transition: all .3s ease-in-out;
+		transition: all .3s ease-in-out;
+		border-radius: 0;
+		background-image: none;
+		text-shadow: none;
+	}
 
-  .btn-default {
-    border: 1px solid $primary;
-    color: $primary;
-    background-color: transparent;
-  }
+	.btn-default {
+		border: 1px solid $primary;
+		color: $primary;
+		background-color: transparent;
+	}
 
-  .btn-default:focus, .btn-default:hover {
-    border: 1px solid $primary;
-    outline: none;
-    color: $black;
-    background-color: $primary;
-  }
+	.btn-default:focus,
+	.btn-default:hover {
+		border: 1px solid $primary;
+		outline: none;
+		color: $black;
+		background-color: $primary;
+	}
 
-  background-color: $black;
+	background-color: $black;
 
 }
 
 .asg-info.darkblue {
 
-  background-color: $black;
-  color: $primary;
+	background-color: $black;
+	color: $primary;
 
 }
 
 .asg-panel.darkblue {
 
-  background-color: $black;
+	background-color: $black;
 
-  .item {
+	.item {
 
-    background-color: $black;
+		background-color: $black;
 
-    &.selected {
-      border-color: $black;
-    }
-    .index {
-      background-color: rgba($black, 0.56);
-      color: $primary;
-    }
-  }
+		&.selected {
+			border-color: $black;
+		}
+
+		.index {
+			background-color: rgba($black, 0.56);
+			color: $primary;
+		}
+	}
 }
