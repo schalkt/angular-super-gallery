@@ -1355,6 +1355,16 @@ namespace angularSuperGallery {
 
 		}
 
+
+		public getFullUrl(url : string, baseUrl?: string) {
+
+			baseUrl = baseUrl === undefined ? this.options.baseUrl : baseUrl;
+			let isFull = (url.indexOf('//') === 0 || url.indexOf('http') === 0) ? true : false;
+
+			return isFull ? url : baseUrl + url;
+
+		}
+
 		// add image
 		public addImage(value: any, index?: number) {
 
@@ -1372,28 +1382,28 @@ namespace angularSuperGallery {
 
 				if (src[type]) {
 
-					return self.options.baseUrl + src[type];
+					return self.getFullUrl(src[type]);
 
 				} else {
 
 					if (type === 'panel') {
 						type = 'image';
 						if (src[type]) {
-							return self.options.baseUrl + src[type];
+							return self.getFullUrl(src[type]);
 						}
 					}
 
 					if (type === 'image') {
 						type = 'modal';
 						if (src[type]) {
-							return self.options.baseUrl + src[type];
+							return self.getFullUrl(src[type]);
 						}
 					}
 
 					if (type === 'modal') {
 						type = 'image';
 						if (src[type]) {
-							return self.options.baseUrl + src[type];
+							return self.getFullUrl(src[type]);
 						}
 					}
 
@@ -1415,7 +1425,7 @@ namespace angularSuperGallery {
 				panel: getAvailableSource('panel', value.source),
 				image: getAvailableSource('image', value.source),
 				color: value.color ? value.color : 'transparent',
-				placeholder: value.placeholder ? self.options.baseUrl + value.placeholder : null
+				placeholder: value.placeholder ? self.getFullUrl(value.placeholder) : null
 			};
 
 			if (!source.modal) {
