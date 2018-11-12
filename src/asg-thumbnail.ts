@@ -11,11 +11,13 @@ namespace angularSuperGallery {
 		private template;
 		private asg: IServiceController;
 		private modal = false;
+		private initialized = false;
 
 		constructor(
 			private service: IServiceController,
 			private $scope: ng.IScope,
-			private $element: ng.IRootElementService) {
+			private $element: ng.IRootElementService,
+			private $timeout: ng.ITimeoutService) {
 
 			this.template = 'views/asg-thumbnail.html';
 
@@ -29,6 +31,12 @@ namespace angularSuperGallery {
 			// get parent asg component (modal)
 			if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent.$ctrl) {
 				this.modal = this.$scope.$parent.$parent.$ctrl.type === 'modal' ? true : false;
+			}
+
+			if (!this.modal) {
+				this.$timeout(() => {
+					this.initialized = true;
+				}, 420);
 			}
 
 		}
@@ -119,10 +127,12 @@ namespace angularSuperGallery {
 		// get classes
 		public get classes(): string {
 
-			let show = 'initialized';
+			let show;
 
 			if (this.modal) {
 				show = this.asg.modalInitialized ? 'initialized' : 'initializing';
+			} else {
+				show = this.initialized ? 'initialized' : 'initializing';
 			}
 
 			return this.asg.classes + ' ' + this.dynamic + ' ' + show;
@@ -134,7 +144,7 @@ namespace angularSuperGallery {
 	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgThumbnail', {
-		controller: ['asgService', '$scope', '$element', angularSuperGallery.ThumbnailController],
+		controller: ['asgService', '$scope', '$element', '$timeout', angularSuperGallery.ThumbnailController],
 		template: '<div data-ng-if="!$ctrl.autohide" class="asg-thumbnail {{ $ctrl.classes }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
 		bindings: {
 			id: '@',

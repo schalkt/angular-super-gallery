@@ -56,6 +56,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 				modal: true
 			},
 			transition: 'zlideLR',
+			placeholder: 'panel'
 		},
 	};
 
@@ -219,7 +220,8 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 				initial: true,
 				onresize: true,
 			},
-			transition: 'zoomInOut'
+			transition: 'zoomInOut',
+			placeholder: 'panel'
 		},
 	};
 

@@ -26,7 +26,8 @@
     overflow: hidden;
     background-size: auto;
     background-position: 50% 50%;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	opacity: 0.42;
     filter: blur(10px);
 
     &.cover {
