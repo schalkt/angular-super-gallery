@@ -111,7 +111,7 @@ namespace angularSuperGallery {
 			initial?: boolean;
 			onresize?: boolean;
 		};
-
+		placeholder: string;
 	}
 
 	// gallery options
@@ -207,6 +207,7 @@ namespace angularSuperGallery {
 		items: Array<IFile>;
 		selected: number;
 		file: IFile;
+		files: Array<IFile>;
 		sizes: Array<string>;
 		id: string;
 		isSingle: boolean;
@@ -423,7 +424,8 @@ namespace angularSuperGallery {
 				heightAuto: {
 					initial: true, // calculate div height by first image
 					onresize: false // calculate div height on window resize
-				}
+				},
+				placeholder: 'panel' // set image placeholder source type (thumbnail)
 			}
 		};
 
@@ -1060,6 +1062,11 @@ namespace angularSuperGallery {
 
 			if (file.source.color) {
 				style['background-color'] = file.source.color;
+			}
+
+			if (this.options.image.placeholder) {
+				let type = this.options.image.placeholder;
+				style['background-image'] = 'url(' + file.source[type] + ')';
 			}
 
 			if (file.source.placeholder) {
