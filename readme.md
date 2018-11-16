@@ -27,14 +27,15 @@ AngularJS image gallery
 
 ## Features
 
-- separated Angular components (image, modal, thumbnails, panel, info and controls)
+- separated Angular components (image, modal, thumbnail, panel, info and control)
 - highly configurable
-- image display mode (cover, contain, auto, stretch)
-- multiple image sizes / thumbnail (for panel) , medium (for image), original (for modal)
+- image display modes (cover, contain, auto, stretch)
+- multiple image sizes : thumbnail (for panel) , medium (for image), original (for modal)
 - responsive and 4 built-in themes
-- 11 image transitions (CSS3 3D)
-- configurable keyboard shortcuts in modal window ([keyCodes](https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes))
-- events (config load, image load, modal open/close, autoplay start/stop, etc.)
+- 13 image transitions (CSS3 3D)
+- configurable keyboard shortcuts in modal window
+- events (config load, image load, modal open/close, autoplay, update, etc.)
+- placeholder image and loading animation
 - touch support (swipe)
 
 ## Install
@@ -134,10 +135,11 @@ or (without thumbnails)
 ## Available options
 
 ```javascript
-    debug: false, // image load, autoplay, etc. info in console.log
+	debug: false, // image load, autoplay, etc. info in console.log
 	hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
 	baseUrl: '', // url prefix
 	duplicates: false, // enable or disable same images (url) in gallery
+	selected: 0, // selected image on init
 	fields: {
 		source: {
 			modal: 'url', // required, image url for modal component (large size)
@@ -160,10 +162,14 @@ or (without thumbnails)
 	modal: {
 		title: '', // modal window title
 		subtitle: '', // modal window subtitle
+		titleFromImage: false, // force update the gallery title by image title
+		subtitleFromImage: false, // force update the gallery subtitle by image description
+		placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
 		caption: {
 			disabled: false, // disable image caption
 			visible: true, // show/hide image caption
-			position: 'top' // caption position [top, bottom]
+			position: 'top', // caption position [top, bottom]
+			download: false // show/hide download link
 		},
 		header: {
 			enabled: true, // enable/disable modal menu
@@ -255,7 +261,8 @@ or (without thumbnails)
 		heightAuto: {
 			initial: true, // calculate div height by first image
 			onresize: false // calculate div height on window resize
-		}
+		},
+		placeholder: 'panel' // set image placeholder source type (thumbnail) or full url (http...)
 	}
 ```
 
@@ -274,11 +281,12 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 });
 ```
 
-### Update gallery options
+### Update gallery options and set selected image
 
 ```javascript
     $rootScope.$broadcast('ASG-gallery-edit', {
         id: 'nature',
+        selected: 0,
         options: this.options1
     });
 ```
@@ -322,6 +330,8 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 - rotateZY
 - slideLR
 - slideTB
+- zlideLR
+- zlideTB
 - flipX
 - flipY
 
@@ -363,14 +373,14 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Todo
 
-- add edit mode (upload, delete, rename, etc.) for admin page
 - remove caption from modal and add asg-info
 - control component custom buttons
 - header component with controls = modal header?
 - fix info component image width and height data
 - exit button must be visible on modal when menubar hidden
 - indicator component
-- load images from API endpoint
+- load images and config from API endpoint
+- add edit mode (upload, delete, rename, etc.) for admin page
 - slideshow mode (fullscreen, hide menu and arrows, start autoplay)
 - options and info menu in modal
 - image zoom / drag / rotate

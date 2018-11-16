@@ -17,6 +17,7 @@ namespace angularSuperGallery {
 			position?: string;
 			download?: boolean;
 		};
+		placeholder?: string;
 		transition?: string;
 		title?: string;
 		subtitle?: string;
@@ -121,6 +122,7 @@ namespace angularSuperGallery {
 		baseUrl?: string;
 		hashUrl?: boolean;
 		duplicates?: boolean;
+		selected?: number;
 		fields?: {
 			source?: {
 				modal?: string;
@@ -184,13 +186,15 @@ namespace angularSuperGallery {
 	}
 
 	export interface IEdit {
-		delete: number;
-		add: Array<IFile>;
-		update: Array<IFile>;
-		refresh: boolean;
-		options: IOptions;
-		delayThumbnails: number;
-		delayRefresh: number;
+		id: number;
+		delete?: number;
+		add?: Array<IFile>;
+		update?: Array<IFile>;
+		refresh?: boolean;
+		selected?: number;
+		options?: IOptions;
+		delayThumbnails?: number;
+		delayRefresh?: number;
 	}
 
 	// service controller interface
@@ -304,6 +308,7 @@ namespace angularSuperGallery {
 			hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
 			baseUrl: '', // url prefix
 			duplicates: false, // enable or disable same images (url) in gallery
+			selected: 0, // selected image on init
 			fields: {
 				source: {
 					modal: 'url', // required, image url for modal component (large size)
@@ -328,6 +333,7 @@ namespace angularSuperGallery {
 				subtitle: '', // modal window subtitle
 				titleFromImage: false, // force update the gallery title by image title
 				subtitleFromImage: false, // force update the gallery subtitle by image description
+				placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
 				caption: {
 					disabled: false, // disable image caption
 					visible: true, // show/hide image caption
@@ -425,7 +431,7 @@ namespace angularSuperGallery {
 					initial: true, // calculate div height by first image
 					onresize: false // calculate div height on window resize
 				},
-				placeholder: 'panel' // set image placeholder source type (thumbnail)
+				placeholder: 'panel' // set image placeholder source type (thumbnail) or full url (http...)
 			}
 		};
 
@@ -486,6 +492,13 @@ namespace angularSuperGallery {
 
 			angular.element($window).bind('resize', (event) => {
 				this.thumbnailsMove(200);
+			});
+
+			// update images when edit event
+			$rootScope.$on(this.events.GALLERY_EDIT, (event, data) => {
+				if (this.instances[data.id]) {
+					this.instances[data.id].editGallery(data);
+				}
 			});
 
 		}
@@ -585,7 +598,7 @@ namespace angularSuperGallery {
 
 			instance.setOptions(component.options);
 			instance.setItems(component.items);
-			instance.selected = component.selected ? component.selected : 0;
+			instance.selected = component.selected ? component.selected : instance.options.selected;
 			instance.parseHash();
 
 			if (instance.options) {
@@ -598,13 +611,6 @@ namespace angularSuperGallery {
 
 			}
 
-			// update images when edit event
-			instance.$rootScope.$on(this.events.GALLERY_EDIT, (event, data) => {
-				if (id === data.id) {
-					instance.editGallery(data, component);
-				}
-			});
-
 			this.instances[id] = instance;
 			return instance;
 
@@ -614,7 +620,6 @@ namespace angularSuperGallery {
 		public setItems(items: Array<IFile>) {
 
 			this.items = items ? items : [];
-			console.log(this.items);
 			this.prepareItems();
 
 		}
@@ -697,6 +702,8 @@ namespace angularSuperGallery {
 				});
 
 			}
+
+			this.options.selected = this._selected;
 
 		}
 
@@ -956,12 +963,14 @@ namespace angularSuperGallery {
 		// after load image
 		private afterLoad(index, type, image) {
 
+			if (!this.files[index] || !this.files[index].loaded) {
+				return;
+			}
+
 			if (this.files[index].loaded[type] === true) {
 				this.files[index].loaded[type] = true;
 				return;
 			}
-
-			this.files[index].loaded[type] = true;
 
 			if (type === 'modal') {
 				this.files[index].width = image.width;
@@ -970,6 +979,8 @@ namespace angularSuperGallery {
 				this.files[index].extension = this.getExtension(index, type);
 				this.files[index].download = this.files[index].source.modal;
 			}
+
+			this.files[index].loaded[type] = true;
 
 			let data = { type: type, index: index, file: this.file, img: image };
 
@@ -1056,17 +1067,30 @@ namespace angularSuperGallery {
 		}
 
 		// get placeholder style
-		public placeholderStyle(file: IFile) {
+		public placeholderStyle(file: IFile, type: string) {
 
 			let style = {};
 
-			if (file.source.color) {
-				style['background-color'] = file.source.color;
+			if (this.options[type].placeholder) {
+
+				let index = this.options[type].placeholder;
+				let isFull = (index.indexOf('//') === 0 || index.indexOf('http') === 0) ? true : false;
+				let source;
+
+				if (isFull) {
+					source = index;
+				} else {
+					source = file.source[index];
+				}
+
+				if (source) {
+					style['background-image'] = 'url(' + source + ')';
+				}
+
 			}
 
-			if (this.options.image.placeholder) {
-				let type = this.options.image.placeholder;
-				style['background-image'] = 'url(' + file.source[type] + ')';
+			if (file.source.color) {
+				style['background-color'] = file.source.color;
 			}
 
 			if (file.source.placeholder) {
@@ -1287,7 +1311,7 @@ namespace angularSuperGallery {
 
 
 		// edit gallery
-		public editGallery(edit: IEdit, component) {
+		public editGallery(edit: IEdit) {
 
 			this.editing = true;
 			let selected = this.selected;
@@ -1302,7 +1326,6 @@ namespace angularSuperGallery {
 			}
 
 			if (edit.add) {
-				selected = this.files.length;
 				let length = edit.add.length;
 				for (let key = 0; key < length; key++) {
 					this.addImage(edit.add[key]);
@@ -1310,8 +1333,6 @@ namespace angularSuperGallery {
 			}
 
 			if (edit.update) {
-
-				this.selected = null;
 
 				let length = edit.update.length;
 
@@ -1327,14 +1348,18 @@ namespace angularSuperGallery {
 
 			this.timeout(() => {
 
-				selected = this.files[selected] ? selected : (selected >= this.files.length ? selected - 1 : selected + 1);
+				if (edit.selected >= 0) {
+					selected = edit.selected;
+				}
+
+				selected = this.files[selected] ? selected : (selected >= this.files.length ? this.files.length - 1 : 0);
 
 				this.forceSelect(this.files[selected] ? selected : 0);
 				this.editing = false;
 				this.event(this.events.GALLERY_UPDATED, edit);
 				this.thumbnailsMove(edit.delayThumbnails !== undefined ? edit.delayThumbnails : 220);
 
-			}, (edit.delayRefresh !== undefined ? edit.delayRefresh : 440));
+			}, (edit.delayRefresh !== undefined ? edit.delayRefresh : 420));
 
 		}
 
@@ -1343,7 +1368,9 @@ namespace angularSuperGallery {
 		public deleteImage(index: number, count?: number) {
 
 			index = index === null || index === undefined ? this.selected : index;
-			this.files.splice(index, count ? count : 1);
+			count = count ? count : 1;
+
+			this.files.splice(index, count);
 
 		}
 
