@@ -2,9 +2,17 @@ var demo = angular.module('demo', ['angularSuperGallery']);
 
 demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 
+	this.gallery =  {
+		nature: true,
+		girls: true,
+		honda: true,
+		logos: true,
+	};
+
 	this.options1 = {
-		debug: true,
+		debug: false,
 		baseUrl: "https://",
+		selected: 2,
 		fields: {
 			source: {
 				modal: "link",
@@ -48,7 +56,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 			item: {
 				class: "custom",
 				title: false
-			},
+			}
 		},
 		image: {
 			height: 320,
@@ -133,6 +141,13 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		});
 	};
 
+	this.update1selected = function () {
+		$rootScope.$broadcast('ASG-gallery-edit', {
+			id: 'nature',
+			selected: this.options1.selected
+		});
+	};
+
 	this.update1 = function () {
 
 		var newGalleryImages = [{
@@ -147,6 +162,8 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 			"thumbnail": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_300x168.jpg",
 			"medium": "images.wallpaperscraft.com/image/sea_wave_beautifully_90798_960x544.jpg",
 		}];
+
+		this.options1.selected = 1;
 
 		$rootScope.$broadcast('ASG-gallery-edit', {
 			id: 'nature',
@@ -169,6 +186,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 
 		$rootScope.$broadcast('ASG-gallery-edit', {
 			id: 'nature',
+			selected: 0,
 			update: this.files1,
 			options: this.options1
 		});

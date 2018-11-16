@@ -78,7 +78,7 @@
 				 ng-style="$ctrl.asg.preloadStyle(file, 'modal')"
 				 ng-class="{'loaded' : file.loaded.modal}">
 
-				<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file)"></div>
+				<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'modal')"></div>
 				<div class="source {{ $ctrl.config.size }}"
 					 ng-if="file.loaded.modal"
 					 ng-style="{'background-image': 'url(' + file.source.modal + ')'}">

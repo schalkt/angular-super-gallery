@@ -28,7 +28,12 @@
     background-position: 50% 50%;
 	background-repeat: no-repeat;
 	opacity: 0.42;
-    filter: blur(10px);
+
+	-ms-filter: 'progid:DXImageTransform.Microsoft.MotionBlur(strength=10)';
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	filter: blur(10px);
 
     &.cover {
       background-size: cover;

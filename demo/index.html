@@ -182,12 +182,12 @@
 					</button>
 				</div>
 
-				<div class="panel-body asg-custom">
+				<div data-ng-if="ctrl.gallery.nature" class="panel-body asg-custom">
 
 					<pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
 
 					<!-- ASG BEGIN -->
-					<asg-image data-id="nature" data-options="ctrl.options1" data-items="ctrl.files1">
+					<asg-image data-id="nature" data-selected="nature1Selected" data-options="ctrl.options1" data-items="ctrl.files1">
 						<asg-modal>
 							<asg-thumbnail></asg-thumbnail>
 						</asg-modal>
@@ -197,36 +197,54 @@
 						<div class="row">
 
 							<div class="col-md-6 text-center">
-								<button class="btn btn-xs btn-warning btn-block" ng-click="ctrl.update1()">Change gallery images</button>
-								<button class="btn btn-xs btn-success btn-block" ng-click="ctrl.add1()">Add new image(s) to gallery</button>
-								<button class="btn btn-xs btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>
-								<button class="btn btn-xs btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
+								<button class="btn btn-sm btn-warning btn-block" ng-click="ctrl.update1()">Change gallery images</button>
+								<button class="btn btn-sm btn-success btn-block" ng-click="ctrl.add1()">Add new image(s) to gallery</button>
+								<button class="btn btn-sm btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>
+								<button class="btn btn-sm btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
 							</div>
 							<div class="col-md-6 text-center">
-								<label>Theme</label>
-								<select class="form-control" data-ng-model="ctrl.options1.theme" data-ng-change="ctrl.update1options()">
-									<option value="darkblue">Darkblue</option>
-									<option value="darkred">Darkred</option>
-									<option value="whitegold">Whitegold</option>
-									<option value="default">Default</option>
-								</select>
-								<label>Transitions</label>
-								<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.update1options()">
-									<option value="no">no</option>
-									<option value="fadeInOut">fadeInOut</option>
-									<option value="zoomIn">zoomIn</option>
-									<option value="zoomOut">zoomOut</option>
-									<option value="zoomInOut">zoomInOut</option>
-									<option value="rotateLR">rotateLR</option>
-									<option value="rotateTB">rotateTB</option>
-									<option value="rotateZY">rotateZY</option>
-									<option value="slideLR">slideLR</option>
-									<option value="slideTB">slideTB</option>
-									<option value="zlideLR">zlideLR</option>
-									<option value="zlideTB">zlideTB</option>
-									<option value="flipX">flipX</option>
-									<option value="flipY">flipY</option>
-								</select>
+
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">File index (editable)</div>
+										<input class="form-control" data-ng-model="nature1Selected" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">Theme</div>
+										<select class="form-control" data-ng-model="ctrl.options1.theme" data-ng-change="ctrl.update1options()">
+											<option value="darkblue">Darkblue</option>
+											<option value="darkred">Darkred</option>
+											<option value="whitegold">Whitegold</option>
+											<option value="default">Default</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-addon">Transition</div>
+											<select class="form-control" data-ng-model="ctrl.options1.image.transition" data-ng-change="ctrl.update1options()">
+													<option value="no">no</option>
+													<option value="fadeInOut">fadeInOut</option>
+													<option value="zoomIn">zoomIn</option>
+													<option value="zoomOut">zoomOut</option>
+													<option value="zoomInOut">zoomInOut</option>
+													<option value="rotateLR">rotateLR</option>
+													<option value="rotateTB">rotateTB</option>
+													<option value="rotateZY">rotateZY</option>
+													<option value="slideLR">slideLR</option>
+													<option value="slideTB">slideTB</option>
+													<option value="zlideLR">zlideLR</option>
+													<option value="zlideTB">zlideTB</option>
+													<option value="flipX">flipX</option>
+													<option value="flipY">flipY</option>
+												</select>
+										</div>
+									</div>
+
 							</div>
 						</div>
 					<hr>
@@ -251,7 +269,7 @@
 					<strong>single image</strong> | fixed height | modal + hidden controls and caption
 				</div>
 
-				<div class="panel-body">
+				<div data-ng-if="ctrl.gallery.honda" class="panel-body">
 
 					<!-- ASG BEGIN -->
 					<asg-image data-options='{
@@ -291,7 +309,7 @@
 						show config
 					</button>
 				</div>
-				<div class="panel-body">
+				<div data-ng-if="ctrl.gallery.girls" class="panel-body">
 
 					<pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
 
@@ -349,12 +367,12 @@
 					<strong>svg logos</strong> | autoplay | no modal | no control | auto height by first image
 				</div>
 
-				<div class="panel-body">
+				<div data-ng-if="ctrl.gallery.logos" class="panel-body">
 
 					<!-- ASG BEGIN -->
 					<asg-image data-options='{
 							   "baseUrl":"svg/",
-							   "image" : { "transition": "rotateLR", "size": "contain", "arrows": false},
+							   "image" : { "transition": "rotateLR", "size": "contain", "arrows": false, "placeholder": ""},
 							   "autoplay" : { "enabled": true, "delay": 2000}
 							   }'
 							   data-items="[
@@ -382,7 +400,7 @@
 					<strong>only modal</strong> | no theme
 				</div>
 
-				<div class="panel-body">
+				<div data-ng-if="ctrl.gallery.nature" class="panel-body">
 
 					<button class="btn btn-primary" ng-click="visible = !visible">show modal</button>
 
