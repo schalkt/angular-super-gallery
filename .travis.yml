@@ -13,11 +13,4 @@ script:
   - gulp prod
 after_success:
   - git reset -hard
-deploy:
-  provider: npm
-  skip_cleanup: true
-  email: "npm@schalk.hu"
-  api_key: "d11c907e-2a5f-4d34-b503-f9e946147b82"
-  on:
-    branch: master
 
