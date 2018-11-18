@@ -4,4 +4,5 @@ node_js:
 cache: yarn
 before_script:
   - yarn
+  - typings install
 script: gulp prod
