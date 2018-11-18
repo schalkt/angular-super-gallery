@@ -5,8 +5,9 @@ AngularJS image gallery
 [![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/)
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
-[![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://david-dm.org/schalkt/angular-super-gallery)
+[![Build Status](https://travis-ci.org/schalkt/angular-super-gallery.svg?branch=develop)](https://travis-ci.org/schalkt/angular-super-gallery)
+[![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/angular-super-gallery/badge)](https://www.jsdelivr.com/package/npm/angular-super-gallery)
 
 ## Demo
@@ -101,15 +102,15 @@ this.nature1Options = {
     }
 };
 this.nature1 = [
-	{
-		"link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
-		"thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x188.jpg",
-		"medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
-  	}, {
-  		"link": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
-  		"thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x188.jpg",
-  		"medium": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_602x339.jpg",
-  	}
+    {
+        "link": "wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_1920x1080.jpg",
+        "thumbnail": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_300x188.jpg",
+        "medium": "i1.wallpaperscraft.com/image/nature_waterfall_summer_lake_trees_90400_602x339.jpg",
+    }, {
+        "link": "wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_1920x1080.jpg",
+        "thumbnail": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_300x188.jpg",
+        "medium": "i1.wallpaperscraft.com/image/summer_mountains_nature_lake_river_grass_93164_602x339.jpg",
+    }
 ];
 ```
 
@@ -135,135 +136,135 @@ or (without thumbnails)
 ## Available options
 
 ```javascript
-	debug: false, // image load, autoplay, etc. info in console.log
-	hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
-	baseUrl: '', // url prefix
-	duplicates: false, // enable or disable same images (url) in gallery
-	selected: 0, // selected image on init
-	fields: {
-		source: {
-			modal: 'url', // required, image url for modal component (large size)
-			panel: 'url', // image url for panel component (thumbnail size)
-			image: 'url', // image url for image (medium or custom size)
-			placeholder: null // image url for preload lowres image
-		},
-		title: 'title', // title field name
-		description: 'description', // description field name
-	},
-	autoplay: {
-		enabled: false, // slideshow play enabled/disabled
-		delay: 4100 // autoplay delay in millisecond
-	},
-	theme: 'default', // css style [default, darkblue, darkred, whitegold]
-	preloadNext: false, // preload next image (forward/backward)
-	preloadDelay: 770, // preload delay for preloadNext
-	loadingImage: 'preload.svg', // loader image
-	preload: [], // preload images by index number
-	modal: {
-		title: '', // modal window title
-		subtitle: '', // modal window subtitle
-		titleFromImage: false, // force update the gallery title by image title
-		subtitleFromImage: false, // force update the gallery subtitle by image description
-		placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
-		caption: {
-			disabled: false, // disable image caption
-			visible: true, // show/hide image caption
-			position: 'top', // caption position [top, bottom]
-			download: false // show/hide download link
-		},
-		header: {
-			enabled: true, // enable/disable modal menu
-			dynamic: false, // show/hide modal menu on mouseover
-			buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
-		},
-		help: false, // show/hide help
-		arrows: {
-			enabled: true, // show/hide arrows
-			preload: true, // preload image on mouseover
-		},
-		click: {
-			close: true // when click on the image close the modal
-		},
-		thumbnail: {
-			height: 50, // thumbnail image height in pixel
-			index: false, // show index number on thumbnail
-			enabled: true, // enable/disable thumbnails
-			dynamic: false, // if true thumbnails visible only when mouseover
-			autohide: true, // hide thumbnail component when single image
-			click: {
-				select: true, // set selected image when true
-				modal: false // open modal when true
-			},
-			hover: {
-				preload: true, // preload image on mouseover
-				select: false // set selected image on mouseover when true
-			},
-		},
-		transition: 'slideLR', // transition effect
-		size: 'cover', // contain, cover, auto, stretch
-		keycodes: {
-			exit: [27], // esc
-			playpause: [80], // p
-			forward: [32, 39], // space, right arrow
-			backward: [37], // left arrow
-			first: [38, 36], // up arrow, home
-			last: [40, 35], // down arrow, end
-			fullscreen: [13], // enter
-			menu: [77], // m
-			caption: [67], // c
-			help: [72], // h
-			size: [83], // s
-			transition: [84] // t
-		}
-	},
-	thumbnail: {
-		height: 50, // thumbnail image height in pixel
-		index: false, // show index number on thumbnail
-		dynamic: false, // if true thumbnails visible only when mouseover
-		autohide: false, // hide thumbnail component when single image
-		click: {
-			select: true, // set selected image when true
-			modal: false // open modal when true
-		},
-		hover: {
-			preload: true, // preload image on mouseover
-			select: false // set selected image on mouseover when true
-		},
-	},
-	panel: {
-		visible: true,
-		item: {
-			class: 'col-md-3', // item class
-			caption: false, // show/hide image caption
-			index: false, // show/hide image index
-		},
-		hover: {
-			preload: true, // preload image on mouseover
-			select: false // set selected image on mouseover when true
-		},
-		click: {
-			select: false, // set selected image when true
-			modal: true // open modal when true
-		},
-	},
-	image: {
-		transition: 'slideLR', // transition effect
-		size: 'cover', // contain, cover, auto, stretch
-		arrows: {
-			enabled: true,  // show/hide arrows
-			preload: true, // preload image on mouseover
-		},
-		click: {
-			modal: true // when click on the image open the modal window
-		},
-		height: null, // height in pixel
-		heightMin: null, // min height in pixel
-		heightAuto: {
-			initial: true, // calculate div height by first image
-			onresize: false // calculate div height on window resize
-		},
-		placeholder: 'panel' // set image placeholder source type (thumbnail) or full url (http...)
-	}
+    debug: false, // image load, autoplay, etc. info in console.log
+    hashUrl: true, // enable/disable hash usage in url (#asg-nature-4)
+    baseUrl: '', // url prefix
+    duplicates: false, // enable or disable same images (url) in gallery
+    selected: 0, // selected image on init
+    fields: {
+        source: {
+            modal: 'url', // required, image url for modal component (large size)
+            panel: 'url', // image url for panel component (thumbnail size)
+            image: 'url', // image url for image (medium or custom size)
+            placeholder: null // image url for preload lowres image
+        },
+        title: 'title', // title field name
+        description: 'description', // description field name
+    },
+    autoplay: {
+        enabled: false, // slideshow play enabled/disabled
+        delay: 4100 // autoplay delay in millisecond
+    },
+    theme: 'default', // css style [default, darkblue, darkred, whitegold]
+    preloadNext: false, // preload next image (forward/backward)
+    preloadDelay: 770, // preload delay for preloadNext
+    loadingImage: 'preload.svg', // loader image
+    preload: [], // preload images by index number
+    modal: {
+        title: '', // modal window title
+        subtitle: '', // modal window subtitle
+        titleFromImage: false, // force update the gallery title by image title
+        subtitleFromImage: false, // force update the gallery subtitle by image description
+        placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
+        caption: {
+            disabled: false, // disable image caption
+            visible: true, // show/hide image caption
+            position: 'top', // caption position [top, bottom]
+            download: false // show/hide download link
+        },
+        header: {
+            enabled: true, // enable/disable modal menu
+            dynamic: false, // show/hide modal menu on mouseover
+            buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullscreen', 'help', 'close'],
+        },
+        help: false, // show/hide help
+        arrows: {
+            enabled: true, // show/hide arrows
+            preload: true, // preload image on mouseover
+        },
+        click: {
+            close: true // when click on the image close the modal
+        },
+        thumbnail: {
+            height: 50, // thumbnail image height in pixel
+            index: false, // show index number on thumbnail
+            enabled: true, // enable/disable thumbnails
+            dynamic: false, // if true thumbnails visible only when mouseover
+            autohide: true, // hide thumbnail component when single image
+            click: {
+                select: true, // set selected image when true
+                modal: false // open modal when true
+            },
+            hover: {
+                preload: true, // preload image on mouseover
+                select: false // set selected image on mouseover when true
+            },
+        },
+        transition: 'slideLR', // transition effect
+        size: 'cover', // contain, cover, auto, stretch
+        keycodes: {
+            exit: [27], // esc
+            playpause: [80], // p
+            forward: [32, 39], // space, right arrow
+            backward: [37], // left arrow
+            first: [38, 36], // up arrow, home
+            last: [40, 35], // down arrow, end
+            fullscreen: [13], // enter
+            menu: [77], // m
+            caption: [67], // c
+            help: [72], // h
+            size: [83], // s
+            transition: [84] // t
+        }
+    },
+    thumbnail: {
+        height: 50, // thumbnail image height in pixel
+        index: false, // show index number on thumbnail
+        dynamic: false, // if true thumbnails visible only when mouseover
+        autohide: false, // hide thumbnail component when single image
+        click: {
+            select: true, // set selected image when true
+            modal: false // open modal when true
+        },
+        hover: {
+            preload: true, // preload image on mouseover
+            select: false // set selected image on mouseover when true
+        },
+    },
+    panel: {
+        visible: true,
+        item: {
+            class: 'col-md-3', // item class
+            caption: false, // show/hide image caption
+            index: false, // show/hide image index
+        },
+        hover: {
+            preload: true, // preload image on mouseover
+            select: false // set selected image on mouseover when true
+        },
+        click: {
+            select: false, // set selected image when true
+            modal: true // open modal when true
+        },
+    },
+    image: {
+        transition: 'slideLR', // transition effect
+        size: 'cover', // contain, cover, auto, stretch
+        arrows: {
+            enabled: true,  // show/hide arrows
+            preload: true, // preload image on mouseover
+        },
+        click: {
+            modal: true // when click on the image open the modal window
+        },
+        height: null, // height in pixel
+        heightMin: null, // min height in pixel
+        heightAuto: {
+            initial: true, // calculate div height by first image
+            onresize: false // calculate div height on window resize
+        },
+        placeholder: 'panel' // set image placeholder source type (thumbnail) or full url (http...)
+    }
 ```
 
 ## Edit
