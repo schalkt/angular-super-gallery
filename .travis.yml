@@ -10,7 +10,6 @@ before_script:
   - typings install
 script:
   - gulp prod
-  - gulp bump
 deploy:
   provider: npm
   email: "npm@schalk.hu"
