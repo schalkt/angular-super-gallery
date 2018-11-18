@@ -2,7 +2,16 @@ language: node_js
 node_js:
   - "8"
 cache: yarn
+branches:
+  only:
+  - master
 before_script:
   - yarn
   - typings install
-script: gulp prod
+script:
+  - gulp prod
+  - gulp bump
+deploy:
+  provider: npm
+  email: "npm@schalk.hu"
+  api_key: "d11c907e-2a5f-4d34-b503-f9e946147b82"
