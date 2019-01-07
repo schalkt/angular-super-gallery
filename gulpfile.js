@@ -242,6 +242,7 @@ gulp.task('prod', function (callback) {
 	prod = true;
 
 	runSequence(
+		["bump"],
 		["css", "js"],
 		["css-min", "js-min"],
 		["version"],
