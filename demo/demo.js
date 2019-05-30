@@ -224,7 +224,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 		panel: {
 			visible: false,
 			item: {
-				class: "col-md-4 thumbnail",
+				class: "col-md-4 float-left img-thumbnail",
 				caption: true,
 				index: true
 			},

@@ -1786,6 +1786,9 @@ body.asg-yhidden {
 .asg-panel.whitegold .item .index {
   color: #d4c386;
   top: inherit;
-  bottom: 14px;
-  font-size: 11px;
-  padding: 2px 6px; }
+  bottom: 5px;
+  font-size: 12px;
+  padding: 0px 4px;
+  line-height: 17px;
+  right: 15px;
+  border-radius: 2px; }

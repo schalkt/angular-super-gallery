@@ -202,10 +202,13 @@ $primary: #d4c386;
 
     .index {
       color: $primary;
-      top: inherit;
-      bottom: 14px;
-      font-size: 11px;
-      padding: 2px 6px;
+	  top: inherit;
+	  bottom: 5px;
+	  font-size: 12px;
+	  padding: 0px 4px;
+	  line-height: 17px;
+	  right: 15px;
+	  border-radius: 2px;
     }
   }
 }

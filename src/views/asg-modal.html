@@ -10,17 +10,17 @@
 
 		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
 
-			<span class="buttons visible-xs pull-right">
+			<span class="buttons d-block d-sm-none pull-right">
 				<span ng-include="'/views/button/asg-index-xs.html'"></span>
 			</span>
 
-			<span class="buttons hidden-xs pull-right">
+			<span class="buttons d-none d-sm-block pull-right">
 				<span ng-repeat="item in $ctrl.config.header.buttons" ng-include="('/views/button/asg-' + item + '.html')"></span>
             </span>
 
 			<span ng-if="$ctrl.config.title">
 				<span class="title">{{ $ctrl.config.title }}</span>
-				<span class="subtitle hidden-xs" ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
+				<span class="subtitle d-none d-sm-block" ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
 			</span>
 
 		</div>
@@ -40,32 +40,20 @@
 
 				<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 
-					<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
+					<button class="btn btn-default btn-lg pull-left"
 							ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
 							ng-click="$ctrl.toBackward(true, $event)">
-						<span class="glyphicon glyphicon-chevron-left"></span>
-					</button>
-
-					<button class="btn btn-default btn-md pull-left visible-sm"
-						ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
-						ng-click="$ctrl.toBackward(true, $event)">
-						<span class="glyphicon glyphicon-chevron-left"></span>
+						<span class="fa fa-chevron-left"></span>
 					</button>
 
 				</div>
 
 				<div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
-					<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
+					<button class="btn btn-default btn-lg pull-right"
 							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
 							ng-click="$ctrl.toForward(true, $event)">
-						<span class="glyphicon glyphicon-chevron-right"></span>
-					</button>
-
-					<button class="btn btn-default btn-md pull-right visible-sm"
-							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
-							ng-click="$ctrl.toForward(true, $event)">
-						<span class="glyphicon glyphicon-chevron-right"></span>
+						<span class="fa fa-chevron-right"></span>
 					</button>
 
 				</div>
@@ -93,8 +81,8 @@
 					<span class="title">{{ $ctrl.asg.file.title }}</span>
 					<span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
 					<span class="description">{{ $ctrl.asg.file.description }}</span>
-					<a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-xs">
-						<span class="glyphicon glyphicon-download"></span> Download
+					<a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm">
+						<span class="fa fa-download"></span> Download
 					</a>
 				</div>
 			</div>

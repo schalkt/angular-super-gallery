@@ -80,7 +80,6 @@ function js() {
 
 }
 
-
 function js_min() {
 
 	var filename = "angular-super-gallery.js";
@@ -102,7 +101,6 @@ function js_min() {
 		.pipe(dest(DIST));
 
 }
-
 
 function css() {
 
@@ -155,31 +153,12 @@ function views() {
 
 }
 
-
-task("watch", function (callback) {
-
-	watch([
-		SRC + "/**/*.html",
-		SRC + "/*.ts"
-	], series("ts2js"));
-
-	watch([
-		SRC + "/**/*.scss"
-	], series(css));
-
-	callback();
-
-});
-
-
-
 function production(callback) {
 
 	PRODUCTION = true;
 	callback();
 
 }
-
 
 function bump() {
 
@@ -207,6 +186,46 @@ function version() {
 
 }
 
+function copyAssetsJs() {
+
+	return src([
+		'./node_modules/jquery/dist/jquery.min.js',
+		'./node_modules/angular/angular.min.js',
+		'./node_modules/angular-animate/angular-animate.min.js',
+		'./node_modules/angular-touch/angular-touch.min.js',
+		'./node_modules/screenfull/dist/screenfull.js',
+		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
+	]).pipe(dest('./demo/assets/js'));
+
+}
+
+function copyAssetsCss() {
+
+	return src([
+		'./node_modules/font-awesome/css/font-awesome.min.css',
+	]).pipe(dest('./demo/assets/css'));
+
+}
+
+function copyAssetsFonts() {
+
+	return src([
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.eot',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.svg',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff',
+		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
+		'./node_modules/font-awesome/fonts/FontAwesome.otf',
+	]).pipe(dest('./demo/assets/fonts'));
+
+}
+
+task('assets', series(
+	copyAssetsJs,
+	copyAssetsCss,
+	copyAssetsFonts
+));
+
 task('ts2js', series(
 	views,
 	ts,
@@ -222,11 +241,23 @@ task('prod', series(
 	production,
 	bump,
 	version,
-	views,
-	css,
-	"ts2js",
+	"dev",
 	css_min,
-	js_min
+	js_min,
+	"assets"
 ));
 
+task("watch", function (callback) {
 
+	watch([
+		SRC + "/**/*.html",
+		SRC + "/*.ts"
+	], series("ts2js"));
+
+	watch([
+		SRC + "/**/*.scss"
+	], series(css));
+
+	callback();
+
+});
