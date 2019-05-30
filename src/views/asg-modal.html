@@ -11,11 +11,11 @@
 		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
 
 			<span class="buttons visible-xs pull-right">
-				<span ng-include="'views/button/asg-index-xs.html'"></span>
+				<span ng-include="'/views/button/asg-index-xs.html'"></span>
 			</span>
 
 			<span class="buttons hidden-xs pull-right">
-				<span ng-repeat="item in $ctrl.config.header.buttons" ng-include="('views/button/asg-' + item + '.html')"></span>
+				<span ng-repeat="item in $ctrl.config.header.buttons" ng-include="('/views/button/asg-' + item + '.html')"></span>
             </span>
 
 			<span ng-if="$ctrl.config.title">
@@ -30,7 +30,7 @@
 			 ng-mouseover="$ctrl.asg.over.modalImage = true;"
 			 ng-mouseleave="$ctrl.asg.over.modalImage = false;">
 
-			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'views/asg-help.html'"></div>
+			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'/views/asg-help.html'"></div>
 
 			<div class="arrows"
 				 ng-if="$ctrl.config.arrows.enabled"

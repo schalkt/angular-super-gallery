@@ -85,7 +85,7 @@ namespace angularSuperGallery {
 			this.asg.options[this.type] = value;
 
 		}
-	
+
 		public toBackward(stop? : boolean, $event? : UIEvent) {
 
 			if ($event) {
@@ -107,7 +107,7 @@ namespace angularSuperGallery {
 		}
 
 		public hover(index : number, $event? : MouseEvent) {
-			
+
 			if (this.config.arrows.preload === true) {
 				this.asg.hoverPreload(index);
 			}
@@ -162,7 +162,7 @@ namespace angularSuperGallery {
 
 	app.component('asgImage', {
 		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', angularSuperGallery.ImageController],
-		templateUrl: 'views/asg-image.html',
+		templateUrl: '/views/asg-image.html',
 		transclude: true,
 		bindings: {
 			id: '@?',

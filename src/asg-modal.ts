@@ -29,7 +29,7 @@ namespace angularSuperGallery {
 			this.$rootScope.$on(this.asg.events.LOAD_IMAGE + this.id, (event, data) => {
 				this.$scope.$apply();
 			});
-					
+
 		}
 
 
@@ -83,10 +83,7 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.asg.modalClose();
-
-			if (this.$window.screenfull) {
-				this.$window.screenfull.exit();
-			}
+			this.exitFullScreen();
 
 		}
 
@@ -96,16 +93,13 @@ namespace angularSuperGallery {
 
 			if (this.config.click.close) {
 				this.asg.modalClose();
-
-				if (this.$window.screenfull) {
-					this.$window.screenfull.exit();
-				}
+				this.exitFullScreen();
 			}
 
 		}
 
 		public hover(index : number, $event? : MouseEvent) {
-			
+
 			if (this.config.arrows.preload === true) {
 				this.asg.hoverPreload(index);
 			}
@@ -227,15 +221,31 @@ namespace angularSuperGallery {
 
 		}
 
-
 		// toggle fullscreen
 		private toggleFullScreen($event? : UIEvent) {
 
 			this.asg.modalClick($event);
 
-			if (this.$window.screenfull) {
-				this.$window.screenfull.toggle();
+			if (!this.$window.screenfull) {
+				return;
 			}
+
+			this.$window.screenfull.toggle();
+
+		}
+
+		// exit fullscreen
+		private exitFullScreen() {
+
+			if (!this.$window.screenfull) {
+				return;
+			}
+
+			if (!this.$window.screenfull.isFullscreen) {
+				return;
+			}
+
+			this.$window.screenfull.exit();
 
 		}
 
@@ -377,7 +387,7 @@ namespace angularSuperGallery {
 
 	app.component('asgModal', {
 		controller: ['asgService', '$window', '$rootScope', '$scope', angularSuperGallery.ModalController],
-		templateUrl: 'views/asg-modal.html',
+		templateUrl: '/views/asg-modal.html',
 		transclude: true,
 		bindings: {
 			id: '@?',
