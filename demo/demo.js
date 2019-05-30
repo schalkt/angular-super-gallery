@@ -10,7 +10,7 @@ demo.controller('DemoController', ['$rootScope', function ($rootScope) {
 	};
 
 	this.options1 = {
-		debug: false,
+		debug: true,
 		baseUrl: "https://",
 		selected: 2,
 		fields: {

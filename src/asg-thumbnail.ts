@@ -19,7 +19,7 @@ namespace angularSuperGallery {
 			private $element: ng.IRootElementService,
 			private $timeout: ng.ITimeoutService) {
 
-			this.template = 'views/asg-thumbnail.html';
+			this.template = '/views/asg-thumbnail.html';
 
 		}
 

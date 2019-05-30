@@ -1,24 +1,22 @@
-var gulp         = require('gulp'),
-	rename       = require('gulp-rename'),
-	gulpif       = require("gulp-if"),
-	debug        = require("gulp-debug"),
-	order        = require("gulp-order"),
-	concat       = require('gulp-concat'),
-	nano         = require('gulp-cssnano'),
-	sass         = require('gulp-sass'),
-	autoprefixer = require('gulp-autoprefixer'),
-	uglify       = require('gulp-uglify'),
-	sourcemaps   = require('gulp-sourcemaps'),
-	runSequence  = require('run-sequence'),
-	gzip         = require('gulp-gzip'),
-	tslint       = require('gulp-tslint'),
-	gutil        = require('gulp-util');
+/*jshint esversion: 6 */
 
+const { src, task, dest, parallel, series, watch } = require("gulp");
+const gulpif = require("gulp-if");
+const sass = require("gulp-sass");
+const uglify = require('gulp-uglify');
+const concat = require("gulp-concat");
+const nano = require('gulp-cssnano');
+const order = require("gulp-order");
+const gzip = require("gulp-gzip");
+const gutil = require("gulp-util");
+const rename = require("gulp-rename");
+const sourcemaps = require("gulp-sourcemaps");
+const autoprefixer = require('gulp-autoprefixer');
 
 var DIST = "dist";
 var SRC = "src";
 var TEMP = "temp";
-var PROD = false;
+var PRODUCTION = false;
 
 var nanoOptions = {
 	safe: true,
@@ -36,219 +34,199 @@ var banner = ['/**',
 	' */',
 	''].join('\n');
 
-gulp.task("tslint", function () {
 
-	return gulp.src([
-		SRC + "/**/*.ts",
-	])
-		.pipe(tslint({
-			formatter: "prose"
-		}))
-		.pipe(tslint.report({
-			summarizeFailureOutput: true
-		}));
-
-});
-
-gulp.task("ts", function () {
+function ts() {
 
 	var tsc = require("gulp-typescript");
 	var filename = "angular-super-gallery.js";
 
-	return gulp.src([
+	return src([
 		SRC + "/**/*.ts",
 	])
-		.pipe(gulpif(!PROD, sourcemaps.init()))
+		.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 		.pipe(order([
 			"asg.ts",
 			"asg-factory.ts"
 		], {
-			base: SRC
-		}))
+				base: SRC
+			}))
 		.pipe(tsc({
 			target: 'ES5',
 			removeComments: true
 		}))
 		.pipe(concat(filename))
-		.pipe(gulpif(!PROD, sourcemaps.write()))
-		.pipe(gulp.dest(TEMP))
-		.pipe(debug());
+		.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
+		.pipe(dest(TEMP));
 
-});
+}
 
-gulp.task("js", ['ts', 'views'], function () {
+function js() {
 
 	var filename = "angular-super-gallery.js";
 	var header = require('gulp-header');
 	var package = require('./package.json');
 
-	return gulp.src([
+	return src([
 		TEMP + "/*.js"
 	])
 		.pipe(order([
 			"angular-super-gallery.js"
 		], {
-			base: TEMP
-		}))
+				base: TEMP
+			}))
 		.pipe(concat(filename))
-		.pipe(header(banner, {pkg: package}))
-		.pipe(gulp.dest(DIST))
-		.pipe(debug());
+		.pipe(header(banner, { pkg: package }))
+		.pipe(dest(DIST));
 
-});
+}
 
 
-gulp.task("js-min", function () {
+function js_min() {
 
 	var filename = "angular-super-gallery.js";
 	var header = require('gulp-header');
 	var package = require('./package.json');
 
-	return gulp.src([
+	return src([
 		DIST + "/" + filename,
 	])
 		.pipe(concat(filename))
-		.pipe(rename({suffix: '.min'}))
+		.pipe(rename({ suffix: '.min' }))
 		.pipe(uglify().on('error', function (err) {
 			gutil.log(gutil.colors.red('[Error]'), err.toString());
 			this.emit('end');
 		}))
-		.pipe(header(banner, {pkg: package}))
-		.pipe(gulp.dest(DIST))
-		.pipe(debug())
-		.pipe(gzip({append: true}))
-		.pipe(gulp.dest(DIST))
-		.pipe(debug());
+		.pipe(header(banner, { pkg: package }))
+		.pipe(dest(DIST))
+		.pipe(gzip({ append: true }))
+		.pipe(dest(DIST));
 
-});
+}
 
 
-gulp.task("css", function () {
+function css() {
 
-	return gulp.src([
+	return src([
 		SRC + '/*.scss'
 	])
 		.pipe(concat("angular-super-gallery.css"))
-		.pipe(gulpif(!PROD, sourcemaps.init()))
+		.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 		.pipe(sass())
 		.pipe(autoprefixer())
-		.pipe(gulpif(!PROD, sourcemaps.write()))
-		.pipe(gulp.dest(DIST));
+		.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
+		.pipe(dest(DIST));
 
-});
+}
 
-gulp.task("css-min", function () {
+function css_min() {
 
 	var filename = "angular-super-gallery.css";
 
-	return gulp.src([
+	return src([
 		DIST + "/" + filename
 	])
 		.pipe(concat(filename))
 		.pipe(nano(nanoOptions))
-		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest(DIST))
-		.pipe(debug())
-		.pipe(gzip({append: true}))
-		.pipe(gulp.dest(DIST))
-		.pipe(debug());
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(dest(DIST))
+		.pipe(gzip({ append: true }))
+		.pipe(dest(DIST));
 
 
-});
+}
 
-
-gulp.task("views", function () {
+function views() {
 
 	var templateCache = require('gulp-angular-templatecache');
 	var htmlmin = require('gulp-htmlmin');
 
-	return gulp.src([SRC + '/**/*.html'])
+	return src([SRC + '/**/*.html'])
 		.pipe(htmlmin({
-			removeComments: false,
-			collapseWhitespace: false,
-			preserveLineBreaks: false
+			removeComments: true,
+			collapseWhitespace: true,
+			preserveLineBreaks: false,
 		}))
 		.pipe(templateCache({
 			module: 'angularSuperGallery',
 			root: ''
 		}))
 		.pipe(concat("angular-super-gallery-views.js"))
-		.pipe(gulp.dest(TEMP))
-		.pipe(debug());
+		.pipe(dest(TEMP));
+
+}
+
+
+task("watch", function (callback) {
+
+	watch([
+		SRC + "/**/*.html",
+		SRC + "/*.ts"
+	], series("ts2js"));
+
+	watch([
+		SRC + "/**/*.scss"
+	], series(css));
+
+	callback();
 
 });
 
 
-gulp.task("watch", function () {
 
-	var watch = require("gulp-watch");
-	var batch = require("gulp-batch");
+function production(callback) {
 
-	watch(SRC + "/**/*.html", batch(function (events, done) {
-		gulp.start("js", done);
-	}));
+	PRODUCTION = true;
+	callback();
 
-	watch(SRC + "/*.ts", batch(function (events, done) {
-		gulp.start("js", done);
-	}));
-
-	watch(SRC + "/**/*.scss", batch(function (events, done) {
-		gulp.start("css", done);
-	}));
+}
 
 
-});
+function bump() {
 
+	let bump = require('gulp-bump');
 
-gulp.task('bump', function () {
+	return src(['./package.json'])
+		.pipe(bump({
+			type: 'patch',
+			indent: 4
+		}))
+		.pipe(dest('./'));
 
-	var bump = require('gulp-bump');
+}
 
-	return gulp.src(['./package.json'])
-		.pipe(bump({type: 'patch', indent: 4}))
-		.pipe(gulp.dest('./'));
-
-});
-
-
-gulp.task('version', function (callback) {
+function version() {
 
 	var package = require('./package.json');
 	var replace = require('gulp-replace');
 
-	return gulp.src([
-		SRC + '/angular-super-gallery.ts',
+	return src([
+		SRC + '/asg-service.ts',
 	])
-		.pipe(replace(/version",\s"\d+\.\d+\.\d+/g, 'version ", "' + package.version))
-		.pipe(gulp.dest(SRC))
-		.pipe(debug());
+		.pipe(replace(/version\s=\s"\d+\.\d+\.\d+/g, 'version = "' + package.version))
+		.pipe(dest(SRC));
 
-});
+}
 
-gulp.task('dev', function (callback) {
+task('ts2js', series(
+	views,
+	ts,
+	js
+));
 
-	prod = false;
+task('dev', series(
+	css,
+	"ts2js"
+));
 
-	runSequence(
-		["css", "js"],
-		["version"],
-		callback
-	);
-
-});
-
-gulp.task('prod', function (callback) {
-
-	prod = true;
-
-	runSequence(
-		["bump"],
-		["css", "js"],
-		["css-min", "js-min"],
-		["version"],
-		callback
-	);
-
-});
+task('prod', series(
+	production,
+	bump,
+	version,
+	views,
+	css,
+	"ts2js",
+	css_min,
+	js_min
+));
 
 

@@ -12,7 +12,7 @@ namespace angularSuperGallery {
 			private $scope: ng.IScope) {
 
 			this.type = 'info';
-			this.template = 'views/asg-info.html';
+			this.template = '/views/asg-info.html';
 
 		}
 

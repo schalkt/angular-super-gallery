@@ -15,7 +15,7 @@ namespace angularSuperGallery {
 			private service: IServiceController,
 			private $scope: ng.IScope) {
 
-			this.template = 'views/asg-panel.html';
+			this.template = '/views/asg-panel.html';
 
 		}
 
