@@ -28,32 +28,20 @@
 
 		<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 
-			<button class="btn btn-default btn-lg pull-left visible-md visible-lg"
+			<button class="btn btn-default btn-md pull-left"
 					ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
 					ng-click="$ctrl.toBackward(true, $event)">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</button>
-
-			<button class="btn btn-default btn-md pull-left visible-sm"
-					ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
-					ng-click="$ctrl.toBackward(true, $event)">
-				<span class="glyphicon glyphicon-chevron-left"></span>
+				<span class="fa fa-chevron-left"></span>
 			</button>
 
 		</div>
 
 		<div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
-			<button class="btn btn-default btn-lg pull-right visible-md visible-lg"
+			<button class="btn btn-default btn-md pull-right"
 					ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
 					ng-click="$ctrl.toForward(true, $event)">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-
-			<button class="btn btn-default btn-md pull-right visible-sm"
-					ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
-					ng-click="$ctrl.toForward(true, $event)">
-				<span class="glyphicon glyphicon-chevron-right"></span>
+				<span class="fa fa-chevron-right"></span>
 			</button>
 
 		</div>

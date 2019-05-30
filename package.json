@@ -1,6 +1,6 @@
 {
 	"name": "angular-super-gallery",
-	"version": "2.0.1",
+	"version": "2.0.3",
 	"description": "AngularJS Super Gallery",
 	"homepage": "http://schalk.hu/projects/angular-super-gallery/demo/",
 	"repository": {
@@ -48,6 +48,7 @@
 		"angular-animate": "1.7.8",
 		"angular-touch": "1.7.8",
 		"bootstrap": "4.3.1",
+		"font-awesome": "^4.7.0",
 		"jquery": "3.4.1",
 		"popper.js": "1.15.0",
 		"screenfull": "4.2.0"

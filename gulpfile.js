@@ -80,7 +80,6 @@ function js() {
 
 }
 
-
 function js_min() {
 
 	var filename = "angular-super-gallery.js";
@@ -102,7 +101,6 @@ function js_min() {
 		.pipe(dest(DIST));
 
 }
-
 
 function css() {
 
@@ -155,31 +153,12 @@ function views() {
 
 }
 
-
-task("watch", function (callback) {
-
-	watch([
-		SRC + "/**/*.html",
-		SRC + "/*.ts"
-	], series("ts2js"));
-
-	watch([
-		SRC + "/**/*.scss"
-	], series(css));
-
-	callback();
-
-});
-
-
-
 function production(callback) {
 
 	PRODUCTION = true;
 	callback();
 
 }
-
 
 function bump() {
 
@@ -222,11 +201,22 @@ task('prod', series(
 	production,
 	bump,
 	version,
-	views,
-	css,
-	"ts2js",
+	"dev",
 	css_min,
 	js_min
 ));
 
+task("watch", function (callback) {
 
+	watch([
+		SRC + "/**/*.html",
+		SRC + "/*.ts"
+	], series("ts2js"));
+
+	watch([
+		SRC + "/**/*.scss"
+	], series(css));
+
+	callback();
+
+});

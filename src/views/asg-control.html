@@ -1,6 +1,6 @@
 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.autoPlayToggle()">
-	<span ng-if="!$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-play"></span>
-	<span ng-if="$ctrl.asg.options.autoplay.enabled" class="glyphicon glyphicon-stop"></span>
+	<span ng-if="!$ctrl.asg.options.autoplay.enabled" class="fa fa-play"></span>
+	<span ng-if="$ctrl.asg.options.autoplay.enabled" class="fa fa-stop"></span>
 </button>
 
 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm " ng-click="$ctrl.asg.toFirst(true)">
@@ -8,10 +8,10 @@
 </button>
 
 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toBackward(true)">
-	<span class="glyphicon glyphicon-chevron-left"></span>
+	<span class="fa fa-chevron-left"></span>
 </button>
 
 <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toForward(true)">
-	<span class="glyphicon glyphicon-chevron-right"></span>
+	<span class="fa fa-chevron-right"></span>
 </button>
 
