@@ -8,7 +8,6 @@ branches:
   - develop
 before_script:
   - yarn
-  - typings install
 script:
   - gulp prod
 after_success:
