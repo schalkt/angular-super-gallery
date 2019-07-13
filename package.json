@@ -39,11 +39,13 @@
 		"gulp-sourcemaps": "2.6.5",
 		"gulp-typescript": "5.0.1",
 		"gulp-uglify": "3.0.2",
-		"gulp-util": "3.0.8",
-		"typescript": "3.5.3",
-		"typings": "2.1.1"
+		"typescript": "3.5.3"
 	},
 	"dependencies": {
+		"@types/angular": "1.6.55",
+		"@types/angular-animate": "1.5.10",
+		"@types/bootstrap": "4.3.1",
+		"@types/jquery": "3.3.30",
 		"angular": "1.7.8",
 		"angular-animate": "1.7.8",
 		"angular-touch": "1.7.8",

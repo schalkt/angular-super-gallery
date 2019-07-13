@@ -8,7 +8,6 @@ const concat = require("gulp-concat");
 const cleanCSS = require('gulp-clean-css');
 const order = require("gulp-order");
 const gzip = require("gulp-gzip");
-const gutil = require("gulp-util");
 const rename = require("gulp-rename");
 const sourcemaps = require("gulp-sourcemaps");
 const autoprefixer = require('gulp-autoprefixer');
@@ -89,10 +88,7 @@ function js_min() {
 	])
 		.pipe(concat(filename))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(uglify().on('error', function (err) {
-			gutil.log(gutil.colors.red('[Error]'), err.toString());
-			this.emit('end');
-		}))
+		.pipe(uglify())
 		.pipe(header(banner, { pkg: package }))
 		.pipe(dest(DIST))
 		.pipe(gzip({ append: true }))
