@@ -1,5 +1,3 @@
-///<reference path="./../typings/index.d.ts" />
-
 namespace angularSuperGallery {
 
 	// modal component options
@@ -197,6 +195,11 @@ namespace angularSuperGallery {
 		delayRefresh?: number;
 	}
 
+	export interface IScope extends ng.IScope {
+		forward: () => void;
+		backward: () => void;
+	}
+
 	// service controller interface
 	export interface IServiceController {
 
@@ -286,7 +289,7 @@ namespace angularSuperGallery {
 	// service controller
 	export class ServiceController {
 
-		public version = "2.0.9";
+		public version = "2.0.8";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -1254,7 +1257,7 @@ namespace angularSuperGallery {
 				let element: Node = this.el('div.asg-modal.' + this.id + ' .keyInput')[0];
 
 				if (element) {
-					angular.element(element)[0].focus();
+					angular.element(element)[0]['focus']();
 				}
 
 			}
