@@ -9,7 +9,7 @@ namespace angularSuperGallery {
 
 		constructor(
 			private service: IServiceController,
-			private $scope: ng.IScope) {
+			private $scope: IScope) {
 
 			this.template = '/views/asg-control.html';
 

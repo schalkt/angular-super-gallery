@@ -1,7 +1,7 @@
 /**
  * angular-super-gallery - AngularJS Super Gallery
  * 
- * @version v2.0.9
+ * @version v2.0.8
  * @link http://schalk.hu/projects/angular-super-gallery/demo/
  * @license MIT
  */
@@ -584,7 +584,7 @@ var angularSuperGallery;
             this.location = location;
             this.$rootScope = $rootScope;
             this.$window = $window;
-            this.version = "2.0.9";
+            this.version = "2.0.8";
             this.slug = 'asg';
             this.items = [];
             this.files = [];
@@ -1276,7 +1276,7 @@ var angularSuperGallery;
             if (this.modalVisible) {
                 var element = this.el('div.asg-modal.' + this.id + ' .keyInput')[0];
                 if (element) {
-                    angular.element(element)[0].focus();
+                    angular.element(element)[0]['focus']();
                 }
             }
         };
@@ -1469,8 +1469,8 @@ var angularSuperGallery;
         ThumbnailController.prototype.$onInit = function () {
             var _this = this;
             this.asg = this.service.getInstance(this);
-            if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent.$ctrl) {
-                this.modal = this.$scope.$parent.$parent.$ctrl.type === 'modal' ? true : false;
+            if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent['$ctrl']) {
+                this.modal = this.$scope.$parent.$parent['$ctrl'].type === 'modal' ? true : false;
             }
             if (!this.modal) {
                 this.$timeout(function () {

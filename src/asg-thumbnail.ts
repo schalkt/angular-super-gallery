@@ -15,7 +15,7 @@ namespace angularSuperGallery {
 
 		constructor(
 			private service: IServiceController,
-			private $scope: ng.IScope,
+			private $scope: IScope,
 			private $element: ng.IRootElementService,
 			private $timeout: ng.ITimeoutService) {
 
@@ -29,8 +29,8 @@ namespace angularSuperGallery {
 			this.asg = this.service.getInstance(this);
 
 			// get parent asg component (modal)
-			if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent.$ctrl) {
-				this.modal = this.$scope.$parent.$parent.$ctrl.type === 'modal' ? true : false;
+			if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent['$ctrl']) {
+				this.modal = this.$scope.$parent.$parent['$ctrl'].type === 'modal' ? true : false;
 			}
 
 			if (!this.modal) {
