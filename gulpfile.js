@@ -5,10 +5,9 @@ const gulpif = require("gulp-if");
 const sass = require("gulp-sass");
 const uglify = require('gulp-uglify');
 const concat = require("gulp-concat");
-const nano = require('gulp-cssnano');
+const cleanCSS = require('gulp-clean-css');
 const order = require("gulp-order");
 const gzip = require("gulp-gzip");
-const gutil = require("gulp-util");
 const rename = require("gulp-rename");
 const sourcemaps = require("gulp-sourcemaps");
 const autoprefixer = require('gulp-autoprefixer');
@@ -18,11 +17,9 @@ var SRC = "src";
 var TEMP = "temp";
 var PRODUCTION = false;
 
-var nanoOptions = {
-	safe: true,
-	discardComments: {
-		removeAll: true
-	}
+var cleanCSSOptions = {
+	debug: false,
+	compatibility: '*'
 };
 
 var banner = ['/**',
@@ -91,10 +88,7 @@ function js_min() {
 	])
 		.pipe(concat(filename))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(uglify().on('error', function (err) {
-			gutil.log(gutil.colors.red('[Error]'), err.toString());
-			this.emit('end');
-		}))
+		.pipe(uglify())
 		.pipe(header(banner, { pkg: package }))
 		.pipe(dest(DIST))
 		.pipe(gzip({ append: true }))
@@ -124,7 +118,7 @@ function css_min() {
 		DIST + "/" + filename
 	])
 		.pipe(concat(filename))
-		.pipe(nano(nanoOptions))
+		.pipe(cleanCSS(cleanCSSOptions))
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(dest(DIST))
 		.pipe(gzip({ append: true }))

@@ -2,6 +2,7 @@
 .vscode
 temp
 typings
+*.log
 node_modules
 test/node_modules
 test/fonts

@@ -1,8 +1,8 @@
-# Angular Super Gallery
+# AngularJS Super Gallery
 
-AngularJS image gallery
+Image gallery based on AngularJS and Bootstrap 4
 
-*Bootstrap3 version is in the bootstra3 branch*
+*For Bootstrap 3 use the bootstrap3 branch*
 
 [![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/)
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
@@ -19,14 +19,21 @@ AngularJS image gallery
 ![angular-super-gallery-screenshot-1](http://schalk.hu/projects/angular-super-gallery/screenshot1.jpg)
 ![angular-super-gallery-screenshot-2](http://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
 
-## Requirements
+## Dependencies
 
-- [jQuery](https://github.com/jquery/jquery/tree/3.2.1) ^3.2.1
-- [angular](https://github.com/angular/angular.js/tree/v1.7.5) 1.7.x
-- [angular-animate](https://github.com/angular/bower-angular-animate/tree/v1.7.5) 1.7.x
-- [angular-touch](https://github.com/angular/bower-angular-touch/tree/v1.7.5) 1.7.x
-- [screenfull](https://www.npmjs.com/package/screenfull) 3.3.x
-- [bootstrap](https://github.com/twbs/bootstrap/tree/v3.3.7) 3.3.x
+```json
+{
+    "angular": "1.7.8",
+    "angular-animate": "1.7.8",
+    "angular-touch": "1.7.8",
+    "bootstrap": "4.3.1",
+    "font-awesome": "4.7.0",
+    "jquery": "3.4.1",
+    "popper.js": "1.15.0",
+    "screenfull": "4.2.0"
+}
+```
+
 
 ## Features
 
@@ -368,7 +375,7 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Build
 
-- `npm install`
+- `yarn install` or `npm install`
 - `typings install`
 - `gulp dev`
 - `gulp prod` (minified javascript and css file)
@@ -388,7 +395,6 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 - options and info menu in modal
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
-- gulp -> webpack
 - preloader svg fix in Microsoft Edge (or fix Edge :)
 - remember website hash and set back when modal closed?
 
