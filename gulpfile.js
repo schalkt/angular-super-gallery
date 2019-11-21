@@ -32,6 +32,12 @@ var banner = ['/**',
 	''].join('\n');
 
 
+var tsconfig = {
+	target: 'ES5',
+	removeComments: true,
+	skipLibCheck: true
+}
+
 function ts() {
 
 	var tsc = require("gulp-typescript");
@@ -47,10 +53,7 @@ function ts() {
 		], {
 				base: SRC
 			}))
-		.pipe(tsc({
-			target: 'ES5',
-			removeComments: true
-		}))
+		.pipe(tsc(tsconfig))
 		.pipe(concat(filename))
 		.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
 		.pipe(dest(TEMP));
