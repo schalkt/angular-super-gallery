@@ -289,7 +289,7 @@ namespace angularSuperGallery {
 	// service controller
 	export class ServiceController {
 
-		public version = "2.0.10";
+		public version = "2.0.11";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
