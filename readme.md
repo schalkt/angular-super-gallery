@@ -23,14 +23,13 @@ Image gallery based on AngularJS and Bootstrap 4
 
 ```json
 {
-	"angular": "1.7.9",
-	"angular-animate": "1.7.9",
-	"angular-touch": "1.7.9",
-	"bootstrap": "4.3.1",
-	"font-awesome": "4.7.0",
-	"jquery": "3.4.1",
-	"popper.js": "1.16.0",
-	"screenfull": "5.0.0"
+    "angular": "1.7.9",
+    "angular-animate": "1.7.9",
+    "angular-touch": "1.7.9",
+    "bootstrap": "4.4.1",
+    "font-awesome": "4.7.0",
+    "jquery": "3.4.1",
+    "screenfull": "5.0.1"
 }
 ```
 
