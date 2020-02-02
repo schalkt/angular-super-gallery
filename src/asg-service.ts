@@ -17,6 +17,7 @@ namespace angularSuperGallery {
 		};
 		placeholder?: string;
 		transition?: string;
+		transitionSpeed? : number;
 		title?: string;
 		subtitle?: string;
 		titleFromImage? : boolean;
@@ -96,6 +97,7 @@ namespace angularSuperGallery {
 	export interface IOptionsImage {
 
 		transition?: string;
+		transitionSpeed? : number;
 		size?: string;
 		arrows?: {
 			preload?: boolean;
@@ -129,6 +131,7 @@ namespace angularSuperGallery {
 				placeholder?: string;
 			}
 			title?: string;
+			subtitle?: string;
 			description?: string;
 			thumbnail?: string;
 		};
@@ -164,6 +167,7 @@ namespace angularSuperGallery {
 
 		source: ISource;
 		title?: string;
+		subtitle?: string;
 		name?: string;
 		extension?: string;
 		description?: string;
@@ -289,7 +293,7 @@ namespace angularSuperGallery {
 	// service controller
 	export class ServiceController {
 
-		public version = "2.0.11";
+		public version = "2.1.1";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -321,6 +325,7 @@ namespace angularSuperGallery {
 					placeholder: null // image url for preload lowres image
 				},
 				title: 'title', // title field name
+				subtitle: 'subtitle', // subtitle field name
 				description: 'description', // description field name
 			},
 			autoplay: {
@@ -373,6 +378,7 @@ namespace angularSuperGallery {
 					},
 				},
 				transition: 'slideLR', // transition effect
+				transitionSpeed: 0.7, // transition speed 0.7s
 				size: 'cover', // contain, cover, auto, stretch
 				keycodes: {
 					exit: [27], // esc
@@ -421,6 +427,7 @@ namespace angularSuperGallery {
 			},
 			image: {
 				transition: 'slideLR', // transition effect
+				transitionSpeed: 0.7, // transition speed 0.7s
 				size: 'cover', // contain, cover, auto, stretch
 				arrows: {
 					enabled: true,  // show/hide arrows
@@ -1054,7 +1061,7 @@ namespace angularSuperGallery {
 		}
 
 		// get preload style
-		public preloadStyle(file: IFile, type: string) {
+		public dynamicStyle(file: IFile, type: string, config: IOptionsModal | IOptionsImage) {
 
 			let style = {};
 
@@ -1066,6 +1073,10 @@ namespace angularSuperGallery {
 				style['background-image'] = 'url(' + this.options.loadingImage + ')';
 			}
 
+			if (config.transitionSpeed !== undefined && config.transitionSpeed !== null) {
+				style['transition'] = 'all ease ' + config.transitionSpeed + 's';
+			}
+		
 			return style;
 
 		}
@@ -1356,6 +1367,10 @@ namespace angularSuperGallery {
 					selected = edit.selected;
 				}
 
+				if (edit.selected == -1) {
+					selected = this.files.length - 1;
+				}
+
 				selected = this.files[selected] ? selected : (selected >= this.files.length ? this.files.length - 1 : 0);
 
 				this.forceSelect(this.files[selected] ? selected : 0);
@@ -1473,23 +1488,22 @@ namespace angularSuperGallery {
 
 			let parts = source.modal.split('/');
 			let filename = parts[parts.length - 1];
-			let title, description;
+			let title, subtitle, description;
 
 			if (self.options.fields !== undefined) {
 				title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
-			} else {
-				title = filename;
-			}
-
-			if (self.options.fields !== undefined) {
+				subtitle = value[self.options.fields.subtitle] ? value[self.options.fields.subtitle] : null;
 				description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
 			} else {
+				title = filename;
+				subtitle = null;
 				description = null;
 			}
-
+						
 			let file = {
 				source: source,
 				title: title,
+				subtitle: subtitle,
 				description: description,
 				loaded: {
 					modal: false,

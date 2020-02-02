@@ -36,7 +36,7 @@ namespace angularSuperGallery {
 			if (!this.modal) {
 				this.$timeout(() => {
 					this.initialized = true;
-				}, 420);
+				}, 640);
 			}
 
 		}

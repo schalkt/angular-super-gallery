@@ -1,252 +1,240 @@
-$black: #252c31;
+$black: #141414;
+$dark: #252c31;
 $primary: #ff4343;
 $button: #445059;
 $icon: #8fa9cc;
 $white: #fefefe;
-
 .asg-thumbnail.darkred {
-
-  background-color: $black;
-  padding: 6px 0px 7px 0px;
-
-  .item {
-
-    margin: 0px 7px 0px 0px;
-    opacity: 0.64;
-
-    &.selected {
-      opacity: 1;
+    background-color: $dark;
+    padding: 6px 0px 7px 0px;
+    .item {
+        margin: 0px 7px 0px 0px;
+        opacity: 0.64;
+        &.selected {
+            opacity: 1;
+        }
+        img {
+            height: 42px;
+        }
+        &:hover,
+        &.selected {
+            .index {
+                opacity: 1;
+                left: 0px;
+            }
+        }
+        .index {
+            background-color: rgba($dark, 0.9);
+            color: $primary;
+            top: unset;
+            left: -20px;
+            bottom: 8%;
+            right: unset;
+            opacity: 0;
+            padding: 1px 12px;
+        }
+        background-color: $dark;
     }
-
-    img {
-      height: 42px;
-    }
-
-    &:hover, &.selected {
-      .index {
-        opacity: 1;
-        left: 0px;
-      }
-    }
-
-    .index {
-      background-color: rgba($black, 0.9);
-      color: $primary;
-      top: unset;
-      left: -20px;
-      bottom: 8%;
-      right: unset;
-      opacity: 0;
-      padding: 1px 12px;
-    }
-
-    background-color: $black;
-
-  }
 }
 
 .asg-image.darkred {
-
-  background-color: $black;
-  color: $primary;
-
-  .asg-info {
-
-    top: -100px;
-    bottom: auto;
-    font-size: 12px;
-    background-color: rgba($black, 0);
-    transition: all 0.25s;
-
-    a {
-      color: $primary;
-      border-bottom: 1px dashed $primary;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: none;
-        border-bottom: 1px solid $primary;
-      }
-
+    background-color: $dark;
+    color: $primary;
+    .asg-info {
+        top: -100px;
+        bottom: auto;
+        font-size: 12px;
+        background-color: rgba($dark, 0);
+        transition: all 0.25s;
+        a {
+            color: $primary;
+            border-bottom: 1px dashed $primary;
+            text-decoration: none;
+            &:hover {
+                text-decoration: none;
+                border-bottom: 1px solid $primary;
+            }
+        }
     }
-
-  }
-
-  &:hover .asg-info {
-    background-color: rgba($black, 0.77);
-    top: 0;
-  }
-
-  .btn {
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    border-radius: 3px;
-    background-image: none;
-    text-shadow: none;
-  }
-
-  .btn-default {
-    border: none;
-    color: $icon;
-    background-color: $button;
-  }
-
-  .btn-default:focus, .btn-default:hover {
-    border: none;
-    outline: none;
-    color: $black;
-    background-color: $primary;
-  }
-
+    &:hover .asg-info {
+        background-color: rgba($dark, 0.77);
+        top: 0;
+    }
+    .btn {
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        border-radius: 3px;
+        background-image: none;
+        text-shadow: none;
+    }
+    .btn-default {
+        border: none;
+        color: $icon;
+        background-color: $button;
+    }
+    .btn-default:focus,
+    .btn-default:hover {
+        border: none;
+        outline: none;
+        color: $dark;
+        background-color: $primary;
+    }
+    .arrows {
+        .toBackward {
+            left: 5px;
+        }
+        .toForward {
+            right: 5px;
+        }
+    }
 }
 
 .asg-modal.darkred {
-
-  .frame {
-    margin: 0;
-  }
-
-  .btn {
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    border-radius: 3px;
-    background-image: none;
-    text-shadow: none;
-  }
-
-  .btn-default {
-    border: none;
-    color: $icon;
-    background-color: $button;
-  }
-
-  .btn-default:focus, .btn-default:hover {
-    border: none;
-    outline: none;
-    color: $black;
-    background-color: $primary;
-  }
-
-  background-color: $black;
-
-  .highlight {
-
-  }
-
-  .header {
-    background-color: $black;
-    color: $icon;
-    .title {
-      color: $primary;
-      text-transform: uppercase;
+    .frame {
+        margin: 0;
     }
-    .subtitle {
-      background: $primary;
-      color: $black;
+    .btn {
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        border-radius: 3px;
+        background-image: none;
+        text-shadow: none;
     }
-  }
-
-  .help {
-    background-color: rgba($black, 0.77);
-    color: $icon;
-  }
-
-  .images {
-    .img {
-      .details {
-
-      }
+    .btn-default {
+        border: none;
+        color: $icon;
+        background-color: $button;
     }
-
-  }
-
-  .caption {
-    .content {
-      background-color: rgba($black, 0.77);
-      color: $icon;
-      padding: 0px;
-      line-height: 32px;
+    .btn-default:focus,
+    .btn-default:hover {
+        border: none;
+        outline: none;
+        color: $dark;
+        background-color: $primary;
     }
-  }
-
-  .asg-thumbnail {
-
-    background-color: rgba($black, 0.77);
-
-    .item {
-      img {
-        height: 77px;
-      }
-    }
-  }
-
-  .arrows {
-
-    .toBackward, .toForward {
-
-      .btn {
-        opacity: 0.7;
-
-        &:hover {
-          opacity: 1;
+    background-color: $dark;
+    .highlight {}
+    .header {
+        .buttons {
+            margin: 4px 4px 5px 14px;
         }
-
-      }
-
+        background-color: $dark;
+        color: $icon;
+        .title {
+            margin: 3px 10px 4px 12px;
+            color: $primary;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            margin: 6px 10px 4px 10px;
+            padding: 2px 10px 2px 10px;
+            background: $primary;
+            color: $dark;
+        }
     }
-
-  }
-
+    .help {
+        background-color: rgba($dark, 0.77);
+        color: $icon;
+    }
+    .images {
+        .img {
+            .details {}
+        }
+    }
+    .caption {
+        .content {
+            background-color: rgba($dark, 0.77);
+            color: $icon;
+            padding: 0px;
+            line-height: 32px;
+        }
+    }
+    .asg-thumbnail {
+        background-color: rgba($dark, 0.77);
+        .item {
+            img {
+                height: 77px;
+            }
+        }
+    }
+    .arrows {
+        .toBackward {
+            left: 5px;
+        }
+        .toForward {
+            right: 5px;
+        }
+        .toBackward,
+        .toForward {
+            .btn {
+                opacity: 0.7;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
 }
 
 .asg-control.darkred {
-
-  .btn {
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    border-radius: 3px;
-    background-image: none;
-    text-shadow: none;
-  }
-
-  .btn-default {
-    border: none;
-    color: $primary;
-    background-color: transparent;
-  }
-
-  .btn-default:focus, .btn-default:hover {
-    border: none;
-    outline: none;
-    color: $black;
-    background-color: $primary;
-  }
-
-  background-color: $black;
-
+    .btn {
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        border-radius: 3px;
+        background-image: none;
+        text-shadow: none;
+    }
+    .btn-default {
+        border: none;
+        color: $primary;
+        background-color: transparent;
+    }
+    .btn-default:focus,
+    .btn-default:hover {
+        border: none;
+        outline: none;
+        color: $dark;
+        background-color: $primary;
+    }
+    background-color: $dark;
 }
 
 .asg-info.darkred {
-
-  background-color: $black;
-  color: $primary;
-
+    background-color: $dark;
+    color: $primary;
 }
 
 .asg-panel.darkred {
-
-  background-color: $black;
-
-  .item {
-
-    background-color: $black;
-
-    &.selected {
-      border-color: $black;
+    background-color: $dark;
+    .item {
+        background-color: $dark;
+        &:hover {
+            .caption {
+                color: $white;
+            }
+        }
+        &.selected {
+            .index {
+                background-color: $black;
+            }
+        }
+        .index {
+            float: left;
+            background-color: $dark;
+            color: $primary;
+            position: relative;
+            padding: 1px 7px;
+            margin-right: 7px;
+            font-size: 10px;
+            top: unset;
+            right: unset;
+        }
+        .caption {
+            transition: color 0.4s;
+            max-height: 21px;
+            display: inline-block;
+            padding: 3px 0px;
+            margin-bottom: 15px;
+        }
     }
-    .index {
-      background-color: $black;
-      color: $primary;
-    }
-  }
 }

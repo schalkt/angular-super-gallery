@@ -209,6 +209,7 @@ or (without thumbnails)
             },
         },
         transition: 'slideLR', // transition effect
+        transitionSpeed: 0.7, // transition speed 0.7s
         size: 'cover', // contain, cover, auto, stretch
         keycodes: {
             exit: [27], // esc
@@ -257,6 +258,7 @@ or (without thumbnails)
     },
     image: {
         transition: 'slideLR', // transition effect
+        transitionSpeed: 0.7, // transition speed 0.7s
         size: 'cover', // contain, cover, auto, stretch
         arrows: {
             enabled: true,  // show/hide arrows
@@ -382,6 +384,7 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Todo
 
+- theme color setup
 - remove caption from modal and add asg-info
 - control component custom buttons
 - header component with controls = modal header?
