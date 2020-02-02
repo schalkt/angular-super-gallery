@@ -384,16 +384,16 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Todo
 
+- slideshow mode (fullscreen, hide menu and arrows, start autoplay)
+- indicator component
 - theme color setup
 - remove caption from modal and add asg-info
 - control component custom buttons
 - header component with controls = modal header?
 - fix info component image width and height data
 - exit button must be visible on modal when menubar hidden
-- indicator component
 - load images and config from API endpoint
 - add edit mode (upload, delete, rename, etc.) for admin page
-- slideshow mode (fullscreen, hide menu and arrows, start autoplay)
 - options and info menu in modal
 - image zoom / drag / rotate
 - image info (original width and height / bytes)
@@ -402,7 +402,7 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Photos
 
-[wallpaperscraft.com](https://wallpaperscraft.com)
+[unsplash.com](https://unsplash.com/)
 
 ## License
 

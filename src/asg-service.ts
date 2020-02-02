@@ -53,6 +53,9 @@ namespace angularSuperGallery {
 	export interface IOptionsPanel {
 
 		visible?: boolean;
+		items?: {
+			class?: string;
+		},
 		item?: {
 			class?: string;
 			caption: boolean;
@@ -146,7 +149,7 @@ namespace angularSuperGallery {
 		loadingImage?: string;
 		modal?: IOptionsModal;
 		panel?: IOptionsPanel;
-		image?: IOptionsImage;
+		image?: IOptionsImage;		
 		thumbnail?: IOptionsThumbnail;
 
 	}
@@ -342,7 +345,7 @@ namespace angularSuperGallery {
 				subtitle: '', // modal window subtitle
 				titleFromImage: false, // force update the gallery title by image title
 				subtitleFromImage: false, // force update the gallery subtitle by image description
-				placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
+				placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)				
 				caption: {
 					disabled: false, // disable image caption
 					visible: true, // show/hide image caption
@@ -411,6 +414,9 @@ namespace angularSuperGallery {
 			},
 			panel: {
 				visible: true,
+				items: {
+					class: 'row', // items class
+				},
 				item: {
 					class: 'col-md-3', // item class
 					caption: false, // show/hide image caption

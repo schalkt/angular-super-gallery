@@ -57,6 +57,9 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
             hover: {
                 select: true
             },
+            items: {
+                class: "",
+            },
             item: {
                 class: "custom",
                 title: false
@@ -77,8 +80,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
     this.files1 = [{
             "source": {
                 "modal": "photo-1462480803487-a2edfd796460?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1462480803487-a2edfd796460?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1462480803487-a2edfd796460?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1462480803487-a2edfd796460?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1462480803487-a2edfd796460?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Marmolada, Italy",
             "description": "Marco Bonomo",
@@ -86,8 +89,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1577951930508-9b26cce01b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1577951930508-9b26cce01b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1577951930508-9b26cce01b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1577951930508-9b26cce01b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1577951930508-9b26cce01b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "ALEKSEY KUPRIKOV",
             "description": "",
@@ -95,8 +98,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1577578306649-09e937512e28?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1577578306649-09e937512e28?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1577578306649-09e937512e28?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1577578306649-09e937512e28?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1577578306649-09e937512e28?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Tindfjöll, Iceland",
             "description": "Gissur Steinarsson",
@@ -104,8 +107,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1577688723008-7c501eae6f26?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1577688723008-7c501eae6f26?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1577688723008-7c501eae6f26?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1577688723008-7c501eae6f26?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1577688723008-7c501eae6f26?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Ky Quan San (Bạch Mộc Lương Tử), Bát Xát, Lào Cai, Việt Nam",
             "description": "Dương Trần Quốc",
@@ -113,8 +116,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1577833780113-9ce85d64d49d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1577833780113-9ce85d64d49d?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1577833780113-9ce85d64d49d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1577833780113-9ce85d64d49d?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1577833780113-9ce85d64d49d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Arhavi, Artvin, Turkey",
             "description": "Emre Öztürk",
@@ -124,8 +127,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1555985202-12975b0235dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1555985202-12975b0235dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1555985202-12975b0235dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1555985202-12975b0235dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1555985202-12975b0235dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Grand Canyon North Rim",
             "description": "Stephen Walker",
@@ -134,8 +137,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1483977399921-6cf94f6fdc3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1483977399921-6cf94f6fdc3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1483977399921-6cf94f6fdc3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1483977399921-6cf94f6fdc3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1483977399921-6cf94f6fdc3a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Paris, France",
             "description": "Nicolas Prieto",
@@ -145,8 +148,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1434394354979-a235cd36269d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1434394354979-a235cd36269d?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1434394354979-a235cd36269d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1434394354979-a235cd36269d?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1434394354979-a235cd36269d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Ales Krivec",
             "description": "",
@@ -157,8 +160,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Kluane National Park and Reserve of Canada, Canada",
             "description": "Kalen Emsley",
@@ -168,8 +171,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1466927593098-4d4aa7a2b2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1466927593098-4d4aa7a2b2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1466927593098-4d4aa7a2b2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1466927593098-4d4aa7a2b2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1466927593098-4d4aa7a2b2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Playa de la Misericordia, Spain",
             "description": "Quino Al",
@@ -178,8 +181,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1542810104-c5f07c7357ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1542810104-c5f07c7357ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1542810104-c5f07c7357ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1542810104-c5f07c7357ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1542810104-c5f07c7357ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Francesco Ungaro",
             "description": "",
@@ -188,8 +191,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1572152269271-c652a70dd517?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1572152269271-c652a70dd517?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1572152269271-c652a70dd517?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1572152269271-c652a70dd517?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1572152269271-c652a70dd517?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Heping Island Park, Keelung City, Taiwan",
             "description": "Andy Wang",
@@ -201,8 +204,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         {
             "source": {
                 "modal": "photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Sun rays a game only on 3-6 minutes…",
             "description": "Valeriy Andrushko",
@@ -218,8 +221,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
             add: [{
                 "source": {
                     "modal": "photo-1527437934671-61474b530017?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                    "image": "photo-1527437934671-61474b530017?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                    "panel": "photo-1527437934671-61474b530017?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                    "image": "photo-1527437934671-61474b530017?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                    "panel": "photo-1527437934671-61474b530017?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
                 },
                 "title": "Seychelles",
                 "description": "Nenad Radojčić",
@@ -247,8 +250,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         var newGalleryImages = [{
             "source": {
                 "modal": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "North Shore, Waialua, United States",
             "description": "Sean O.",
@@ -256,8 +259,8 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1560294572-28b9874e5ada?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1560294572-28b9874e5ada?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
-                "panel": "photo-1560294572-28b9874e5ada?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=70",
+                "image": "photo-1560294572-28b9874e5ada?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
+                "panel": "photo-1560294572-28b9874e5ada?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=75",
             },
             "title": "Beach, Fuerteventura, Spain",
             "description": "Uwe Jelting",
@@ -353,7 +356,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
     this.files2 = [{
             "source": {
                 "modal": "photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "Lucas Benjamin",
@@ -361,7 +364,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1516670428252-df97bba108d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1516670428252-df97bba108d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1516670428252-df97bba108d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1516670428252-df97bba108d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "Fairhaven, Bellingham, United States",
@@ -369,7 +372,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1519017524945-ed31bb7a3786?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1519017524945-ed31bb7a3786?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1519017524945-ed31bb7a3786?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1519017524945-ed31bb7a3786?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "Red Vein",
@@ -378,7 +381,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1565638459249-c85cbb2faaa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1565638459249-c85cbb2faaa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1565638459249-c85cbb2faaa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1565638459249-c85cbb2faaa8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "Paweł Czerwiński",
@@ -387,7 +390,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1470485661945-c52d58c91f51?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1470485661945-c52d58c91f51?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1470485661945-c52d58c91f51?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1470485661945-c52d58c91f51?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "The Titanic Memorial Garden, Belfast, United Kingdom",
@@ -396,7 +399,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1552084162-ec07b3f162dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1552084162-ec07b3f162dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1552084162-ec07b3f162dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1552084162-ec07b3f162dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "Paweł Czerwiński",
@@ -405,7 +408,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         }, {
             "source": {
                 "modal": "photo-1484626753559-5fa3ea273ae8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
-                "image": "photo-1484626753559-5fa3ea273ae8?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=80",
+                "image": "photo-1484626753559-5fa3ea273ae8?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
                 "panel": "photo-1484626753559-5fa3ea273ae8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=70",
             },
             "title": "Petersen Automotive Museum, Los Angeles, United States",

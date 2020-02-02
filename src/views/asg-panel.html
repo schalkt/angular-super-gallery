@@ -1,4 +1,4 @@
-<div class="items row">
+<div class="items {{ $ctrl.asg.options.panel.items.class }}">
 
     <div class="item {{ $ctrl.asg.options.panel.item.class }}" ng-mouseover="$ctrl.hover(key, $event)" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-style="{'background-color': file.source.color}" ng-class="{'selected' : $ctrl.asg.selected == key}">
 
