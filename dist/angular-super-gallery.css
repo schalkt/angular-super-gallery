@@ -1367,7 +1367,9 @@ body.asg-yhidden {
 
 .asg-panel .item {
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  border: none;
+  border-radius: unset; }
   .asg-panel .item img {
     cursor: pointer;
     display: block;
@@ -1382,6 +1384,12 @@ body.asg-yhidden {
     right: 7px;
     padding: 2px 4px;
     font-size: 9px; }
+  .asg-panel .item .caption {
+    width: 100%;
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
 
 .asg-thumbnail {
   position: relative;
@@ -1487,6 +1495,7 @@ body.asg-yhidden {
       opacity: 0.64; }
     .asg-thumbnail.darkblue .item .index {
       background-color: rgba(5, 5, 5, 0.64);
+      padding: 1px 3px 0px 4px;
       color: #30c6d4;
       top: 0px;
       right: -10px;
@@ -1528,7 +1537,7 @@ body.asg-yhidden {
     background-image: none;
     text-shadow: none; }
   .asg-image.darkblue .btn-default {
-    border: 1px solid #30c6d4;
+    border: 1px solid #0a2b2e;
     color: #30c6d4;
     background-color: transparent; }
   .asg-image.darkblue .btn-default:focus,
@@ -1537,6 +1546,10 @@ body.asg-yhidden {
     outline: none;
     color: #050505;
     background-color: #30c6d4; }
+  .asg-image.darkblue .arrows .toBackward {
+    left: -1px; }
+  .asg-image.darkblue .arrows .toForward {
+    right: -1px; }
 
 .asg-modal.darkblue {
   background-color: #050505; }
@@ -1549,7 +1562,7 @@ body.asg-yhidden {
     background-image: none;
     text-shadow: none; }
   .asg-modal.darkblue .btn-default {
-    border: 1px solid #30c6d4;
+    border: 1px solid #0a2b2e;
     color: #30c6d4;
     background-color: transparent; }
   .asg-modal.darkblue .btn-default:focus,
@@ -1578,6 +1591,10 @@ body.asg-yhidden {
     background-color: rgba(5, 5, 5, 0.77); }
     .asg-modal.darkblue .asg-thumbnail .item img {
       height: 77px; }
+  .asg-modal.darkblue .arrows .toBackward {
+    left: -1px; }
+  .asg-modal.darkblue .arrows .toForward {
+    right: -1px; }
 
 .asg-control.darkblue {
   background-color: #050505; }
@@ -1666,11 +1683,16 @@ body.asg-yhidden {
     border: none;
     color: #8fa9cc;
     background-color: #445059; }
-  .asg-image.darkred .btn-default:focus, .asg-image.darkred .btn-default:hover {
+  .asg-image.darkred .btn-default:focus,
+  .asg-image.darkred .btn-default:hover {
     border: none;
     outline: none;
     color: #252c31;
     background-color: #ff4343; }
+  .asg-image.darkred .arrows .toBackward {
+    left: 5px; }
+  .asg-image.darkred .arrows .toForward {
+    right: 5px; }
 
 .asg-modal.darkred {
   background-color: #252c31; }
@@ -1686,7 +1708,8 @@ body.asg-yhidden {
     border: none;
     color: #8fa9cc;
     background-color: #445059; }
-  .asg-modal.darkred .btn-default:focus, .asg-modal.darkred .btn-default:hover {
+  .asg-modal.darkred .btn-default:focus,
+  .asg-modal.darkred .btn-default:hover {
     border: none;
     outline: none;
     color: #252c31;
@@ -1694,10 +1717,15 @@ body.asg-yhidden {
   .asg-modal.darkred .header {
     background-color: #252c31;
     color: #8fa9cc; }
+    .asg-modal.darkred .header .buttons {
+      margin: 4px 4px 5px 14px; }
     .asg-modal.darkred .header .title {
+      margin: 3px 10px 4px 12px;
       color: #ff4343;
       text-transform: uppercase; }
     .asg-modal.darkred .header .subtitle {
+      margin: 6px 10px 4px 10px;
+      padding: 2px 10px 2px 10px;
       background: #ff4343;
       color: #252c31; }
   .asg-modal.darkred .help {
@@ -1712,9 +1740,15 @@ body.asg-yhidden {
     background-color: rgba(37, 44, 49, 0.77); }
     .asg-modal.darkred .asg-thumbnail .item img {
       height: 77px; }
-  .asg-modal.darkred .arrows .toBackward .btn, .asg-modal.darkred .arrows .toForward .btn {
+  .asg-modal.darkred .arrows .toBackward {
+    left: 5px; }
+  .asg-modal.darkred .arrows .toForward {
+    right: 5px; }
+  .asg-modal.darkred .arrows .toBackward .btn,
+  .asg-modal.darkred .arrows .toForward .btn {
     opacity: 0.7; }
-    .asg-modal.darkred .arrows .toBackward .btn:hover, .asg-modal.darkred .arrows .toForward .btn:hover {
+    .asg-modal.darkred .arrows .toBackward .btn:hover,
+    .asg-modal.darkred .arrows .toForward .btn:hover {
       opacity: 1; }
 
 .asg-control.darkred {
@@ -1729,7 +1763,8 @@ body.asg-yhidden {
     border: none;
     color: #ff4343;
     background-color: transparent; }
-  .asg-control.darkred .btn-default:focus, .asg-control.darkred .btn-default:hover {
+  .asg-control.darkred .btn-default:focus,
+  .asg-control.darkred .btn-default:hover {
     border: none;
     outline: none;
     color: #252c31;
@@ -1743,11 +1778,27 @@ body.asg-yhidden {
   background-color: #252c31; }
   .asg-panel.darkred .item {
     background-color: #252c31; }
-    .asg-panel.darkred .item.selected {
-      border-color: #252c31; }
+    .asg-panel.darkred .item:hover .caption {
+      color: #fefefe; }
+    .asg-panel.darkred .item.selected .index {
+      background-color: #141414; }
     .asg-panel.darkred .item .index {
+      float: left;
       background-color: #252c31;
-      color: #ff4343; }
+      color: #ff4343;
+      position: relative;
+      padding: 1px 7px;
+      margin-right: 7px;
+      font-size: 10px;
+      top: unset;
+      right: unset; }
+    .asg-panel.darkred .item .caption {
+      -webkit-transition: color 0.4s;
+      transition: color 0.4s;
+      max-height: 21px;
+      display: inline-block;
+      padding: 3px 0px;
+      margin-bottom: 15px; }
 
 .asg-thumbnail.whitegold {
   background-color: #d4c386;

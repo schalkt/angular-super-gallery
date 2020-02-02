@@ -1,7 +1,7 @@
 /**
  * angular-super-gallery - AngularJS Super Gallery
  * 
- * @version v2.0.11
+ * @version v2.1.2
  * @link http://schalk.hu/projects/angular-super-gallery/demo/
  * @license MIT
  */
@@ -87,12 +87,47 @@ var angularSuperGallery;
 
 var angularSuperGallery;
 (function (angularSuperGallery) {
+    var DebugController = (function () {
+        function DebugController(service, $scope) {
+            this.service = service;
+            this.$scope = $scope;
+            this.type = 'info';
+            this.template = '/views/asg-debug.html';
+        }
+        DebugController.prototype.$onInit = function () {
+            this.asg = this.service.getInstance(this);
+        };
+        Object.defineProperty(DebugController.prototype, "file", {
+            get: function () {
+                return this.asg.file;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return DebugController;
+    }());
+    angularSuperGallery.DebugController = DebugController;
+    var app = angular.module('angularSuperGallery');
+    app.component('asgDebug', {
+        controller: ['asgService', '$scope', angularSuperGallery.DebugController],
+        template: '<div class="asg-debug {{ $ctrl.asg.classes }}"><div ng-include="$ctrl.template"></div></div>',
+        transclude: true,
+        bindings: {
+            id: '@?',
+            template: '@?'
+        }
+    });
+})(angularSuperGallery || (angularSuperGallery = {}));
+
+var angularSuperGallery;
+(function (angularSuperGallery) {
     var ImageController = (function () {
-        function ImageController(service, $rootScope, $element, $window, $scope) {
+        function ImageController(service, $rootScope, $element, $timeout, $window, $scope) {
             var _this = this;
             this.service = service;
             this.$rootScope = $rootScope;
             this.$element = $element;
+            this.$timeout = $timeout;
             this.$window = $window;
             this.$scope = $scope;
             this.type = 'image';
@@ -108,11 +143,13 @@ var angularSuperGallery;
         ImageController.prototype.$onInit = function () {
             var _this = this;
             this.asg = this.service.getInstance(this);
+            var self = this;
             this.$rootScope.$on(this.asg.events.FIRST_IMAGE + this.id, function (event, data) {
                 if (!_this.config.height && _this.config.heightAuto.initial === true) {
-                    _this.setHeight(data.img);
+                    _this.$timeout(function () {
+                        self.setHeight(data.img);
+                    }, 10);
                 }
-                _this.asg.thumbnailsMove(200);
             });
             this.$rootScope.$on(this.asg.events.LOAD_IMAGE + this.id, function (event, data) {
                 _this.$scope.$apply();
@@ -193,7 +230,7 @@ var angularSuperGallery;
     angularSuperGallery.ImageController = ImageController;
     var app = angular.module('angularSuperGallery');
     app.component('asgImage', {
-        controller: ['asgService', '$rootScope', '$element', '$window', '$scope', angularSuperGallery.ImageController],
+        controller: ['asgService', '$rootScope', '$element', '$timeout', '$window', '$scope', angularSuperGallery.ImageController],
         templateUrl: '/views/asg-image.html',
         transclude: true,
         bindings: {
@@ -584,7 +621,7 @@ var angularSuperGallery;
             this.location = location;
             this.$rootScope = $rootScope;
             this.$window = $window;
-            this.version = "2.0.11";
+            this.version = "2.1.2";
             this.slug = 'asg';
             this.items = [];
             this.files = [];
@@ -610,6 +647,7 @@ var angularSuperGallery;
                         placeholder: null
                     },
                     title: 'title',
+                    subtitle: 'subtitle',
                     description: 'description',
                 },
                 autoplay: {
@@ -662,6 +700,7 @@ var angularSuperGallery;
                         },
                     },
                     transition: 'slideLR',
+                    transitionSpeed: 0.7,
                     size: 'cover',
                     keycodes: {
                         exit: [27],
@@ -694,6 +733,9 @@ var angularSuperGallery;
                 },
                 panel: {
                     visible: true,
+                    items: {
+                        class: 'row',
+                    },
                     item: {
                         class: 'col-md-3',
                         caption: false,
@@ -710,6 +752,7 @@ var angularSuperGallery;
                 },
                 image: {
                     transition: 'slideLR',
+                    transitionSpeed: 0.7,
                     size: 'cover',
                     arrows: {
                         enabled: true,
@@ -767,6 +810,7 @@ var angularSuperGallery;
                 MODAL_CLOSE: 'ASG-modal-close-',
                 THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
                 GALLERY_UPDATED: 'ASG-gallery-updated-',
+                LAST_THUMBNAIL: 'ASG-last-thumbnail-',
                 GALLERY_EDIT: 'ASG-gallery-edit',
             };
             angular.element($window).bind('resize', function (event) {
@@ -1156,13 +1200,16 @@ var angularSuperGallery;
             enumerable: true,
             configurable: true
         });
-        ServiceController.prototype.preloadStyle = function (file, type) {
+        ServiceController.prototype.dynamicStyle = function (file, type, config) {
             var style = {};
             if (file.source.color) {
                 style['background-color'] = file.source.color;
             }
             if (this.options.loadingImage && file.loaded[type] === false) {
                 style['background-image'] = 'url(' + this.options.loadingImage + ')';
+            }
+            if (config.transitionSpeed !== undefined && config.transitionSpeed !== null) {
+                style['transition'] = 'all ease ' + config.transitionSpeed + 's';
             }
             return style;
         };
@@ -1196,7 +1243,6 @@ var angularSuperGallery;
             this.timeout(function () {
                 self.setFocus();
             }, 100);
-            this.thumbnailsMove(440);
             this.timeout(function () {
                 _this.modalInitialized = true;
             }, 460);
@@ -1332,6 +1378,9 @@ var angularSuperGallery;
                 if (edit.selected >= 0) {
                     selected = edit.selected;
                 }
+                if (edit.selected == -1) {
+                    selected = _this.files.length - 1;
+                }
                 selected = _this.files[selected] ? selected : (selected >= _this.files.length ? _this.files.length - 1 : 0);
                 _this.forceSelect(_this.files[selected] ? selected : 0);
                 _this.editing = false;
@@ -1412,22 +1461,21 @@ var angularSuperGallery;
             }
             var parts = source.modal.split('/');
             var filename = parts[parts.length - 1];
-            var title, description;
+            var title, subtitle, description;
             if (self.options.fields !== undefined) {
                 title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
-            }
-            else {
-                title = filename;
-            }
-            if (self.options.fields !== undefined) {
+                subtitle = value[self.options.fields.subtitle] ? value[self.options.fields.subtitle] : null;
                 description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
             }
             else {
+                title = filename;
+                subtitle = null;
                 description = null;
             }
             var file = {
                 source: source,
                 title: title,
+                subtitle: subtitle,
                 description: description,
                 loaded: {
                     modal: false,
@@ -1456,26 +1504,36 @@ var angularSuperGallery;
 var angularSuperGallery;
 (function (angularSuperGallery) {
     var ThumbnailController = (function () {
-        function ThumbnailController(service, $scope, $element, $timeout) {
+        function ThumbnailController(service, $scope, $rootScope, $element, $timeout) {
             this.service = service;
             this.$scope = $scope;
+            this.$rootScope = $rootScope;
             this.$element = $element;
             this.$timeout = $timeout;
             this.type = 'thumbnail';
             this.modal = false;
-            this.initialized = false;
+            this.loaded = 0;
             this.template = '/views/asg-thumbnail.html';
         }
         ThumbnailController.prototype.$onInit = function () {
-            var _this = this;
             this.asg = this.service.getInstance(this);
+            var self = this;
             if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent['$ctrl']) {
                 this.modal = this.$scope.$parent.$parent['$ctrl'].type === 'modal' ? true : false;
             }
-            if (!this.modal) {
-                this.$timeout(function () {
-                    _this.initialized = true;
-                }, 420);
+            this.$rootScope.$on(this.asg.events.LAST_THUMBNAIL + this.id, function (event, data) {
+                self.asg.thumbnailsMove(10);
+                self.$timeout(function () {
+                    self.config.initialized = true;
+                }, 120);
+            });
+        };
+        ThumbnailController.prototype.onLoad = function (file) {
+            file.loaded.panel = true;
+            this.loaded++;
+            if (this.loaded === this.asg.files.length) {
+                this.asg.event(this.asg.events.LAST_THUMBNAIL, file);
+                this.config.loaded = true;
             }
         };
         ThumbnailController.prototype.setSelected = function (index, $event) {
@@ -1543,14 +1601,7 @@ var angularSuperGallery;
         });
         Object.defineProperty(ThumbnailController.prototype, "classes", {
             get: function () {
-                var show;
-                if (this.modal) {
-                    show = this.asg.modalInitialized ? 'initialized' : 'initializing';
-                }
-                else {
-                    show = this.initialized ? 'initialized' : 'initializing';
-                }
-                return this.asg.classes + ' ' + this.dynamic + ' ' + show;
+                return this.asg.classes + ' ' + this.dynamic + ' ' + (this.config.initialized ? 'initialized' : 'initializing');
             },
             enumerable: true,
             configurable: true
@@ -1560,7 +1611,7 @@ var angularSuperGallery;
     angularSuperGallery.ThumbnailController = ThumbnailController;
     var app = angular.module('angularSuperGallery');
     app.component('asgThumbnail', {
-        controller: ['asgService', '$scope', '$element', '$timeout', angularSuperGallery.ThumbnailController],
+        controller: ['asgService', '$scope', '$rootScope', '$element', '$timeout', angularSuperGallery.ThumbnailController],
         template: '<div data-ng-if="!$ctrl.autohide" class="asg-thumbnail {{ $ctrl.classes }}" ng-click="$ctrl.asg.modalClick($event);"><div ng-include="$ctrl.template"></div></div>',
         bindings: {
             id: '@',
@@ -1575,12 +1626,13 @@ var angularSuperGallery;
 })(angularSuperGallery || (angularSuperGallery = {}));
 
 angular.module('angularSuperGallery').run(['$templateCache', function($templateCache) {$templateCache.put('/views/asg-control.html','<button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.autoPlayToggle()"><span ng-if="!$ctrl.asg.options.autoplay.enabled" class="fa fa-play"></span> <span ng-if="$ctrl.asg.options.autoplay.enabled" class="fa fa-stop"></span></button> <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toFirst(true)">{{ $ctrl.asg.selected + 1 }} | {{ $ctrl.asg.files.length }}</button> <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toBackward(true)"><span class="fa fa-chevron-left"></span></button> <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toForward(true)"><span class="fa fa-chevron-right"></span></button>');
+$templateCache.put('/views/asg-debug.html','<pre>    \r\n    {{ $ctrl.file | json }}    \r\n</pre><hr><pre>        \r\n    {{ $ctrl.service.instances.abstracts.options | json }}\r\n</pre>');
 $templateCache.put('/views/asg-help.html','<ul><li>SPACE : forward</li><li>RIGHT : forward</li><li>LEFT : backward</li><li>UP / HOME : first</li><li>DOWN / END : last</li><li>ENTER : toggle fullscreen</li><li>ESC : exit</li><li>p : play/pause</li><li>t : change transition effect</li><li>m : toggle menu</li><li>s : toggle image size</li><li>c : toggle caption</li><li>h : toggle help</li></ul>');
-$templateCache.put('/views/asg-image.html','<div class="asg-image {{ $ctrl.asg.classes }}" ng-class="{\'modalon\' : $ctrl.modalAvailable }" ng-style="{\'min-height\' : $ctrl.config.heightMin + \'px\', \'height\' : $ctrl.height + \'px\'}"><div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)"><div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.preloadStyle(file, \'image\')" ng-class="{\'loaded\' : file.loaded.image}"><div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, \'image\')"></div><div class="source {{ $ctrl.config.size }}" ng-style="{\'background-image\': \'url(\' + file.source.image + \')\'}" ng-mouseover="$ctrl.asg.hoverPreload(key)" ng-click="$ctrl.modalOpen($event)"></div></div></div><div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.modalOpen($event)"><div ng-if="!$ctrl.asg.isSingle" class="toBackward"><button class="btn btn-default btn-md pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)"><span class="fa fa-chevron-left"></span></button></div><div ng-if="!$ctrl.asg.isSingle" class="toForward"><button class="btn btn-default btn-md pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)"><span class="fa fa-chevron-right"></span></button></div></div><ng-transclude></ng-transclude></div>');
+$templateCache.put('/views/asg-image.html','<div class="asg-image {{ $ctrl.asg.classes }}" ng-class="{\'modalon\' : $ctrl.modalAvailable }" ng-style="{\'min-height\' : $ctrl.config.heightMin + \'px\', \'height\' : $ctrl.height + \'px\'}"><div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)"><div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.dynamicStyle(file, \'image\', $ctrl.config)" ng-class="{\'loaded\' : file.loaded.image}"><div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, \'image\')"></div><div class="source {{ $ctrl.config.size }}" ng-style="{\'background-image\': \'url(\' + file.source.image + \')\'}" ng-mouseover="$ctrl.asg.hoverPreload(key)" ng-click="$ctrl.modalOpen($event)"></div></div></div><div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.modalOpen($event)"><div ng-if="!$ctrl.asg.isSingle" class="toBackward"><button class="btn btn-default btn-md pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)"><span class="fa fa-chevron-left"></span></button></div><div ng-if="!$ctrl.asg.isSingle" class="toForward"><button class="btn btn-default btn-md pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)"><span class="fa fa-chevron-right"></span></button></div></div><ng-transclude></ng-transclude></div>');
 $templateCache.put('/views/asg-info.html','<div class="row"><div class="col-md-12"><h3>{{ $ctrl.file.title }}</h3></div><div class="col-md-12">{{ $ctrl.file.description }} <a target="_blank" href="{{ $ctrl.download }}"><span class="fa fa-download"></span></a></div></div>');
-$templateCache.put('/views/asg-modal.html','<div class="asg-modal {{ $ctrl.asg.classes }}" ng-class="$ctrl.getClass()" ng-click="$ctrl.imageClick($event);" ng-if="$ctrl.asg.modalVisible" ng-cloak><div tabindex="1" class="keyInput" ng-keydown="$ctrl.keyUp($event)"></div><div class="frame" ng-click="$ctrl.asg.modalClick($event);"><div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);"><span class="buttons d-block d-sm-none pull-right"><span ng-include="\'/views/button/asg-index-xs.html\'"></span> </span><span class="buttons d-none d-sm-block pull-right"><span ng-repeat="item in $ctrl.config.header.buttons" ng-include="(\'/views/button/asg-\' + item + \'.html\')"></span> </span><span ng-if="$ctrl.config.title"><span class="title">{{ $ctrl.config.title }}</span> <span class="subtitle d-none d-sm-block" ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span></span></div><div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}" ng-style="{\'top\': $ctrl.marginTop + \'px\', \'bottom\': $ctrl.marginBottom + \'px\'}" ng-mouseover="$ctrl.asg.over.modalImage = true;" ng-mouseleave="$ctrl.asg.over.modalImage = false;"><div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="\'/views/asg-help.html\'"></div><div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.imageClick($event)"><div ng-if="!$ctrl.asg.isSingle" class="toBackward"><button class="btn btn-default btn-lg pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)"><span class="fa fa-chevron-left"></span></button></div><div ng-if="!$ctrl.asg.isSingle" class="toForward"><button class="btn btn-default btn-lg pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)"><span class="fa fa-chevron-right"></span></button></div></div><div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.preloadStyle(file, \'modal\')" ng-class="{\'loaded\' : file.loaded.modal}"><div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, \'modal\')"></div><div class="source {{ $ctrl.config.size }}" ng-if="file.loaded.modal" ng-style="{\'background-image\': \'url(\' + file.source.modal + \')\'}"></div></div><div class="caption {{ $ctrl.config.caption.position }}" ng-show="!$ctrl.config.caption.disabled" ng-class="{\'visible\' : $ctrl.config.caption.visible}"><div class="content"><span class="title">{{ $ctrl.asg.file.title }}</span> <span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description">- </span><span class="description">{{ $ctrl.asg.file.description }}</span> <a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download</a></div></div></div><ng-transclude></ng-transclude></div></div>');
-$templateCache.put('/views/asg-panel.html','<div class="items"><div class="item {{ $ctrl.asg.options.panel.item.class }}" ng-mouseover="$ctrl.hover(key, $event)" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-style="{\'background-color\': file.source.color}" ng-class="{\'selected\' : $ctrl.asg.selected == key}"><img ng-src="{{ file.source.panel }}" ng-click="$ctrl.setSelected(key, $event)" alt="{{ file.title }}"> <span class="index" ng-if="$ctrl.config.item.index">{{ key + 1 }}</span><div class="caption" ng-if="$ctrl.config.item.caption"><span>{{ file.title }}</span></div></div></div>');
-$templateCache.put('/views/asg-thumbnail.html','<div class="items"><div class="item" ng-click="$ctrl.setSelected(key, $event)" ng-mouseover="$ctrl.hover(key, $event)" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-style="{\'background-color\': file.source.color}" ng-class="{\'selected\' : $ctrl.asg.selected == key}"><img ng-src="{{ file.source.panel }}" ng-style="{\'height\': $ctrl.config.height + \'px\'}" alt="{{ file.title }}"> <span class="index" ng-if="$ctrl.config.index">{{ key + 1 }}</span></div></div>');
+$templateCache.put('/views/asg-modal.html','<div class="asg-modal {{ $ctrl.asg.classes }}" ng-class="$ctrl.getClass()" ng-click="$ctrl.imageClick($event);" ng-if="$ctrl.asg.modalVisible" ng-cloak><div tabindex="1" class="keyInput" ng-keydown="$ctrl.keyUp($event)"></div><div class="frame" ng-click="$ctrl.asg.modalClick($event);"><div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);"><span class="buttons d-block d-sm-none pull-right"><span ng-include="\'/views/button/asg-index-xs.html\'"></span> </span><span class="buttons d-none d-sm-block pull-right"><span ng-repeat="item in $ctrl.config.header.buttons" ng-include="(\'/views/button/asg-\' + item + \'.html\')"></span> </span><span ng-if="$ctrl.config.title"><span class="title">{{ $ctrl.config.title }}</span> <span class="subtitle d-none d-sm-block" ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span></span></div><div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}" ng-style="{\'top\': $ctrl.marginTop + \'px\', \'bottom\': $ctrl.marginBottom + \'px\'}" ng-mouseover="$ctrl.asg.over.modalImage = true;" ng-mouseleave="$ctrl.asg.over.modalImage = false;"><div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="\'/views/asg-help.html\'"></div><div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.imageClick($event)"><div ng-if="!$ctrl.asg.isSingle" class="toBackward"><button class="btn btn-default btn-lg pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)"><span class="fa fa-chevron-left"></span></button></div><div ng-if="!$ctrl.asg.isSingle" class="toForward"><button class="btn btn-default btn-lg pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)"><span class="fa fa-chevron-right"></span></button></div></div><div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.dynamicStyle(file, \'modal\', $ctrl.config)" ng-class="{\'loaded\' : file.loaded.modal}"><div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, \'modal\')"></div><div class="source {{ $ctrl.config.size }}" ng-if="file.loaded.modal" ng-style="{\'background-image\': \'url(\' + file.source.modal + \')\'}"></div></div><div class="caption {{ $ctrl.config.caption.position }}" ng-show="!$ctrl.config.caption.disabled" ng-class="{\'visible\' : $ctrl.config.caption.visible}"><div class="content"><span class="title">{{ $ctrl.asg.file.title }}</span> <span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description">- </span><span class="description">{{ $ctrl.asg.file.description }}</span> <a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm"><span class="fa fa-download"></span> Download</a></div></div></div><ng-transclude></ng-transclude></div></div>');
+$templateCache.put('/views/asg-panel.html','<div class="items {{ $ctrl.asg.options.panel.items.class }}"><div class="item {{ $ctrl.asg.options.panel.item.class }}" ng-mouseover="$ctrl.hover(key, $event)" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-style="{\'background-color\': file.source.color}" ng-class="{\'selected\' : $ctrl.asg.selected == key}"><img ng-src="{{ file.source.panel }}" ng-click="$ctrl.setSelected(key, $event)" alt="{{ file.title }}"><div class="caption" ng-if="$ctrl.config.item.caption"><span class="index" ng-if="$ctrl.config.item.index">{{ key + 1 }}</span> <span>{{ file.title }}</span></div></div></div>');
+$templateCache.put('/views/asg-thumbnail.html','<div class="items"><div class="item" ng-click="$ctrl.setSelected(key, $event)" ng-mouseover="$ctrl.hover(key, $event)" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-style="{\'background-color\': file.source.color}" ng-class="{\'selected\' : $ctrl.asg.selected == key}"><img ng-src="{{ file.source.panel }}" ng-on-load="$ctrl.onLoad(file)" ng-style="{\'height\': $ctrl.config.height + \'px\'}" alt="{{ file.title }}"> <span class="index" ng-if="$ctrl.config.index">{{ key + 1 }}</span></div></div>');
 $templateCache.put('/views/button/asg-close.html','<button class="btn btn-default btn-sm" ng-click="$ctrl.close($event)"><span class="fa fa-times"></span></button>');
 $templateCache.put('/views/button/asg-fullscreen.html','<button class="btn btn-default btn-sm" ng-click="$ctrl.toggleFullScreen($event)"><span class="fa fa-expand"></span></button>');
 $templateCache.put('/views/button/asg-help.html','<button class="btn btn-default btn-sm" ng-click="$ctrl.toggleHelp($event)"><span class="fa fa-question"></span></button>');

@@ -1,96 +1,73 @@
-<div class="asg-modal {{ $ctrl.asg.classes }}"
-	 ng-class="$ctrl.getClass()"
-	 ng-click="$ctrl.imageClick($event);"
-	 ng-if="$ctrl.asg.modalVisible"
-	 ng-cloak>
+<div class="asg-modal {{ $ctrl.asg.classes }}" ng-class="$ctrl.getClass()" ng-click="$ctrl.imageClick($event);" ng-if="$ctrl.asg.modalVisible" ng-cloak>
 
-	<div tabindex="1" class="keyInput" ng-keydown="$ctrl.keyUp($event)"></div>
+    <div tabindex="1" class="keyInput" ng-keydown="$ctrl.keyUp($event)"></div>
 
-	<div class="frame" ng-click="$ctrl.asg.modalClick($event);">
+    <div class="frame" ng-click="$ctrl.asg.modalClick($event);">
 
-		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
+        <div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
 
-			<span class="buttons d-block d-sm-none pull-right">
+            <span class="buttons d-block d-sm-none pull-right">
 				<span ng-include="'/views/button/asg-index-xs.html'"></span>
-			</span>
+            </span>
 
-			<span class="buttons d-none d-sm-block pull-right">
+            <span class="buttons d-none d-sm-block pull-right">
 				<span ng-repeat="item in $ctrl.config.header.buttons" ng-include="('/views/button/asg-' + item + '.html')"></span>
             </span>
 
-			<span ng-if="$ctrl.config.title">
+            <span ng-if="$ctrl.config.title">
 				<span class="title">{{ $ctrl.config.title }}</span>
-				<span class="subtitle d-none d-sm-block" ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
-			</span>
+            <span class="subtitle d-none d-sm-block" ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
+            </span>
 
-		</div>
+        </div>
 
-		<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}"
-			 ng-style="{'top': $ctrl.marginTop + 'px', 'bottom': $ctrl.marginBottom + 'px'}"
-			 ng-mouseover="$ctrl.asg.over.modalImage = true;"
-			 ng-mouseleave="$ctrl.asg.over.modalImage = false;">
+        <div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}" ng-style="{'top': $ctrl.marginTop + 'px', 'bottom': $ctrl.marginBottom + 'px'}" ng-mouseover="$ctrl.asg.over.modalImage = true;" ng-mouseleave="$ctrl.asg.over.modalImage = false;">
 
-			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'/views/asg-help.html'"></div>
+            <div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'/views/asg-help.html'"></div>
 
-			<div class="arrows"
-				 ng-if="$ctrl.config.arrows.enabled"
-				 ng-swipe-left="$ctrl.asg.toForward(true)"
-				 ng-swipe-right="$ctrl.asg.toBackward(true)"
-				 ng-click="$ctrl.imageClick($event)">
+            <div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.imageClick($event)">
 
-				<div ng-if="!$ctrl.asg.isSingle" class="toBackward">
+                <div ng-if="!$ctrl.asg.isSingle" class="toBackward">
 
-					<button class="btn btn-default btn-lg pull-left"
-							ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)"
-							ng-click="$ctrl.toBackward(true, $event)">
+                    <button class="btn btn-default btn-lg pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)">
 						<span class="fa fa-chevron-left"></span>
 					</button>
 
-				</div>
+                </div>
 
-				<div ng-if="!$ctrl.asg.isSingle" class="toForward">
+                <div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
-					<button class="btn btn-default btn-lg pull-right"
-							ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)"
-							ng-click="$ctrl.toForward(true, $event)">
+                    <button class="btn btn-default btn-lg pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)">
 						<span class="fa fa-chevron-right"></span>
 					</button>
 
-				</div>
+                </div>
 
-			</div>
+            </div>
 
-			<div class="img"
-				 ng-repeat="(key,file) in $ctrl.asg.files track by $index"
-				 ng-show="$ctrl.asg.selected == key"
-				 ng-style="$ctrl.asg.preloadStyle(file, 'modal')"
-				 ng-class="{'loaded' : file.loaded.modal}">
+            <div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.dynamicStyle(file, 'modal', $ctrl.config)" ng-class="{'loaded' : file.loaded.modal}">
 
-				<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'modal')"></div>
-				<div class="source {{ $ctrl.config.size }}"
-					 ng-if="file.loaded.modal"
-					 ng-style="{'background-image': 'url(' + file.source.modal + ')'}">
-				</div>
+                <div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'modal')"></div>
+                <div class="source {{ $ctrl.config.size }}" ng-if="file.loaded.modal" ng-style="{'background-image': 'url(' + file.source.modal + ')'}">
+                </div>
 
-			</div>
+            </div>
 
-			<div class="caption {{ $ctrl.config.caption.position }}"
-				 ng-show="!$ctrl.config.caption.disabled"
-				 ng-class="{'visible' : $ctrl.config.caption.visible}">
-				<div class="content">
-					<span class="title">{{ $ctrl.asg.file.title }}</span>
-					<span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
-					<span class="description">{{ $ctrl.asg.file.description }}</span>
-					<a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm">
-						<span class="fa fa-download"></span> Download
-					</a>
-				</div>
-			</div>
+            <div class="caption {{ $ctrl.config.caption.position }}" ng-show="!$ctrl.config.caption.disabled" ng-class="{'visible' : $ctrl.config.caption.visible}">
+                <div class="content">
+                    <span class="title">{{ $ctrl.asg.file.title }}</span>
+                    <span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
+                    <span class="description">{{ $ctrl.asg.file.description }}</span>
+                    <a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm">
+                        <span class="fa fa-download"></span> Download
+                    </a>
+                </div>
+            </div>
 
-		</div>
+        </div>
 
-		<ng-transclude></ng-transclude>
+        <ng-transclude></ng-transclude>
 
-	</div>
+    </div>
 
 </div>

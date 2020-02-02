@@ -17,6 +17,7 @@ namespace angularSuperGallery {
 		};
 		placeholder?: string;
 		transition?: string;
+		transitionSpeed? : number;
 		title?: string;
 		subtitle?: string;
 		titleFromImage? : boolean;
@@ -52,6 +53,9 @@ namespace angularSuperGallery {
 	export interface IOptionsPanel {
 
 		visible?: boolean;
+		items?: {
+			class?: string;
+		},
 		item?: {
 			class?: string;
 			caption: boolean;
@@ -83,7 +87,9 @@ namespace angularSuperGallery {
 		hover?: {
 			preload: boolean;
 			select: boolean;
-		};
+		};		
+		loaded?: boolean;
+		initialized?: boolean;
 
 	}
 
@@ -96,6 +102,7 @@ namespace angularSuperGallery {
 	export interface IOptionsImage {
 
 		transition?: string;
+		transitionSpeed? : number;
 		size?: string;
 		arrows?: {
 			preload?: boolean;
@@ -129,6 +136,7 @@ namespace angularSuperGallery {
 				placeholder?: string;
 			}
 			title?: string;
+			subtitle?: string;
 			description?: string;
 			thumbnail?: string;
 		};
@@ -143,7 +151,7 @@ namespace angularSuperGallery {
 		loadingImage?: string;
 		modal?: IOptionsModal;
 		panel?: IOptionsPanel;
-		image?: IOptionsImage;
+		image?: IOptionsImage;		
 		thumbnail?: IOptionsThumbnail;
 
 	}
@@ -164,6 +172,7 @@ namespace angularSuperGallery {
 
 		source: ISource;
 		title?: string;
+		subtitle?: string;
 		name?: string;
 		extension?: string;
 		description?: string;
@@ -231,6 +240,7 @@ namespace angularSuperGallery {
 			MODAL_CLOSE: string;
 			GALLERY_UPDATED: string;
 			GALLERY_EDIT: string;
+			LAST_THUMBNAIL: string;
 		};
 
 		getInstance(component: any): IServiceController;
@@ -283,13 +293,14 @@ namespace angularSuperGallery {
 
 		log(event: string, data?: any): void;
 
+		event(event: string, data?: any);
 
 	}
 
 	// service controller
 	export class ServiceController {
 
-		public version = "2.0.11";
+		public version = "2.1.2";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -321,6 +332,7 @@ namespace angularSuperGallery {
 					placeholder: null // image url for preload lowres image
 				},
 				title: 'title', // title field name
+				subtitle: 'subtitle', // subtitle field name
 				description: 'description', // description field name
 			},
 			autoplay: {
@@ -337,7 +349,7 @@ namespace angularSuperGallery {
 				subtitle: '', // modal window subtitle
 				titleFromImage: false, // force update the gallery title by image title
 				subtitleFromImage: false, // force update the gallery subtitle by image description
-				placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
+				placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)				
 				caption: {
 					disabled: false, // disable image caption
 					visible: true, // show/hide image caption
@@ -373,6 +385,7 @@ namespace angularSuperGallery {
 					},
 				},
 				transition: 'slideLR', // transition effect
+				transitionSpeed: 0.7, // transition speed 0.7s
 				size: 'cover', // contain, cover, auto, stretch
 				keycodes: {
 					exit: [27], // esc
@@ -405,6 +418,9 @@ namespace angularSuperGallery {
 			},
 			panel: {
 				visible: true,
+				items: {
+					class: 'row', // items class
+				},
 				item: {
 					class: 'col-md-3', // item class
 					caption: false, // show/hide image caption
@@ -421,6 +437,7 @@ namespace angularSuperGallery {
 			},
 			image: {
 				transition: 'slideLR', // transition effect
+				transitionSpeed: 0.7, // transition speed 0.7s
 				size: 'cover', // contain, cover, auto, stretch
 				arrows: {
 					enabled: true,  // show/hide arrows
@@ -484,7 +501,8 @@ namespace angularSuperGallery {
 			MODAL_OPEN: 'ASG-modal-open-',
 			MODAL_CLOSE: 'ASG-modal-close-',
 			THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
-			GALLERY_UPDATED: 'ASG-gallery-updated-',
+			GALLERY_UPDATED: 'ASG-gallery-updated-',			
+			LAST_THUMBNAIL: 'ASG-last-thumbnail-',
 			GALLERY_EDIT: 'ASG-gallery-edit',
 		};
 
@@ -1054,7 +1072,7 @@ namespace angularSuperGallery {
 		}
 
 		// get preload style
-		public preloadStyle(file: IFile, type: string) {
+		public dynamicStyle(file: IFile, type: string, config: IOptionsModal | IOptionsImage) {
 
 			let style = {};
 
@@ -1066,6 +1084,10 @@ namespace angularSuperGallery {
 				style['background-image'] = 'url(' + this.options.loadingImage + ')';
 			}
 
+			if (config.transitionSpeed !== undefined && config.transitionSpeed !== null) {
+				style['transition'] = 'all ease ' + config.transitionSpeed + 's';
+			}
+		
 			return style;
 
 		}
@@ -1140,8 +1162,6 @@ namespace angularSuperGallery {
 			this.timeout(() => {
 				self.setFocus();
 			}, 100);
-
-			this.thumbnailsMove(440);
 
 			this.timeout(() => {
 				this.modalInitialized = true;
@@ -1264,7 +1284,7 @@ namespace angularSuperGallery {
 
 		}
 
-		private event(event: string, data?: any) {
+		public event(event: string, data?: any) {
 
 			event = event + this.id;
 			this.$rootScope.$emit(event, data);
@@ -1338,7 +1358,7 @@ namespace angularSuperGallery {
 
 			if (edit.update) {
 
-				let length = edit.update.length;
+				let length = edit.update.length;		
 
 				for (let key = 0; key < length; key++) {
 					this.addImage(edit.update[key], key);
@@ -1354,6 +1374,10 @@ namespace angularSuperGallery {
 
 				if (edit.selected >= 0) {
 					selected = edit.selected;
+				}
+
+				if (edit.selected == -1) {
+					selected = this.files.length - 1;
 				}
 
 				selected = this.files[selected] ? selected : (selected >= this.files.length ? this.files.length - 1 : 0);
@@ -1473,23 +1497,22 @@ namespace angularSuperGallery {
 
 			let parts = source.modal.split('/');
 			let filename = parts[parts.length - 1];
-			let title, description;
+			let title, subtitle, description;
 
 			if (self.options.fields !== undefined) {
 				title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
-			} else {
-				title = filename;
-			}
-
-			if (self.options.fields !== undefined) {
+				subtitle = value[self.options.fields.subtitle] ? value[self.options.fields.subtitle] : null;
 				description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
 			} else {
+				title = filename;
+				subtitle = null;
 				description = null;
 			}
-
+						
 			let file = {
 				source: source,
 				title: title,
+				subtitle: subtitle,
 				description: description,
 				loaded: {
 					modal: false,

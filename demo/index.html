@@ -1,275 +1,387 @@
 <!DOCTYPE html>
 <html data-ng-app="demo" data-ng-controller="DemoController as ctrl" lang="en">
 
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <title>AngularJS Super Gallery</title>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>AngularJS Super Gallery</title>
 
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/angular.min.js"></script>
-        <script src="assets/js/angular-animate.min.js"></script>
-        <script src="assets/js/angular-touch.min.js"></script>
-        <script src="assets/js/screenfull.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-animate.min.js"></script>
+    <script src="assets/js/angular-touch.min.js"></script>
+    <script src="assets/js/screenfull.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
-        <link crossorigin="anonymous" href="https://bootswatch.com/4/slate/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-        <link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css"/>
+    <link crossorigin="anonymous" href="https://bootswatch.com/4/slate/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css" />
 
-        <script src="../dist/angular-super-gallery.js"></script>
-        <script src="demo.js"></script>
+    <script src="../dist/angular-super-gallery.js"></script>
+    <script src="demo.js"></script>
 
-        <style>
+    <style>
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak {
+            display: none !important;
+        }
+        
+        .navbar-text {
+            margin: 0;
+            padding: 9px 10px;
+        }
+        
+        .donate {
+            display: inline-block;
+            line-height: 0;
+            margin: 0;
+        }
+        
+        .donate .btn-donate {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .asg-info h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 2rem;
+        }
+        
+        .custom-panel .asg-panel .items {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            flex-shrink: 1;
+            justify-content: space-around;
+            align-items: stretch;
+            align-content: stretch;
+            perspective: 1280px;
+        }
+        
+        .custom-panel .asg-panel .item {
+            display: inline-block;
+            height: 128px;
+            transition: all ease 0.2s;
+            opacity: 0.77;
+            transform: scale(1);
+            z-index: 10;
+        }
+        
+        .custom-panel .asg-panel .item.selected {
+            opacity: 1;
+        }
+        
+        .custom-panel .asg-panel .item:hover {
+            z-index: 11;
+            opacity: 1;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px #141414;
+        }
+        
+        .custom-panel .asg-panel .item img {
+            height: 100%;
+            max-width: inherit;
+        }
+        
+        .svg-logos .card-body {
+            background-color: #c8c8c8;
+        }
+    </style>
 
-            .navbar-text {
-                margin: 0;
-                padding: 9px 10px;
-            }
+</head>
 
-            .donate {
-                display: inline-block;
-                line-height: 0;
-                margin: 0;
-            }
+<body>
 
-            .donate .btn-donate {
-                text-transform: uppercase;
-                font-weight: bold;
-            }
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AngularJS Super Gallery</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            .asg-info h3 {
-                margin: 0;
-                padding: 0;
-                font-size: 2rem;
-            }
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
+                        <img height="16" src="github.png" width="16" /> GITHUB
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.npmjs.com/package/angular-super-gallery" target="_blank">
+                        <img height="16" src="npmjs.png" width="16" /> NPM
+                    </a>
+                </li>
+                <li class="nav-item"></li>
 
-            .custom-panel .asg-panel .items {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                flex-shrink: 1;
-                justify-content: space-around;
-                align-items: stretch;
-                align-content: stretch;
-                perspective: 1280px;
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                        <span class="fa fa-link"></span> Links
+                    </a>
+                    <div aria-labelledby="navbarDropdown" class="dropdown-menu">
 
-            }
-
-            .custom-panel .asg-panel .item {
-                display: inline;
-                height: 100px;
-                transition: all ease 0.2s;
-                opacity: 0.77;
-                transform: scale(1);
-                z-index: 10;
-            }
-
-            .custom-panel .asg-panel .item.selected {
-                opacity: 1;
-            }
-
-            .custom-panel .asg-panel .item:hover {
-                z-index: 11;
-                opacity: 1;
-                transform: scale(1.2);
-                box-shadow: 0 0 10px #141414;
-            }
-
-            .custom-panel .asg-panel .item img {
-                height: 100%;
-                max-width: inherit;
-            }
-
-            .svg-logos .card-body {
-                background-color: #c8c8c8;
-            }
-        </style>
-
-    </head>
-
-    <body>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">AngularJS Super Gallery</a>
-            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/schalkt/angular-super-gallery" target="_blank">
-                            <img height="16" src="github.png" width="16"/>
-                            GITHUB
+                        <a class="dropdown-item" href="http://angularjs.bestjquery.com/angular-super-image-gallery/" target="_blank">
+                            <span class="fa fa-link"></span> angularjs.bestjquery.com
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.npmjs.com/package/angular-super-gallery" target="_blank">
-                            <img height="16" src="npmjs.png" width="16"/>
-                            NPM
+
+                        <a class="dropdown-item" href="http://www.onlinecode.org/super-angularjs-image-gallery/" target="_blank">
+                            <span class="fa fa-link"></span> onlinecode.org
                         </a>
-                    </li>
-                    <li class="nav-item"></li>
 
-                    <li class="nav-item dropdown">
-                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
-                            <span class="fa fa-link"></span>
-                            Links
+                        <a class="dropdown-item" href="https://angularscript.com/angular-super-image-gallery/" target="_blank">
+                            <span class="fa fa-link"></span> angularscript.com
                         </a>
-                        <div aria-labelledby="navbarDropdown" class="dropdown-menu">
 
-                            <a class="dropdown-item" href="http://angularjs.bestjquery.com/angular-super-image-gallery/" target="_blank">
-                                <span class="fa fa-link"></span>
-                                angularjs.bestjquery.com</a>
+                        <a class="dropdown-item" href="https://www.jsdelivr.com/package/npm/angular-super-gallery" target="_blank">
+                            <span class="fa fa-link"></span> jsdelivr.com
+                        </a>
 
-                            <a class="dropdown-item" href="http://www.onlinecode.org/super-angularjs-image-gallery/" target="_blank">
-                                <span class="fa fa-link"></span>
-                                onlinecode.org</a>
+                        <a class="dropdown-item" href="https://david-dm.org/schalkt/angular-super-gallery" target="_blank">
+                            <span class="fa fa-link"></span> david-dm.org
+                        </a>
 
-                            <a class="dropdown-item" href="https://angularscript.com/angular-super-image-gallery/" target="_blank">
-                                <span class="fa fa-link"></span>
-                                angularscript.com</a>
+                        <a class="dropdown-item" href="https://snyk.io/test/github/schalkt/angular-super-gallery" target="_blank">
+                            <span class="fa fa-link"></span> snyk.io
+                        </a>
 
-                            <a class="dropdown-item" href="https://www.jsdelivr.com/package/npm/angular-super-gallery" target="_blank">
-                                <span class="fa fa-link"></span>
-                                jsdelivr.com</a>
+                    </div>
+                </li>
+            </ul>
+            <form action="https://www.paypal.com/cgi-bin/webscr" class="donate form-inline my-2 my-lg-0" method="post" target="_blank">
 
-                            <a class="dropdown-item" href="https://david-dm.org/schalkt/angular-super-gallery" target="_blank">
-                                <span class="fa fa-link"></span>
-                                david-dm.org</a>
+                <!-- Identify your business so that you can collect the payments. -->
+                <input name="business" type="hidden" value="paypal2@schalk.hu">
 
-                            <a class="dropdown-item" href="https://www.bithound.io/github/schalkt/angular-super-gallery" target="_blank">
-                                <span class="fa fa-link"></span>
-                                bithound.io</a>
+                <!-- Specify a Donate button. -->
+                <input name="cmd" type="hidden" value="_donations">
 
-                            <a class="dropdown-item" href="https://snyk.io/test/github/schalkt/angular-super-gallery" target="_blank">
-                                <span class="fa fa-link"></span>
-                                snyk.io</a>
+                <!-- Specify details about the contribution -->
+                <input name="item_name" type="hidden" value="Donation for Angular Super Gallery">
+                <input name="currency_code" type="hidden" value="USD">
+                <button class="btn btn-sm btn-warning btn-donate">
+                    Donate
+                    <img height="16" src="paypal.png" width="auto" />
+                </button>
+                <img alt="" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
 
-                        </div>
-                    </li>
-                </ul>
-                <form action="https://www.paypal.com/cgi-bin/webscr" class="donate form-inline my-2 my-lg-0" method="post" target="_blank">
+            </form>
+        </div>
+    </nav>
 
-                    <!-- Identify your business so that you can collect the payments. -->
-                    <input name="business" type="hidden" value="paypal2@schalk.hu">
+    <div class="container-fluid mt-4">
 
-                    <!-- Specify a Donate button. -->
-                    <input name="cmd" type="hidden" value="_donations">
+        <div class="row">
 
-                    <!-- Specify details about the contribution -->
-                    <input name="item_name" type="hidden" value="Donation for Angular Super Gallery">
-                    <input name="currency_code" type="hidden" value="USD">
-                    <button class="btn btn-sm btn-warning btn-donate">
-                        Donate
-                        <img height="16" src="paypal.png" width="auto"/>
-                    </button>
-                    <img alt="" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
+            <div class="col-md-7">
 
-                </form>
-            </div>
-        </nav>
+                <!-- DEMO BEGIN -->
+                <div class="card">
+                    <div class="card-header">
+                        <strong class>multiple images</strong> | thumbnails | modal + controls
+                        <button class="btn btn-sm btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show
+                            config
+                        </button>
+                    </div>
 
-        <div class="container-fluid mt-4">
+                    <div class="card-body asg-custom" data-ng-if="ctrl.gallery.nature">
 
-            <div class="row">
+                        <pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
 
-                <div
-                    class="col-md-6">
+                        <!-- ASG BEGIN -->
+                        <asg-image data-id="nature" data-items="ctrl.files1" data-options="ctrl.options1" data-selected="nature1Selected">
+                            <asg-modal>
+                                <asg-thumbnail></asg-thumbnail>
+                            </asg-modal>
+                        </asg-image>
+                        <asg-thumbnail data-id="nature"></asg-thumbnail>
+                        <hr>
+                        <div class="row">
 
-                    <!-- DEMO BEGIN -->
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class>multiple images</strong>
-                            | thumbnails | modal + controls
-                            <button class="btn btn-sm btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show
-                                                                                                                                                                                                                                                                							config
-                            </button>
-                        </div>
-
-                        <div class="card-body asg-custom" data-ng-if="ctrl.gallery.nature">
-
-                            <pre data-ng-if="showOptions1">{{ ctrl.options1|json}}</pre>
-
-                            <!-- ASG BEGIN -->
-                            <asg-image data-id="nature" data-items="ctrl.files1" data-options="ctrl.options1" data-selected="nature1Selected">
-                                <asg-modal>
-                                    <asg-thumbnail></asg-thumbnail>
-                                </asg-modal>
-                            </asg-image>
-                            <asg-thumbnail data-id="nature"></asg-thumbnail>
-                            <hr>
-                            <div class="row">
-
-                                <div class="col-md-6 text-center">
-                                    <button class="btn btn-sm btn-warning btn-block" ng-click="ctrl.update1()">Change gallery images</button>
-                                    <button class="btn btn-sm btn-success btn-block" ng-click="ctrl.add1()">Add new image(s) to gallery</button>
-                                    <button class="btn btn-sm btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>
-                                    <button class="btn btn-sm btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
-                                </div>
-                                <div class="col-md-6 text-center">
-
-                                    <div class="form-group">
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">File index (editable)</span>
-                                            </div>
-                                            <input class="form-control" data-ng-model="nature1Selected"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Theme</span>
-                                            </div>
-                                            <select class="form-control" data-ng-change="ctrl.update1options()" data-ng-model="ctrl.options1.theme">
-                                                <option value="darkblue">Darkblue</option>
-                                                <option value="darkred">Darkred</option>
-                                                <option value="whitegold">Whitegold</option>
-                                                <option value="default">Default</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Transition</span>
-                                            </div>
-                                            <select class="form-control" data-ng-change="ctrl.update1options()" data-ng-model="ctrl.options1.image.transition">
-                                                <option value="no">no</option>
-                                                <option value="fadeInOut">fadeInOut</option>
-                                                <option value="zoomIn">zoomIn</option>
-                                                <option value="zoomOut">zoomOut</option>
-                                                <option value="zoomInOut">zoomInOut</option>
-                                                <option value="rotateLR">rotateLR</option>
-                                                <option value="rotateTB">rotateTB</option>
-                                                <option value="rotateZY">rotateZY</option>
-                                                <option value="slideLR">slideLR</option>
-                                                <option value="slideTB">slideTB</option>
-                                                <option value="zlideLR">zlideLR</option>
-                                                <option value="zlideTB">zlideTB</option>
-                                                <option value="flipX">flipX</option>
-                                                <option value="flipY">flipY</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="col-md-6 text-center">
+                                <button class="btn btn-sm btn-warning btn-block" ng-click="ctrl.update1()">Change
+                                    gallery images</button>
+                                <button class="btn btn-sm btn-success btn-block" ng-click="ctrl.add1()">Add new image(s)
+                                    to gallery</button>
+                                <button class="btn btn-sm btn-danger btn-block" ng-click="ctrl.delete1()">Delete
+                                    selected image</button>
+                                <button class="btn btn-sm btn-primary btn-block" ng-click="ctrl.reset1()">Reset
+                                    gallery</button>
                             </div>
-                            <hr>
-                            <strong>custom panel</strong>
-                            | auto select the image when mouseover
-                            <asg-panel class="custom-panel" data-id="nature"></asg-panel>
-                            <!-- ASG END -->
+                            <div class="col-md-6 text-center">
 
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">File index (editable)</span>
+                                        </div>
+                                        <input class="form-control" data-ng-model="nature1Selected" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Theme</span>
+                                        </div>
+                                        <select class="form-control" data-ng-change="ctrl.update1options()" data-ng-model="ctrl.options1.theme">
+                                            <option value="darkblue">Darkblue</option>
+                                            <option value="darkred">Darkred</option>
+                                            <option value="whitegold">Whitegold</option>
+                                            <option value="default">Default</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Transition</span>
+                                        </div>
+                                        <select class="form-control" data-ng-change="ctrl.update1options()" data-ng-model="ctrl.options1.image.transition">
+                                            <option value="no">no</option>
+                                            <option value="fadeInOut">fadeInOut</option>
+                                            <option value="zoomIn">zoomIn</option>
+                                            <option value="zoomOut">zoomOut</option>
+                                            <option value="zoomInOut">zoomInOut</option>
+                                            <option value="rotateLR">rotateLR</option>
+                                            <option value="rotateTB">rotateTB</option>
+                                            <option value="rotateZY">rotateZY</option>
+                                            <option value="slideLR">slideLR</option>
+                                            <option value="slideTB">slideTB</option>
+                                            <option value="zlideLR">zlideLR</option>
+                                            <option value="zlideTB">zlideTB</option>
+                                            <option value="flipX">flipX</option>
+                                            <option value="flipY">flipY</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
+                        <hr>
+                        <strong>custom panel</strong> | auto select the image when mouseover
+                        <asg-panel class="custom-panel" data-id="nature"></asg-panel>
 
-                        <div class="card-footer text-center">
-                            photos :
-                            <a href="https://wallpaperscraft.com/catalog/nature" target="_blank"/>wallpaperscraft.com</a>
+                        <hr>
+                        <strong>only modal</strong> | without theme
+                        <br>
+                        <button class="btn btn-primary" ng-click="visible = !visible">show modal</button>
+
+
+                        <asg-modal data-items="ctrl.files1" data-options='{ "baseUrl": "https://images.unsplash.com/" }' data-visible="visible">
+                            <asg-thumbnail></asg-thumbnail>
+                        </asg-modal>
+                        <!-- ASG END -->
+
+                    </div>
+
+                    <div class="card-footer text-center">
+                        photos :
+                        <a href="https://unsplash.com" target="_blank">unsplash.com</a>
+                    </div>
+
+                </div>
+                <!-- DEMO END -->
+
+            </div>
+
+            <div class="col-md-5">
+
+                <!-- DEMO BEGIN -->
+                <div class="card">
+
+                    <div class="card-header">
+                        <strong>multiple images</strong> | autoplay | modal + hidden controls
+                        <button class="btn btn-sm btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">
+                            show config
+                        </button>
+                    </div>
+                    <div class="card-body" data-ng-if="ctrl.gallery.abstracts">
+
+                        <pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
+
+                        <!-- ASG BEGIN -->
+
+                        <script id="custom-info.html" type="text/ng-template">
+                            <span ng-show="$ctrl.file.title">{{ $ctrl.file.title }}</span>
+                            <span ng-show="$ctrl.file.subtitle">| {{ $ctrl.file.subtitle }}</span>
+                            <span ng-show="$ctrl.file.description">| {{ $ctrl.file.description }}</span>
+                        </script>
+
+                        <script id="custom-control.html" type="text/ng-template">
+                            <button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()" data-ng-if="!$ctrl.asg.isSingle">
+                            <span class="fa fa-play" data-ng-if="!$ctrl.asg.options.autoplay.enabled"></span>
+                            <span class="fa fa-stop" data-ng-if="$ctrl.asg.options.autoplay.enabled"></span>
+                        </button>
+
+                            <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toBackward(true)">
+                            <span class="fa fa-chevron-left"></span>
+                        </button>
+
+                            <button ng-if="!$ctrl.asg.isSingle" class="btn btn-default btn-sm" ng-click="$ctrl.asg.toForward(true)">
+                            <span class="fa fa-chevron-right"></span>
+                        </button>
+
+                            <button class="btn btn-default btn-sm " data-ng-click="$ctrl.asg.toFirst(true)" data-ng-if="!$ctrl.asg.isSingle">
+                            {{ $ctrl.asg.selected + 1 }}
+                            |
+                            {{ $ctrl.asg.files.length }}
+                        </button>
+                            <button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.toggle('panel')">
+                            {{ $ctrl.asg.options.panel.visible ? 'hide' : 'show' }} panel <span class="fa fa-th"></span>
+                        </button>
+                        </script>
+
+                        <asg-image data-id="abstracts">
+                            <asg-info data-template="custom-info.html"></asg-info>
+                            <asg-modal>
+                                <asg-thumbnail></asg-thumbnail>
+                            </asg-modal>
+                        </asg-image>
+                        <asg-control data-id="abstracts" data-template="custom-control.html"></asg-control>
+                        <asg-panel class="clearfix" data-id="abstracts" data-items="ctrl.files2" data-options="ctrl.options2"></asg-panel>
+                        <!-- <asg-debug data-id="abstracts"></asg-debug> -->
+                        <!-- ASG END -->
+
+                    </div>
+
+                    <div class="card-footer text-center">
+                        photos :
+                        <a href="https://unsplash.com" target="_blank">unsplash.com</a>
+                    </div>
+
+                </div>
+                <!-- DEMO END -->
+
+                <!-- DEMO BEGIN -->
+                <div class="card svg-logos">
+
+                    <div class="card-header">
+                        <strong>svg logos</strong> | autoplay | no modal | no control | auto height by first image
+                    </div>
+
+                    <div class="card-body" data-ng-if="ctrl.gallery.logos">
+
+                        <!-- ASG BEGIN -->
+                        <asg-image data-items="[
+                                'amazon-ws.svg','asus.svg','avast.svg','bluetooth.svg',
+                                'burger-king.svg','continental.svg','hilti.svg','sennheiser.svg',
+                            ]" data-options='{
+                                "baseUrl":"svg/",
+                                "image" : { "height": 90, "transition": "rotateLR", "size": "contain", "arrows": false, "placeholder": ""},
+                                "autoplay" : { "enabled": true, "delay": 2000}
+                            }'>
+                        </asg-image>
+                        <!-- ASG END -->
+
+                    </div>
+
+                    <div class="card-footer text-center">
+                        images :
+                        <a href="https://www.google.hu/search?q=*.svg&newwindow=1&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi9_a2yufjWAhUIJMAKHf3hBlEQ_AUICigB&biw=1602&bih=787" target="_blank" />internet</a>
                     </div>
 
                 </div>
@@ -279,161 +391,63 @@
                 <div class="card card-default">
 
                     <div class="card-header">
-                        <strong>single image</strong>
-                        | fixed height | modal + hidden controls and caption
+                        <strong>single image</strong> | fixed height | modal + hidden controls and caption
                     </div>
 
-                    <div
-                        class="card-body" data-ng-if="ctrl.gallery.honda">
+                    <div class="card-body" data-ng-if="ctrl.gallery.portraits">
 
-                        <!-- ASG BEGIN -->
-                        <asg-image data-base-url="http://wallpaperscraft.com/image/" data-items="['honda_nsx_movement_side_view_111399_1920x1080.jpg']" data-options='{
-								theme: "darkred",
-								image: { height: 190, size: "cover" },
-								modal: { title: "Honda NSX", subtitle: "supercar", menu: false, caption: false, size: "cover",
-									header: {buttons: ["prev","next","close"]}, caption: { disabled: true }, thumbnail: { height: 90 }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- ASG BEGIN -->
+                                <asg-image data-base-url="https://images.unsplash.com/" data-items="['photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=90']" data-options='{
+								theme: "whitegold",
+								image: { caption: {visible: false}, height: 0, size: "cover" },
+								modal: { menu: false, caption: false, size: "cover",
+									header: {dynamic: true, buttons: ["prev","next","close"]}, caption: { disabled: true }, thumbnail: { height: 90 }}
 								}'>
-                            <asg-modal>
-                                <asg-thumbnail></asg-thumbnail>
-                            </asg-modal>
-                            <asg-info data-template="custom-info.html"></asg-info>
-                        </asg-image>
+                                    <asg-modal></asg-modal>
+                                </asg-image>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- ASG BEGIN -->
+                                <asg-image data-base-url="https://images.unsplash.com/" data-items="['photo-1544610195-8db0cf3703a9?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=90']" data-options='{
+								theme: "whitegold",
+								image: { caption: {visible: false}, size: "cover" },
+								modal: { menu: false, caption: false, size: "cover",
+									header: {enabled:true, dynamic: true, buttons: ["prev","next","close"]}, caption: { disabled: true }, thumbnail: { height: 90 }}
+								}'>
+                                    <asg-modal></asg-modal>
+                                </asg-image>
+                            </div>
+                        </div>
                         <!-- ASG END -->
 
                     </div>
 
                     <div class="card-footer text-center">
                         photo :
-                        <a href="https://wallpaperscraft.com/catalog/cars" target="_blank"/>wallpaperscraft.com</a>
-                </div>
-
-            </div>
-            <!-- DEMO END -->
-
-        </div>
-
-        <div
-            class="col-md-6">
-
-            <!-- DEMO BEGIN -->
-            <div class="card">
-
-                <div class="card-header">
-                    <strong>multiple images</strong>
-                    | autoplay | modal + hidden controls
-                    <button class="btn btn-sm btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">
-                        show config
-                    </button>
-                </div>
-                <div class="card-body" data-ng-if="ctrl.gallery.girls">
-
-                    <pre data-ng-if="showOptions2">{{ ctrl.options2|json}}</pre>
-
-                    <!-- ASG BEGIN -->
-
-                    <script id="custom-info.html" type="text/ng-template">
-                        {{ $ctrl.file.description }}
-                        <a target="_blank" href="{{ $ctrl.file.download }}">
-                            Download
-                            {{ $ctrl.file.width }}px width and
-                            {{ $ctrl.file.height }}px height
-                            {{
-							$ctrl.file.extension|uppercase }}
-                            file.
-                        </a>
-                    </script>
-
-                    <script id="custom-control.html" type="text/ng-template">
-                        <button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.autoPlayToggle()" data-ng-if="!$ctrl.asg.isSingle">
-                            <span class="fa fa-play" data-ng-if="!$ctrl.asg.options.autoplay.enabled"></span>
-                            <span class="fa fa-stop" data-ng-if="$ctrl.asg.options.autoplay.enabled"></span>
-                        </button>
-                        <button class="btn btn-default btn-sm " data-ng-click="$ctrl.asg.toFirst(true)" data-ng-if="!$ctrl.asg.isSingle">
-                            {{ $ctrl.asg.selected + 1 }}
-                            |
-                            {{ $ctrl.asg.files.length }}
-                        </button>
-                        <button class="btn btn-default btn-sm" data-ng-click="$ctrl.asg.toggle('panel')">
-                            {{ $ctrl.asg.options.panel.visible ? 'hide' : 'show' }}
-                            panel
-                        </button>
-                    </script>
-
-                    <asg-image data-id="girls">
-                        <asg-info data-template="custom-info.html"></asg-info>
-                        <asg-modal>
-                            <asg-thumbnail></asg-thumbnail>
-                        </asg-modal>
-                    </asg-image>
-                    <asg-control data-id="girls" data-template="custom-control.html"></asg-control>
-                    <asg-panel class="clearfix" data-id="girls" data-items="ctrl.files2" data-options="ctrl.options2"></asg-panel>
-                    <!-- ASG END -->
+                        <a href="https://unsplash.com" target="_blank">unsplash.com</a>
+                    </div>
 
                 </div>
+                <!-- DEMO END -->
 
-                <div class="card-footer text-center">
-                    photos :
-                    <a href="https://wallpaperscraft.com/catalog/girls" target="_blank"/>wallpaperscraft.com</a>
+
             </div>
-
         </div>
-        <!-- DEMO END -->
+    </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4360165-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-        <!-- DEMO BEGIN -->
-        <div class="card svg-logos">
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-            <div class="card-header">
-                <strong>svg logos</strong>
-                | autoplay | no modal | no control | auto height by first image
-            </div>
+        gtag('config', 'UA-4360165-2');
+    </script>
+</body>
 
-            <div
-                class="card-body" data-ng-if="ctrl.gallery.logos">
-
-                <!-- ASG BEGIN -->
-                <asg-image data-items="[
-                                                                                                                                                                							    'amazon-ws.svg','asus.svg','avast.svg','bluetooth.svg',
-                                                                                                                                                                							    'burger-king.svg','continental.svg','hilti.svg','sennheiser.svg',
-                                                                                                                                                                							   ]" data-options='{
-                                                                                                                                                                							   "baseUrl":"svg/",
-                                                                                                                                                                							   "image" : { "transition": "rotateLR", "size": "contain", "arrows": false, "placeholder": ""},
-                                                                                                                                                                							   "autoplay" : { "enabled": true, "delay": 2000}
-                                                                                                                                                                							   }'></asg-image>
-                <!-- ASG END -->
-
-            </div>
-
-            <div class="card-footer text-center">
-                images :
-                <a href="https://www.google.hu/search?q=*.svg&newwindow=1&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi9_a2yufjWAhUIJMAKHf3hBlEQ_AUICigB&biw=1602&bih=787" target="_blank"/>internet</a>
-        </div>
-    </body>
-</html></div><!-- DEMO END --><!-- DEMO BEGIN --><div class="card">
-
-<div class="card-header">
-    <strong>only modal</strong>
-    | no theme
-</div>
-
-<div class="card-body" data-ng-if="ctrl.gallery.nature">
-
-    <button class="btn btn-primary" ng-click="visible = !visible">show modal</button>
-
-    <!-- ASG BEGIN -->
-    <asg-modal data-items="ctrl.files1" data-options='{ "baseUrl": "http://" }' data-visible="visible">
-        <asg-thumbnail></asg-thumbnail>
-    </asg-modal>
-    <!-- ASG END -->
-
-</div>
-
-<div class="card-footer text-center">
-    photos :
-    <a href="https://wallpaperscraft.com/catalog/nature" target="_blank"/>wallpaperscraft.com</a></div></div><!-- DEMO END --></div></div></div><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4360165-2"></script><script>window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-4360165-2');</script></body></html>
+</html>

@@ -12,4 +12,3 @@ script:
   - gulp prod
 after_success:
   - git reset -hard
-
