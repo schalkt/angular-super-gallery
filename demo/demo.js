@@ -5,7 +5,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
     this.gallery = {
         nature: true,
         abstracts: true,
-        honda: true,
+        portraits: true,
         logos: true,
     };
 
@@ -66,7 +66,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
             }
         },
         image: {
-            height: 360,
+            height: 580,
             click: {
                 modal: true
             },
@@ -302,7 +302,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
     //-----------------------------
 
     this.options2 = {
-        debug: true,
+        debug: false,
         loadingImage: 'preload.svg',
         preloadNext: true,
         preloadDelay: 1200,

@@ -13,6 +13,7 @@ namespace angularSuperGallery {
 		constructor(private service : IServiceController,
 					private $rootScope : ng.IRootScopeService,
 					private $element : ng.IRootElementService,
+					private $timeout: ng.ITimeoutService,
 					private $window : ng.IWindowService,
 					private $scope : ng.IScope) {
 
@@ -35,14 +36,16 @@ namespace angularSuperGallery {
 			// get service instance
 			this.asg = this.service.getInstance(this);
 
+			var self = this;
+
 			// set image component height
 			this.$rootScope.$on(this.asg.events.FIRST_IMAGE + this.id, (event, data) => {
 
-				if (!this.config.height && this.config.heightAuto.initial === true) {
-					this.setHeight(data.img);
+				if (!this.config.height && this.config.heightAuto.initial === true) {			
+					this.$timeout(() => {					
+						self.setHeight(data.img);
+					}, 10);					
 				}
-
-				this.asg.thumbnailsMove(200);
 
 			});
 
@@ -161,7 +164,7 @@ namespace angularSuperGallery {
 	let app : ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgImage', {
-		controller: ['asgService', '$rootScope', '$element', '$window', '$scope', angularSuperGallery.ImageController],
+		controller: ['asgService', '$rootScope', '$element', '$timeout', '$window', '$scope', angularSuperGallery.ImageController],
 		templateUrl: '/views/asg-image.html',
 		transclude: true,
 		bindings: {

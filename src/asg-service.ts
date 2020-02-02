@@ -87,7 +87,9 @@ namespace angularSuperGallery {
 		hover?: {
 			preload: boolean;
 			select: boolean;
-		};
+		};		
+		loaded?: boolean;
+		initialized?: boolean;
 
 	}
 
@@ -238,6 +240,7 @@ namespace angularSuperGallery {
 			MODAL_CLOSE: string;
 			GALLERY_UPDATED: string;
 			GALLERY_EDIT: string;
+			LAST_THUMBNAIL: string;
 		};
 
 		getInstance(component: any): IServiceController;
@@ -290,13 +293,14 @@ namespace angularSuperGallery {
 
 		log(event: string, data?: any): void;
 
+		event(event: string, data?: any);
 
 	}
 
 	// service controller
 	export class ServiceController {
 
-		public version = "2.1.1";
+		public version = "2.1.2";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -497,7 +501,8 @@ namespace angularSuperGallery {
 			MODAL_OPEN: 'ASG-modal-open-',
 			MODAL_CLOSE: 'ASG-modal-close-',
 			THUMBNAIL_MOVE: 'ASG-thumbnail-move-',
-			GALLERY_UPDATED: 'ASG-gallery-updated-',
+			GALLERY_UPDATED: 'ASG-gallery-updated-',			
+			LAST_THUMBNAIL: 'ASG-last-thumbnail-',
 			GALLERY_EDIT: 'ASG-gallery-edit',
 		};
 
@@ -1158,8 +1163,6 @@ namespace angularSuperGallery {
 				self.setFocus();
 			}, 100);
 
-			this.thumbnailsMove(440);
-
 			this.timeout(() => {
 				this.modalInitialized = true;
 			}, 460);
@@ -1281,7 +1284,7 @@ namespace angularSuperGallery {
 
 		}
 
-		private event(event: string, data?: any) {
+		public event(event: string, data?: any) {
 
 			event = event + this.id;
 			this.$rootScope.$emit(event, data);
@@ -1355,7 +1358,7 @@ namespace angularSuperGallery {
 
 			if (edit.update) {
 
-				let length = edit.update.length;
+				let length = edit.update.length;		
 
 				for (let key = 0; key < length; key++) {
 					this.addImage(edit.update[key], key);

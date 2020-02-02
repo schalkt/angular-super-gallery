@@ -21,6 +21,15 @@
     <script src="demo.js"></script>
 
     <style>
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak {
+            display: none !important;
+        }
+        
         .navbar-text {
             margin: 0;
             padding: 9px 10px;
@@ -56,7 +65,7 @@
         
         .custom-panel .asg-panel .item {
             display: inline-block;
-            height: 100px;
+            height: 128px;
             transition: all ease 0.2s;
             opacity: 0.77;
             transform: scale(1);
@@ -91,8 +100,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">AngularJS Super Gallery</a>
         <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -153,9 +162,9 @@
                 <input name="item_name" type="hidden" value="Donation for Angular Super Gallery">
                 <input name="currency_code" type="hidden" value="USD">
                 <button class="btn btn-sm btn-warning btn-donate">
-                        Donate
-                        <img height="16" src="paypal.png" width="auto"/>
-                    </button>
+                    Donate
+                    <img height="16" src="paypal.png" width="auto" />
+                </button>
                 <img alt="" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
 
             </form>
@@ -173,8 +182,8 @@
                     <div class="card-header">
                         <strong class>multiple images</strong> | thumbnails | modal + controls
                         <button class="btn btn-sm btn-default pull-right" data-ng-click="showOptions1 = !showOptions1">show
-                                                                                                                                                                                                                                                                							config
-                            </button>
+                            config
+                        </button>
                     </div>
 
                     <div class="card-body asg-custom" data-ng-if="ctrl.gallery.nature">
@@ -192,10 +201,14 @@
                         <div class="row">
 
                             <div class="col-md-6 text-center">
-                                <button class="btn btn-sm btn-warning btn-block" ng-click="ctrl.update1()">Change gallery images</button>
-                                <button class="btn btn-sm btn-success btn-block" ng-click="ctrl.add1()">Add new image(s) to gallery</button>
-                                <button class="btn btn-sm btn-danger btn-block" ng-click="ctrl.delete1()">Delete selected image</button>
-                                <button class="btn btn-sm btn-primary btn-block" ng-click="ctrl.reset1()">Reset gallery</button>
+                                <button class="btn btn-sm btn-warning btn-block" ng-click="ctrl.update1()">Change
+                                    gallery images</button>
+                                <button class="btn btn-sm btn-success btn-block" ng-click="ctrl.add1()">Add new image(s)
+                                    to gallery</button>
+                                <button class="btn btn-sm btn-danger btn-block" ng-click="ctrl.delete1()">Delete
+                                    selected image</button>
+                                <button class="btn btn-sm btn-primary btn-block" ng-click="ctrl.reset1()">Reset
+                                    gallery</button>
                             </div>
                             <div class="col-md-6 text-center">
 
@@ -214,11 +227,11 @@
                                             <span class="input-group-text">Theme</span>
                                         </div>
                                         <select class="form-control" data-ng-change="ctrl.update1options()" data-ng-model="ctrl.options1.theme">
-                                                <option value="darkblue">Darkblue</option>
-                                                <option value="darkred">Darkred</option>
-                                                <option value="whitegold">Whitegold</option>
-                                                <option value="default">Default</option>
-                                            </select>
+                                            <option value="darkblue">Darkblue</option>
+                                            <option value="darkred">Darkred</option>
+                                            <option value="whitegold">Whitegold</option>
+                                            <option value="default">Default</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -228,21 +241,21 @@
                                             <span class="input-group-text">Transition</span>
                                         </div>
                                         <select class="form-control" data-ng-change="ctrl.update1options()" data-ng-model="ctrl.options1.image.transition">
-                                                <option value="no">no</option>
-                                                <option value="fadeInOut">fadeInOut</option>
-                                                <option value="zoomIn">zoomIn</option>
-                                                <option value="zoomOut">zoomOut</option>
-                                                <option value="zoomInOut">zoomInOut</option>
-                                                <option value="rotateLR">rotateLR</option>
-                                                <option value="rotateTB">rotateTB</option>
-                                                <option value="rotateZY">rotateZY</option>
-                                                <option value="slideLR">slideLR</option>
-                                                <option value="slideTB">slideTB</option>
-                                                <option value="zlideLR">zlideLR</option>
-                                                <option value="zlideTB">zlideTB</option>
-                                                <option value="flipX">flipX</option>
-                                                <option value="flipY">flipY</option>
-                                            </select>
+                                            <option value="no">no</option>
+                                            <option value="fadeInOut">fadeInOut</option>
+                                            <option value="zoomIn">zoomIn</option>
+                                            <option value="zoomOut">zoomOut</option>
+                                            <option value="zoomInOut">zoomInOut</option>
+                                            <option value="rotateLR">rotateLR</option>
+                                            <option value="rotateTB">rotateTB</option>
+                                            <option value="rotateZY">rotateZY</option>
+                                            <option value="slideLR">slideLR</option>
+                                            <option value="slideTB">slideTB</option>
+                                            <option value="zlideLR">zlideLR</option>
+                                            <option value="zlideTB">zlideTB</option>
+                                            <option value="flipX">flipX</option>
+                                            <option value="flipY">flipY</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -251,45 +264,22 @@
                         <hr>
                         <strong>custom panel</strong> | auto select the image when mouseover
                         <asg-panel class="custom-panel" data-id="nature"></asg-panel>
+
+                        <hr>
+                        <strong>only modal</strong> | without theme
+                        <br>
+                        <button class="btn btn-primary" ng-click="visible = !visible">show modal</button>
+
+
+                        <asg-modal data-items="ctrl.files1" data-options='{ "baseUrl": "https://images.unsplash.com/" }' data-visible="visible">
+                            <asg-thumbnail></asg-thumbnail>
+                        </asg-modal>
                         <!-- ASG END -->
 
                     </div>
 
                     <div class="card-footer text-center">
                         photos :
-                        <a href="https://unsplash.com" target="_blank">unsplash.com</a>
-                    </div>
-
-                </div>
-                <!-- DEMO END -->
-
-                <!-- DEMO BEGIN -->
-                <div class="card card-default">
-
-                    <div class="card-header">
-                        <strong>single image</strong> | fixed height | modal + hidden controls and caption
-                    </div>
-
-                    <div class="card-body" data-ng-if="ctrl.gallery.honda">
-
-                        <!-- ASG BEGIN -->
-                        <asg-image data-base-url="https://images.unsplash.com/" data-items="['photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=90']" data-options='{
-								theme: "whitegold",
-								image: { height: 0, size: "cover" },
-								modal: { title: "Hinze Dam", subtitle: "Christopher Campbell", menu: false, caption: false, size: "cover",
-									header: {buttons: ["prev","next","close"]}, caption: { disabled: true }, thumbnail: { height: 90 }}
-								}'>
-                            <asg-modal>
-                                <asg-thumbnail></asg-thumbnail>
-                            </asg-modal>
-                            <asg-info data-template="custom-info.html"></asg-info>
-                        </asg-image>
-                        <!-- ASG END -->
-
-                    </div>
-
-                    <div class="card-footer text-center">
-                        photo :
                         <a href="https://unsplash.com" target="_blank">unsplash.com</a>
                     </div>
 
@@ -306,8 +296,8 @@
                     <div class="card-header">
                         <strong>multiple images</strong> | autoplay | modal + hidden controls
                         <button class="btn btn-sm btn-default pull-right" data-ng-click="showOptions2 = !showOptions2">
-                        show config
-                    </button>
+                            show config
+                        </button>
                     </div>
                     <div class="card-body" data-ng-if="ctrl.gallery.abstracts">
 
@@ -377,13 +367,14 @@
 
                         <!-- ASG BEGIN -->
                         <asg-image data-items="[
-                                                                                                                                                                							    'amazon-ws.svg','asus.svg','avast.svg','bluetooth.svg',
-                                                                                                                                                                							    'burger-king.svg','continental.svg','hilti.svg','sennheiser.svg',
-                                                                                                                                                                							   ]" data-options='{
-                                                                                                                                                                							   "baseUrl":"svg/",
-                                                                                                                                                                							   "image" : { "transition": "rotateLR", "size": "contain", "arrows": false, "placeholder": ""},
-                                                                                                                                                                							   "autoplay" : { "enabled": true, "delay": 2000}
-                                                                                                                                                                							   }'></asg-image>
+                                'amazon-ws.svg','asus.svg','avast.svg','bluetooth.svg',
+                                'burger-king.svg','continental.svg','hilti.svg','sennheiser.svg',
+                            ]" data-options='{
+                                "baseUrl":"svg/",
+                                "image" : { "height": 90, "transition": "rotateLR", "size": "contain", "arrows": false, "placeholder": ""},
+                                "autoplay" : { "enabled": true, "delay": 2000}
+                            }'>
+                        </asg-image>
                         <!-- ASG END -->
 
                     </div>
@@ -392,51 +383,71 @@
                         images :
                         <a href="https://www.google.hu/search?q=*.svg&newwindow=1&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi9_a2yufjWAhUIJMAKHf3hBlEQ_AUICigB&biw=1602&bih=787" target="_blank" />internet</a>
                     </div>
-</body>
 
-</html>
-</div>
-<!-- DEMO END -->
-<!-- DEMO BEGIN -->
-<div class="card">
+                </div>
+                <!-- DEMO END -->
 
-    <div class="card-header">
-        <strong>only modal</strong> | without theme
+                <!-- DEMO BEGIN -->
+                <div class="card card-default">
+
+                    <div class="card-header">
+                        <strong>single image</strong> | fixed height | modal + hidden controls and caption
+                    </div>
+
+                    <div class="card-body" data-ng-if="ctrl.gallery.portraits">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- ASG BEGIN -->
+                                <asg-image data-base-url="https://images.unsplash.com/" data-items="['photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=90']" data-options='{
+								theme: "whitegold",
+								image: { caption: {visible: false}, height: 0, size: "cover" },
+								modal: { menu: false, caption: false, size: "cover",
+									header: {dynamic: true, buttons: ["prev","next","close"]}, caption: { disabled: true }, thumbnail: { height: 90 }}
+								}'>
+                                    <asg-modal></asg-modal>
+                                </asg-image>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- ASG BEGIN -->
+                                <asg-image data-base-url="https://images.unsplash.com/" data-items="['photo-1544610195-8db0cf3703a9?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=90']" data-options='{
+								theme: "whitegold",
+								image: { caption: {visible: false}, size: "cover" },
+								modal: { menu: false, caption: false, size: "cover",
+									header: {enabled:true, dynamic: true, buttons: ["prev","next","close"]}, caption: { disabled: true }, thumbnail: { height: 90 }}
+								}'>
+                                    <asg-modal></asg-modal>
+                                </asg-image>
+                            </div>
+                        </div>
+                        <!-- ASG END -->
+
+                    </div>
+
+                    <div class="card-footer text-center">
+                        photo :
+                        <a href="https://unsplash.com" target="_blank">unsplash.com</a>
+                    </div>
+
+                </div>
+                <!-- DEMO END -->
+
+
+            </div>
+        </div>
     </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4360165-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    <div class="card-body" data-ng-if="ctrl.gallery.nature">
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-        <button class="btn btn-primary" ng-click="visible = !visible">show modal</button>
-
-        <!-- ASG BEGIN -->
-        <asg-modal data-items="ctrl.files1" data-options='{ "baseUrl": "https://images.unsplash.com/" }' data-visible="visible">
-            <asg-thumbnail></asg-thumbnail>
-        </asg-modal>
-        <!-- ASG END -->
-
-    </div>
-
-    <div class="card-footer text-center">
-        photos :
-        <a href="https://unsplash.com" target="_blank">unsplash.com</a>
-    </div>
-</div>
-<!-- DEMO END -->
-</div>
-</div>
-</div>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-4360165-2"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-4360165-2');
-</script>
+        gtag('config', 'UA-4360165-2');
+    </script>
 </body>
 
 </html>

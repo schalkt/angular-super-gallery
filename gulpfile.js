@@ -32,11 +32,7 @@ var banner = ['/**',
     ''
 ].join('\n');
 
-var tsconfig = {
-    target: 'ES5',
-    removeComments: true,
-    skipLibCheck: true
-};
+var tsconfig = require('./tsconfig.json');
 
 function ts() {
 
@@ -53,7 +49,7 @@ function ts() {
         ], {
             base: SRC
         }))
-        .pipe(tsc(tsconfig))
+        .pipe(tsc(tsconfig.compilerOptions))
         .pipe(concat(filename))
         .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
         .pipe(dest(TEMP));
