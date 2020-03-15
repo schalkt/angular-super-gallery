@@ -12,8 +12,7 @@ body.asg-yhidden {
     left: 0px;
     z-index: auto;
     overflow: hidden;
-    -webkit-perspective: 1280px;
-            perspective: 1280px; }
+    perspective: 1280px; }
     .asg-image > .images > .img {
       background-size: auto;
       background-position: 50% 50%;
@@ -42,7 +41,6 @@ body.asg-yhidden {
         background-size: auto;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        -webkit-transition: all ease .5s;
         transition: all ease .5s;
         opacity: 0; }
         .asg-image > .images > .img > .source.cover {
@@ -107,7 +105,6 @@ body.asg-yhidden {
         background-size: auto;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        -webkit-transition: all ease .5s;
         transition: all ease .5s;
         opacity: 0; }
         .asg-image > .images .img > .source.cover {
@@ -121,273 +118,202 @@ body.asg-yhidden {
         .asg-image > .images .img.loaded .source {
           opacity: 1; }
     .asg-image > .images.rotateLR.forward .img.ng-hide-remove, .asg-image > .images.rotateLR.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.rotateLR.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(-32deg) translateX(-14%);
-              transform: rotateY(-32deg) translateX(-14%); }
+      transform: rotateY(-32deg) translateX(-14%); }
     .asg-image > .images.rotateLR.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-image > .images.rotateLR.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-image > .images.rotateLR.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(32deg) translateX(14%);
-              transform: rotateY(32deg) translateX(14%); }
+      transform: rotateY(32deg) translateX(14%); }
     .asg-image > .images.rotateLR.backward .img.ng-hide-remove, .asg-image > .images.rotateLR.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.rotateLR.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(32deg) translateX(14%);
-              transform: rotateY(32deg) translateX(14%); }
+      transform: rotateY(32deg) translateX(14%); }
     .asg-image > .images.rotateLR.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-image > .images.rotateLR.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-image > .images.rotateLR.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(-32deg) translateX(-14%);
-              transform: rotateY(-32deg) translateX(-14%); }
+      transform: rotateY(-32deg) translateX(-14%); }
     .asg-image > .images.rotateTB.forward .img.ng-hide-remove, .asg-image > .images.rotateTB.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.rotateTB.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(14%) rotateX(-32deg);
-              transform: translateY(14%) rotateX(-32deg); }
+      transform: translateY(14%) rotateX(-32deg); }
     .asg-image > .images.rotateTB.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-image > .images.rotateTB.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-image > .images.rotateTB.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(-14%) rotateX(32deg);
-              transform: translateY(-14%) rotateX(32deg); }
+      transform: translateY(-14%) rotateX(32deg); }
     .asg-image > .images.rotateTB.backward .img.ng-hide-remove, .asg-image > .images.rotateTB.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.rotateTB.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(-14%) rotateX(32deg);
-              transform: translateY(-14%) rotateX(32deg); }
+      transform: translateY(-14%) rotateX(32deg); }
     .asg-image > .images.rotateTB.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-image > .images.rotateTB.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-image > .images.rotateTB.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(14%) rotateX(-32deg);
-              transform: translateY(14%) rotateX(-32deg); }
+      transform: translateY(14%) rotateX(-32deg); }
     .asg-image > .images.rotateZY.forward .img.ng-hide-remove, .asg-image > .images.rotateZY.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.rotateZY.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateZ(-32deg) rotateY(32deg);
-              transform: rotateZ(-32deg) rotateY(32deg); }
+      transform: rotateZ(-32deg) rotateY(32deg); }
     .asg-image > .images.rotateZY.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-image > .images.rotateZY.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-image > .images.rotateZY.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateZ(32deg) rotateY(-32deg);
-              transform: rotateZ(32deg) rotateY(-32deg); }
+      transform: rotateZ(32deg) rotateY(-32deg); }
     .asg-image > .images.rotateZY.backward .img.ng-hide-remove, .asg-image > .images.rotateZY.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.rotateZY.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateZ(32deg) rotateY(-32deg);
-              transform: rotateZ(32deg) rotateY(-32deg); }
+      transform: rotateZ(32deg) rotateY(-32deg); }
     .asg-image > .images.rotateZY.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-image > .images.rotateZY.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-image > .images.rotateZY.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateZ(-32deg) rotateY(32deg);
-              transform: rotateZ(-32deg) rotateY(32deg); }
+      transform: rotateZ(-32deg) rotateY(32deg); }
     .asg-image > .images.slideLR.forward .img.ng-hide-remove, .asg-image > .images.slideLR.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.slideLR.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(-14%);
-              transform: translateX(-14%); }
+      transform: translateX(-14%); }
     .asg-image > .images.slideLR.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-image > .images.slideLR.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-image > .images.slideLR.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(14%);
-              transform: translateX(14%); }
+      transform: translateX(14%); }
     .asg-image > .images.slideLR.backward .img.ng-hide-remove, .asg-image > .images.slideLR.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.slideLR.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(14%);
-              transform: translateX(14%); }
+      transform: translateX(14%); }
     .asg-image > .images.slideLR.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-image > .images.slideLR.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-image > .images.slideLR.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(-14%);
-              transform: translateX(-14%); }
+      transform: translateX(-14%); }
     .asg-image > .images.slideTB.forward .img.ng-hide-remove, .asg-image > .images.slideTB.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.slideTB.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(14%);
-              transform: translateY(14%); }
+      transform: translateY(14%); }
     .asg-image > .images.slideTB.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-image > .images.slideTB.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-image > .images.slideTB.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(-14%);
-              transform: translateY(-14%); }
+      transform: translateY(-14%); }
     .asg-image > .images.slideTB.backward .img.ng-hide-remove, .asg-image > .images.slideTB.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.slideTB.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(-14%);
-              transform: translateY(-14%); }
+      transform: translateY(-14%); }
     .asg-image > .images.slideTB.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-image > .images.slideTB.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-image > .images.slideTB.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(14%);
-              transform: translateY(14%); }
+      transform: translateY(14%); }
     .asg-image > .images.zlideLR.forward .img.ng-hide-remove, .asg-image > .images.zlideLR.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zlideLR.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(-14%) scale(0.86);
-              transform: translateX(-14%) scale(0.86); }
+      transform: translateX(-14%) scale(0.86); }
     .asg-image > .images.zlideLR.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-image > .images.zlideLR.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-image > .images.zlideLR.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(14%) scale(0.86);
-              transform: translateX(14%) scale(0.86); }
+      transform: translateX(14%) scale(0.86); }
     .asg-image > .images.zlideLR.backward .img.ng-hide-remove, .asg-image > .images.zlideLR.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zlideLR.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(14%) scale(0.86);
-              transform: translateX(14%) scale(0.86); }
+      transform: translateX(14%) scale(0.86); }
     .asg-image > .images.zlideLR.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-image > .images.zlideLR.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-image > .images.zlideLR.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(-14%) scale(0.86);
-              transform: translateX(-14%) scale(0.86); }
+      transform: translateX(-14%) scale(0.86); }
     .asg-image > .images.zlideTB.forward .img.ng-hide-remove, .asg-image > .images.zlideTB.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zlideTB.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(14%) scale(0.86);
-              transform: translateY(14%) scale(0.86); }
+      transform: translateY(14%) scale(0.86); }
     .asg-image > .images.zlideTB.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-image > .images.zlideTB.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-image > .images.zlideTB.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(-14%) scale(0.86);
-              transform: translateY(-14%) scale(0.86); }
+      transform: translateY(-14%) scale(0.86); }
     .asg-image > .images.zlideTB.backward .img.ng-hide-remove, .asg-image > .images.zlideTB.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zlideTB.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(-14%) scale(0.86);
-              transform: translateY(-14%) scale(0.86); }
+      transform: translateY(-14%) scale(0.86); }
     .asg-image > .images.zlideTB.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-image > .images.zlideTB.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-image > .images.zlideTB.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(14%) scale(0.86);
-              transform: translateY(14%) scale(0.86); }
+      transform: translateY(14%) scale(0.86); }
     .asg-image > .images.fadeInOut.forward .img.ng-hide-remove, .asg-image > .images.fadeInOut.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.fadeInOut.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0; }
@@ -398,7 +324,6 @@ body.asg-yhidden {
     .asg-image > .images.fadeInOut.forward .img.ng-hide-remove {
       opacity: 0; }
     .asg-image > .images.fadeInOut.backward .img.ng-hide-remove, .asg-image > .images.fadeInOut.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.fadeInOut.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0; }
@@ -409,195 +334,145 @@ body.asg-yhidden {
     .asg-image > .images.fadeInOut.backward .img.ng-hide-remove {
       opacity: 0; }
     .asg-image > .images.zoomIn.forward .img.ng-hide-remove, .asg-image > .images.zoomIn.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zoomIn.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomIn.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomIn.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomIn.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-image > .images.zoomIn.backward .img.ng-hide-remove, .asg-image > .images.zoomIn.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zoomIn.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-image > .images.zoomIn.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomIn.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomIn.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomOut.forward .img.ng-hide-remove, .asg-image > .images.zoomOut.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zoomOut.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-image > .images.zoomOut.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomOut.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomOut.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomOut.backward .img.ng-hide-remove, .asg-image > .images.zoomOut.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zoomOut.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomOut.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomOut.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomOut.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-image > .images.zoomInOut.forward .img.ng-hide-remove, .asg-image > .images.zoomInOut.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zoomInOut.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomInOut.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomInOut.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomInOut.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomInOut.backward .img.ng-hide-remove, .asg-image > .images.zoomInOut.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.zoomInOut.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.zoomInOut.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomInOut.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image > .images.zoomInOut.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-image > .images.flipX.forward .img.ng-hide-remove, .asg-image > .images.flipX.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.flipX.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateX(-180deg);
-              transform: rotateX(-180deg); }
+      transform: rotateX(-180deg); }
     .asg-image > .images.flipX.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-image > .images.flipX.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-image > .images.flipX.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateX(180deg);
-              transform: rotateX(180deg); }
+      transform: rotateX(180deg); }
     .asg-image > .images.flipX.backward .img.ng-hide-remove, .asg-image > .images.flipX.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.flipX.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateX(180deg);
-              transform: rotateX(180deg); }
+      transform: rotateX(180deg); }
     .asg-image > .images.flipX.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-image > .images.flipX.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-image > .images.flipX.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateX(-180deg);
-              transform: rotateX(-180deg); }
+      transform: rotateX(-180deg); }
     .asg-image > .images.flipY.forward .img.ng-hide-remove, .asg-image > .images.flipY.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.flipY.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(-180deg);
-              transform: rotateY(-180deg); }
+      transform: rotateY(-180deg); }
     .asg-image > .images.flipY.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-image > .images.flipY.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-image > .images.flipY.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(180deg);
-              transform: rotateY(180deg); }
+      transform: rotateY(180deg); }
     .asg-image > .images.flipY.backward .img.ng-hide-remove, .asg-image > .images.flipY.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-image > .images.flipY.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(180deg);
-              transform: rotateY(180deg); }
+      transform: rotateY(180deg); }
     .asg-image > .images.flipY.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-image > .images.flipY.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-image > .images.flipY.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(-180deg);
-              transform: rotateY(-180deg); }
+      transform: rotateY(-180deg); }
   .asg-image.modalon .source {
     cursor: pointer; }
   .asg-image.modalon .arrows {
@@ -619,14 +494,11 @@ body.asg-yhidden {
     right: 0;
     z-index: 700;
     opacity: 0;
-    -webkit-transition: all ease 0.2s;
     transition: all ease 0.2s;
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1); }
+    transform: scale(1.1); }
     .asg-image .arrows:hover {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-image .arrows .toBackward, .asg-image .arrows .toForward {
       position: absolute;
       top: 45%; }
@@ -651,8 +523,7 @@ body.asg-yhidden {
   padding: 0;
   outline: none;
   opacity: 1;
-  -webkit-perspective: 1280px;
-          perspective: 1280px; }
+  perspective: 1280px; }
   .asg-modal.dynamic .header {
     position: absolute;
     opacity: 0;
@@ -670,11 +541,8 @@ body.asg-yhidden {
     bottom: 0;
     left: 0;
     padding: 0;
-    display: -webkit-box;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-            flex-direction: column; }
+    flex-direction: column; }
   .asg-modal .btn {
     text-transform: lowercase; }
   .asg-modal .btn-size {
@@ -682,7 +550,6 @@ body.asg-yhidden {
   .asg-modal .btn-transitions {
     width: 96px; }
   .asg-modal.ng-hide-add, .asg-modal.ng-hide-remove {
-    -webkit-transition: all ease 0.42s;
     transition: all ease 0.42s; }
   .asg-modal.ng-hide {
     opacity: 0; }
@@ -723,23 +590,18 @@ body.asg-yhidden {
     padding: 10px;
     z-index: 7500;
     font-size: 12px;
-    -webkit-transition: all ease 0.42s;
     transition: all ease 0.42s;
-    -webkit-transform: translateY(0) rotateX(0deg);
-            transform: translateY(0) rotateX(0deg); }
+    transform: translateY(0) rotateX(0deg); }
     .asg-modal .help ul, .asg-modal .help li {
       margin: 0;
       padding: 0;
       display: block; }
     .asg-modal .help.ng-hide {
       opacity: 0;
-      -webkit-transform-origin: right center;
-              transform-origin: right center;
-      -webkit-transform: translateX(77px) rotateY(0deg);
-              transform: translateX(77px) rotateY(0deg); }
+      transform-origin: right center;
+      transform: translateX(77px) rotateY(0deg); }
   .asg-modal .images {
-    -webkit-perspective: 1280px;
-            perspective: 1280px;
+    perspective: 1280px;
     position: relative;
     z-index: auto;
     overflow: hidden;
@@ -796,7 +658,6 @@ body.asg-yhidden {
         background-size: auto;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        -webkit-transition: all ease .5s;
         transition: all ease .5s;
         opacity: 0; }
         .asg-modal .images .img > .source.cover {
@@ -810,273 +671,202 @@ body.asg-yhidden {
         .asg-modal .images .img.loaded .source {
           opacity: 1; }
     .asg-modal .images.rotateLR.forward .img.ng-hide-remove, .asg-modal .images.rotateLR.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.rotateLR.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(-32deg) translateX(-14%);
-              transform: rotateY(-32deg) translateX(-14%); }
+      transform: rotateY(-32deg) translateX(-14%); }
     .asg-modal .images.rotateLR.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-modal .images.rotateLR.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-modal .images.rotateLR.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(32deg) translateX(14%);
-              transform: rotateY(32deg) translateX(14%); }
+      transform: rotateY(32deg) translateX(14%); }
     .asg-modal .images.rotateLR.backward .img.ng-hide-remove, .asg-modal .images.rotateLR.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.rotateLR.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(32deg) translateX(14%);
-              transform: rotateY(32deg) translateX(14%); }
+      transform: rotateY(32deg) translateX(14%); }
     .asg-modal .images.rotateLR.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-modal .images.rotateLR.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg) translateX(0);
-              transform: rotateY(0deg) translateX(0); }
+      transform: rotateY(0deg) translateX(0); }
     .asg-modal .images.rotateLR.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(-32deg) translateX(-14%);
-              transform: rotateY(-32deg) translateX(-14%); }
+      transform: rotateY(-32deg) translateX(-14%); }
     .asg-modal .images.rotateTB.forward .img.ng-hide-remove, .asg-modal .images.rotateTB.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.rotateTB.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(14%) rotateX(-32deg);
-              transform: translateY(14%) rotateX(-32deg); }
+      transform: translateY(14%) rotateX(-32deg); }
     .asg-modal .images.rotateTB.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-modal .images.rotateTB.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-modal .images.rotateTB.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(-14%) rotateX(32deg);
-              transform: translateY(-14%) rotateX(32deg); }
+      transform: translateY(-14%) rotateX(32deg); }
     .asg-modal .images.rotateTB.backward .img.ng-hide-remove, .asg-modal .images.rotateTB.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.rotateTB.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(-14%) rotateX(32deg);
-              transform: translateY(-14%) rotateX(32deg); }
+      transform: translateY(-14%) rotateX(32deg); }
     .asg-modal .images.rotateTB.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-modal .images.rotateTB.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) rotateX(0deg);
-              transform: translateY(0) rotateX(0deg); }
+      transform: translateY(0) rotateX(0deg); }
     .asg-modal .images.rotateTB.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(14%) rotateX(-32deg);
-              transform: translateY(14%) rotateX(-32deg); }
+      transform: translateY(14%) rotateX(-32deg); }
     .asg-modal .images.rotateZY.forward .img.ng-hide-remove, .asg-modal .images.rotateZY.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.rotateZY.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateZ(-32deg) rotateY(32deg);
-              transform: rotateZ(-32deg) rotateY(32deg); }
+      transform: rotateZ(-32deg) rotateY(32deg); }
     .asg-modal .images.rotateZY.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-modal .images.rotateZY.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-modal .images.rotateZY.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateZ(32deg) rotateY(-32deg);
-              transform: rotateZ(32deg) rotateY(-32deg); }
+      transform: rotateZ(32deg) rotateY(-32deg); }
     .asg-modal .images.rotateZY.backward .img.ng-hide-remove, .asg-modal .images.rotateZY.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.rotateZY.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateZ(32deg) rotateY(-32deg);
-              transform: rotateZ(32deg) rotateY(-32deg); }
+      transform: rotateZ(32deg) rotateY(-32deg); }
     .asg-modal .images.rotateZY.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-modal .images.rotateZY.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateZ(0) rotateY(0deg);
-              transform: rotateZ(0) rotateY(0deg); }
+      transform: rotateZ(0) rotateY(0deg); }
     .asg-modal .images.rotateZY.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateZ(-32deg) rotateY(32deg);
-              transform: rotateZ(-32deg) rotateY(32deg); }
+      transform: rotateZ(-32deg) rotateY(32deg); }
     .asg-modal .images.slideLR.forward .img.ng-hide-remove, .asg-modal .images.slideLR.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.slideLR.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(-14%);
-              transform: translateX(-14%); }
+      transform: translateX(-14%); }
     .asg-modal .images.slideLR.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-modal .images.slideLR.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-modal .images.slideLR.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(14%);
-              transform: translateX(14%); }
+      transform: translateX(14%); }
     .asg-modal .images.slideLR.backward .img.ng-hide-remove, .asg-modal .images.slideLR.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.slideLR.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(14%);
-              transform: translateX(14%); }
+      transform: translateX(14%); }
     .asg-modal .images.slideLR.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-modal .images.slideLR.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0);
-              transform: translateX(0); }
+      transform: translateX(0); }
     .asg-modal .images.slideLR.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(-14%);
-              transform: translateX(-14%); }
+      transform: translateX(-14%); }
     .asg-modal .images.slideTB.forward .img.ng-hide-remove, .asg-modal .images.slideTB.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.slideTB.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(14%);
-              transform: translateY(14%); }
+      transform: translateY(14%); }
     .asg-modal .images.slideTB.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-modal .images.slideTB.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-modal .images.slideTB.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(-14%);
-              transform: translateY(-14%); }
+      transform: translateY(-14%); }
     .asg-modal .images.slideTB.backward .img.ng-hide-remove, .asg-modal .images.slideTB.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.slideTB.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(-14%);
-              transform: translateY(-14%); }
+      transform: translateY(-14%); }
     .asg-modal .images.slideTB.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-modal .images.slideTB.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0);
-              transform: translateY(0); }
+      transform: translateY(0); }
     .asg-modal .images.slideTB.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(14%);
-              transform: translateY(14%); }
+      transform: translateY(14%); }
     .asg-modal .images.zlideLR.forward .img.ng-hide-remove, .asg-modal .images.zlideLR.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zlideLR.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(-14%) scale(0.86);
-              transform: translateX(-14%) scale(0.86); }
+      transform: translateX(-14%) scale(0.86); }
     .asg-modal .images.zlideLR.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-modal .images.zlideLR.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-modal .images.zlideLR.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(14%) scale(0.86);
-              transform: translateX(14%) scale(0.86); }
+      transform: translateX(14%) scale(0.86); }
     .asg-modal .images.zlideLR.backward .img.ng-hide-remove, .asg-modal .images.zlideLR.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zlideLR.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateX(14%) scale(0.86);
-              transform: translateX(14%) scale(0.86); }
+      transform: translateX(14%) scale(0.86); }
     .asg-modal .images.zlideLR.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-modal .images.zlideLR.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateX(0) scale(1);
-              transform: translateX(0) scale(1); }
+      transform: translateX(0) scale(1); }
     .asg-modal .images.zlideLR.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateX(-14%) scale(0.86);
-              transform: translateX(-14%) scale(0.86); }
+      transform: translateX(-14%) scale(0.86); }
     .asg-modal .images.zlideTB.forward .img.ng-hide-remove, .asg-modal .images.zlideTB.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zlideTB.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(14%) scale(0.86);
-              transform: translateY(14%) scale(0.86); }
+      transform: translateY(14%) scale(0.86); }
     .asg-modal .images.zlideTB.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-modal .images.zlideTB.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-modal .images.zlideTB.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(-14%) scale(0.86);
-              transform: translateY(-14%) scale(0.86); }
+      transform: translateY(-14%) scale(0.86); }
     .asg-modal .images.zlideTB.backward .img.ng-hide-remove, .asg-modal .images.zlideTB.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zlideTB.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: translateY(-14%) scale(0.86);
-              transform: translateY(-14%) scale(0.86); }
+      transform: translateY(-14%) scale(0.86); }
     .asg-modal .images.zlideTB.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-modal .images.zlideTB.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: translateY(0) scale(1);
-              transform: translateY(0) scale(1); }
+      transform: translateY(0) scale(1); }
     .asg-modal .images.zlideTB.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: translateY(14%) scale(0.86);
-              transform: translateY(14%) scale(0.86); }
+      transform: translateY(14%) scale(0.86); }
     .asg-modal .images.fadeInOut.forward .img.ng-hide-remove, .asg-modal .images.fadeInOut.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.fadeInOut.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0; }
@@ -1087,7 +877,6 @@ body.asg-yhidden {
     .asg-modal .images.fadeInOut.forward .img.ng-hide-remove {
       opacity: 0; }
     .asg-modal .images.fadeInOut.backward .img.ng-hide-remove, .asg-modal .images.fadeInOut.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.fadeInOut.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0; }
@@ -1098,195 +887,145 @@ body.asg-yhidden {
     .asg-modal .images.fadeInOut.backward .img.ng-hide-remove {
       opacity: 0; }
     .asg-modal .images.zoomIn.forward .img.ng-hide-remove, .asg-modal .images.zoomIn.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zoomIn.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomIn.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomIn.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomIn.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-modal .images.zoomIn.backward .img.ng-hide-remove, .asg-modal .images.zoomIn.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zoomIn.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-modal .images.zoomIn.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomIn.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomIn.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomOut.forward .img.ng-hide-remove, .asg-modal .images.zoomOut.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zoomOut.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-modal .images.zoomOut.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomOut.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomOut.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomOut.backward .img.ng-hide-remove, .asg-modal .images.zoomOut.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zoomOut.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomOut.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomOut.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomOut.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(0.86);
-              transform: scale(0.86); }
+      transform: scale(0.86); }
     .asg-modal .images.zoomInOut.forward .img.ng-hide-remove, .asg-modal .images.zoomInOut.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zoomInOut.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomInOut.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomInOut.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomInOut.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomInOut.backward .img.ng-hide-remove, .asg-modal .images.zoomInOut.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.zoomInOut.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.zoomInOut.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomInOut.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .images.zoomInOut.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: scale(1.14);
-              transform: scale(1.14); }
+      transform: scale(1.14); }
     .asg-modal .images.flipX.forward .img.ng-hide-remove, .asg-modal .images.flipX.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.flipX.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateX(-180deg);
-              transform: rotateX(-180deg); }
+      transform: rotateX(-180deg); }
     .asg-modal .images.flipX.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-modal .images.flipX.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-modal .images.flipX.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateX(180deg);
-              transform: rotateX(180deg); }
+      transform: rotateX(180deg); }
     .asg-modal .images.flipX.backward .img.ng-hide-remove, .asg-modal .images.flipX.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.flipX.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateX(180deg);
-              transform: rotateX(180deg); }
+      transform: rotateX(180deg); }
     .asg-modal .images.flipX.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-modal .images.flipX.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateX(0deg);
-              transform: rotateX(0deg); }
+      transform: rotateX(0deg); }
     .asg-modal .images.flipX.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateX(-180deg);
-              transform: rotateX(-180deg); }
+      transform: rotateX(-180deg); }
     .asg-modal .images.flipY.forward .img.ng-hide-remove, .asg-modal .images.flipY.forward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.flipY.forward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(-180deg);
-              transform: rotateY(-180deg); }
+      transform: rotateY(-180deg); }
     .asg-modal .images.flipY.forward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-modal .images.flipY.forward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-modal .images.flipY.forward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(180deg);
-              transform: rotateY(180deg); }
+      transform: rotateY(180deg); }
     .asg-modal .images.flipY.backward .img.ng-hide-remove, .asg-modal .images.flipY.backward .img.ng-hide-add {
-      -webkit-transition: all ease 0.64s;
       transition: all ease 0.64s; }
     .asg-modal .images.flipY.backward .img.ng-hide-add.ng-hide-add-active {
       opacity: 0;
-      -webkit-transform: rotateY(180deg);
-              transform: rotateY(180deg); }
+      transform: rotateY(180deg); }
     .asg-modal .images.flipY.backward .img.ng-hide-add {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-modal .images.flipY.backward .img.ng-hide-remove.ng-hide-remove-active {
       opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg); }
+      transform: rotateY(0deg); }
     .asg-modal .images.flipY.backward .img.ng-hide-remove {
       opacity: 0;
-      -webkit-transform: rotateY(-180deg);
-              transform: rotateY(-180deg); }
+      transform: rotateY(-180deg); }
   .asg-modal .arrows {
     position: absolute;
     top: 0;
@@ -1294,14 +1033,11 @@ body.asg-yhidden {
     left: 0;
     right: 0;
     z-index: 700;
-    -webkit-transition: all ease 0.2s;
     transition: all ease 0.2s;
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1); }
+    transform: scale(1.1); }
     .asg-modal .arrows:hover {
       opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
+      transform: scale(1); }
     .asg-modal .arrows .toBackward, .asg-modal .arrows .toForward {
       position: absolute;
       top: 45%; }
@@ -1394,7 +1130,6 @@ body.asg-yhidden {
 .asg-thumbnail {
   position: relative;
   overflow: hidden;
-  -webkit-transition: all ease 0.32s;
   transition: all ease 0.32s;
   padding: 0;
   opacity: 0; }
@@ -1413,14 +1148,12 @@ body.asg-yhidden {
   .asg-thumbnail .items {
     position: relative;
     white-space: nowrap;
-    -webkit-transition: all ease 0.32s;
     transition: all ease 0.32s; }
     .asg-thumbnail .items .item {
       overflow: hidden;
       position: relative;
       display: inline-block;
       margin: 0px 0px 0px 0px;
-      -webkit-transition: all ease 0.32s;
       transition: all ease 0.32s;
       vertical-align: top; }
       .asg-thumbnail .items .item:last-child {
@@ -1431,7 +1164,6 @@ body.asg-yhidden {
         width: auto;
         margin: 0px; }
       .asg-thumbnail .items .item .index {
-        -webkit-transition: all ease 0.32s;
         transition: all ease 0.32s;
         position: absolute;
         z-index: 9999;
@@ -1518,7 +1250,6 @@ body.asg-yhidden {
     bottom: auto;
     font-size: 12px;
     background-color: rgba(5, 5, 5, 0);
-    -webkit-transition: all 0.25s;
     transition: all 0.25s; }
     .asg-image.darkblue .asg-info a {
       color: #30c6d4;
@@ -1531,7 +1262,6 @@ body.asg-yhidden {
     background-color: rgba(5, 5, 5, 0.77);
     top: 0; }
   .asg-image.darkblue .btn {
-    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1556,7 +1286,6 @@ body.asg-yhidden {
   .asg-modal.darkblue .frame {
     margin: 0; }
   .asg-modal.darkblue .btn {
-    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1599,7 +1328,6 @@ body.asg-yhidden {
 .asg-control.darkblue {
   background-color: #050505; }
   .asg-control.darkblue .btn {
-    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1661,7 +1389,6 @@ body.asg-yhidden {
     bottom: auto;
     font-size: 12px;
     background-color: rgba(37, 44, 49, 0);
-    -webkit-transition: all 0.25s;
     transition: all 0.25s; }
     .asg-image.darkred .asg-info a {
       color: #ff4343;
@@ -1674,7 +1401,6 @@ body.asg-yhidden {
     background-color: rgba(37, 44, 49, 0.77);
     top: 0; }
   .asg-image.darkred .btn {
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     border-radius: 3px;
     background-image: none;
@@ -1699,7 +1425,6 @@ body.asg-yhidden {
   .asg-modal.darkred .frame {
     margin: 0; }
   .asg-modal.darkred .btn {
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     border-radius: 3px;
     background-image: none;
@@ -1754,7 +1479,6 @@ body.asg-yhidden {
 .asg-control.darkred {
   background-color: #252c31; }
   .asg-control.darkred .btn {
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     border-radius: 3px;
     background-image: none;
@@ -1793,7 +1517,6 @@ body.asg-yhidden {
       top: unset;
       right: unset; }
     .asg-panel.darkred .item .caption {
-      -webkit-transition: color 0.4s;
       transition: color 0.4s;
       max-height: 21px;
       display: inline-block;
@@ -1829,7 +1552,6 @@ body.asg-yhidden {
     .asg-image.whitegold .asg-info a {
       color: #e4e4e4; }
   .asg-image.whitegold .btn {
-    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1847,7 +1569,6 @@ body.asg-yhidden {
 .asg-modal.whitegold {
   background-color: #d4c386; }
   .asg-modal.whitegold .btn {
-    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1879,7 +1600,6 @@ body.asg-yhidden {
 .asg-control.whitegold {
   background-color: #d4c386; }
   .asg-control.whitegold .btn {
-    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
