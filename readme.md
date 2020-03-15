@@ -9,6 +9,7 @@ Image gallery based on AngularJS and Bootstrap 4
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
 [![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://david-dm.org/schalkt/angular-super-gallery)
 [![Build Status](https://travis-ci.org/schalkt/angular-super-gallery.svg?branch=master)](https://travis-ci.org/schalkt/angular-super-gallery)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=alert_status)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/angular-super-gallery/badge)](https://www.jsdelivr.com/package/npm/angular-super-gallery)
 
