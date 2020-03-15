@@ -42,10 +42,10 @@
         "typescript": "3.8.3"
     },
     "dependencies": {
-        "@types/jquery": "3.3.33",
         "@types/angular": "1.6.57",
         "@types/angular-animate": "1.5.10",
         "@types/bootstrap": "4.3.1",
+        "@types/jquery": "3.3.33",
         "angular": "1.7.9",
         "angular-animate": "1.7.9",
         "angular-touch": "1.7.9",
