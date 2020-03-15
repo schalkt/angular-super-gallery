@@ -4,21 +4,24 @@ Image gallery based on AngularJS and Bootstrap 4
 
 *For Bootstrap 3 use the bootstrap3 branch*
 
-[![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/)
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
 [![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://david-dm.org/schalkt/angular-super-gallery)
 [![Build Status](https://travis-ci.org/schalkt/angular-super-gallery.svg?branch=master)](https://travis-ci.org/schalkt/angular-super-gallery)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=alert_status)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
-[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/angular-super-gallery/badge)](https://www.jsdelivr.com/package/npm/angular-super-gallery)
 
-## Demo
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=alert_status)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=security_rating)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=bugs)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 
-[online demo](http://schalk.hu/projects/angular-super-gallery/demo/) or see /demo/index.html
 
-![angular-super-gallery-screenshot-1](http://schalk.hu/projects/angular-super-gallery/screenshot1.jpg)
-![angular-super-gallery-screenshot-2](http://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
+## Preview
+
+[![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/) or check /demo/index.html
+
+![angular-super-gallery-screenshot-1](https://schalk.hu/projects/angular-super-gallery/screenshot1.jpg)
+![angular-super-gallery-screenshot-2](https://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
 
 ## Dependencies
 
@@ -30,7 +33,7 @@ Image gallery based on AngularJS and Bootstrap 4
     "bootstrap": "4.4.1",
     "font-awesome": "4.7.0",
     "jquery": "3.4.1",
-    "screenfull": "5.0.1"
+    "screenfull": "5.0.2"
 }
 ```
 
