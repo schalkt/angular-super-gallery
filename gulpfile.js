@@ -60,7 +60,7 @@ function js() {
 
     var filename = "angular-super-gallery.js";
     var header = require('gulp-header');
-    var package = require('./package.json');
+    var app = require('./package.json');
 
     return src([
             TEMP + "/*.js"
@@ -71,7 +71,7 @@ function js() {
             base: TEMP
         }))
         .pipe(concat(filename))
-        .pipe(header(banner, { pkg: package }))
+        .pipe(header(banner, { pkg: app }))
         .pipe(dest(DIST));
 
 }
@@ -80,7 +80,7 @@ function js_min() {
 
     var filename = "angular-super-gallery.js";
     var header = require('gulp-header');
-    var package = require('./package.json');
+    var app = require('./package.json');
 
     return src([
             DIST + "/" + filename,
@@ -88,7 +88,7 @@ function js_min() {
         .pipe(concat(filename))
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
-        .pipe(header(banner, { pkg: package }))
+        .pipe(header(banner, { pkg: app }))
         .pipe(dest(DIST))
         .pipe(gzip({ append: true }))
         .pipe(dest(DIST));
@@ -153,9 +153,9 @@ function production(callback) {
 
 }
 
-function bump() {
+function versionBump() {
 
-    let bump = require('gulp-bump');
+    var bump = require('gulp-bump');
 
     return src(['./package.json'])
         .pipe(bump({
@@ -166,15 +166,15 @@ function bump() {
 
 }
 
-function version() {
+function versionReplace() {
 
-    var package = require('./package.json');
+    var app = require('./package.json');
     var replace = require('gulp-replace');
 
     return src([
             SRC + '/asg-service.ts',
         ])
-        .pipe(replace(/version\s=\s"\d+\.\d+\.\d+/g, 'version = "' + package.version))
+        .pipe(replace(/version\s=\s"\d+\.\d+\.\d+/g, 'version = "' + app.version))
         .pipe(dest(SRC));
 
 }
@@ -232,8 +232,8 @@ task('dev', series(
 
 task('prod', series(
     production,
-    bump,
-    version,
+    versionBump,
+    versionReplace,
     "dev",
     css_min,
     js_min,

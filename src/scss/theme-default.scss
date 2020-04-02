@@ -1,69 +1,47 @@
 $black: #050505;
 $white: #fefefe;
 $white_darken: darken($white, 14%);
-
 .asg-thumbnail {
-  .item {
-    .index {
-      background-color: $white_darken;
-      color: $black;
+    .item {
+        .index {
+            background-color: $white_darken;
+            color: $black;
+        }
     }
-  }
 }
 
 .asg-modal.default {
-
-  background-color: $white_darken;
-
-  .highlight {
-    background-color: $white;
-  }
-
-  .header {
-    background-color: $white;
-    .title {
-
+    background-color: $white_darken;
+    .highlight {
+        background-color: $white;
     }
-    .subtitle {
-      background: $white_darken;
-      color: $white;
+    .header {
+        background-color: $white;
+        .subtitle {
+            background: $white_darken;
+            color: $white;
+        }
     }
-  }
-
-  .help {
-    background-color: rgba($black, 0.56);
-    color: $white_darken;
-  }
-
-  .images {
-    .img {
-      .details {
-
-      }
+    .help {
+        background-color: rgba($black, 0.56);
+        color: $white_darken;
     }
-  }
-
-  .caption {
-    .content {
-      background-color: rgba($black, 0.56);
-      color: $white_darken;
+    .caption {
+        .content {
+            background-color: rgba($black, 0.56);
+            color: $white_darken;
+        }
     }
-  }
-
-}
-
-.asg-image.default {
-
 }
 
 .asg-panel.default {
-  .item {
-    &.selected {
-      border-color: $black;
+    .item {
+        &.selected {
+            border-color: $black;
+        }
+        .index {
+            background-color: $white_darken;
+            color: $black;
+        }
     }
-    .index {
-      background-color: $white_darken;
-      color: $black;
-    }
-  }
 }
