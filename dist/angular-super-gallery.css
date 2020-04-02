@@ -592,7 +592,8 @@ body.asg-yhidden {
     font-size: 12px;
     transition: all ease 0.42s;
     transform: translateY(0) rotateX(0deg); }
-    .asg-modal .help ul, .asg-modal .help li {
+    .asg-modal .help ul,
+    .asg-modal .help li {
       margin: 0;
       padding: 0;
       display: block; }
@@ -1038,13 +1039,16 @@ body.asg-yhidden {
     .asg-modal .arrows:hover {
       opacity: 1;
       transform: scale(1); }
-    .asg-modal .arrows .toBackward, .asg-modal .arrows .toForward {
+    .asg-modal .arrows .toBackward,
+    .asg-modal .arrows .toForward {
       position: absolute;
       top: 45%; }
-      .asg-modal .arrows .toBackward .btn, .asg-modal .arrows .toForward .btn {
+      .asg-modal .arrows .toBackward .btn,
+      .asg-modal .arrows .toForward .btn {
         padding: 10px 16px;
         opacity: 0.4; }
-        .asg-modal .arrows .toBackward .btn:hover, .asg-modal .arrows .toForward .btn:hover {
+        .asg-modal .arrows .toBackward .btn:hover,
+        .asg-modal .arrows .toForward .btn:hover {
           opacity: 1; }
     .asg-modal .arrows .toBackward {
       left: 0; }
@@ -1088,7 +1092,8 @@ body.asg-yhidden {
     .asg-modal .header {
       text-align: center;
       font-size: 18px; }
-      .asg-modal .header .title, .asg-modal .header .subtitle {
+      .asg-modal .header .title,
+      .asg-modal .header .subtitle {
         margin-top: 1%;
         float: none;
         clear: both; }
@@ -1560,7 +1565,8 @@ body.asg-yhidden {
     border: 1px solid #f1f1f1;
     color: #f1f1f1;
     background-color: transparent; }
-  .asg-image.whitegold .btn-default:focus, .asg-image.whitegold .btn-default:hover {
+  .asg-image.whitegold .btn-default:focus,
+  .asg-image.whitegold .btn-default:hover {
     border: 1px solid #d4c386;
     outline: none;
     color: #d4c386;
@@ -1577,7 +1583,8 @@ body.asg-yhidden {
     border: 1px solid #f1f1f1;
     color: #f1f1f1;
     background-color: transparent; }
-  .asg-modal.whitegold .btn-default:focus, .asg-modal.whitegold .btn-default:hover {
+  .asg-modal.whitegold .btn-default:focus,
+  .asg-modal.whitegold .btn-default:hover {
     border: 1px solid #d4c386;
     outline: none;
     color: #d4c386;
@@ -1608,7 +1615,8 @@ body.asg-yhidden {
     border: 1px solid #f1f1f1;
     color: #f1f1f1;
     background-color: transparent; }
-  .asg-control.whitegold .btn-default:focus, .asg-control.whitegold .btn-default:hover {
+  .asg-control.whitegold .btn-default:focus,
+  .asg-control.whitegold .btn-default:hover {
     border: 1px solid #d4c386;
     outline: none;
     color: #d4c386;

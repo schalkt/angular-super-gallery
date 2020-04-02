@@ -10,7 +10,7 @@ Image gallery based on AngularJS and Bootstrap 4
 [![Build Status](https://travis-ci.org/schalkt/angular-super-gallery.svg?branch=master)](https://travis-ci.org/schalkt/angular-super-gallery)
 [![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=alert_status)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=security_rating)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=bugs)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
