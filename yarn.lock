@@ -28,23 +28,35 @@
   dependencies:
     "@types/angular" "*"
 
-"@types/angular@*", "@types/angular@1.6.57":
+"@types/angular@*":
   version "1.6.57"
   resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.57.tgz#d8beefa0ee1aeb1ef277fbaf63bf694321dd7f5d"
   integrity sha512-Pbp8Clanwb/nurGuLUYhKp7eeaEjwyI3MHb3ggjPHYPxysypzEin6UFcrcDv5xhu433axlwQ5BYU9svmcICoAQ==
 
-"@types/bootstrap@4.3.1":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-4.3.1.tgz#15fa89a4d275b114a4eceb90909d4eb8b90d43f5"
-  integrity sha512-n7Zv7Y+C98Yv4oqbyqGn3alCvNRCya2xMYzOdVEnmnFlu04MXQk1ntVrBhXzDkiwhZZYNkNfBZn2yhTnEh/mHQ==
+"@types/angular@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.7.0.tgz#3dd8d3b2d3b7ce2cca51b9fc3691b48b638eb468"
+  integrity sha512-zneUmi5I6oSkGBqkRP9rxbWX1mi6Yj7gNV+WNffmJLf8x4cnV0MGqXFNSP90NZ1kRRLCOdKBf9RIVD1TMg4aog==
+
+"@types/bootstrap@4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-4.3.2.tgz#25e6be5fc09ad58911555eb8d01dcf05f37156d8"
+  integrity sha512-ArJM2BsZ6KvPb7M3PGWNjlriFYP6gh3hINk76TTVXBqUiPYFOeyXA08gsVFSIjUqMitregBEqT79rvfgXEiLQQ==
   dependencies:
     "@types/jquery" "*"
     popper.js "^1.14.1"
 
-"@types/jquery@*", "@types/jquery@3.3.33":
+"@types/jquery@*":
   version "3.3.33"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.33.tgz#61d9cbd4004ffcdf6cf7e34720a87a5625a7d8e9"
   integrity sha512-U6IdXYGkfUI42SR79vB2Spj+h1Ly3J3UZjpd8mi943lh126TK7CB+HZOxGh2nM3IySor7wqVQdemD/xtydsBKA==
+  dependencies:
+    "@types/sizzle" "*"
+
+"@types/jquery@3.3.36":
+  version "3.3.36"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.36.tgz#a868c1c244a9f7b988d8fc56a3234f22e73c57b8"
+  integrity sha512-jHL8J5y5fJ0+C9zCTkeOvX4zqRnPug3r6JhAqAYl2YyBCYHiXTbZSH0MRCpayZADed5TigPjH92dEKczUFT2TQ==
   dependencies:
     "@types/sizzle" "*"
 
@@ -1546,13 +1558,13 @@ gulp-replace@1.0.0:
     readable-stream "^2.0.1"
     replacestream "^4.0.0"
 
-gulp-sass@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/gulp-sass/-/gulp-sass-4.0.2.tgz#cfb1e3eff2bd9852431c7ce87f43880807d8d505"
-  integrity sha512-q8psj4+aDrblJMMtRxihNBdovfzGrXJp1l4JU0Sz4b/Mhsi2DPrKFYCGDwjIWRENs04ELVHxdOJQ7Vs98OFohg==
+gulp-sass@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/gulp-sass/-/gulp-sass-4.1.0.tgz#486d7443c32d42bf31a6b1573ebbdaa361de7427"
+  integrity sha512-xIiwp9nkBLcJDpmYHbEHdoWZv+j+WtYaKD6Zil/67F3nrAaZtWYN5mDwerdo7EvcdBenSAj7Xb2hx2DqURLGdA==
   dependencies:
     chalk "^2.3.0"
-    lodash.clonedeep "^4.3.2"
+    lodash "^4.17.11"
     node-sass "^4.8.3"
     plugin-error "^1.0.1"
     replace-ext "^1.0.0"
@@ -2170,11 +2182,6 @@ lodash._root@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._root/-/lodash._root-3.0.1.tgz#fba1c4524c19ee9a5f8136b4609f017cf4ded692"
   integrity sha1-+6HEUkwZ7ppfgTa0YJ8BfPTe1pI=
 
-lodash.clonedeep@^4.3.2:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
-  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
-
 lodash.escape@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash.escape/-/lodash.escape-3.2.0.tgz#995ee0dc18c1b48cc92effae71a10aab5b487698"
@@ -2244,7 +2251,7 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
-lodash@^4.0.0, lodash@^4.17.15, lodash@~4.17.12:
+lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.15, lodash@~4.17.12:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
