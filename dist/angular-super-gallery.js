@@ -1,7 +1,7 @@
 /**
  * angular-super-gallery - AngularJS Super Gallery
  * 
- * @version v2.1.5
+ * @version v2.1.6
  * @link http://schalk.hu/projects/angular-super-gallery/demo/
  * @license MIT
  */
@@ -621,7 +621,7 @@ var angularSuperGallery;
             this.location = location;
             this.$rootScope = $rootScope;
             this.$window = $window;
-            this.version = "2.1.5";
+            this.version = "2.1.6";
             this.slug = 'asg';
             this.items = [];
             this.files = [];
@@ -1374,18 +1374,19 @@ var angularSuperGallery;
                     this.deleteImage(length_2, count);
                 }
             }
+            if (edit.selected >= 0) {
+                selected = edit.selected;
+            }
+            if (edit.selected == -1) {
+                selected = this.files.length - 1;
+            }
+            selected = this.files[selected] ? selected : (selected >= this.files.length ? this.files.length - 1 : 0);
+            this.forceSelect(this.files[selected] ? selected : 0);
             this.timeout(function () {
-                if (edit.selected >= 0) {
-                    selected = edit.selected;
-                }
-                if (edit.selected == -1) {
-                    selected = _this.files.length - 1;
-                }
-                selected = _this.files[selected] ? selected : (selected >= _this.files.length ? _this.files.length - 1 : 0);
-                _this.forceSelect(_this.files[selected] ? selected : 0);
                 _this.editing = false;
                 _this.event(_this.events.GALLERY_UPDATED, edit);
                 _this.thumbnailsMove(edit.delayThumbnails !== undefined ? edit.delayThumbnails : 220);
+                _this.event(_this.events.LAST_THUMBNAIL);
             }, (edit.delayRefresh !== undefined ? edit.delayRefresh : 420));
         };
         ServiceController.prototype.deleteImage = function (index, count) {
