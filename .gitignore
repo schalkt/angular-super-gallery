@@ -1,5 +1,6 @@
 .idea
 .vscode
+.history
 temp
 typings
 node_modules

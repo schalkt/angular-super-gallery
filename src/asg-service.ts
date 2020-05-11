@@ -1346,15 +1346,19 @@ namespace angularSuperGallery {
 				}
 			}
 
+			if (edit.selected >= 0) {
+				selected = edit.selected;
+			}
+
+			if (edit.selected == -1) {
+				selected = this.files.length - 1;
+			}
+
+			selected = this.files[selected] ? selected : (selected >= this.files.length ? this.files.length - 1 : 0);
+			this.forceSelect(this.files[selected] ? selected : 0);
+
 			this.timeout(() => {
 
-				if (edit.selected >= 0) {
-					selected = edit.selected;
-				}
-
-				selected = this.files[selected] ? selected : (selected >= this.files.length ? this.files.length - 1 : 0);
-
-				this.forceSelect(this.files[selected] ? selected : 0);
 				this.editing = false;
 				this.event(this.events.GALLERY_UPDATED, edit);
 				this.thumbnailsMove(edit.delayThumbnails !== undefined ? edit.delayThumbnails : 220);
