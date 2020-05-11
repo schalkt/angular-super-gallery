@@ -1,7 +1,7 @@
 /**
  * angular-super-gallery - AngularJS Super Gallery
  * 
- * @version v1.5.11
+ * @version v1.5.12
  * @link http://schalk.hu/projects/angular-super-gallery/demo/
  * @license MIT
  */
