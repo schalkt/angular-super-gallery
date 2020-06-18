@@ -46,7 +46,7 @@
         "@types/angular-animate": "1.5.10",
         "@types/bootstrap": "4.3.2",
         "@types/jquery": "3.3.36",
-        "angular": "1.7.9",
+        "angular": "1.8.0",
         "angular-animate": "1.7.9",
         "angular-touch": "1.7.9",
         "bootstrap": "4.4.1",
