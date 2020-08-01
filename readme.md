@@ -1,7 +1,8 @@
 # AngularJS Super Gallery
 
-Image gallery based on AngularJS and Bootstrap 4
-*For Bootstrap 3 use the bootstrap3 branch*
+## Image gallery based on **AngularJS** and **Bootstrap 4**
+
+### For Bootstrap 3 use the bootstrap3 branch
 
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
