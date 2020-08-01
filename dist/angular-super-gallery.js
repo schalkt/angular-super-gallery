@@ -1,7 +1,7 @@
 /**
  * angular-super-gallery - AngularJS Super Gallery
  * 
- * @version v2.1.7
+ * @version v2.1.8
  * @link http://schalk.hu/projects/angular-super-gallery/demo/
  * @license MIT
  */
@@ -51,7 +51,7 @@ var angularSuperGallery;
             set: function (value) {
                 this.asg.options[this.type] = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ControlController.prototype, "selected", {
@@ -67,7 +67,7 @@ var angularSuperGallery;
                 }
                 this.asg.selected = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return ControlController;
@@ -101,7 +101,7 @@ var angularSuperGallery;
             get: function () {
                 return this.asg.file;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return DebugController;
@@ -164,7 +164,7 @@ var angularSuperGallery;
             get: function () {
                 return this.config.height;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ImageController.prototype, "config", {
@@ -174,7 +174,7 @@ var angularSuperGallery;
             set: function (value) {
                 this.asg.options[this.type] = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ImageController.prototype.toBackward = function (stop, $event) {
@@ -207,14 +207,14 @@ var angularSuperGallery;
                 }
                 this.asg.selected = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ImageController.prototype, "modalAvailable", {
             get: function () {
                 return this.asg.modalAvailable && this.config.click.modal;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ImageController.prototype.modalOpen = function ($event) {
@@ -259,7 +259,7 @@ var angularSuperGallery;
             get: function () {
                 return this.asg.file;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return InfoController;
@@ -463,14 +463,14 @@ var angularSuperGallery;
             get: function () {
                 return this.config.marginTop;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ModalController.prototype, "marginBottom", {
             get: function () {
                 return this.config.marginBottom;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ModalController.prototype, "visible", {
@@ -487,7 +487,7 @@ var angularSuperGallery;
                 this.asg.modalVisible = value;
                 this.asg.setHash();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ModalController.prototype, "selected", {
@@ -503,7 +503,7 @@ var angularSuperGallery;
                 }
                 this.asg.selected = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ModalController.prototype, "config", {
@@ -513,7 +513,7 @@ var angularSuperGallery;
             set: function (value) {
                 this.asg.options[this.type] = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return ModalController;
@@ -572,7 +572,7 @@ var angularSuperGallery;
             set: function (value) {
                 this.asg.options[this.type] = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PanelController.prototype, "selected", {
@@ -588,7 +588,7 @@ var angularSuperGallery;
                 }
                 this.asg.selected = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return PanelController;
@@ -621,7 +621,7 @@ var angularSuperGallery;
             this.location = location;
             this.$rootScope = $rootScope;
             this.$window = $window;
-            this.version = "2.1.7";
+            this.version = "2.1.8";
             this.slug = 'asg';
             this.items = [];
             this.files = [];
@@ -956,7 +956,7 @@ var angularSuperGallery;
                 }
                 this.options.selected = this._selected;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ServiceController.prototype.forceSelect = function (index) {
@@ -1146,7 +1146,7 @@ var angularSuperGallery;
             get: function () {
                 return this.files.length > 1 ? false : true;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ServiceController.prototype.downloadLink = function () {
@@ -1158,7 +1158,7 @@ var angularSuperGallery;
             get: function () {
                 return this.files[this.selected];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ServiceController.prototype.toggle = function (element) {
@@ -1183,21 +1183,21 @@ var angularSuperGallery;
                     body.className = body.className.replace(className, '').trim();
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ServiceController.prototype, "theme", {
             get: function () {
                 return this.options.theme;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ServiceController.prototype, "classes", {
             get: function () {
                 return this.options.theme + ' ' + this.id + (this.editing ? ' editing' : '');
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ServiceController.prototype.dynamicStyle = function (file, type, config) {
@@ -1567,7 +1567,7 @@ var angularSuperGallery;
                     this.asg.options.modal[this.type] = value;
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ThumbnailController.prototype, "selected", {
@@ -1583,28 +1583,28 @@ var angularSuperGallery;
                 }
                 this.asg.selected = v;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ThumbnailController.prototype, "dynamic", {
             get: function () {
                 return this.config.dynamic ? 'dynamic' : '';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ThumbnailController.prototype, "autohide", {
             get: function () {
                 return this.config.autohide && this.asg.isSingle ? true : false;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ThumbnailController.prototype, "classes", {
             get: function () {
                 return this.asg.classes + ' ' + this.dynamic + ' ' + (this.config.initialized ? 'initialized' : 'initializing');
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         return ThumbnailController;
