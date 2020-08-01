@@ -254,3 +254,7 @@ task("watch", function(callback) {
     callback();
 
 });
+
+task('default', series(
+    "dev"
+));
