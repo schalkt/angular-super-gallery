@@ -3,7 +3,6 @@
 Image gallery based on AngularJS and Bootstrap 4
 
 *For Bootstrap 3 use the bootstrap3 branch*
-
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
 [![schalkt](https://img.shields.io/david/schalkt/angular-super-gallery.svg?style=flat-square)](https://david-dm.org/schalkt/angular-super-gallery)
@@ -14,7 +13,6 @@ Image gallery based on AngularJS and Bootstrap 4
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=security_rating)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=bugs)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
-
 
 ## Preview
 
@@ -27,16 +25,15 @@ Image gallery based on AngularJS and Bootstrap 4
 
 ```json
 {
-    "angular": "1.7.9",
-    "angular-animate": "1.7.9",
-    "angular-touch": "1.7.9",
-    "bootstrap": "4.4.1",
+    "angular": "1.8.0",
+    "angular-animate": "1.8.0",
+    "angular-touch": "1.8.0",
+    "bootstrap": "4.5.0",
     "font-awesome": "4.7.0",
-    "jquery": "3.4.1",
+    "jquery": "3.5.1",
     "screenfull": "5.0.2"
 }
 ```
-
 
 ## Features
 
@@ -380,8 +377,8 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Build
 
-- `yarn install` or `npm install`
-- `typings install`
+- Node.js 12 recommended
+- `npm install`
 - `gulp dev`
 - `gulp prod` (minified javascript and css file)
 - `gulp watch` (automatic build under development)
