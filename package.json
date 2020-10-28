@@ -1,6 +1,6 @@
 {
     "name": "angular-super-gallery",
-    "version": "2.1.8",
+    "version": "2.1.9",
     "description": "AngularJS Super Gallery",
     "homepage": "http://schalk.hu/projects/angular-super-gallery/demo/",
     "repository": {
@@ -39,17 +39,17 @@
         "gulp-sourcemaps": "2.6.5",
         "gulp-typescript": "6.0.0-alpha.1",
         "gulp-uglify": "3.0.2",
-        "typescript": "3.9.7"
+        "typescript": "4.0.5"
     },
     "dependencies": {
-        "@types/angular": "1.7.2",
+        "@types/angular": "1.7.4",
         "@types/angular-animate": "1.5.10",
-        "@types/bootstrap": "4.5.0",
-        "@types/jquery": "3.5.1",
-        "angular": "1.8.0",
-        "angular-animate": "1.8.0",
-        "angular-touch": "1.8.0",
-        "bootstrap": "4.5.0",
+        "@types/bootstrap": "4.5.1",
+        "@types/jquery": "3.5.3",
+        "angular": "1.8.2",
+        "angular-animate": "1.8.2",
+        "angular-touch": "1.8.2",
+        "bootstrap": "4.5.3",
         "font-awesome": "4.7.0",
         "jquery": "3.5.1",
         "popper.js": "1.16.1",
