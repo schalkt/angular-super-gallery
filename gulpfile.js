@@ -232,12 +232,15 @@ task('dev', series(
 
 task('prod', series(
     production,
-    versionBump,
-    versionReplace,
     "dev",
     css_min,
     js_min,
     "assets"
+));
+
+task('release', series(
+    versionBump,
+    versionReplace
 ));
 
 task("watch", function(callback) {
