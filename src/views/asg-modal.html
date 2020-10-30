@@ -25,27 +25,19 @@
 
             <div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'/views/asg-help.html'"></div>
 
-            <div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.imageClick($event)">
+			<div class="arrow left" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle" ng-click="$ctrl.toBackward(true, $event)">
+				<button class="btn btn-default btn-md pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)">
+					<span class="fa fa-chevron-left"></span>
+				</button>
+			</div>
 
-                <div ng-if="!$ctrl.asg.isSingle" class="toBackward">
+			<div class="arrow right" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle" ng-click="$ctrl.toForward(true, $event)">
+				<button class="btn btn-default btn-md pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)">
+					<span class="fa fa-chevron-right"></span>
+				</button>
+			</div>
 
-                    <button class="btn btn-default btn-lg pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)">
-						<span class="fa fa-chevron-left"></span>
-					</button>
-
-                </div>
-
-                <div ng-if="!$ctrl.asg.isSingle" class="toForward">
-
-                    <button class="btn btn-default btn-lg pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)">
-						<span class="fa fa-chevron-right"></span>
-					</button>
-
-                </div>
-
-            </div>
-
-            <div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.dynamicStyle(file, 'modal', $ctrl.config)" ng-class="{'loaded' : file.loaded.modal}">
+            <div class="img" ng-click="$ctrl.imageClick($event)" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.dynamicStyle(file, 'modal', $ctrl.config)" ng-class="{'loaded' : file.loaded.modal}">
 
                 <div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'modal')"></div>
                 <div class="source {{ $ctrl.config.size }}" ng-if="file.loaded.modal" ng-style="{'background-image': 'url(' + file.source.modal + ')'}">

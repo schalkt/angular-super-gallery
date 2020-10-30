@@ -116,38 +116,58 @@
         height: 100%;
         @import "asg-transitions";
     }
-    .arrows {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 700;
-        transition: all ease 0.2s;
-        transform: scale(1.1);
-        &:hover {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .toBackward,
-        .toForward {
-            position: absolute;
-            top: 45%;
-            .btn {
-                padding: 10px 16px;
-                opacity: 0.4;
-                &:hover {
-                    opacity: 1;
-                }
-            }
-        }
-        .toBackward {
-            left: 0;
-        }
-        .toForward {
-            right: 0;
-        }
-    }
+
+	.arrow {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		opacity: 0;
+		z-index: 700;
+		min-height: 100px;
+		transition: all ease 0.2s;
+		transform: scale(1.2);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		cursor: pointer;
+
+		&.left {
+			left: -20px;
+		}
+
+		&.right {
+			right: -20px;
+		}
+
+		.btn {
+			padding: 10px 16px;
+			opacity: 0.7;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	&:hover {
+		.arrow {
+			opacity: 1;
+			transform: scale(1);
+
+			&.left {
+				left: 0;
+			}
+
+			&.right {
+				right: 0;
+			}
+
+		}
+
+	}
+
     .caption {
         position: absolute;
         left: 0;

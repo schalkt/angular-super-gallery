@@ -1,21 +1,23 @@
+var Vimeo;
+
 namespace angularSuperGallery {
 
 	export class ImageController {
 
-		public id : string;
-		public options : IOptions;
-		public items : Array<IFile>;
-		public baseUrl : string;
+		public id: string;
+		public options: IOptions;
+		public items: Array<IFile>;
+		public baseUrl: string;
 
 		private type = 'image';
-		private asg : IServiceController;
+		private asg: IServiceController;
 
-		constructor(private service : IServiceController,
-					private $rootScope : ng.IRootScopeService,
-					private $element : ng.IRootElementService,
-					private $timeout: ng.ITimeoutService,
-					private $window : ng.IWindowService,
-					private $scope : ng.IScope) {
+		constructor(private service: IServiceController,
+			private $rootScope: ng.IRootScopeService,
+			private $element: ng.IRootElementService,
+			private $timeout: ng.ITimeoutService,
+			private $window: ng.IWindowService,
+			private $scope: ng.IScope) {
 
 			angular.element($window).bind('resize', (event) => {
 				this.onResize();
@@ -41,10 +43,10 @@ namespace angularSuperGallery {
 			// set image component height
 			this.$rootScope.$on(this.asg.events.FIRST_IMAGE + this.id, (event, data) => {
 
-				if (!this.config.height && this.config.heightAuto.initial === true) {			
-					this.$timeout(() => {					
+				if (!this.config.height && this.config.heightAuto.initial === true) {
+					this.$timeout(() => {
 						self.setHeight(data.img);
-					}, 10);					
+					}, 10);
 				}
 
 			});
@@ -76,20 +78,20 @@ namespace angularSuperGallery {
 
 
 		// get image config
-		public get config() : IOptionsImage {
+		public get config(): IOptionsImage {
 
 			return this.asg.options[this.type];
 
 		}
 
 		// set image config
-		public set config(value : IOptionsImage) {
+		public set config(value: IOptionsImage) {
 
 			this.asg.options[this.type] = value;
 
 		}
 
-		public toBackward(stop? : boolean, $event? : UIEvent) {
+		public toBackward(stop?: boolean, $event?: UIEvent) {
 
 			if ($event) {
 				$event.stopPropagation();
@@ -99,7 +101,7 @@ namespace angularSuperGallery {
 
 		}
 
-		public toForward(stop? : boolean, $event? : UIEvent) {
+		public toForward(stop?: boolean, $event?: UIEvent) {
 
 			if ($event) {
 				$event.stopPropagation();
@@ -109,7 +111,7 @@ namespace angularSuperGallery {
 
 		}
 
-		public hover(index : number, $event? : MouseEvent) {
+		public hover(index: number, $event?: MouseEvent) {
 
 			if (this.config.arrows.preload === true) {
 				this.asg.hoverPreload(index);
@@ -118,7 +120,7 @@ namespace angularSuperGallery {
 		}
 
 		// set selected image
-		public set selected(v : number) {
+		public set selected(v: number) {
 
 			if (!this.asg) {
 				return;
@@ -147,7 +149,7 @@ namespace angularSuperGallery {
 		}
 
 		// open the modal
-		public modalOpen($event : UIEvent) {
+		public modalOpen($event: UIEvent) {
 
 			if ($event) {
 				$event.stopPropagation();
@@ -159,9 +161,58 @@ namespace angularSuperGallery {
 
 		}
 
+		public playVideo($event: UIEvent) {
+
+			if ($event) {
+				$event.stopPropagation();
+			}
+
+			var player;
+			var options = {
+				id: this.asg.file.video.vimeoId,
+				responsive: true,
+				controls: true,
+				playsinline: true,
+				//background: true,
+				loop: true,
+				width: 640,
+			};
+
+			if (this.asg.file.video.player) {
+				player = this.asg.file.video.player;
+			} else {
+				player = new Vimeo.Player('video_vimeo_' + options.id, options);
+				this.asg.file.video.player = player;
+			}
+
+			//player.setVolume(0);
+			player.play().catch(function (error) {
+				console.error('error playing the video:', error.name);
+			})
+
+			player.on('play', function (data) {
+				console.log('video play', data, this.asg.file.video);
+				this.asg.file.video.playing = true;
+			});
+
+			player.on('playing', function (data) {
+				console.log('video playing', data, this.asg.file.video);
+				this.asg.file.video.playing = true;
+			});
+
+			player.on('progress', function (data) {
+				console.log('video progress', data, this.asg.file.video);
+				this.asg.file.video.playing = true;
+			});
+
+			this.asg.file.video.visible = true;
+			this.asg.file.video.playing = true;
+
+		}
+
 	}
 
-	let app : ng.IModule = angular.module('angularSuperGallery');
+	let app: ng.IModule = angular.module('angularSuperGallery');
 
 	app.component('asgImage', {
 		controller: ['asgService', '$rootScope', '$element', '$timeout', '$window', '$scope', angularSuperGallery.ImageController],

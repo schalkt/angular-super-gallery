@@ -1,32 +1,55 @@
-<div class="asg-image {{ $ctrl.asg.classes }}" ng-class="{'modalon' : $ctrl.modalAvailable }" ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
+<div class="asg-image {{ $ctrl.asg.classes }}" ng-class="{'modalon' : $ctrl.modalAvailable }"
+	ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
 
-    <div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)">
+	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
+		xng-swipe-left="$ctrl.asg.toForward(true)" xng-swipe-right="$ctrl.asg.toBackward(true)">
 
-        <div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key" ng-style="$ctrl.asg.dynamicStyle(file, 'image', $ctrl.config)" ng-class="{'loaded' : file.loaded.image}">
+		<div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key"
+			xng-swipe-left="$ctrl.asg.toForward(true)" xng-swipe-right="$ctrl.asg.toBackward(true)"
+			ng-click="$ctrl.modalOpen($event)" ng-style="$ctrl.asg.dynamicStyle(file, 'image', $ctrl.config)"
+			ng-class="{'loaded' : file.loaded.image}">
 
-            <div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'image')"></div>
-            <div class="source {{ $ctrl.config.size }}" ng-style="{'background-image': 'url(' + file.source.image + ')'}" ng-mouseover="$ctrl.asg.hoverPreload(key)" ng-click="$ctrl.modalOpen($event)"></div>
+			<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index: 10;"
+				ng-if="$ctrl.asg.options.debug">{{ file }}</div>
+			<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'image')"></div>
+			<div class="source {{ $ctrl.config.size }}"
+				ng-style="{'background-image': 'url(' + file.source.image + ')'}"
+				ng-mouseover="$ctrl.asg.hoverPreload(key)"></div>
 
-        </div>
-    </div>
-    <div class="arrows" ng-if="$ctrl.config.arrows.enabled" ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)" ng-click="$ctrl.modalOpen($event)">
+			<div class="video" ng-show="file.video.visible" id="video_vimeo_{{ file.video.vimeoId }}"></div>
 
-        <div ng-if="!$ctrl.asg.isSingle" class="toBackward">
+			<div class="play" ng-if="file.video && !file.video.playing">
+				<div class="button" ng-click="$ctrl.playVideo($event)">
+					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+						style="enable-background:new 0 0 512 512;" xml:space="preserve">
+						<g>
+							<circle class="circle" cx="256" cy="256" r="256" stroke-width="1" />
+						</g>
+						<g>
+							<polygon class="icon" points="189.776,141.328 189.776,370.992 388.672,256.16" />
+						</g>
+					</svg>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            <button class="btn btn-default btn-md pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)" ng-click="$ctrl.toBackward(true, $event)">
-				<span class="fa fa-chevron-left"></span>
-			</button>
+	<div class="arrow left" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle">
+		<button class="btn btn-default btn-md pull-left" ng-click="$ctrl.toBackward(true, $event)"
+			ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)">
+			<span class="fa fa-chevron-left"></span>
+		</button>
+	</div>
 
-        </div>
+	<div class="arrow right" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle">
+		<button class="btn btn-default btn-md pull-right" ng-click="$ctrl.toForward(true, $event)"
+			ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)">
+			<span class="fa fa-chevron-right"></span>
+		</button>
+	</div>
 
-        <div ng-if="!$ctrl.asg.isSingle" class="toForward">
 
-            <button class="btn btn-default btn-md pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)" ng-click="$ctrl.toForward(true, $event)">
-				<span class="fa fa-chevron-right"></span>
-			</button>
+	<ng-transclude></ng-transclude>
 
-        </div>
-
-    </div>
-    <ng-transclude></ng-transclude>
 </div>
