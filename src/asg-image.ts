@@ -167,45 +167,47 @@ namespace angularSuperGallery {
 				$event.stopPropagation();
 			}
 
-			var player;
+			var self = this;
+
+			this.asg.file.video.visible = true;
+			this.asg.file.video.htmlId = 'vimeo_video_' + this.asg.file.video.vimeoId;
+
 			var options = {
 				id: this.asg.file.video.vimeoId,
 				responsive: true,
-				controls: true,
-				playsinline: true,
-				//background: true,
-				loop: true,
-				width: 640,
+				loop: false
 			};
 
+			// console.log('video',  this.asg.file.video);
+			// console.log('vimeo options', options);
+
 			if (this.asg.file.video.player) {
-				player = this.asg.file.video.player;
+				var player = this.asg.file.video.player;
 			} else {
-				player = new Vimeo.Player('video_vimeo_' + options.id, options);
-				this.asg.file.video.player = player;
+				var player = new Vimeo.Player(this.asg.file.video.htmlId, options);
 			}
 
-			//player.setVolume(0);
+			// player.loadVideo(this.asg.file.video.vimeoId).then(function(id) {
+
+			// })
+
+			player.setVolume(0.5);
+
 			player.play().catch(function (error) {
-				console.error('error playing the video:', error.name);
+				console.error('error playing the video:', error);
 			})
 
-			player.on('play', function (data) {
-				console.log('video play', data, this.asg.file.video);
-				this.asg.file.video.playing = true;
+			player.on('play', function() {
+				self.asg.file.video.playing = true;
+				console.log('play the video!');
 			});
 
-			player.on('playing', function (data) {
-				console.log('video playing', data, this.asg.file.video);
-				this.asg.file.video.playing = true;
+			player.on('pause', function() {
+				self.asg.file.video.playing = false
+				console.log('paused the video!');
 			});
 
-			player.on('progress', function (data) {
-				console.log('video progress', data, this.asg.file.video);
-				this.asg.file.video.playing = true;
-			});
-
-			this.asg.file.video.visible = true;
+			this.asg.file.video.player = player;
 			this.asg.file.video.playing = true;
 
 		}

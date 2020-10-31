@@ -180,6 +180,7 @@ namespace angularSuperGallery {
 		video?: {
 			vimeoId: string;
 			youtubeId: string;
+			htmlId: string;
 			autoplay: boolean;
 			paused: boolean;
 			visible: boolean;
@@ -713,7 +714,7 @@ namespace angularSuperGallery {
 
 			if (prev != v && this.file && this.file.video && this.file.video.playing) {
 				this.file.video.player.pause();
-				this.file.video.playing = false;
+				this.file.video.paused = true;
 			}
 
 			this._selected = v;
@@ -728,6 +729,11 @@ namespace angularSuperGallery {
 
 				if (this.options.modal.subtitleFromImage && this.file.description) {
 					this.options.modal.subtitle = this.file.description;
+				}
+
+				if (this.file.video && this.file.video.paused) {
+					this.file.video.player.play();
+					this.file.video.paused = false;
 				}
 
 			}

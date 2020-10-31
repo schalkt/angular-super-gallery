@@ -353,7 +353,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
                 onresize: true,
             },
             transition: 'zoomInOut',
-            transitionSpeed: 3.2,
+            transitionSpeed: 0.9,
             placeholder: 'panel'
         },
     };

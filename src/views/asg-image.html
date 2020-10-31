@@ -1,11 +1,12 @@
+
 <div class="asg-image {{ $ctrl.asg.classes }}" ng-class="{'modalon' : $ctrl.modalAvailable }"
 	ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
 
 	<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.asg.options.image.transition }}"
-		xng-swipe-left="$ctrl.asg.toForward(true)" xng-swipe-right="$ctrl.asg.toBackward(true)">
+		ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)">
 
 		<div class="img" ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key"
-			xng-swipe-left="$ctrl.asg.toForward(true)" xng-swipe-right="$ctrl.asg.toBackward(true)"
+			ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)"
 			ng-click="$ctrl.modalOpen($event)" ng-style="$ctrl.asg.dynamicStyle(file, 'image', $ctrl.config)"
 			ng-class="{'loaded' : file.loaded.image}">
 
@@ -16,7 +17,7 @@
 				ng-style="{'background-image': 'url(' + file.source.image + ')'}"
 				ng-mouseover="$ctrl.asg.hoverPreload(key)"></div>
 
-			<div class="video" ng-show="file.video.visible" id="video_vimeo_{{ file.video.vimeoId }}"></div>
+			<div class="video" ng-show="file.video.visible" id="vimeo_video_{{ file.video.vimeoId }}"></div>
 
 			<div class="play" ng-if="file.video && !file.video.playing">
 				<div class="button" ng-click="$ctrl.playVideo($event)">
@@ -48,7 +49,6 @@
 			<span class="fa fa-chevron-right"></span>
 		</button>
 	</div>
-
 
 	<ng-transclude></ng-transclude>
 
