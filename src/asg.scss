@@ -5,12 +5,11 @@ $rotate: 32deg;
 $scaleIn: 1.14;
 $scaleOut: 0.86;
 
-body.asg-yhidden {
-  overflow-y: hidden;
-}
-
+@import "scss/asg-common";
+@import "scss/asg-item";
 @import "scss/asg-image";
 @import "scss/asg-modal";
+@import "scss/asg-container";
 @import "scss/asg-panel";
 @import "scss/asg-thumbnail";
 @import "scss/asg-info";
@@ -18,4 +17,5 @@ body.asg-yhidden {
 @import "scss/theme-default";
 @import "scss/theme-darkblue";
 @import "scss/theme-darkred";
+@import "scss/theme-lightbrown";
 @import "scss/theme-whitegold";

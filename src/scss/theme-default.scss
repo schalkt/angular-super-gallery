@@ -1,6 +1,11 @@
 $black: #050505;
 $white: #fefefe;
 $white_darken: darken($white, 14%);
+
+.asg-images {
+	background-color: $white_darken;
+}
+
 .asg-thumbnail {
     .item {
         .index {
@@ -10,7 +15,8 @@ $white_darken: darken($white, 14%);
     }
 }
 
-.asg-modal.default {
+.asg-container.asg-theme-default,
+.asg-modal.asg-theme-default {
     background-color: $white_darken;
     .highlight {
         background-color: $white;
@@ -31,10 +37,13 @@ $white_darken: darken($white, 14%);
             background-color: rgba($black, 0.56);
             color: $white_darken;
         }
-    }
+	}
+	.video {
+		background-color: $black;
+	}
 }
 
-.asg-panel.default {
+.asg-panel.asg-theme-default {
     .item {
         &.selected {
             border-color: $black;

@@ -1,0 +1,268 @@
+.asg-container {
+	z-index: 99999;
+	line-height: inherit;
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	padding: 0;
+	outline: none;
+	opacity: 1;
+
+	&.fullsize {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&.fullscreen {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: unset;
+		width: unset;
+	}
+
+	&.dynamic {
+		.header {
+			position: absolute;
+			opacity: 0;
+			top: 0;
+			left: 0;
+			right: 0;
+			&:hover {
+				opacity: 0.75;
+			}
+		}
+	}
+	.frame {
+		z-index: 7400;
+		position: absolute;
+		overflow: hidden;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	.btn {
+		text-transform: lowercase;
+	}
+	.btn-size {
+		width: 64px;
+	}
+	.btn-transitions {
+		width: 96px;
+	}
+	&.ng-hide-add,
+	&.ng-hide-remove {
+		transition: all ease 0.42s;
+	}
+	&.ng-hide {
+		opacity: 0;
+	}
+	.keyInput {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		opacity: 0;
+	}
+	.header {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: auto;
+		z-index: 7700;
+		.title {
+			display: inline-block;
+			margin: 6px 10px 4px 12px;
+			float: left;
+			font-size: 1.2em;
+		}
+		.subtitle {
+			display: inline-block;
+			margin: 4px 10px 4px 2px;
+			text-transform: uppercase;
+			float: left;
+			font-size: 0.8em;
+			padding: 6px 16px 6px 16px;
+		}
+		.file {
+			font-size: 0.9em;
+			padding: 10px 12px;
+			display: inline-block;
+		}
+		.buttons {
+			margin: 4px 4px 4px 14px;
+			.btn {
+				margin: 0px 1px;
+			}
+		}
+	}
+	perspective: $perspective;
+	.help {
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			display: block;
+		}
+		position: absolute;
+		right: 0;
+		padding: 10px;
+		z-index: 7500;
+		font-size: 12px;
+		transition: all ease 0.42s;
+		transform: translateY(0) rotateX(0deg);
+		&.ng-hide {
+			opacity: 0;
+			transform-origin: right center;
+			transform: translateX(77px) rotateY(0deg);
+		}
+	}
+	.images {
+		perspective: $perspective;
+		position: relative;
+		z-index: auto;
+		overflow: hidden;
+		height: 100%;
+		@import "asg-transitions";
+	}
+
+	.arrow {
+		position: absolute;
+		top: calc(50% - 35px);
+		opacity: 0;
+		z-index: 720;
+		min-height: 70px;
+		transition: all ease 0.2s;
+		transform: scale(1.2);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&.left {
+			text-align: left;
+			left: -40px;
+		}
+
+		&.right {
+			text-align: right;
+			right: -40px;
+		}
+
+		.btn {
+			padding: 10px 16px;
+			opacity: 0.7;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	.video {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 710;
+
+		> div {
+			position: unset !important;
+		}
+	}
+
+	&:hover {
+		.arrow {
+			opacity: 1;
+			transform: scale(1);
+
+			&.left {
+				left: 0;
+			}
+
+			&.right {
+				right: 0;
+			}
+		}
+	}
+
+	.caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		opacity: 0;
+		z-index: 900;
+		&.top {
+			top: 0;
+		}
+		&.bottom {
+			bottom: 0;
+		}
+		&.visible {
+			opacity: 1;
+		}
+		&:not(.visible):hover {
+			opacity: 1;
+		}
+		.content {
+			padding: 7px 10px;
+			text-align: center;
+			margin: auto;
+		}
+	}
+	.dropdown-submenu {
+		position: relative;
+	}
+	.dropdown-submenu > .dropdown-menu {
+		position: relative;
+	}
+	.dropdown-submenu.open > .dropdown-menu {
+		display: block;
+	}
+	@media (orientation: portrait) {
+		.help {
+			left: 0;
+			right: 0;
+			top: 0;
+			font-size: 1.1em;
+			text-align: right;
+			li {
+				margin: 0;
+				padding: 2px;
+				display: block;
+			}
+		}
+		.header {
+			text-align: center;
+			font-size: 18px;
+			.title,
+			.subtitle {
+				margin-top: 1%;
+				float: none;
+				clear: both;
+			}
+			.buttons {
+				float: none !important;
+				clear: both !important;
+				.btn {
+					font-size: 0.7em;
+					margin: 1% 0;
+				}
+			}
+		}
+		.caption {
+			.content {
+				font-size: 1.1em;
+			}
+		}
+	}
+}

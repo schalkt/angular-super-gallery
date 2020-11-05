@@ -3,7 +3,7 @@ $white: #fefefe;
 $white_darken: darken($white, 14%);
 $primary: #30c6d4;
 $primary_darken: darken($primary, 40%);
-.asg-thumbnail.darkblue {
+.asg-thumbnail.asg-theme-darkblue {
     background-color: $black;
     padding: 4px 0px 0px 0px;
     .item {
@@ -40,7 +40,7 @@ $primary_darken: darken($primary, 40%);
     }
 }
 
-.asg-image.darkblue {
+.asg-image.asg-theme-darkblue {
     background-color: $black;
     color: $primary;
     .asg-info {
@@ -90,31 +90,10 @@ $primary_darken: darken($primary, 40%);
 			margin-right: -1px;
         }
 	}
-	.play {
-
-		.button {
-
-			fill: white;
-			box-shadow: 0px 0px 4px $primary;
-
-			&:hover {
-				box-shadow: 0px 0px 17px $primary;
-			}
-
-			svg {
-				.circle {
-					stroke: $primary;
-					fill: $black;
-				}
-				.icon {
-					fill: $primary;
-				}
-			}
-		}
-	}
 }
 
-.asg-modal.darkblue {
+.asg-container.asg-theme-darkblue,
+.asg-modal.asg-theme-darkblue {
     .frame {
         margin: 0;
     }
@@ -150,7 +129,10 @@ $primary_darken: darken($primary, 40%);
         }
     }
     .help {
-        background-color: rgba($black, 0.77);
+		top: 0;
+		bottom: 0;
+		background-color: rgba($black, 0.77);
+		box-shadow: 0px 0px 10px $black;
         color: $primary;
     }
     .caption {
@@ -172,7 +154,7 @@ $primary_darken: darken($primary, 40%);
 
 }
 
-.asg-control.darkblue {
+.asg-control.asg-theme-darkblue {
     .btn {
         -webkit-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
@@ -195,12 +177,12 @@ $primary_darken: darken($primary, 40%);
     background-color: $black;
 }
 
-.asg-info.darkblue {
+.asg-info.asg-theme-darkblue {
     background-color: $black;
     color: $primary;
 }
 
-.asg-panel.darkblue {
+.asg-panel.asg-theme-darkblue {
     background-color: $black;
     .item {
         background-color: $black;

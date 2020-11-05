@@ -192,31 +192,8 @@ function copyAssetsJs() {
 
 }
 
-function copyAssetsCss() {
-
-    return src([
-        './node_modules/font-awesome/css/font-awesome.min.css',
-    ]).pipe(dest('./demo/assets/css'));
-
-}
-
-function copyAssetsFonts() {
-
-    return src([
-        './node_modules/font-awesome/fonts/fontawesome-webfont.eot',
-        './node_modules/font-awesome/fonts/fontawesome-webfont.svg',
-        './node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
-        './node_modules/font-awesome/fonts/fontawesome-webfont.woff',
-        './node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
-        './node_modules/font-awesome/fonts/FontAwesome.otf',
-    ]).pipe(dest('./demo/assets/fonts'));
-
-}
-
 task('assets', series(
-    copyAssetsJs,
-    copyAssetsCss,
-    copyAssetsFonts
+    copyAssetsJs
 ));
 
 task('ts2js', series(

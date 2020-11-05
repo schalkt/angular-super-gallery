@@ -25,14 +25,14 @@
 
             <div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help" ng-include="'/views/asg-help.html'"></div>
 
-			<div class="arrow left" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle" ng-click="$ctrl.toBackward(true, $event)">
-				<button class="btn btn-default btn-md pull-left" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)">
+			<div class="arrow left" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle">
+				<button class="btn btn-default btn-md pull-left" ng-click="$ctrl.toBackward(true, $event)" ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)">
 					<span class="fa fa-chevron-left"></span>
 				</button>
 			</div>
 
-			<div class="arrow right" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle" ng-click="$ctrl.toForward(true, $event)">
-				<button class="btn btn-default btn-md pull-right" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)">
+			<div class="arrow right" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle">
+				<button class="btn btn-default btn-md pull-right" ng-click="$ctrl.toForward(true, $event)" ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)">
 					<span class="fa fa-chevron-right"></span>
 				</button>
 			</div>
@@ -41,7 +41,24 @@
 
                 <div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'modal')"></div>
                 <div class="source {{ $ctrl.config.size }}" ng-if="file.loaded.modal" ng-style="{'background-image': 'url(' + file.source.modal + ')'}">
-                </div>
+				</div>
+
+				<div class="video" ng-show="file.video.visible" id="modal_vimeo_video_{{ file.video.vimeoId }}"></div>
+
+				<div class="play" ng-if="file.video && !file.video.playing">
+					<div class="button" ng-click="$ctrl.playVideo($event)">
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+							style="enable-background:new 0 0 512 512;" xml:space="preserve">
+							<g>
+								<circle class="circle" cx="256" cy="256" r="256" stroke-width="1" />
+							</g>
+							<g>
+								<polygon class="icon" points="189.776,141.328 189.776,370.992 388.672,256.16" />
+							</g>
+						</svg>
+					</div>
+				</div>
 
             </div>
 

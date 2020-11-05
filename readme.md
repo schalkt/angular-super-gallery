@@ -28,7 +28,7 @@ Image gallery based on **AngularJS** and **Bootstrap 4**. (for Bootstrap 3 switc
     "angular-animate": "1.8.0",
     "angular-touch": "1.8.0",
     "bootstrap": "4.5.0",
-    "font-awesome": "4.7.0",
+    "font-awesome": "5.x",
     "jquery": "3.5.1",
     "screenfull": "5.0.2"
 }
@@ -384,6 +384,7 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Todo
 
+- delete asg-modal
 - slideshow mode (fullscreen, hide menu and arrows, start autoplay)
 - indicator component
 - theme color setup

@@ -1,8 +1,67 @@
 namespace angularSuperGallery {
 
+	// container component options
+	export interface IOptionsContainer {
+
+		available : boolean;
+		header?: {
+			enabled?: boolean;
+			dynamic?: boolean;
+			buttons: Array<string>;
+		};
+		help?: boolean;
+		visible? : boolean;
+		visibleDefault?: boolean;
+		caption?: {
+			disabled?: boolean;
+			visible?: boolean;
+			position?: string;
+			download?: boolean;
+		};
+		transition?: string;
+		transitionSpeed? : number;
+		title?: string;
+		subtitle?: string;
+		titleFromImage? : boolean;
+		subtitleFromImage? : boolean;
+		arrows?: {
+			preload?: boolean;
+			enabled?: boolean;
+		};
+		fullsize: boolean;
+		size?: string;
+		thumbnail?: IOptionsThumbnail;
+		marginTop?: number;
+		marginBottom?: number;
+		click?: {
+			close: boolean;
+		};
+		keycodes?: {
+			exit?: Array<number>;
+			playpause?: Array<number>;
+			forward?: Array<number>;
+			backward?: Array<number>;
+			first?: Array<number>;
+			last?: Array<number>;
+			fullscreen?: Array<number>;
+			menu?: Array<number>;
+			caption?: Array<number>;
+			help?: Array<number>;
+			size?: Array<number>;
+			transition?: Array<number>;
+		};
+		height?: number;
+		heightMin?: number;
+		heightAuto?: {
+			initial?: boolean;
+			onresize?: boolean;
+		};
+	}
+
 	// modal component options
 	export interface IOptionsModal {
 
+		available : boolean;
 		header?: {
 			enabled?: boolean;
 			dynamic?: boolean;
@@ -15,7 +74,6 @@ namespace angularSuperGallery {
 			position?: string;
 			download?: boolean;
 		};
-		placeholder?: string;
 		transition?: string;
 		transitionSpeed? : number;
 		title?: string;
@@ -52,7 +110,9 @@ namespace angularSuperGallery {
 	// panel component options
 	export interface IOptionsPanel {
 
+		available : boolean;
 		visible?: boolean;
+		size?: string;
 		items?: {
 			class?: string;
 		},
@@ -75,6 +135,7 @@ namespace angularSuperGallery {
 	// thumbnail component options
 	export interface IOptionsThumbnail {
 
+		available : boolean;
 		height?: number;
 		index?: boolean;
 		enabled?: boolean;
@@ -101,6 +162,7 @@ namespace angularSuperGallery {
 	// image component options
 	export interface IOptionsImage {
 
+		available : boolean;
 		transition?: string;
 		transitionSpeed? : number;
 		size?: string;
@@ -117,7 +179,6 @@ namespace angularSuperGallery {
 			initial?: boolean;
 			onresize?: boolean;
 		};
-		placeholder: string;
 	}
 
 	// gallery options
@@ -130,10 +191,10 @@ namespace angularSuperGallery {
 		selected?: number;
 		fields?: {
 			source?: {
-				modal?: string;
-				panel?: string;
-				image?: string;
-				placeholder?: string;
+				large?: string;
+				small?: string;
+				medium?: string;
+				lazy?: string;
 			}
 			title?: string;
 			subtitle?: string;
@@ -150,9 +211,11 @@ namespace angularSuperGallery {
 		preloadNext?: boolean;
 		preloadDelay?: number;
 		loadingImage?: string;
+		container?: IOptionsContainer;
 		modal?: IOptionsModal;
 		panel?: IOptionsPanel;
 		image?: IOptionsImage;
+		item?: IOptionsImage;
 		thumbnail?: IOptionsThumbnail;
 
 	}
@@ -160,17 +223,18 @@ namespace angularSuperGallery {
 	// image source
 	export interface ISource {
 
-		modal: string; // original, required
-		panel?: string;
-		image?: string;
+		large: string; // original, required
+		small?: string;
+		medium?: string;
+		lazy?: string;
 		color?: string;
-		placeholder?: string;
 
 	}
 
 	// image file
 	export interface IFile {
 
+		index: number;
 		source: ISource;
 		title?: string;
 		subtitle?: string;
@@ -189,9 +253,9 @@ namespace angularSuperGallery {
 		};
 		download?: string;
 		loaded?: {
-			modal?: boolean;
-			panel?: boolean;
-			image?: boolean;
+			large?: boolean;
+			medium?: boolean;
+			small?: boolean;
 		};
 		width?: number;
 		height?: number;
@@ -262,6 +326,8 @@ namespace angularSuperGallery {
 
 		setItems(items: Array<IFile>, force?: boolean): void;
 
+		addImage(value: any, index?: number) : IFile;
+
 		preload(wait?: number): void;
 
 		normalize(index: number): number;
@@ -269,6 +335,8 @@ namespace angularSuperGallery {
 		setFocus(): void;
 
 		setSelected(index: number);
+
+		containerFullSize(): void;
 
 		modalOpen(index: number): void;
 
@@ -292,6 +360,8 @@ namespace angularSuperGallery {
 
 		hoverPreload(index: number): void;
 
+		preloadImage(index: number, size: string): void;
+
 		autoPlayToggle(): void;
 
 		toggle(element: string): void;
@@ -311,7 +381,7 @@ namespace angularSuperGallery {
 	// service controller
 	export class ServiceController {
 
-		public version = "2.1.9";
+		public version = "3.0.2";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -337,10 +407,10 @@ namespace angularSuperGallery {
 			selected: 0, // selected image on init
 			fields: {
 				source: {
-					modal: 'url', // required, image url for modal component (large size)
-					panel: 'url', // image url for panel component (thumbnail size)
-					image: 'url', // image url for image (medium or custom size)
-					placeholder: null // image url for preload lowres image
+					large: 'url', // required, image url for modal component (large size)
+					small: 'url', // image url for panel component (thumbnail size)
+					medium: 'url', // image url for image (medium or custom size)
+					lazy: null // image url for preload lowres image
 				},
 				title: 'title', // title field name
 				subtitle: 'subtitle', // subtitle field name
@@ -356,12 +426,79 @@ namespace angularSuperGallery {
 			preloadDelay: 770, // preload delay for preloadNext
 			loadingImage: 'preload.svg', // loader image
 			preload: [], // preload images by index number
-			modal: {
+			container: {
+				available: false,
+				fullsize: true,
+				visible: false,
 				title: '', // modal window title
 				subtitle: '', // modal window subtitle
 				titleFromImage: false, // force update the gallery title by image title
 				subtitleFromImage: false, // force update the gallery subtitle by image description
-				placeholder: 'panel', // set image placeholder source type (thumbnail) or full url (http...)
+				caption: {
+					disabled: true, // disable image caption
+					visible: true, // show/hide image caption
+					position: 'top', // caption position [top, bottom]
+					download: false // show/hide download link
+				},
+				header: {
+					enabled: true, // enable/disable modal menu
+					dynamic: false, // show/hide modal menu on mouseover
+					buttons: ['playstop', 'index', 'prev', 'next', 'pin', 'size', 'transition', 'thumbnails', 'fullsize', 'fullscreen', 'help', 'close'],
+				},
+				help: false, // show/hide help
+				arrows: {
+					enabled: true, // show/hide arrows
+					preload: false, // preload image on mouseover
+				},
+				click: {
+					close: true // when click on the image close the modal
+				},
+				thumbnail: {
+					available: false,
+					height: 50, // thumbnail image height in pixel
+					index: false, // show index number on thumbnail
+					enabled: true, // enable/disable thumbnails
+					dynamic: true, // if true thumbnails visible only when mouseover
+					autohide: true, // hide thumbnail component when single image
+					click: {
+						select: true, // set selected image when true
+						modal: false // open modal when true
+					},
+					hover: {
+						preload: false, // preload image on mouseover
+						select: false // set selected image on mouseover when true
+					},
+				},
+				transition: 'slideLR', // transition effect
+				transitionSpeed: 0.7, // transition speed 0.7s
+				size: 'contain', // contain, cover, auto, stretch
+				keycodes: {
+					exit: [27], // esc
+					playpause: [80], // p
+					forward: [32, 39], // space, right arrow
+					backward: [37], // left arrow
+					first: [38, 36], // up arrow, home
+					last: [40, 35], // down arrow, end
+					fullscreen: [13], // enter
+					menu: [77], // m
+					caption: [67], // c
+					help: [72], // h
+					size: [83], // s
+					transition: [84] // t
+				},
+				height: null, // height in pixel
+				heightMin: null, // min height in pixel
+				heightAuto: {
+					initial: true, // calculate div height by first image
+					onresize: false // calculate div height on window resize
+				},
+			},
+			modal: {
+				available: false,
+				title: '', // modal window title
+				subtitle: '', // modal window subtitle
+				titleFromImage: false, // force update the gallery title by image title
+				subtitleFromImage: false, // force update the gallery subtitle by image description
 				caption: {
 					disabled: false, // disable image caption
 					visible: true, // show/hide image caption
@@ -376,12 +513,13 @@ namespace angularSuperGallery {
 				help: false, // show/hide help
 				arrows: {
 					enabled: true, // show/hide arrows
-					preload: true, // preload image on mouseover
+					preload: false, // preload image on mouseover
 				},
 				click: {
 					close: true // when click on the image close the modal
 				},
 				thumbnail: {
+					available: false,
 					height: 50, // thumbnail image height in pixel
 					index: false, // show index number on thumbnail
 					enabled: true, // enable/disable thumbnails
@@ -392,7 +530,7 @@ namespace angularSuperGallery {
 						modal: false // open modal when true
 					},
 					hover: {
-						preload: true, // preload image on mouseover
+						preload: false, // preload image on mouseover
 						select: false // set selected image on mouseover when true
 					},
 				},
@@ -415,6 +553,7 @@ namespace angularSuperGallery {
 				}
 			},
 			thumbnail: {
+				available: false,
 				height: 50, // thumbnail image height in pixel
 				index: false, // show index number on thumbnail
 				dynamic: false, // if true thumbnails visible only when mouseover
@@ -429,7 +568,9 @@ namespace angularSuperGallery {
 				},
 			},
 			panel: {
+				available: false,
 				visible: true,
+				size: 'cover', // contain, cover, auto, stretch
 				items: {
 					class: 'row', // items class
 				},
@@ -439,7 +580,7 @@ namespace angularSuperGallery {
 					index: false, // show/hide image index
 				},
 				hover: {
-					preload: true, // preload image on mouseover
+					preload: false, // preload image on mouseover
 					select: false // set selected image on mouseover when true
 				},
 				click: {
@@ -448,12 +589,13 @@ namespace angularSuperGallery {
 				},
 			},
 			image: {
+				available: false,
 				transition: 'slideLR', // transition effect
 				transitionSpeed: 0.7, // transition speed 0.7s
 				size: 'cover', // contain, cover, auto, stretch
 				arrows: {
-					enabled: true,  // show/hide arrows
-					preload: true, // preload image on mouseover
+					enabled: false,  // show/hide arrows
+					preload: false, // preload image on mouseover
 				},
 				click: {
 					modal: true // when click on the image open the modal window
@@ -464,7 +606,25 @@ namespace angularSuperGallery {
 					initial: true, // calculate div height by first image
 					onresize: false // calculate div height on window resize
 				},
-				placeholder: 'panel' // set image placeholder source type (thumbnail) or full url (http...)
+			},
+			item: {
+				available: false,
+				transition: 'slideLR', // transition effect
+				transitionSpeed: 0.7, // transition speed 0.7s
+				size: 'cover', // contain, cover, auto, stretch
+				arrows: {
+					enabled: false,  // show/hide arrows
+					preload: false, // preload image on mouseover
+				},
+				click: {
+					modal: true // when click on the image open the modal window
+				},
+				height: null, // height in pixel
+				heightMin: null, // min height in pixel
+				heightAuto: {
+					initial: true, // calculate div height by first image
+					onresize: false // calculate div height on window resize
+				},
 			}
 		};
 
@@ -613,7 +773,7 @@ namespace angularSuperGallery {
 				if (component.$scope && component.$scope.$parent && component.$scope.$parent.$parent && component.$scope.$parent.$parent.$ctrl) {
 					component.id = component.$scope.$parent.$parent.$ctrl.id;
 				} else {
-					component.id = this.objectHashId(component.options);
+					component.id = this.objectHashId(component.options ? component.options : {'asg': 1});
 				}
 
 			}
@@ -632,13 +792,17 @@ namespace angularSuperGallery {
 			}
 
 			instance.setOptions(component.options);
-			instance.setItems(component.items);
+
+			if (component.items) {
+				instance.setItems(component.items);
+			}
+
 			instance.selected = component.selected ? component.selected : instance.options.selected;
 			instance.parseHash();
 
 			if (instance.options) {
 
-				instance.loadImages(instance.options.preload);
+				//instance.loadImages(instance.options.preload);
 
 				if (instance.options.autoplay && instance.options.autoplay.enabled && !instance.autoplay) {
 					instance.autoPlayStart();
@@ -667,12 +831,16 @@ namespace angularSuperGallery {
 				return;
 			}
 
+			this.options = angular.copy(this.defaults);
+
 			if (options) {
 
-				this.options = angular.copy(this.defaults);
 				angular.merge(this.options, options);
 
-				if (options.modal && options.modal.header && options.modal.header.buttons) {
+				let modalHeaderButtons = options.modal && options.modal.header && options.modal.header.buttons;
+				let containerHeaderButtons = options.container && options.container.header && options.container.header.buttons;
+
+				if (modalHeaderButtons) {
 
 					this.options.modal.header.buttons = options.modal.header.buttons;
 
@@ -683,10 +851,19 @@ namespace angularSuperGallery {
 
 				}
 
+				if (containerHeaderButtons) {
+
+					this.options.container.header.buttons = options.container.header.buttons;
+
+					// remove duplicates from buttons
+					this.options.container.header.buttons = this.options.container.header.buttons.filter(function (x, i, a) {
+						return a.indexOf(x) === i;
+					});
+
+				}
+
 				this.optionsLoaded = true;
 
-			} else {
-				this.options = angular.copy(this.defaults);
 			}
 
 			// if !this.$window.screenfull
@@ -718,8 +895,13 @@ namespace angularSuperGallery {
 			}
 
 			this._selected = v;
-			this.loadImage(this._selected);
-			this.preload();
+
+			if (this.options.container.available && this.options.container.visible) {
+				this.preloadImage(this._selected, 'large');
+			}
+
+			//this.loadImage(this._selected);
+			// this.preload();
 
 			if (this.file) {
 
@@ -947,6 +1129,28 @@ namespace angularSuperGallery {
 		}
 
 
+		public preloadImage(index, size, callback?: {}) {
+
+			index = index ? index : this.selected;
+			index = this.normalize(index);
+
+			if (!this.files[index]) {
+				this.log('invalid file index', { index: index });
+				return;
+			}
+
+			if (this.files[index].loaded[size] === true) {
+				return;
+			}
+
+			let img = new Image();
+			img.src = this.files[index].source[size];
+			img.addEventListener('load', (event) => {
+				this.afterLoad(index, size, img);
+			});
+
+		}
+
 		public loadImage(index?: number, callback?: {}) {
 
 			index = index ? index : this.selected;
@@ -959,26 +1163,26 @@ namespace angularSuperGallery {
 
 			if (this.modalVisible) {
 
-				if (this.files[index].loaded.modal === true) {
+				if (this.files[index].loaded.large === true) {
 					return;
 				}
 
-				let modal = new Image();
-				modal.src = this.files[index].source.modal;
-				modal.addEventListener('load', (event) => {
-					this.afterLoad(index, 'modal', modal);
+				let large = new Image();
+				large.src = this.files[index].source.large;
+				large.addEventListener('load', (event) => {
+					this.afterLoad(index, 'large', large);
 				});
 
 			} else {
 
-				if (this.files[index].loaded.image === true) {
+				if (this.files[index].loaded.medium === true) {
 					return;
 				}
 
-				let image = new Image();
-				image.src = this.files[index].source.image;
-				image.addEventListener('load', () => {
-					this.afterLoad(index, 'image', image);
+				let medium = new Image();
+				medium.src = this.files[index].source.medium;
+				medium.addEventListener('load', () => {
+					this.afterLoad(index, 'medium', medium);
 				});
 
 			}
@@ -1017,12 +1221,12 @@ namespace angularSuperGallery {
 				return;
 			}
 
-			if (type === 'modal') {
+			if (type === 'large') {
 				this.files[index].width = image.width;
 				this.files[index].height = image.height;
 				this.files[index].name = this.getFilename(index, type);
 				this.files[index].extension = this.getExtension(index, type);
-				this.files[index].download = this.files[index].source.modal;
+				this.files[index].download = this.files[index].source.large;
 			}
 
 			this.files[index].loaded[type] = true;
@@ -1032,9 +1236,9 @@ namespace angularSuperGallery {
 			if (!this.first) {
 				this.first = true;
 				this.event(this.events.FIRST_IMAGE, data);
+			} else {
+				this.event(this.events.LOAD_IMAGE, data);
 			}
-
-			this.event(this.events.LOAD_IMAGE, data);
 
 		}
 
@@ -1051,7 +1255,7 @@ namespace angularSuperGallery {
 		public downloadLink() {
 
 			if (this.selected !== undefined && this.files.length > 0) {
-				return this.files[this.selected].source.modal;
+				return this.files[this.selected].source.large;
 			}
 
 		}
@@ -1090,7 +1294,7 @@ namespace angularSuperGallery {
 		// get classes
 		public get classes(): string {
 
-			return this.options.theme + ' ' + this.id + (this.editing ? ' editing' : '');
+			return 'asg-theme-' + this.options.theme + ' ' + this.id + (this.editing ? ' editing' : '');
 
 		}
 
@@ -1098,6 +1302,10 @@ namespace angularSuperGallery {
 		public dynamicStyle(file: IFile, type: string, config: IOptionsModal | IOptionsImage) {
 
 			let style = {};
+
+			if (!file) {
+				return style;
+			}
 
 			if (file.source.color) {
 				style['background-color'] = file.source.color;
@@ -1119,6 +1327,12 @@ namespace angularSuperGallery {
 		public placeholderStyle(file: IFile, type: string) {
 
 			let style = {};
+
+			return style;
+
+			if (!file) {
+				return style;
+			}
 
 			if (this.options[type].placeholder) {
 
@@ -1142,8 +1356,8 @@ namespace angularSuperGallery {
 				style['background-color'] = file.source.color;
 			}
 
-			if (file.source.placeholder) {
-				style['background-image'] = 'url(' + file.source.placeholder + ')';
+			if (file.source.lazy) {
+				style['background-image'] = 'url(' + file.source.lazy + ')';
 			}
 
 			return style;
@@ -1295,15 +1509,34 @@ namespace angularSuperGallery {
 		// set the focus
 		public setFocus() {
 
-			if (this.modalVisible) {
 
-				let element: Node = this.el('div.asg-modal.' + this.id + ' .keyInput')[0];
+			let path = 'div.asg-container.' + this.id + ' .keyInput';
+			let element: Node = this.el(path)[0];
 
-				if (element) {
-					angular.element(element)[0]['focus']();
-				}
+			this.log('set focus', [path, element]);
 
+			if (element) {
+				angular.element(element)[0]['focus']();
 			}
+
+		}
+
+		public containerFullSize() {
+
+			if (!this.options.container.available) {
+				return;
+			}
+
+			this.options.container.fullsize = true;
+			this.options.container.visible = true;
+
+			this.timeout(() => {
+				this.setFocus();
+			}, 100);
+
+			this.timeout(() => {
+				this.event(this.events.MODAL_OPEN, { index: this.selected });
+			}, 460);
 
 		}
 
@@ -1432,7 +1665,7 @@ namespace angularSuperGallery {
 			let length = this.files.length;
 
 			for (let key = 0; key < length; key++) {
-				if (this.files[key].source.modal === filename) {
+				if (this.files[key].source.large === filename) {
 					return this.files[key];
 				}
 			}
@@ -1452,16 +1685,17 @@ namespace angularSuperGallery {
 		}
 
 		// add image
-		public addImage(value: any, index?: number) {
-
-			if (value === undefined || value === null) {
-				return;
-			}
+		public addImage(value: any, index?: number) : IFile {
 
 			const self = this;
 
+			if (value === undefined || value === null) {
+				self.log('invalid image value');
+				return;
+			}
+
 			if (angular.isString(value) === true) {
-				value = { source: { modal: value } };
+				value = { source: { medium: value } };
 			}
 
 			let getAvailableSource = function (type: string, src: ISource) {
@@ -1472,22 +1706,29 @@ namespace angularSuperGallery {
 
 				} else {
 
-					if (type === 'panel') {
-						type = 'image';
+					if (type === 'small') {
+						type = 'medium';
 						if (src[type]) {
 							return self.getFullUrl(src[type]);
 						}
 					}
 
-					if (type === 'image') {
-						type = 'modal';
+					if (type === 'medium') {
+						type = 'large';
 						if (src[type]) {
 							return self.getFullUrl(src[type]);
 						}
 					}
 
-					if (type === 'modal') {
-						type = 'image';
+					if (type === 'large') {
+						type = 'medium';
+						if (src[type]) {
+							return self.getFullUrl(src[type]);
+						}
+					}
+
+					if (type === 'lazy') {
+						type = 'medium';
 						if (src[type]) {
 							return self.getFullUrl(src[type]);
 						}
@@ -1499,27 +1740,52 @@ namespace angularSuperGallery {
 
 			if (!value.source) {
 				value.source = {
-					modal: value[self.options.fields.source.modal],
-					panel: value[self.options.fields.source.panel],
-					image: value[self.options.fields.source.image],
-					placeholder: value[self.options.fields.source.placeholder]
+					large: value[self.options.fields.source.large],
+					small: value[self.options.fields.source.small],
+					medium: value[self.options.fields.source.medium],
+					lazy: value[self.options.fields.source.lazy],
 				};
 			}
 
 			let source = {
-				modal: getAvailableSource('modal', value.source),
-				panel: getAvailableSource('panel', value.source),
-				image: getAvailableSource('image', value.source),
+				large: getAvailableSource('large', value.source),
+				small: getAvailableSource('small', value.source),
+				medium: getAvailableSource('medium', value.source),
+				lazy: getAvailableSource('lazy', value.source),
 				color: value.color ? value.color : 'transparent',
-				placeholder: value.placeholder ? self.getFullUrl(value.placeholder) : null
 			};
 
-			if (!source.modal) {
+			let sizes = {
+				large: '1920w',
+				medium: '1024w',
+				small: '480w',
+			}
+
+			if (!source.large) {
 				self.log('invalid image data', { source: source, value: value });
 				return;
 			}
 
-			let parts = source.modal.split('/');
+			if (source.large.indexOf(' ') > 0) {
+				let parts = source.large.split(' ');
+				sizes.large = parts[1].trim();
+				source.large = parts[0].trim();
+			}
+
+			if (source.medium.indexOf(' ') > 0) {
+				let parts = source.medium.split(' ');
+				sizes.medium = parts[1].trim();
+				source.medium = parts[0].trim();
+			}
+
+			if (source.small.indexOf(' ') > 0) {
+				let parts = source.small.split(' ');
+				sizes.small = parts[1].trim();
+				source.small = parts[0].trim();
+			}
+
+
+			let parts = source.large.split('/');
 			let filename = parts[parts.length - 1];
 			let title, subtitle, description, video;
 
@@ -1536,28 +1802,35 @@ namespace angularSuperGallery {
 			}
 
 			let file = {
+				index: index,
 				source: source,
+				sizes: sizes,
 				title: title,
 				subtitle: subtitle,
 				description: description,
-				video: video,
+				video: video && video.vimeoId ? video : null,
+				'class': value.class ? value.class : '',
 				loaded: {
-					modal: false,
-					panel: false,
-					image: false
+					large: false,
+					medium: false,
+					small: false
 				}
 			};
 
 			if (index !== undefined && this.files[index] !== undefined) {
 				this.files[index] = file;
+				return file;
 			} else {
 
-				if (self.options.duplicates !== true && this.findImage(file.source.modal)) {
+				if (self.options.duplicates !== true && this.findImage(file.source.large)) {
 					self.event(self.events.DOUBLE_IMAGE, file);
 					return;
 				}
 
 				this.files.push(file);
+				file.index = this.files.length - 1;
+
+				return file;
 
 			}
 

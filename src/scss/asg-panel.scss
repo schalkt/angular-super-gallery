@@ -4,14 +4,37 @@
         position: relative;
         border: none;
         border-radius: unset;
-        img {
-            cursor: pointer;
+
+		img {
+			cursor: pointer;
             display: block;
-            max-width: 100%;
-            height: auto;
+			width: 100%;
+			height: 100%;
+			max-width: 100%;
+			max-height: 100%;
             margin-right: auto;
             margin-left: auto;
-        }
+			object-fit: cover;
+		}
+
+		&.cover {
+			img {
+				object-fit: cover;
+			}
+		}
+
+		&.contain {
+			img {
+				object-fit: contain;
+			}
+		}
+
+		&.stretch {
+			img {
+				object-fit: fill;
+			}
+		}
+
         .index {
             position: absolute;
             top: 7px;

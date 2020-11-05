@@ -4,7 +4,7 @@ $primary: #ff4343;
 $button: #445059;
 $icon: #8fa9cc;
 $white: #fefefe;
-.asg-thumbnail.darkred {
+.asg-thumbnail.asg-theme-darkred {
     background-color: $dark;
     padding: 6px 0px 7px 0px;
     .item {
@@ -37,7 +37,7 @@ $white: #fefefe;
     }
 }
 
-.asg-image.darkred {
+.asg-image.asg-theme-darkred {
     background-color: $dark;
     color: $primary;
     .asg-info {
@@ -89,7 +89,7 @@ $white: #fefefe;
     }
 }
 
-.asg-modal.darkred {
+.asg-modal.asg-theme-darkred {
     .frame {
         margin: 0;
     }
@@ -153,7 +153,7 @@ $white: #fefefe;
     }
 }
 
-.asg-control.darkred {
+.asg-control.asg-theme-darkred {
     .btn {
         -webkit-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
@@ -176,12 +176,12 @@ $white: #fefefe;
     background-color: $dark;
 }
 
-.asg-info.darkred {
+.asg-info.asg-theme-darkred {
     background-color: $dark;
     color: $primary;
 }
 
-.asg-panel.darkred {
+.asg-panel.asg-theme-darkred {
     background-color: $dark;
     .item {
         background-color: $dark;

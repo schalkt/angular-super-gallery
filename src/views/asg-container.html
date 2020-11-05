@@ -1,0 +1,100 @@
+<div ng-cloak class="asg-container {{ $ctrl.asg.classes }}" ng-class="$ctrl.getClass()" ng-if="$ctrl.visible"
+	ng-click="$ctrl.imageClick($event);"
+	ng-style="{'min-height' : $ctrl.config.heightMin + 'px', 'height' : $ctrl.height + 'px'}">
+
+	<div tabindex="1" class="keyInput" ng-keydown="$ctrl.keyUp($event)"></div>
+
+	<div class="frame" ng-click="$ctrl.asg.modalClick($event);">
+
+		<div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">
+
+			<span class="buttons d-block d-sm-none pull-right">
+				<span ng-include="'/views/button/asg-index-xs.html'"></span>
+			</span>
+
+			<span class="buttons d-none d-sm-block pull-right">
+				<span ng-repeat="item in $ctrl.config.header.buttons"
+					ng-include="('/views/button/asg-' + item + '.html')"></span>
+			</span>
+
+			<span ng-if="$ctrl.config.title">
+				<span class="title">{{ $ctrl.config.title }}</span>
+				<span class="subtitle d-none d-sm-block"
+					ng-if="$ctrl.config.subtitle">{{ $ctrl.config.subtitle }}</span>
+			</span>
+
+		</div>
+
+		<div class="images {{ $ctrl.asg.direction }} {{ $ctrl.config.transition }}"
+			ng-style="{'top': $ctrl.marginTop + 'px', 'bottom': $ctrl.marginBottom + 'px'}"
+			ng-mouseover="$ctrl.asg.over.modalImage = true;" ng-mouseleave="$ctrl.asg.over.modalImage = false;">
+
+			<div class="help text-right" ng-click="$ctrl.toggleHelp($event)" ng-show="$ctrl.config.help"
+				ng-include="'/views/asg-help.html'"></div>
+
+			<div class="arrow left" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle">
+				<button class="btn btn-default btn-md pull-left" ng-click="$ctrl.toBackward(true, $event)"
+					ng-mouseover="$ctrl.hover($ctrl.asg.selected - 1, $event)">
+					<span class="fa fa-chevron-left"></span>
+				</button>
+			</div>
+
+			<div class="arrow right" ng-if="$ctrl.config.arrows.enabled && !$ctrl.asg.isSingle">
+				<button class="btn btn-default btn-md pull-right" ng-click="$ctrl.toForward(true, $event)"
+					ng-mouseover="$ctrl.hover($ctrl.asg.selected + 1, $event)">
+					<span class="fa fa-chevron-right"></span>
+				</button>
+			</div>
+
+			<div class="image {{ $ctrl.config.size }}" ng-click="$ctrl.imageClick($event)"
+				ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)"
+				ng-repeat="(key,file) in $ctrl.asg.files track by $index" ng-show="$ctrl.asg.selected == key"
+				ng-style="$ctrl.asg.dynamicStyle(file, 'large', $ctrl.config)"
+				ng-class="{'loaded' : file.loaded.large || file.loaded.medium }">
+
+				<div class="source {{ $ctrl.config.size }}">
+					<img ng-src="{{ file.source.lazy ? file.source.lazy : file.source.small }}"
+					ng-srcset="{{ file.source.large }} {{ file.sizes.large }}, {{ file.source.medium }} {{ file.sizes.medium }}, {{ file.source.small }} {{ file.sizes.small }}"
+					alt="{{ file.title }}" />
+				</div>
+
+				<div class="video" ng-show="file.video.visible" id="modal_vimeo_video_{{ file.video.vimeoId }}"
+					ng-swipe-left="$ctrl.asg.toForward(true)" ng-swipe-right="$ctrl.asg.toBackward(true)"></div>
+
+				<div class="play" ng-show="file.video && !file.video.playing">
+					<div class="button" ng-click="$ctrl.playVideo($event)">
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+							style="enable-background:new 0 0 512 512;" xml:space="preserve">
+							<g>
+								<circle class="circle" cx="256" cy="256" r="256" stroke-width="1" />
+							</g>
+							<g>
+								<polygon class="icon" points="189.776,141.328 189.776,370.992 388.672,256.16" />
+							</g>
+						</svg>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="caption {{ $ctrl.config.caption.position }}" ng-show="!$ctrl.config.caption.disabled"
+				ng-class="{'visible' : $ctrl.config.caption.visible}">
+				<div class="content">
+					<span class="title">{{ $ctrl.asg.file.title }}</span>
+					<span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
+					<span class="description">{{ $ctrl.asg.file.description }}</span>
+					<a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank"
+						class="btn btn-default btn-sm">
+						<span class="fa fa-download"></span> Download
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<ng-transclude></ng-transclude>
+
+	</div>
+
+</div>

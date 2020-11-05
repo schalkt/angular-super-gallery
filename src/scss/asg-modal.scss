@@ -119,11 +119,10 @@
 
 	.arrow {
 		position: absolute;
-		top: 0;
-		bottom: 0;
+		top: calc(50% - 35px);
 		opacity: 0;
-		z-index: 700;
-		min-height: 100px;
+		z-index: 720;
+		min-height: 70px;
 		transition: all ease 0.2s;
 		transform: scale(1.2);
 
@@ -131,13 +130,13 @@
 		align-items: center;
 		justify-content: center;
 
-		cursor: pointer;
-
 		&.left {
+			text-align: left;
 			left: -20px;
 		}
 
 		&.right {
+			text-align: right;
 			right: -20px;
 		}
 
@@ -148,6 +147,20 @@
 			&:hover {
 				opacity: 1;
 			}
+		}
+	}
+
+	.video {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 710;
+		background-color: black;
+
+		> div {
+			position: unset !important;
 		}
 	}
 
@@ -163,9 +176,7 @@
 			&.right {
 				right: 0;
 			}
-
 		}
-
 	}
 
     .caption {

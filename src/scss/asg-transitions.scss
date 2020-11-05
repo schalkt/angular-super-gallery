@@ -1,107 +1,112 @@
-.img {
-  max-width: 100%;
-  max-height: 100%;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  right: 0px;
-  left: 0;
-  z-index: 0;
-  width: auto;
-  height: auto;
-  bottom: 0px;
-  opacity: 1;
+.image {
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	right: 0px;
+	left: 0;
+	z-index: 0;
+	width: auto;
+	height: auto;
+	bottom: 0px;
+	opacity: 1;
 
-  background-size: auto;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-
-  >.placeholder {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    z-index: auto;
-    overflow: hidden;
-    background-size: auto;
-    background-position: 50% 50%;
+	background-size: auto;
+	background-position: 50% 50%;
 	background-repeat: no-repeat;
-	opacity: 0.42;
 
-	-ms-filter: 'progid:DXImageTransform.Microsoft.MotionBlur(strength=10)';
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(10px);
-	-o-filter: blur(10px);
-	filter: blur(10px);
+	> .source {
+		max-width: 100%;
+		max-height: 100%;
+		margin: auto;
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-size: auto;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		transition: all ease 0.5s;
+		opacity: 0;
+		text-align: center;
 
-    &.cover {
-      background-size: cover;
-    }
+		> img {
+			width: auto;
+			min-height: 100%;
+			max-height: 100%;
+			max-width: 100%;
+			object-fit: none;
+			object-position: 50% 50%;
+		}
 
-    &.contain {
-      background-size: contain;
-    }
+		&.cover {
+			background-size: cover;
 
-    &.stretch {
-      background-size: 100% 100%;
-    }
+			> img {
+				object-fit: cover;
+			}
+		}
 
-  }
+		&.contain {
+			background-size: contain;
+			> img {
+				object-fit: contain;
+			}
+		}
 
-  >.source {
-    max-width: 100%;
-    max-height: 100%;
-    margin: auto;
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-size: auto;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    transition: all ease .5s;
-    opacity: 0;
+		&.stretch {
+			background-size: 100% 100%;
+			> img {
+				object-fit: fill;
+			}
+		}
+	}
 
-    &.cover {
-      background-size: cover;
-    }
+	&.loaded {
+		background-image: none;
 
-    &.contain {
-      background-size: contain;
-    }
-
-    &.stretch {
-      background-size: 100% 100%;
-    }
-
-  }
-
-  &.loaded {
-
-    background-image: none;
-
-    .source {
-      opacity: 1;
-    }
-
-  }
-
+		.source {
+			opacity: 1;
+		}
+	}
 }
 
-@import 'transitions/rotateLR';
-@import 'transitions/rotateTB';
-@import 'transitions/rotateZY';
-@import 'transitions/slideLR';
-@import 'transitions/slideTB';
-@import 'transitions/zlideLR';
-@import 'transitions/zlideTB';
-@import 'transitions/fadeInOut';
-@import 'transitions/zoomIn';
-@import 'transitions/zoomOut';
-@import 'transitions/zoomInOut';
-@import 'transitions/flipX';
-@import 'transitions/flipY';
+.fadeinout {
+    &.ng-hide-add,
+    &.ng-hide-remove {
+        transition: all linear 2.21s;
+    }
 
+    &.ng-hide-add.ng-hide-add-active {
+        opacity: 0;
+    }
+
+    &.ng-hide-add {
+        opacity: 1;
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+        opacity: 1;
+    }
+
+    &.ng-hide-remove {
+        opacity: 0;
+    }
+}
+
+@import "transitions/rotateLR";
+@import "transitions/rotateTB";
+@import "transitions/rotateZY";
+@import "transitions/slideLR";
+@import "transitions/slideTB";
+@import "transitions/zlideLR";
+@import "transitions/zlideTB";
+@import "transitions/fadeInOut";
+@import "transitions/zoomIn";
+@import "transitions/zoomOut";
+@import "transitions/zoomInOut";
+@import "transitions/flipX";
+@import "transitions/flipY";

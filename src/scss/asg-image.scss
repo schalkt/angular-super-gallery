@@ -1,83 +1,43 @@
+.asg-images {
+	padding-bottom: 2px;
+	padding-right: 2px;
+}
+
 .asg-image {
 	position: relative;
 	overflow: hidden;
+	height: 100%;
 
-	> .images {
-		position: absolute;
-		top: 0px;
-		right: 0px;
-		bottom: 0px;
-		left: 0px;
-		z-index: auto;
-		overflow: hidden;
-		perspective: $perspective;
-
-		> .img {
-			background-size: auto;
-			background-position: 50% 50%;
-			background-repeat: no-repeat;
-
-			> .placeholder {
-				position: absolute;
-				top: 0px;
-				right: 0px;
-				bottom: 0px;
-				left: 0px;
-				z-index: auto;
-				overflow: hidden;
-				background-size: auto;
-				background-position: 50% 50%;
-				background-repeat: no-repeat;
-				filter: blur(10px);
-
-				&.cover {
-					background-size: cover;
-				}
-
-				&.contain {
-					background-size: contain;
-				}
-
-				&.stretch {
-					background-size: 100% 100%;
-				}
-			}
-
-			> .source {
-				cursor: pointer;
-				background-size: auto;
-				background-position: 50% 50%;
-				background-repeat: no-repeat;
-				transition: all ease 0.5s;
-				opacity: 0;
-
-				&.cover {
-					background-size: cover;
-				}
-
-				&.contain {
-					background-size: contain;
-				}
-
-				&.stretch {
-					background-size: 100% 100%;
-				}
-			}
-
-			&.loaded {
-				background-image: none;
-
-				.source {
-					opacity: 1;
-				}
-			}
-		}
-
-		@import "asg-transitions";
+	img {
+		padding-left: 2px;
+		padding-top: 2px;
+		cursor: pointer;
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		max-height: 100%;
+		margin-right: auto;
+		margin-left: auto;
+		object-fit: contain;
 	}
 
-	&.modalon .source {
-		cursor: pointer;
+	&.cover {
+		img {
+			object-fit: cover;
+		}
+	}
+
+	&.contain {
+		img {
+			object-fit: contain;
+		}
+	}
+
+	&.stretch {
+		img {
+			object-fit: fill;
+		}
 	}
 
 	.asg-info {
@@ -93,39 +53,6 @@
 		right: 0;
 	}
 
-	.arrow {
-		position: absolute;
-		top: calc(50% - 35px);
-		opacity: 0;
-		z-index: 720;
-		min-height: 70px;
-		transition: all ease 0.2s;
-		transform: scale(1.2);
-
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		&.left {
-			text-align: left;
-			left: -20px;
-		}
-
-		&.right {
-			text-align: right;
-			right: -20px;
-		}
-
-		.btn {
-			padding: 10px 16px;
-			opacity: 0.7;
-
-			&:hover {
-				opacity: 1;
-			}
-		}
-	}
-
 	.video {
 		position: absolute;
 		top: 0;
@@ -133,52 +60,10 @@
 		left: 0;
 		right: 0;
 		z-index: 710;
-		background-color: black;
 
 		> div {
 			position: unset !important;
 		}
 	}
 
-	.play {
-		position: absolute;
-		top: calc(50% - 80px);
-		left: calc(50% - 80px);
-		width: 160px;
-		height: 160px;
-		z-index: 800;
-		text-align: center;
-
-		.button {
-			fill: white;
-			opacity: 0.42;
-			cursor: pointer;
-			transition: all $animspeed;
-			border-radius: 50%;
-
-			&:hover {
-				opacity: 0.77;
-				box-shadow: 0px 0px 7px #212121;
-			}
-
-			svg {
-				stroke-width: 2;
-			}
-		}
-	}
-
-	&:hover {
-		.arrow {
-			opacity: 1;
-			transform: scale(1);
-
-			&.left {
-				left: 0;
-			}
-
-			&.right {
-				right: 0;
-			}
-		}
-	}
 }

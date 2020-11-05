@@ -2,7 +2,7 @@ $black: #212121;
 $white: #f1f1f1;
 $white_darken: darken($white, 14%);
 $primary: #d4c386;
-.asg-thumbnail.whitegold {
+.asg-thumbnail.asg-theme-whitegold {
     background-color: #d4c386;
     padding: 4px;
     .item {
@@ -30,7 +30,7 @@ $primary: #d4c386;
     }
 }
 
-.asg-image.whitegold {
+.asg-image.asg-theme-whitegold {
     background-color: $primary;
     color: $white;
     .asg-info {
@@ -61,7 +61,7 @@ $primary: #d4c386;
     }
 }
 
-.asg-modal.whitegold {
+.asg-modal.asg-theme-whitegold {
     .btn {
         -webkit-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
@@ -105,7 +105,7 @@ $primary: #d4c386;
     }
 }
 
-.asg-control.whitegold {
+.asg-control.asg-theme-whitegold {
     .btn {
         -webkit-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
@@ -128,7 +128,7 @@ $primary: #d4c386;
     background-color: $primary;
 }
 
-.asg-info.whitegold {
+.asg-info.asg-theme-whitegold {
     background-color: $primary;
     color: $white;
     a {
@@ -142,7 +142,7 @@ $primary: #d4c386;
     }
 }
 
-.asg-panel.whitegold {
+.asg-panel.asg-theme-whitegold {
     .item {
         &.selected {
             border-color: $primary;

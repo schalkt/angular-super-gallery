@@ -5,9 +5,11 @@ namespace angularSuperGallery {
 	export class ImageController {
 
 		public id: string;
-		public options: IOptions;
-		public items: Array<IFile>;
-		public baseUrl: string;
+		public options: IOptions = {};
+		public baseUrl: string = '';
+		public item: IFile;
+		public file: IFile;
+		public index: number;
 
 		private type = 'image';
 		private asg: IServiceController;
@@ -37,26 +39,23 @@ namespace angularSuperGallery {
 
 			// get service instance
 			this.asg = this.service.getInstance(this);
-
-			var self = this;
-
-			// set image component height
-			this.$rootScope.$on(this.asg.events.FIRST_IMAGE + this.id, (event, data) => {
-
-				if (!this.config.height && this.config.heightAuto.initial === true) {
-					this.$timeout(() => {
-						self.setHeight(data.img);
-					}, 10);
-				}
-
-			});
+			this.config.available = true;
 
 			// scope apply when image loaded
 			this.$rootScope.$on(this.asg.events.LOAD_IMAGE + this.id, (event, data) => {
-
 				this.$scope.$apply();
-
 			});
+
+			if (this.index) {
+				this.file = this.asg.files[this.index] ? this.asg.files[this.index] : undefined;
+
+				console.log('image index', this.index);
+			}
+
+			if (this.item) {
+				this.file = this.asg.addImage(this.item);
+				this.index = this.file.index;
+			}
 
 		}
 
@@ -76,7 +75,6 @@ namespace angularSuperGallery {
 
 		}
 
-
 		// get image config
 		public get config(): IOptionsImage {
 
@@ -88,26 +86,6 @@ namespace angularSuperGallery {
 		public set config(value: IOptionsImage) {
 
 			this.asg.options[this.type] = value;
-
-		}
-
-		public toBackward(stop?: boolean, $event?: UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
-			}
-
-			this.asg.toBackward(stop);
-
-		}
-
-		public toForward(stop?: boolean, $event?: UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
-			}
-
-			this.asg.toForward(stop);
 
 		}
 
@@ -141,74 +119,21 @@ namespace angularSuperGallery {
 
 		}
 
-		// modal available
-		public get modalAvailable() {
-
-			return this.asg.modalAvailable && this.config.click.modal;
-
-		}
-
-		// open the modal
-		public modalOpen($event: UIEvent) {
+		public containerAction($event: UIEvent) {
 
 			if ($event) {
 				$event.stopPropagation();
 			}
 
-			if (this.config.click.modal) {
-				this.asg.modalOpen(this.asg.selected);
+			if (!this.asg.options.container.available) {
+				return;
 			}
 
-		}
+			this.asg.setSelected(this.file.index);
 
-		public playVideo($event: UIEvent) {
-
-			if ($event) {
-				$event.stopPropagation();
+			if (this.asg.options.container.fullsize) {
+				this.asg.containerFullSize();
 			}
-
-			var self = this;
-
-			this.asg.file.video.visible = true;
-			this.asg.file.video.htmlId = 'vimeo_video_' + this.asg.file.video.vimeoId;
-
-			var options = {
-				id: this.asg.file.video.vimeoId,
-				responsive: true,
-				loop: false
-			};
-
-			// console.log('video',  this.asg.file.video);
-			// console.log('vimeo options', options);
-
-			if (this.asg.file.video.player) {
-				var player = this.asg.file.video.player;
-			} else {
-				var player = new Vimeo.Player(this.asg.file.video.htmlId, options);
-			}
-
-			// player.loadVideo(this.asg.file.video.vimeoId).then(function(id) {
-
-			// })
-
-			player.setVolume(0.5);
-
-			player.play().catch(function (error) {
-				console.error('error playing the video:', error);
-			})
-
-			player.on('play', function() {
-				self.asg.file.video.playing = true;
-				console.log('play the video!');
-			});
-
-			player.on('pause', function() {
-				self.asg.file.video.playing = false
-				console.log('paused the video!');
-			});
-
-			this.asg.file.video.player = player;
-			this.asg.file.video.playing = true;
 
 		}
 
@@ -222,7 +147,8 @@ namespace angularSuperGallery {
 		transclude: true,
 		bindings: {
 			id: '@?',
-			items: '=?',
+			item: '=?',
+			index: '=?',
 			options: '=?',
 			selected: '=?',
 			baseUrl: '@?'

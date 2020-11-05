@@ -1,6 +1,6 @@
 &.slideLR {
 
-  &.forward .img {
+  &.forward .image {
 
     &.ng-hide-remove, &.ng-hide-add {
       transition: all ease $animspeed;
@@ -28,7 +28,7 @@
 
   }
 
-  &.backward .img {
+  &.backward .image {
 
     &.ng-hide-remove, &.ng-hide-add {
       transition: all ease $animspeed;

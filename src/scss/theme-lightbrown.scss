@@ -1,0 +1,137 @@
+$black: #070707;
+$white: #f0ebe8;
+$primary: #f0ebe8;
+
+.asg-container.asg-theme-lightbrown {
+	background-color: rgba($white, 1);
+	.frame {
+
+		.header {
+			background-color: $primary;
+			color: $primary;
+			.title {
+				color: $white;
+			}
+			.subtitle {
+				background: $primary;
+				color: $white;
+			}
+		}
+
+		.images {
+			overflow: visible;
+		}
+
+		.video {
+			background-color: $white;
+		}
+
+		.btn {
+			-webkit-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+			border-radius: 0;
+			background-image: none;
+			text-shadow: none;
+		}
+		.btn-default {
+			border: none;
+			color: $black;
+			background-color: transparent;
+		}
+		.btn-default:focus,
+		.btn-default:hover {
+			border: none;
+			outline: none;
+			color: $black;
+		}
+
+		.help {
+			background-color: rgba($primary, 0.77);
+			color: $white;
+		}
+		.caption {
+			.content {
+				background-color: rgba($primary, 0.56);
+				color: $white;
+			}
+		}
+
+		.arrow {
+			opacity: 1;
+			transform: scale(1);
+
+			&.left {
+				left: 0px;
+			}
+
+			&.right {
+				right: 0px;
+			}
+
+			.btn {
+				font-size: 1.4em;
+				opacity: 0.7;
+
+				&:hover {
+					opacity: 1;
+				}
+			}
+
+		}
+
+	}
+}
+
+.asg-control.asg-theme-lightbrown {
+	.btn {
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		border-radius: 0;
+		background-image: none;
+		text-shadow: none;
+	}
+	.btn-default {
+		border: 1px solid $white;
+		color: $white;
+		background-color: transparent;
+	}
+	.btn-default:focus,
+	.btn-default:hover {
+		border: 1px solid $primary;
+		outline: none;
+		color: $primary;
+		background-color: $white;
+	}
+	background-color: $primary;
+}
+
+.asg-image.asg-theme-lightbrown {
+	background-color: $primary;
+	color: $white;
+	.asg-info {
+		background-color: rgba($black, 0.5);
+		color: darken($white, 5%);
+		a {
+			color: darken($white, 5%);
+		}
+	}
+	.btn {
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		border-radius: 0;
+		background-image: none;
+		text-shadow: none;
+	}
+	.btn-default {
+		border: 1px solid $white;
+		color: $white;
+		background-color: transparent;
+	}
+	.btn-default:focus,
+	.btn-default:hover {
+		border: 1px solid $primary;
+		outline: none;
+		color: $primary;
+		background-color: $white;
+	}
+}

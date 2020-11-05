@@ -48,7 +48,7 @@ namespace angularSuperGallery {
 
 		public onLoad(file?: IFile) {
 
-			file.loaded.panel = true;
+			file.loaded.small = true;
 			this.loaded++;
 
 			if (this.loaded === this.asg.files.length) {
