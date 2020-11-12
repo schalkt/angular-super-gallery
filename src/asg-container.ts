@@ -177,7 +177,7 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.asg.toFirst();
-			this.$scope.$apply();
+			// this.$scope.$apply();
 
 		}
 
@@ -185,7 +185,7 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.asg.toBackward(stop);
-			this.$scope.$apply();
+			// this.$scope.$apply();
 
 		}
 
@@ -193,7 +193,7 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.asg.toForward(stop);
-			this.$scope.$apply();
+			// this.$scope.$apply();
 
 		}
 
@@ -201,7 +201,7 @@ namespace angularSuperGallery {
 
 			this.asg.modalClick($event);
 			this.asg.toLast(stop);
-			this.$scope.$apply();
+			// this.$scope.$apply();
 
 		}
 
@@ -290,17 +290,12 @@ namespace angularSuperGallery {
 		private toggleFullSize($event?: UIEvent) {
 
 			this.asg.modalClick($event);
+			this.asg.stopVideos();
 
 			if (this.config.visibleDefault) {
 				this.config.fullsize = !this.config.fullsize;
 			} else {
 				this.config.visible = !this.config.visible;
-
-				if (this.asg.file.video && this.asg.file.video.playing) {
-					this.asg.file.video.player.pause();
-					this.asg.file.video.paused = true;
-				}
-
 			}
 
 		}
@@ -310,6 +305,7 @@ namespace angularSuperGallery {
 		private toggleFullScreen($event?: UIEvent) {
 
 			this.asg.modalClick($event);
+			this.asg.stopVideos();
 
 			if (!this.$window.screenfull) {
 				return;
@@ -401,53 +397,41 @@ namespace angularSuperGallery {
 				$event.stopPropagation();
 			}
 
-			if (!this.asg.file.video.vimeoId) {
-				return;
-			}
-
 			var self = this;
 
-			this.asg.file.video.visible = true;
-			this.asg.file.video.htmlId = 'modal_vimeo_video_' + this.asg.file.video.vimeoId;
+			this.asg.createVideo(this.asg.file);
 
-			var options = {
-				id: this.asg.file.video.vimeoId,
-				responsive: true,
-				loop: false
-			};
 
 			// console.log('video',  this.asg.file.video);
 			// console.log('vimeo options', options);
 
-			if (this.asg.file.video.player) {
-				var player = this.asg.file.video.player;
-			} else {
-				var player = new Vimeo.Player(this.asg.file.video.htmlId, options);
-			}
+			// if (this.asg.file.video.player) {
+			// 	var player = this.asg.file.video.player;
+			// } else {
+			// 	var player = new Vimeo.Player(this.asg.file.video.htmlId, options);
+			// }
 
-			player.setVolume(0.5);
-			player.play().catch(function (error) {
+			this.asg.file.video.player.setVolume(0.5);
+			this.asg.file.video.player.play().catch(function (error) {
 				console.error('error playing the video:', error);
 			})
 
 			// player.loadVideo(this.asg.file.video.vimeoId).then(function(id) {
 			// });
 
-			player.on('play', function () {
+			this.asg.file.video.player.on('play', function () {
 				self.asg.file.video.playing = true;
 				self.asg.file.video.visible = true;
 				self.$scope.$apply();
-				//console.log('play the video!');
 			});
 
-			player.on('pause', function () {
+			this.asg.file.video.player.on('pause', function () {
 				self.asg.file.video.playing = false
 				self.asg.file.video.visible = false;
 				self.$scope.$apply();
-				//console.log('paused the video!');
 			});
 
-			this.asg.file.video.player = player;
+			this.asg.file.video.visible = true;
 			this.asg.file.video.playing = true;
 
 		}

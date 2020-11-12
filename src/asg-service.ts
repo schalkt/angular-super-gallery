@@ -3,14 +3,14 @@ namespace angularSuperGallery {
 	// container component options
 	export interface IOptionsContainer {
 
-		available : boolean;
+		available: boolean;
 		header?: {
 			enabled?: boolean;
 			dynamic?: boolean;
 			buttons: Array<string>;
 		};
 		help?: boolean;
-		visible? : boolean;
+		visible?: boolean;
 		visibleDefault?: boolean;
 		caption?: {
 			disabled?: boolean;
@@ -19,11 +19,11 @@ namespace angularSuperGallery {
 			download?: boolean;
 		};
 		transition?: string;
-		transitionSpeed? : number;
+		transitionSpeed?: number;
 		title?: string;
 		subtitle?: string;
-		titleFromImage? : boolean;
-		subtitleFromImage? : boolean;
+		titleFromImage?: boolean;
+		subtitleFromImage?: boolean;
 		arrows?: {
 			preload?: boolean;
 			enabled?: boolean;
@@ -61,7 +61,7 @@ namespace angularSuperGallery {
 	// modal component options
 	export interface IOptionsModal {
 
-		available : boolean;
+		available: boolean;
 		header?: {
 			enabled?: boolean;
 			dynamic?: boolean;
@@ -75,11 +75,11 @@ namespace angularSuperGallery {
 			download?: boolean;
 		};
 		transition?: string;
-		transitionSpeed? : number;
+		transitionSpeed?: number;
 		title?: string;
 		subtitle?: string;
-		titleFromImage? : boolean;
-		subtitleFromImage? : boolean;
+		titleFromImage?: boolean;
+		subtitleFromImage?: boolean;
 		arrows?: {
 			preload?: boolean;
 			enabled?: boolean;
@@ -110,7 +110,7 @@ namespace angularSuperGallery {
 	// panel component options
 	export interface IOptionsPanel {
 
-		available : boolean;
+		available: boolean;
 		visible?: boolean;
 		size?: string;
 		items?: {
@@ -135,7 +135,7 @@ namespace angularSuperGallery {
 	// thumbnail component options
 	export interface IOptionsThumbnail {
 
-		available : boolean;
+		available: boolean;
 		height?: number;
 		index?: boolean;
 		enabled?: boolean;
@@ -162,9 +162,9 @@ namespace angularSuperGallery {
 	// image component options
 	export interface IOptionsImage {
 
-		available : boolean;
+		available: boolean;
 		transition?: string;
-		transitionSpeed? : number;
+		transitionSpeed?: number;
 		size?: string;
 		arrows?: {
 			preload?: boolean;
@@ -241,16 +241,7 @@ namespace angularSuperGallery {
 		name?: string;
 		extension?: string;
 		description?: string;
-		video?: {
-			vimeoId: string;
-			youtubeId: string;
-			htmlId: string;
-			autoplay: boolean;
-			paused: boolean;
-			visible: boolean;
-			playing: boolean;
-			player: any
-		};
+		video?: IVideo;
 		download?: string;
 		loaded?: {
 			large?: boolean;
@@ -260,6 +251,25 @@ namespace angularSuperGallery {
 		width?: number;
 		height?: number;
 
+	}
+
+	// video
+	export interface IVideo {
+		vimeoId: string;
+		youtubeId?: string;
+		htmlId: string;
+		autoplay: boolean;
+		paused: boolean;
+		visible: boolean;
+		playing: boolean;
+		player: any
+	}
+
+	// vimeo options
+	export interface IVimeoOptions {
+		id?: string;
+		responsive?: boolean;
+		loop?: boolean;
 	}
 
 	export interface IOver {
@@ -326,7 +336,7 @@ namespace angularSuperGallery {
 
 		setItems(items: Array<IFile>, force?: boolean): void;
 
-		addImage(value: any, index?: number) : IFile;
+		addImage(value: any, index?: number): IFile;
 
 		preload(wait?: number): void;
 
@@ -376,12 +386,16 @@ namespace angularSuperGallery {
 
 		event(event: string, data?: any);
 
+		createVideo(file: IFile, options?: IVimeoOptions) : void;
+
+		stopVideos() : void;
+
 	}
 
 	// service controller
 	export class ServiceController {
 
-		public version = "3.0.2";
+		public version = "3.0.3";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -773,7 +787,7 @@ namespace angularSuperGallery {
 				if (component.$scope && component.$scope.$parent && component.$scope.$parent.$parent && component.$scope.$parent.$parent.$ctrl) {
 					component.id = component.$scope.$parent.$parent.$ctrl.id;
 				} else {
-					component.id = this.objectHashId(component.options ? component.options : {'asg': 1});
+					component.id = this.objectHashId(component.options ? component.options : { 'asg': 1 });
 				}
 
 			}
@@ -1660,7 +1674,7 @@ namespace angularSuperGallery {
 		}
 
 		// find image in gallery by modal source
-		public findImage(filename : string) {
+		public findImage(filename: string) {
 
 			let length = this.files.length;
 
@@ -1675,7 +1689,7 @@ namespace angularSuperGallery {
 		}
 
 
-		public getFullUrl(url : string, baseUrl?: string) {
+		public getFullUrl(url: string, baseUrl?: string) {
 
 			baseUrl = baseUrl === undefined ? this.options.baseUrl : baseUrl;
 			let isFull = (url.indexOf('//') === 0 || url.indexOf('http') === 0) ? true : false;
@@ -1685,7 +1699,7 @@ namespace angularSuperGallery {
 		}
 
 		// add image
-		public addImage(value: any, index?: number) : IFile {
+		public addImage(value: any, index?: number): IFile {
 
 			const self = this;
 
@@ -1833,6 +1847,37 @@ namespace angularSuperGallery {
 				return file;
 
 			}
+
+		}
+
+
+		// create video player
+		public createVideo(file: IFile, options?: IVimeoOptions) : void {
+
+			if (!file.video || !file.video.vimeoId) {
+				return;
+			}
+
+			options = options === undefined ? {} : options;
+			options.id = file.video.vimeoId;
+			options.responsive = options.responsive ? options.responsive : true;;
+			options.loop = options.loop ? options.loop : false;
+
+			file.video.htmlId = 'modal_vimeo_video_' + file.video.vimeoId;
+			file.video.player = new Vimeo.Player(file.video.htmlId, options);
+			file.video.player.setVolume(0.77);
+
+		}
+
+		public stopVideos() : void {
+
+			this.files.forEach((item) => {
+				if (item.video && item.video.player) {
+					 item.video.paused = true;
+					 item.video.visible = false;
+					 item.video.playing = false;
+				}
+			});
 
 		}
 
