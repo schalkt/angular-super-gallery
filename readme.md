@@ -384,6 +384,7 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 ## Todo
 
+- Vimeo video player [WIP]
 - slideshow mode (fullscreen, hide menu and arrows, start autoplay)
 - indicator component
 - theme color setup

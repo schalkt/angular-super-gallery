@@ -10,8 +10,6 @@
 			ng-click="$ctrl.modalOpen($event)" ng-style="$ctrl.asg.dynamicStyle(file, 'image', $ctrl.config)"
 			ng-class="{'loaded' : file.loaded.image}">
 
-			<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index: 10;"
-				ng-if="$ctrl.asg.options.debug">{{ file }}</div>
 			<div class="placeholder {{ $ctrl.config.size }}" ng-style="$ctrl.asg.placeholderStyle(file, 'image')"></div>
 			<div class="source {{ $ctrl.config.size }}"
 				ng-style="{'background-image': 'url(' + file.source.image + ')'}"
