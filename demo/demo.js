@@ -70,7 +70,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
             click: {
                 modal: true
             },
-            transition: 'zoomInOut',
+            transition: 'zlideLR',
             placeholder: 'panel'
         },
     };
@@ -85,7 +85,10 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
             },
             "title": "Marmolada, Italy",
             "description": "Marco Bonomo",
-            'color': imagesBackGroundColor
+			'color': imagesBackGroundColor,
+			'video': {
+				'vimeoId' : '173523597'
+			}
         }, {
             "source": {
                 "modal": "photo-1577951930508-9b26cce01b4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
@@ -94,7 +97,10 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
             },
             "title": "ALEKSEY KUPRIKOV",
             "description": "",
-            'color': imagesBackGroundColor
+			'color': imagesBackGroundColor,
+			'video': {
+				'vimeoId' : '137468479'
+			}
         }, {
             "source": {
                 "modal": "photo-1577578306649-09e937512e28?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
@@ -347,7 +353,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
                 onresize: true,
             },
             transition: 'zoomInOut',
-            transitionSpeed: 3.2,
+            transitionSpeed: 0.9,
             placeholder: 'panel'
         },
     };

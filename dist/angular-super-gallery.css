@@ -41,7 +41,7 @@ body.asg-yhidden {
         background-size: auto;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        transition: all ease .5s;
+        transition: all ease 0.5s;
         opacity: 0; }
         .asg-image > .images > .img > .source.cover {
           background-size: cover; }
@@ -475,8 +475,6 @@ body.asg-yhidden {
       transform: rotateY(-180deg); }
   .asg-image.modalon .source {
     cursor: pointer; }
-  .asg-image.modalon .arrows {
-    cursor: pointer; }
   .asg-image .asg-info {
     position: absolute;
     bottom: 0;
@@ -486,30 +484,63 @@ body.asg-yhidden {
     position: absolute;
     bottom: 0;
     right: 0; }
-  .asg-image .arrows {
+  .asg-image .arrow {
+    position: absolute;
+    top: calc(50% - 35px);
+    opacity: 0;
+    z-index: 720;
+    min-height: 70px;
+    transition: all ease 0.2s;
+    transform: scale(1.2);
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .asg-image .arrow.left {
+      text-align: left;
+      left: -20px; }
+    .asg-image .arrow.right {
+      text-align: right;
+      right: -20px; }
+    .asg-image .arrow .btn {
+      padding: 10px 16px;
+      opacity: 0.7; }
+      .asg-image .arrow .btn:hover {
+        opacity: 1; }
+  .asg-image .video {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 700;
-    opacity: 0;
-    transition: all ease 0.2s;
-    transform: scale(1.1); }
-    .asg-image .arrows:hover {
-      opacity: 1;
-      transform: scale(1); }
-    .asg-image .arrows .toBackward, .asg-image .arrows .toForward {
-      position: absolute;
-      top: 45%; }
-      .asg-image .arrows .toBackward .btn, .asg-image .arrows .toForward .btn {
-        padding: 10px 16px;
-        opacity: 0.7; }
-        .asg-image .arrows .toBackward .btn:hover, .asg-image .arrows .toForward .btn:hover {
-          opacity: 1; }
-    .asg-image .arrows .toBackward {
+    z-index: 710;
+    background-color: black; }
+    .asg-image .video > div {
+      position: unset !important; }
+  .asg-image .play {
+    position: absolute;
+    top: calc(50% - 80px);
+    left: calc(50% - 80px);
+    width: 160px;
+    height: 160px;
+    z-index: 800;
+    text-align: center; }
+    .asg-image .play .button {
+      fill: white;
+      opacity: 0.42;
+      cursor: pointer;
+      transition: all 0.64s;
+      border-radius: 50%; }
+      .asg-image .play .button:hover {
+        opacity: 0.77;
+        box-shadow: 0px 0px 7px #212121; }
+      .asg-image .play .button svg {
+        stroke-width: 2; }
+  .asg-image:hover .arrow {
+    opacity: 1;
+    transform: scale(1); }
+    .asg-image:hover .arrow.left {
       left: 0; }
-    .asg-image .arrows .toForward {
+    .asg-image:hover .arrow.right {
       right: 0; }
 
 .asg-modal {
@@ -1027,32 +1058,34 @@ body.asg-yhidden {
     .asg-modal .images.flipY.backward .img.ng-hide-remove {
       opacity: 0;
       transform: rotateY(-180deg); }
-  .asg-modal .arrows {
+  .asg-modal .arrow {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
+    opacity: 0;
     z-index: 700;
+    min-height: 100px;
     transition: all ease 0.2s;
-    transform: scale(1.1); }
-    .asg-modal .arrows:hover {
-      opacity: 1;
-      transform: scale(1); }
-    .asg-modal .arrows .toBackward,
-    .asg-modal .arrows .toForward {
-      position: absolute;
-      top: 45%; }
-      .asg-modal .arrows .toBackward .btn,
-      .asg-modal .arrows .toForward .btn {
-        padding: 10px 16px;
-        opacity: 0.4; }
-        .asg-modal .arrows .toBackward .btn:hover,
-        .asg-modal .arrows .toForward .btn:hover {
-          opacity: 1; }
-    .asg-modal .arrows .toBackward {
+    transform: scale(1.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; }
+    .asg-modal .arrow.left {
+      left: -20px; }
+    .asg-modal .arrow.right {
+      right: -20px; }
+    .asg-modal .arrow .btn {
+      padding: 10px 16px;
+      opacity: 0.7; }
+      .asg-modal .arrow .btn:hover {
+        opacity: 1; }
+  .asg-modal:hover .arrow {
+    opacity: 1;
+    transform: scale(1); }
+    .asg-modal:hover .arrow.left {
       left: 0; }
-    .asg-modal .arrows .toForward {
+    .asg-modal:hover .arrow.right {
       right: 0; }
   .asg-modal .caption {
     position: absolute;
@@ -1281,10 +1314,20 @@ body.asg-yhidden {
     outline: none;
     color: #050505;
     background-color: #30c6d4; }
-  .asg-image.darkblue .arrows .toBackward {
-    left: -1px; }
-  .asg-image.darkblue .arrows .toForward {
-    right: -1px; }
+  .asg-image.darkblue .arrow.left .btn {
+    margin-left: -1px; }
+  .asg-image.darkblue .arrow.right .btn {
+    margin-right: -1px; }
+  .asg-image.darkblue .play .button {
+    fill: white;
+    box-shadow: 0px 0px 4px #30c6d4; }
+    .asg-image.darkblue .play .button:hover {
+      box-shadow: 0px 0px 17px #30c6d4; }
+    .asg-image.darkblue .play .button svg .circle {
+      stroke: #30c6d4;
+      fill: #050505; }
+    .asg-image.darkblue .play .button svg .icon {
+      fill: #30c6d4; }
 
 .asg-modal.darkblue {
   background-color: #050505; }
@@ -1325,10 +1368,6 @@ body.asg-yhidden {
     background-color: rgba(5, 5, 5, 0.77); }
     .asg-modal.darkblue .asg-thumbnail .item img {
       height: 77px; }
-  .asg-modal.darkblue .arrows .toBackward {
-    left: -1px; }
-  .asg-modal.darkblue .arrows .toForward {
-    right: -1px; }
 
 .asg-control.darkblue {
   background-color: #050505; }
@@ -1420,10 +1459,10 @@ body.asg-yhidden {
     outline: none;
     color: #252c31;
     background-color: #ff4343; }
-  .asg-image.darkred .arrows .toBackward {
-    left: 5px; }
-  .asg-image.darkred .arrows .toForward {
-    right: 5px; }
+  .asg-image.darkred .arrow.left .btn {
+    margin-left: 7px; }
+  .asg-image.darkred .arrow.right .btn {
+    margin-right: 7px; }
 
 .asg-modal.darkred {
   background-color: #252c31; }
@@ -1470,16 +1509,6 @@ body.asg-yhidden {
     background-color: rgba(37, 44, 49, 0.77); }
     .asg-modal.darkred .asg-thumbnail .item img {
       height: 77px; }
-  .asg-modal.darkred .arrows .toBackward {
-    left: 5px; }
-  .asg-modal.darkred .arrows .toForward {
-    right: 5px; }
-  .asg-modal.darkred .arrows .toBackward .btn,
-  .asg-modal.darkred .arrows .toForward .btn {
-    opacity: 0.7; }
-    .asg-modal.darkred .arrows .toBackward .btn:hover,
-    .asg-modal.darkred .arrows .toForward .btn:hover {
-      opacity: 1; }
 
 .asg-control.darkred {
   background-color: #252c31; }

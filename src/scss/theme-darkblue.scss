@@ -82,14 +82,36 @@ $primary_darken: darken($primary, 40%);
         color: $black;
         background-color: $primary;
     }
-    .arrows {
-        .toBackward {
-            left: -1px;
+    .arrow {
+        &.left .btn {
+            margin-left: -1px;
         }
-        .toForward {
-            right: -1px;
+        &.right .btn {
+			margin-right: -1px;
         }
-    }
+	}
+	.play {
+
+		.button {
+
+			fill: white;
+			box-shadow: 0px 0px 4px $primary;
+
+			&:hover {
+				box-shadow: 0px 0px 17px $primary;
+			}
+
+			svg {
+				.circle {
+					stroke: $primary;
+					fill: $black;
+				}
+				.icon {
+					fill: $primary;
+				}
+			}
+		}
+	}
 }
 
 .asg-modal.darkblue {
@@ -146,15 +168,8 @@ $primary_darken: darken($primary, 40%);
                 height: 77px;
             }
         }
-    }
-    .arrows {
-        .toBackward {
-            left: -1px;
-        }
-        .toForward {
-            right: -1px;
-        }
-    }
+	}
+
 }
 
 .asg-control.darkblue {

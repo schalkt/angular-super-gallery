@@ -17,8 +17,10 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="../dist/angular-super-gallery.css" rel="stylesheet" type="text/css" />
 
-    <script src="../dist/angular-super-gallery.js"></script>
-    <script src="demo.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vimeo-player/2.15.0/player.min.js" integrity="sha512-2NC+CbjOdLxHbT3qwKsqALCl6y1uv5MYQXuuOJ9Sf0CK6yUXcLN3puPhBEbEkCFfjzh36vYmmKCh9P04pL8e2A==" crossorigin="anonymous"></script>
+	<script src="../dist/angular-super-gallery.js"></script>
+	<script src="demo.js"></script>
+
 
     <style>
         [ng\:cloak],
@@ -29,29 +31,29 @@
         .x-ng-cloak {
             display: none !important;
         }
-        
+
         .navbar-text {
             margin: 0;
             padding: 9px 10px;
         }
-        
+
         .donate {
             display: inline-block;
             line-height: 0;
             margin: 0;
         }
-        
+
         .donate .btn-donate {
             text-transform: uppercase;
             font-weight: bold;
         }
-        
+
         .asg-info h3 {
             margin: 0;
             padding: 0;
             font-size: 2rem;
         }
-        
+
         .custom-panel .asg-panel .items {
             display: flex;
             flex-direction: row;
@@ -62,7 +64,7 @@
             align-content: stretch;
             perspective: 1280px;
         }
-        
+
         .custom-panel .asg-panel .item {
             display: inline-block;
             height: 128px;
@@ -71,23 +73,23 @@
             transform: scale(1);
             z-index: 10;
         }
-        
+
         .custom-panel .asg-panel .item.selected {
             opacity: 1;
         }
-        
+
         .custom-panel .asg-panel .item:hover {
             z-index: 11;
             opacity: 1;
             transform: scale(1.2);
             box-shadow: 0 0 10px #141414;
         }
-        
+
         .custom-panel .asg-panel .item img {
             height: 100%;
             max-width: inherit;
         }
-        
+
         .svg-logos .card-body {
             background-color: #c8c8c8;
         }
@@ -194,7 +196,7 @@
                         <asg-image data-id="nature" data-items="ctrl.files1" data-options="ctrl.options1" data-selected="nature1Selected">
                             <asg-modal>
                                 <asg-thumbnail></asg-thumbnail>
-                            </asg-modal>
+							</asg-modal>
                         </asg-image>
                         <asg-thumbnail data-id="nature"></asg-thumbnail>
                         <hr>

@@ -139,6 +139,7 @@ namespace angularSuperGallery {
 			subtitle?: string;
 			description?: string;
 			thumbnail?: string;
+			video?: string;
 		};
 		autoplay?: {
 			enabled?: boolean;
@@ -176,6 +177,16 @@ namespace angularSuperGallery {
 		name?: string;
 		extension?: string;
 		description?: string;
+		video?: {
+			vimeoId: string;
+			youtubeId: string;
+			htmlId: string;
+			autoplay: boolean;
+			paused: boolean;
+			visible: boolean;
+			playing: boolean;
+			player: any
+		};
 		download?: string;
 		loaded?: {
 			modal?: boolean;
@@ -300,7 +311,7 @@ namespace angularSuperGallery {
 	// service controller
 	export class ServiceController {
 
-		public version = "2.1.9";
+		public version = "2.1.10";
 		public slug = 'asg';
 		public id: string;
 		public items: Array<IFile> = [];
@@ -334,6 +345,7 @@ namespace angularSuperGallery {
 				title: 'title', // title field name
 				subtitle: 'subtitle', // subtitle field name
 				description: 'description', // description field name
+				video: 'video', // video field name
 			},
 			autoplay: {
 				enabled: false, // slideshow play enabled/disabled
@@ -510,7 +522,8 @@ namespace angularSuperGallery {
 			private interval: ng.IIntervalService,
 			private location: ng.ILocationService,
 			private $rootScope: ng.IRootScopeService,
-			private $window: ng.IWindowService) {
+			private $window: ng.IWindowService,
+			private $sce: ng.ISCEService) {
 
 			angular.element($window).bind('resize', (event) => {
 				this.thumbnailsMove(200);
@@ -610,7 +623,7 @@ namespace angularSuperGallery {
 
 			// new instance and set options and items
 			if (instance === undefined) {
-				instance = new ServiceController(this.timeout, this.interval, this.location, this.$rootScope, this.$window);
+				instance = new ServiceController(this.timeout, this.interval, this.location, this.$rootScope, this.$window, this.$sce);
 				instance.id = id;
 			}
 
@@ -699,6 +712,11 @@ namespace angularSuperGallery {
 			v = this.normalize(v);
 			let prev = this._selected;
 
+			if (prev != v && this.file && this.file.video && this.file.video.playing) {
+				this.file.video.player.pause();
+				this.file.video.paused = true;
+			}
+
 			this._selected = v;
 			this.loadImage(this._selected);
 			this.preload();
@@ -711,6 +729,11 @@ namespace angularSuperGallery {
 
 				if (this.options.modal.subtitleFromImage && this.file.description) {
 					this.options.modal.subtitle = this.file.description;
+				}
+
+				if (this.file.video && this.file.video.paused) {
+					this.file.video.player.play();
+					this.file.video.paused = false;
 				}
 
 			}
@@ -1498,16 +1521,18 @@ namespace angularSuperGallery {
 
 			let parts = source.modal.split('/');
 			let filename = parts[parts.length - 1];
-			let title, subtitle, description;
+			let title, subtitle, description, video;
 
 			if (self.options.fields !== undefined) {
 				title = value[self.options.fields.title] ? value[self.options.fields.title] : filename;
 				subtitle = value[self.options.fields.subtitle] ? value[self.options.fields.subtitle] : null;
 				description = value[self.options.fields.description] ? value[self.options.fields.description] : null;
+				video = value[self.options.fields.video] ? value[self.options.fields.video] : null;
 			} else {
 				title = filename;
 				subtitle = null;
 				description = null;
+				video = null;
 			}
 
 			let file = {
@@ -1515,6 +1540,7 @@ namespace angularSuperGallery {
 				title: title,
 				subtitle: subtitle,
 				description: description,
+				video: video,
 				loaded: {
 					modal: false,
 					panel: false,
@@ -1541,7 +1567,7 @@ namespace angularSuperGallery {
 
 	let app: ng.IModule = angular.module('angularSuperGallery');
 
-	app.service('asgService', ['$timeout', '$interval', '$location', '$rootScope', '$window', ServiceController]);
+	app.service('asgService', ['$timeout', '$interval', '$location', '$rootScope', '$window', '$sce', ServiceController]);
 
 }
 

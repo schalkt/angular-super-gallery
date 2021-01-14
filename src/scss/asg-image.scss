@@ -1,154 +1,184 @@
 .asg-image {
+	position: relative;
+	overflow: hidden;
 
-  position: relative;
-  overflow: hidden;
+	> .images {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		z-index: auto;
+		overflow: hidden;
+		perspective: $perspective;
 
-  >.images {
+		> .img {
+			background-size: auto;
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
 
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    z-index: auto;
-    overflow: hidden;
-    perspective: $perspective;
+			> .placeholder {
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				bottom: 0px;
+				left: 0px;
+				z-index: auto;
+				overflow: hidden;
+				background-size: auto;
+				background-position: 50% 50%;
+				background-repeat: no-repeat;
+				filter: blur(10px);
 
-    >.img {
-    
-      background-size: auto;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
+				&.cover {
+					background-size: cover;
+				}
 
-      >.placeholder {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        z-index: auto;
-        overflow: hidden;
-        background-size: auto;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        filter: blur(10px);
-        
-        &.cover {
-          background-size: cover;
-        }
-  
-        &.contain {
-          background-size: contain;
-        }
-  
-        &.stretch {
-          background-size: 100% 100%;
-        }
+				&.contain {
+					background-size: contain;
+				}
 
-      } 
+				&.stretch {
+					background-size: 100% 100%;
+				}
+			}
 
-      >.source {      
-        
-        cursor: pointer;
-        background-size: auto;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;      
-        transition: all ease .5s;
-        opacity: 0;
-  
-        &.cover {
-          background-size: cover;
-        }
-  
-        &.contain {
-          background-size: contain;
-        }
-  
-        &.stretch {
-          background-size: 100% 100%;
-        }
+			> .source {
+				cursor: pointer;
+				background-size: auto;
+				background-position: 50% 50%;
+				background-repeat: no-repeat;
+				transition: all ease 0.5s;
+				opacity: 0;
 
-      }
+				&.cover {
+					background-size: cover;
+				}
 
-      &.loaded {
-      
-        background-image: none;
+				&.contain {
+					background-size: contain;
+				}
 
-        .source {            
-          opacity: 1;
-        }
+				&.stretch {
+					background-size: 100% 100%;
+				}
+			}
 
-      }
+			&.loaded {
+				background-image: none;
 
-    }
+				.source {
+					opacity: 1;
+				}
+			}
+		}
 
-    @import "asg-transitions";
+		@import "asg-transitions";
+	}
 
-  }
+	&.modalon .source {
+		cursor: pointer;
+	}
 
-  &.modalon .source {
-    cursor: pointer;
-  }
+	.asg-info {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
 
-  &.modalon .arrows {
-    cursor: pointer;
-  }
+	.asg-control {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
 
-  .asg-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+	.arrow {
+		position: absolute;
+		top: calc(50% - 35px);
+		opacity: 0;
+		z-index: 720;
+		min-height: 70px;
+		transition: all ease 0.2s;
+		transform: scale(1.2);
 
-  .asg-control {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-  .arrows {
+		&.left {
+			text-align: left;
+			left: -20px;
+		}
 
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 700;
-    opacity: 0;
-    transition: all ease 0.2s;
-    transform: scale(1.1);
+		&.right {
+			text-align: right;
+			right: -20px;
+		}
 
-    &:hover {
-      opacity: 1;
-      transform: scale(1);
-    }
+		.btn {
+			padding: 10px 16px;
+			opacity: 0.7;
 
-    .toBackward, .toForward {
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
 
-      position: absolute;
-      top: 45%;
+	.video {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 710;
+		background-color: black;
 
-      .btn {
-        padding: 10px 16px;
-        opacity: 0.7;
+		> div {
+			position: unset !important;
+		}
+	}
 
-        &:hover {
-          opacity: 1;
-        }
+	.play {
+		position: absolute;
+		top: calc(50% - 80px);
+		left: calc(50% - 80px);
+		width: 160px;
+		height: 160px;
+		z-index: 800;
+		text-align: center;
 
-      }
+		.button {
+			fill: white;
+			opacity: 0.42;
+			cursor: pointer;
+			transition: all $animspeed;
+			border-radius: 50%;
 
-    }
+			&:hover {
+				opacity: 0.77;
+				box-shadow: 0px 0px 7px #212121;
+			}
 
-    .toBackward {
-      left: 0;
-    }
+			svg {
+				stroke-width: 2;
+			}
+		}
+	}
 
-    .toForward {
-      right: 0;
-    }
+	&:hover {
+		.arrow {
+			opacity: 1;
+			transform: scale(1);
 
-  }
+			&.left {
+				left: 0;
+			}
 
+			&.right {
+				right: 0;
+			}
+		}
+	}
 }
