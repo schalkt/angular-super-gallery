@@ -28,8 +28,7 @@ body.asg-yhidden {
         background-size: auto;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        -webkit-filter: blur(10px);
-                filter: blur(10px); }
+        filter: blur(10px); }
         .asg-image > .images > .img > .placeholder.cover {
           background-size: cover; }
         .asg-image > .images > .img > .placeholder.contain {
@@ -1300,6 +1299,7 @@ body.asg-yhidden {
     background-color: rgba(5, 5, 5, 0.77);
     top: 0; }
   .asg-image.darkblue .btn {
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1334,6 +1334,7 @@ body.asg-yhidden {
   .asg-modal.darkblue .frame {
     margin: 0; }
   .asg-modal.darkblue .btn {
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1372,6 +1373,7 @@ body.asg-yhidden {
 .asg-control.darkblue {
   background-color: #050505; }
   .asg-control.darkblue .btn {
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1445,6 +1447,7 @@ body.asg-yhidden {
     background-color: rgba(37, 44, 49, 0.77);
     top: 0; }
   .asg-image.darkred .btn {
+    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     border-radius: 3px;
     background-image: none;
@@ -1469,6 +1472,7 @@ body.asg-yhidden {
   .asg-modal.darkred .frame {
     margin: 0; }
   .asg-modal.darkred .btn {
+    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     border-radius: 3px;
     background-image: none;
@@ -1513,6 +1517,7 @@ body.asg-yhidden {
 .asg-control.darkred {
   background-color: #252c31; }
   .asg-control.darkred .btn {
+    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     border-radius: 3px;
     background-image: none;
@@ -1586,6 +1591,7 @@ body.asg-yhidden {
     .asg-image.whitegold .asg-info a {
       color: #e4e4e4; }
   .asg-image.whitegold .btn {
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1604,6 +1610,7 @@ body.asg-yhidden {
 .asg-modal.whitegold {
   background-color: #d4c386; }
   .asg-modal.whitegold .btn {
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
@@ -1636,6 +1643,7 @@ body.asg-yhidden {
 .asg-control.whitegold {
   background-color: #d4c386; }
   .asg-control.whitegold .btn {
+    -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
     border-radius: 0;
     background-image: none;
