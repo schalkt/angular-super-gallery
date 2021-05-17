@@ -9,8 +9,6 @@ const cleanCSS = require('gulp-clean-css');
 const order = require("gulp-order");
 const gzip = require("gulp-gzip");
 const rename = require("gulp-rename");
-const sourcemaps = require("gulp-sourcemaps");
-const autoprefixer = require('gulp-autoprefixer');
 
 var DIST = "dist";
 var SRC = "src";
@@ -42,7 +40,6 @@ function ts() {
     return src([
             SRC + "/**/*.ts",
         ])
-        .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
         .pipe(order([
             "asg.ts",
             "asg-factory.ts"
@@ -51,7 +48,6 @@ function ts() {
         }))
         .pipe(tsc(tsconfig.compilerOptions))
         .pipe(concat(filename))
-        .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
         .pipe(dest(TEMP));
 
 }
@@ -101,10 +97,7 @@ function css() {
             SRC + '/*.scss'
         ])
         .pipe(concat("angular-super-gallery.css"))
-        .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
         .pipe(sass())
-        .pipe(autoprefixer())
-        .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
         .pipe(dest(DIST));
 
 }
