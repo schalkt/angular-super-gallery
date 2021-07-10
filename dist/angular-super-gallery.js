@@ -1,7 +1,7 @@
 /**
  * angular-super-gallery - AngularJS Super Gallery
  * 
- * @version v2.1.10
+ * @version v2.1.11
  * @link http://schalk.hu/projects/angular-super-gallery/demo/
  * @license MIT
  */
@@ -656,7 +656,7 @@ var angularSuperGallery;
             this.$rootScope = $rootScope;
             this.$window = $window;
             this.$sce = $sce;
-            this.version = "2.1.10";
+            this.version = "2.1.11";
             this.slug = 'asg';
             this.items = [];
             this.files = [];

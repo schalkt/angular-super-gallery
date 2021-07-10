@@ -1,7 +1,7 @@
 .asg-thumbnail {
     position: relative;
     overflow: hidden;
-    transition: all ease $animspeed / 2;
+    transition: all ease math.div($animspeed, 2);
     padding: 0;
     opacity: 0;
     &.initialized {
@@ -22,13 +22,13 @@
     .items {
         position: relative;
         white-space: nowrap;
-        transition: all ease $animspeed / 2;
+        transition: all ease math.div($animspeed, 2);
         .item {
             overflow: hidden;
             position: relative;
             display: inline-block;
             margin: 0px 0px 0px 0px;
-            transition: all ease $animspeed / 2;
+            transition: all ease math.div($animspeed, 2);
             vertical-align: top;
             &:last-child {
                 margin-right: 0px;
@@ -40,7 +40,7 @@
                 margin: 0px;
             }
             .index {
-                transition: all ease $animspeed / 2;
+                transition: all ease math.div($animspeed, 2);
                 position: absolute;
                 z-index: 9999;
                 top: 5px;

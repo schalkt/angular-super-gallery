@@ -2,7 +2,7 @@
 
 const { src, task, dest, parallel, series, watch } = require("gulp");
 const gulpif = require("gulp-if");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require("sass"));
 const uglify = require('gulp-uglify');
 const concat = require("gulp-concat");
 const cleanCSS = require('gulp-clean-css');
@@ -146,18 +146,6 @@ function production(callback) {
 
 }
 
-function versionBump() {
-
-    var bump = require('gulp-bump');
-
-    return src(['./package.json'])
-        .pipe(bump({
-            type: 'patch',
-            indent: 4
-        }))
-        .pipe(dest('./'));
-
-}
 
 function versionReplace() {
 
@@ -218,24 +206,6 @@ task('ts2js', series(
     js
 ));
 
-task('dev', series(
-    css,
-    "ts2js"
-));
-
-task('prod', series(
-    production,
-    "dev",
-    css_min,
-    js_min,
-    "assets"
-));
-
-task('release', series(
-    versionBump,
-    versionReplace
-));
-
 task("watch", function(callback) {
 
     watch([
@@ -251,6 +221,15 @@ task("watch", function(callback) {
 
 });
 
-task('default', series(
-    "dev"
+
+task('dev', series(css, "ts2js"));
+task('prod', series(
+    production,
+    "dev",
+    css_min,
+    js_min,
+    "assets"
 ));
+
+task('release', series(versionReplace, "prod"));
+task('default', series("dev"));
