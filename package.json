@@ -17,7 +17,7 @@
         "bootstrap"
     ],
     "scripts": {
-        "init": "npm prune && npm install && npm update && gulp dev",
+        "init": "npm prune && npm install && npm update && npm audit fix && gulp dev",
         "release": "npm --no-git-tag-version version patch && gulp release"
     },
     "author": "Tamas Schalk (https://github.com/schalkt)",
@@ -44,9 +44,9 @@
         "gulp-sass": "5.0.0",
         "gulp-typescript": "6.0.0-alpha.1",
         "gulp-uglify": "3.0.2",
-        "sass": "^1.35.2",
+        "sass": "^1.37.5",
         "typescript": "4.3.5",
-        "glob-parent": ">=5.1.2"
+        "glob-parent": ">=6.0.1"
     },
     "dependencies": {
         "angular": "1.8.2",
