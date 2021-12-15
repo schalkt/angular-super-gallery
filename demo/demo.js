@@ -11,6 +11,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
 
     this.options1 = {
         debug: true,
+		hashUrl: false,
         baseUrl: "https://images.unsplash.com/",
         selected: 0,
         fields: {
