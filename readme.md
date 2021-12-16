@@ -4,7 +4,7 @@ Image gallery based on **AngularJS** and **Bootstrap 4**. (for Bootstrap 3 switc
 
 [![npm](https://img.shields.io/npm/dt/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 [![GitHub issues](https://img.shields.io/github/issues/schalkt/angular-super-gallery.svg?style=flat-square)](https://github.com/schalkt/angular-super-gallery/issues)
-[![Build Status](https://travis-ci.org/schalkt/angular-super-gallery.svg?branch=master)](https://travis-ci.org/schalkt/angular-super-gallery)
+[![CodeQL](https://github.com/schalkt/angular-super-gallery/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/schalkt/angular-super-gallery/actions/workflows/codeql-analysis.yml)
 [![npm](https://img.shields.io/npm/v/angular-super-gallery.svg?style=flat-square)](https://www.npmjs.com/package/angular-super-gallery)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=schalkt_angular-super-gallery&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=schalkt_angular-super-gallery)
