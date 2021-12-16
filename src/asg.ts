@@ -1,4 +1,3 @@
-
 namespace angularSuperGallery {
 
 	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'ngTouch']);
@@ -28,3 +27,12 @@ namespace angularSuperGallery {
 
 }
 
+require('./asg-templates');
+require('./asg-service');
+require('./asg-control');
+require('./asg-debug');
+require('./asg-info');
+require('./asg-modal');
+require('./asg-panel');
+require('./asg-image');
+require('./asg-thumbnail');

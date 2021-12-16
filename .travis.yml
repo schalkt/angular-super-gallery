@@ -9,6 +9,6 @@ branches:
 before_script:
   - npm install
 script:
-  - gulp prod
+  - npm run prod
 after_success:
   - git reset -hard

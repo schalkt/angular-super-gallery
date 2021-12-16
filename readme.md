@@ -377,9 +377,9 @@ $rootScope.$broadcast('ASG-gallery-edit', {
 
 - Node.js 12 recommended
 - `npm install`
-- `gulp dev`
-- `gulp prod` (minified javascript and css file)
-- `gulp watch` (automatic build under development)
+- `npm run dev`
+- `npm run prod` (minified javascript and css file)
+- `npm run watch` (automatic build under development)
 
 ## Todo
 
