@@ -11,9 +11,6 @@ mix.extend('replace', function (webpackConfig, ...args) {
 	let content = fs.readFileSync(args[0]).toString();
 
 	args[1].forEach(function (item) {
-
-		console.log(args, item);
-
 		content = content.replace(item[0], item[1]);
 	});
 
