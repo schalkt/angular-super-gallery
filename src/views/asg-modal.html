@@ -50,7 +50,7 @@
                     <span class="title">{{ $ctrl.asg.file.title }}</span>
                     <span ng-if="$ctrl.asg.file.title && $ctrl.asg.file.description"> - </span>
                     <span class="description">{{ $ctrl.asg.file.description }}</span>
-                    <a ng-if="$ctrl.config.caption.download" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm">
+                    <a ng-if="$ctrl.config.caption.download" rel="noreferrer" href="{{ $ctrl.asg.downloadLink() }}" target="_blank" class="btn btn-default btn-sm">
                         <span class="fa fa-download"></span> Download
                     </a>
                 </div>
