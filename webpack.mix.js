@@ -6,6 +6,8 @@ const package = JSON.parse(fs.readFileSync('./package.json'));
 
 require('laravel-mix-angular-templatecache');
 
+mix.disableNotifications();
+
 mix.extend('replace', function (webpackConfig, ...args) {
 
 	let content = fs.readFileSync(args[0]).toString();
