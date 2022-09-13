@@ -1,6 +1,6 @@
 {
     "name": "angular-super-gallery",
-    "version": "2.2.6",
+    "version": "2.2.7",
     "description": "AngularJS Super Gallery",
     "homepage": "http://schalk.hu/projects/angular-super-gallery/demo/",
     "repository": {
@@ -41,12 +41,12 @@
         "laravel-mix": "^6.0.49",
         "laravel-mix-angular-templatecache": "^1.0.1",
         "lodash": "^4.17.21",
-        "postcss": "^8.4.14",
+        "postcss": "^8.4.16",
         "resolve-url-loader": "^5.0.0",
-        "sass": "^1.53.0",
+        "sass": "^1.54.9",
         "sass-loader": "^13.0.2",
         "ts-loader": "^9.3.1",
-        "typescript": "4.7.4"
+        "typescript": "4.8.3"
     },
     "dependencies": {
         "angular": "1.8.3",
@@ -54,7 +54,7 @@
         "angular-touch": "1.8.3",
         "bootstrap": "4.6.0",
         "font-awesome": "4.7.0",
-        "jquery": "3.6.0",
+        "jquery": "3.6.1",
         "popper.js": "1.16.1",
         "screenfull": "6.0.2"
     }
