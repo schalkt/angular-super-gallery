@@ -1,3 +1,5 @@
+var Vimeo;
+
 namespace angularSuperGallery {
 
 	let app : ng.IModule = angular.module('angularSuperGallery', ['ngAnimate', 'ngTouch']);
