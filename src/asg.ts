@@ -1,4 +1,4 @@
-var Vimeo;
+let Vimeo;
 
 namespace angularSuperGallery {
 
