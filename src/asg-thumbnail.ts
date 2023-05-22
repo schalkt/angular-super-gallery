@@ -117,7 +117,9 @@ namespace angularSuperGallery {
 		// get selected image
 		public get selected() {
 
-			return this.asg ? this.asg.selected : null;
+			if (this.asg) {
+				return this.asg.selected;
+			}
 
 		}
 
