@@ -48,25 +48,18 @@ namespace angularSuperGallery {
 		// set selected image
 		public set selected(v: number) {
 
-			if (!this.asg) {
-				return;
+			if (this.asg) {
+				this.asg.selected = v;
 			}
-
-			this.asg.selected = v;
 
 		}
 
 		// get selected image
 		public get selected() {
 
-			if (!this.asg) {
-				return;
-			}
-
-			return this.asg.selected;
+			return this.asg ? this.asg.selected : null;
 
 		}
-
 
 	}
 
