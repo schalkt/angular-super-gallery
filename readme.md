@@ -14,10 +14,10 @@ Image gallery based on **AngularJS** and **Bootstrap 4**. (for Bootstrap 3 switc
 
 ## Preview
 
-[![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](http://schalk.hu/projects/angular-super-gallery/demo/) or check /demo/index.html
+[![preview](https://img.shields.io/badge/preview-click_here-green.svg?style=flat-square)](https://projects.schalk.hu/angular-super-gallery/demo/) or check /demo/index.html
 
-![angular-super-gallery-screenshot-1](https://schalk.hu/projects/angular-super-gallery/screenshot1.jpg)
-![angular-super-gallery-screenshot-2](https://schalk.hu/projects/angular-super-gallery/screenshot2.jpg)
+![angular-super-gallery-screenshot-1](https://projects.schalk.hu/angular-super-gallery/screenshot1.jpg)
+![angular-super-gallery-screenshot-2](https://projects.schalk.hu/angular-super-gallery/screenshot2.jpg)
 
 ## Dependencies
 

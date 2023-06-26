@@ -1,4 +1,4 @@
-var demo = angular.module('demo', ['angularSuperGallery']);
+const demo = angular.module('demo', ['angularSuperGallery']);
 
 demo.controller('DemoController', ['$rootScope', function($rootScope) {
 
@@ -76,7 +76,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
         },
     };
 
-    var imagesBackGroundColor = 'black';
+    const imagesBackGroundColor = 'black';
 
     this.files1 = [{
             "source": {
@@ -254,7 +254,7 @@ demo.controller('DemoController', ['$rootScope', function($rootScope) {
 
     this.update1 = function() {
 
-        var newGalleryImages = [{
+        const newGalleryImages = [{
             "source": {
                 "modal": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=90",
                 "image": "photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=960&q=85",
