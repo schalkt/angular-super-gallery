@@ -2,7 +2,7 @@
     "name": "angular-super-gallery",
     "version": "2.2.14",
     "description": "AngularJS Super Gallery",
-    "homepage": "http://schalk.hu/projects/angular-super-gallery/demo/",
+    "homepage": "https://projects.schalk.hu/angular-super-gallery/demo/",
     "repository": {
         "type": "git",
         "url": "https://github.com/schalkt/angular-super-gallery.git"
