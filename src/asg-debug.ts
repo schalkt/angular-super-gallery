@@ -24,7 +24,7 @@ namespace angularSuperGallery {
 		}
 
 		public get file() {
-			return this.asg.file;
+			return this.asg ? this.asg.file : null;
 		}
 
 	}
