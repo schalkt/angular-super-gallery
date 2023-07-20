@@ -324,11 +324,7 @@ namespace angularSuperGallery {
 		// get modal visible
 		public get visible() {
 
-			if (!this.asg) {
-				return;
-			}
-
-			return this.asg.modalVisible;
+			return this.asg ? this.asg.modalVisible : null;
 
 		}
 
@@ -358,11 +354,7 @@ namespace angularSuperGallery {
 		// get selected image
 		public get selected() {
 
-			if (!this.asg) {
-				return;
-			}
-
-			return this.asg.selected;
+			return this.asg ? this.asg.selected : null;
 
 		}
 

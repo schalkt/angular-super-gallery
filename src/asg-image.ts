@@ -79,7 +79,7 @@ namespace angularSuperGallery {
 		// get image config
 		public get config(): IOptionsImage {
 
-			return this.asg.options[this.type];
+			return this.asg ? this.asg.options[this.type] : null;
 
 		}
 
