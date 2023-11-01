@@ -1,6 +1,6 @@
 {
     "name": "angular-super-gallery",
-    "version": "2.2.19",
+    "version": "2.2.20",
     "description": "AngularJS Super Gallery",
     "homepage": "https://projects.schalk.hu/angular-super-gallery/demo/",
     "repository": {
@@ -31,10 +31,10 @@
     "license": "MIT",
     "main": "index.js",
     "devDependencies": {
-        "@types/angular": "1.8.6",
-        "@types/angular-animate": "1.5.12",
+        "@types/angular": "1.8.7",
+        "@types/angular-animate": "1.5.13",
         "@types/bootstrap": "4.6.*",
-        "@types/jquery": "3.5.22",
+        "@types/jquery": "3.5.25",
         "compression-webpack-plugin": "^10.0.0",
         "cross-env": "^7.0.3",
         "i": "^0.3.7",
@@ -43,7 +43,7 @@
         "lodash": "^4.17.21",
         "postcss": "^8.4.31",
         "resolve-url-loader": "^5.0.0",
-        "sass": "^1.69.0",
+        "sass": "^1.69.5",
         "sass-loader": "^13.3.2",
         "ts-loader": "^9.5.0",
         "typescript": "5.2.2"
