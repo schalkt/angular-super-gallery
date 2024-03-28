@@ -173,9 +173,6 @@ namespace angularSuperGallery {
 				loop: false
 			};
 
-			// console.log('video',  this.asg.file.video);
-			// console.log('vimeo options', options);
-
 			if (this.asg.file.video.player) {
 				player = this.asg.file.video.player;
 			} else {
@@ -194,12 +191,10 @@ namespace angularSuperGallery {
 
 			player.on('play', function() {
 				self.asg.file.video.playing = true;
-				console.log('play the video!');
 			});
 
 			player.on('pause', function() {
 				self.asg.file.video.playing = false
-				console.log('paused the video!');
 			});
 
 			this.asg.file.video.player = player;
