@@ -9,3 +9,4 @@ test/node_modules
 test/fonts
 test/bundle.js
 test/yarn*
+/demo/index.html
