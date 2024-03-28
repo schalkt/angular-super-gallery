@@ -2,7 +2,7 @@ const mix = require('laravel-mix');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PROD = (process.env.NODE_ENV && process.env.NODE_ENV === 'production');
 const fs = require('fs');
-const package = JSON.parse(fs.readFileSync('./package.json'));
+const packagejson = JSON.parse(fs.readFileSync('./package.json'));
 
 require('laravel-mix-angular-templatecache');
 
@@ -58,6 +58,6 @@ mix.ts('./src/asg.ts', './dist/angular-super-gallery.min.js')
 
 // update version
 mix.replace('./src/asg-service.ts', [
-	[/version.*"\d+\.\d+\.\d+"/, 'version = "' + package.version + '"']
+	[/version.*"\d+\.\d+\.\d+"/, 'version = "' + packagejson.version + '"']
 ]);
 

@@ -37,7 +37,7 @@ namespace angularSuperGallery {
 			// get service instance
 			this.asg = this.service.getInstance(this);
 
-			var self = this;
+			const self = this;
 
 			// set image component height
 			this.$rootScope.$on(this.asg.events.FIRST_IMAGE + this.id, (event, data) => {
@@ -160,12 +160,14 @@ namespace angularSuperGallery {
 				$event.stopPropagation();
 			}
 
-			var self = this;
+			const self = this;
 
 			this.asg.file.video.visible = true;
 			this.asg.file.video.htmlId = 'vimeo_video_' + this.asg.file.video.vimeoId;
 
-			var options = {
+			let player;
+
+			const options = {
 				id: this.asg.file.video.vimeoId,
 				responsive: true,
 				loop: false
@@ -175,9 +177,9 @@ namespace angularSuperGallery {
 			// console.log('vimeo options', options);
 
 			if (this.asg.file.video.player) {
-				var player = this.asg.file.video.player;
+				player = this.asg.file.video.player;
 			} else {
-				var player = new Vimeo.Player(this.asg.file.video.htmlId, options);
+				player = new Vimeo.Player(this.asg.file.video.htmlId, options);
 			}
 
 			// player.loadVideo(this.asg.file.video.vimeoId).then(function(id) {

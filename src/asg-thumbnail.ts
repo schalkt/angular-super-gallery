@@ -29,7 +29,7 @@ namespace angularSuperGallery {
 			// get service instance
 			this.asg = this.service.getInstance(this);
 
-			var self = this;
+			const self = this;
 
 			// get parent asg component (modal)
 			if (this.$scope && this.$scope.$parent && this.$scope.$parent.$parent && this.$scope.$parent.$parent['$ctrl']) {
