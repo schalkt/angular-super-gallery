@@ -1,6 +1,6 @@
 {
     "name": "angular-super-gallery",
-    "version": "2.2.24",
+    "version": "2.2.25",
     "description": "AngularJS Super Gallery",
     "homepage": "https://projects.schalk.hu/angular-super-gallery/demo/",
     "repository": {
@@ -24,7 +24,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "init": "npm prune && npm install && npm audit fix && npm run development",
+        "init": "npm prune && npm update && npm audit fix && npm run development",
         "release": "npm --no-git-tag-version version patch && npm run production"
     },
     "author": "Tamas Schalk (https://github.com/schalkt)",
@@ -34,7 +34,7 @@
         "@types/angular": "1.8.9",
         "@types/angular-animate": "1.5.14",
         "@types/bootstrap": "4.*",
-        "@types/jquery": "3.5.29",
+        "@types/jquery": "3.5.30",
         "compression-webpack-plugin": "^11.1.0",
         "cross-env": "^7.0.3",
         "i": "^0.3.7",
@@ -43,10 +43,10 @@
         "lodash": "^4.17.21",
         "postcss": "^8.4.38",
         "resolve-url-loader": "^5.0.0",
-        "sass": "^1.72.0",
-        "sass-loader": "^14.1.1",
+        "sass": "^1.77.2",
+        "sass-loader": "^14.2.1",
         "ts-loader": "^9.5.1",
-        "typescript": "5.4.3"
+        "typescript": "5.4.5"
     },
     "dependencies": {
         "angular": "1.8.3",
