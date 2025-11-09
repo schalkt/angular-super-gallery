@@ -1,7 +1,5 @@
 <div class="asg-modal {{ $ctrl.asg.classes }}" ng-class="$ctrl.getClass()" ng-click="$ctrl.imageClick($event);" ng-if="$ctrl.asg.modalVisible" ng-cloak>
 
-    <div class="keyInput" ng-keydown="$ctrl.keyUp($event)"></div>
-
     <div class="frame" ng-click="$ctrl.asg.modalClick($event);">
 
         <div class="header" ng-if="$ctrl.config.header.enabled" ng-click="$ctrl.asg.modalClick($event);">

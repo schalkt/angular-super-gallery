@@ -10,6 +10,7 @@ namespace angularSuperGallery {
 		private type = 'modal';
 		private asg : IServiceController;
 		private arrowsVisible = false;
+		private keydownHandler : (e : KeyboardEvent) => void;
 
 		constructor(private service : IServiceController,
 					private $window : ng.IWindowService,
@@ -30,6 +31,39 @@ namespace angularSuperGallery {
 				this.$scope.$apply();
 			});
 
+			// watch modal visibility and handle keyboard events
+			this.$scope.$watch(() => this.asg.modalVisible, (newVal, oldVal) => {
+				if (newVal && !oldVal) {
+					// modal opened - attach keydown handler
+					this.attachKeydownHandler();
+				} else if (!newVal && oldVal) {
+					// modal closed - detach keydown handler
+					this.detachKeydownHandler();
+				}
+			});
+
+		}
+
+		private attachKeydownHandler() {
+			this.keydownHandler = (e : KeyboardEvent) => {
+				if (this.asg.modalVisible) {
+					this.$scope.$apply(() => {
+						this.keyDown(e);
+					});
+				}
+			};
+			this.$window.document.addEventListener('keydown', this.keydownHandler);
+		}
+
+		private detachKeydownHandler() {
+			if (this.keydownHandler) {
+				this.$window.document.removeEventListener('keydown', this.keydownHandler);
+				this.keydownHandler = null;
+			}
+		}
+
+		public $onDestroy() {
+			this.detachKeydownHandler();
 		}
 
 
@@ -148,7 +182,7 @@ namespace angularSuperGallery {
 		}
 
 		// do keyboard action
-		public keyUp(e : KeyboardEvent) {
+		public keyDown(e : KeyboardEvent) {
 
 			let action : string = this.getActionByKeyCode(e.keyCode);
 
